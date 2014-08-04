@@ -18,7 +18,7 @@ class HelloWorldProcess(WPSProcess):
     def __init__(self):
         WPSProcess.__init__(
             self,
-            identifier="org.malleefowl.test.helloworld", 
+            identifier="helloworld", 
             title="Hello World",
             version = "1.0",
             metadata = [],
@@ -60,7 +60,7 @@ class UltimateQuestionProcess(WPSProcess):
         # init process
         WPSProcess.__init__(
             self,
-            identifier="org.malleefowl.test.ultimatequestionprocess", #the same as the file name
+            identifier="ultimatequestionprocess", #the same as the file name
             title="Answer to Life, the Universe and Everything",
             version = "2.0",
             metadata = [],
@@ -88,7 +88,7 @@ class WordCountProcess(WPSProcess):
     def __init__(self):
         WPSProcess.__init__(
             self,
-            identifier="org.malleefowl.test.wordcount", 
+            identifier="wordcount", 
             title="Word Counter",
             version = "1.0",
             metadata = [],
@@ -158,7 +158,7 @@ class ChomskyTextGeneratorProcess(WPSProcess):
     def __init__(self):
         WPSProcess.__init__(
             self,
-            identifier="org.malleefowl.test.chomsky", 
+            identifier="chomsky", 
             title="Chomsky test generator",
             version = "1.0",
             metadata = [],
@@ -311,7 +311,7 @@ class InOutProcess(WPSProcess):
         # definition of this process
         WPSProcess.__init__(
             self, 
-            identifier = "org.malleefowl.test.inout",
+            identifier = "inout",
             title="Testing all Data Types",
             version = "0.2",
             # TODO: what can i do with this?
