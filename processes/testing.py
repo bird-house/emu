@@ -660,6 +660,11 @@ class InOutProcess(WPSProcess):
         filename = self.netcdf_upload.getValue()
         if filename is not None:
             self.netcdf_upload_out.setValue( filename )
+        else:
+            tmp_nc_file = self.mktempfile(suffix='.nc')
+            with open(tmp_nc_file, 'w') as fp:
+                fp.write('got nothing ...')
+                self.netcdf_upload_out.setValue( fp.name )
             
         # write file with url from input data
         logger.debug('write input xml_upload')
