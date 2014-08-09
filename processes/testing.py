@@ -104,7 +104,6 @@ class WordCountProcess(WPSProcess):
             maxOccurs=1,
             formats=[{"mimeType":"text/plain"}],
             maxmegabites=2,
-            upload=True,
             )
         
         self.output = self.addComplexOutput(
@@ -411,30 +410,6 @@ class InOutProcess(WPSProcess):
         # complex input
         # -------------
 
-        self.xml_upload = self.addComplexInput(
-            identifier="xml_upload",
-            title="XML Upload",
-            abstract="Upoad XML File",
-            metadata=[],
-            minOccurs=0,
-            maxOccurs=2,
-            formats=[{"mimeType":"text/xml"}],
-            maxmegabites=2,
-            upload=True,
-            )
-
-        self.netcdf_upload = self.addComplexInput(
-            identifier="netcdf_upload",
-            title="NetCDF Upload",
-            abstract="Upoad NetCDF File",
-            metadata=[],
-            minOccurs=0,
-            maxOccurs=1,
-            formats=[{"mimeType":"application/x-netcdf"}],
-            maxmegabites=20,
-            upload=True,
-            )
-
         self.xml_url = self.addComplexInput(
             identifier="xml_url",
             title="XML File",
@@ -553,24 +528,6 @@ class InOutProcess(WPSProcess):
             asReference=True,
             )
 
-        self.xml_upload_out = self.addComplexOutput(
-            identifier="xml_upload",
-            title="Uploaded XML File",
-            abstract="Uploaded XML File",
-            metadata=[],
-            formats=[{"mimeType":"text/xml"}],
-            asReference=True,
-            )
-
-        self.netcdf_upload_out = self.addComplexOutput(
-            identifier="netcdf_upload",
-            title="Uploaded NetCDF File",
-            abstract="Uploaded NetCDF File",
-            metadata=[],
-            formats=[{"mimeType":"application/x-netcdf"}],
-            asReference=True,
-            )
-
         self.xml_url_out = self.addComplexOutput(
             identifier="xml_url",
             title="XML File",
@@ -641,31 +598,6 @@ class InOutProcess(WPSProcess):
             fp.close()
             self.xmlFileOut.setValue( fp.name )
 
-        # write uploaded file from input data
-        logger.debug('write input xml1')
-        xml_filename = self.mktempfile(suffix='.xml')
-        with open(xml_filename, 'w') as fp:
-            xml_upload = self.xml_upload.getValue()
-            if xml_upload is not None:
-                for xml in xml_upload:
-                    logger.debug('read xml')
-                    with open(xml, 'r') as fp2:
-                        logger.debug('reading content')
-                        fp.write( fp2.read() )
-            else:
-                fp.write( "<result>nothing</result>" )
-            self.xml_upload_out.setValue( fp.name )
-
-        # output uploaded netcdf file
-        filename = self.netcdf_upload.getValue()
-        if filename is not None:
-            self.netcdf_upload_out.setValue( filename )
-        else:
-            tmp_nc_file = self.mktempfile(suffix='.nc')
-            with open(tmp_nc_file, 'w') as fp:
-                fp.write('got nothing ...')
-                self.netcdf_upload_out.setValue( fp.name )
-            
         # write file with url from input data
         logger.debug('write input xml_upload')
         xml_filename = self.mktempfile(suffix='.xml')
