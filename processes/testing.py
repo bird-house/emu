@@ -97,8 +97,8 @@ class WordCountProcess(WPSProcess):
 
         self.text = self.addComplexInput(
             identifier = "text",
-            title = "Input text",
-            abstract = "Input text",
+            title = "Text document",
+            abstract = "URL of text document",
             metadata=[],
             minOccurs=1,
             maxOccurs=1,
