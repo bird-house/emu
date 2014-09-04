@@ -10,8 +10,9 @@ Emu is a Python package with some test proccess for  Web Processing Services (WP
 Installation
 ------------
 
-Check out code from the emu git repo (will be available on github). Then do the following::
+Check out code from the emu github repo and start the installation::
 
+   $ git clone https://github.com/bird-house/emu.git
    $ cd emu
    $ ./requirements.sh
    $ ./install.sh
