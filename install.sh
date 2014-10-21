@@ -50,6 +50,11 @@ function setup_cfg() {
     fi
 }
 
+# install conda dependencies
+function install_deps() {
+    "$ANACONDA_HOME/bin/conda" install --yes pyopenssl
+}
+
 # run install
 function install() {
     echo "Installing ..."
@@ -78,6 +83,7 @@ function usage() {
 }
 
 install_anaconda
+install_deps
 install
 
 exit 0
