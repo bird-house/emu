@@ -1,13 +1,25 @@
 FROM ubuntu:14.04
 MAINTAINER Carsten Ehbrecht <ehbrecht@dkrz.de>
 
-RUN apt-get update && apt-get install -y git wget
-WORKDIR /tmp
-RUN wget https://raw.githubusercontent.com/bird-house/emu/master/requirements.sh
-RUN bash requirements.sh
-RUN useradd -d /home/phoenix -m phoenix
-USER phoenix
-RUN git clone https://github.com/bird-house/emu.git
-RUN cd emu && bash install.sh && cd -
-WORKDIR /home/phoenix/anaconda
-EXPOSE 8094 9001
+RUN apt-get update
+
+# install project requirements
+ADD ./requirements.sh /tmp/requirements.sh  
+RUN cd /tmp && bash requirements.sh && cd -
+
+RUN useradd -d /home/emu -m emu
+ADD . /home/emu/src
+RUN chown -R emu /home/emu/src
+
+USER emu
+WORKDIR /home/emu/src
+
+RUN bash bootstrap.sh && make all
+
+WORKDIR /home/emu/anaconda
+
+EXPOSE 8090 8094 9001
+
+#CMD bin/supervisord -n -c etc/supervisor/supervisord.conf && bin/nginx -c etc/nginx/nginx.conf -g 'daemon off;
+CMD etc/init.d/supervisord start && bin/nginx -c etc/nginx/nginx.conf -g 'daemon off;'
+
