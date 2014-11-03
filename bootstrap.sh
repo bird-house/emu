@@ -53,7 +53,7 @@ if [ $# -gt 1 ]; then
     usage
 fi
 
-if [ $1 = '-h' ]; then
+if [ $# -gt 0 ] && [ $1 = '-h' ]; then
     usage
 fi
 
