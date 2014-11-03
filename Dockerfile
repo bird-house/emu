@@ -1,11 +1,11 @@
 FROM ubuntu:14.04
 MAINTAINER Carsten Ehbrecht <ehbrecht@dkrz.de>
 
-RUN apt-get update
+#RUN apt-get update
 
-# install project requirements
-ADD ./requirements.sh /tmp/requirements.sh  
-RUN cd /tmp && bash requirements.sh && cd -
+# install build requirements
+ADD ./bootstrap.sh /tmp/bootstrap.sh  
+RUN cd /tmp && bash bootstrap.sh && cd -
 
 RUN useradd -d /home/phoenix -m phoenix
 ADD . /home/phoenix/src
