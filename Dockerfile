@@ -7,16 +7,16 @@ RUN apt-get update
 ADD ./requirements.sh /tmp/requirements.sh  
 RUN cd /tmp && bash requirements.sh && cd -
 
-RUN useradd -d /home/emu -m emu
-ADD . /home/emu/src
-RUN chown -R emu /home/emu/src
+RUN useradd -d /home/phoenix -m phoenix
+ADD . /home/phoenix/src
+RUN chown -R phoenix /home/phoenix/src
 
-USER emu
-WORKDIR /home/emu/src
+USER phoenix
+WORKDIR /home/phoenix/src
 
 RUN bash bootstrap.sh && make all
 
-WORKDIR /home/emu/anaconda
+WORKDIR /home/phoenix/anaconda
 
 EXPOSE 8090 8094 9001
 
