@@ -1,6 +1,8 @@
 # installer
-install.sh
 Makefile
+
+# Docker
+Dockerfile
 
 # custom configs
 custom.cfg
