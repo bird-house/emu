@@ -8,7 +8,7 @@ usage() {
         -h   - Print this help message.
         -i   - Install required system packages for Birdhouse build. You *need* 'sudo' priviliges!"
         -u   - Update Makefile for Birdhouse build. Python needs to be installed."
-        -b   - Both system packages will be installed (-i) and Makefile will be updated (-u). Default"
+        -b   - Both system packages will be installed (-i) and Makefile will be updated (-u). Default."
 EOT
     exit 1
 }
@@ -23,7 +23,7 @@ install_pkgs() {
         sudo yum -y install wget gcc-c++
     elif [ `uname -s` = "Darwin" ] ; then
         echo "Install Homebrew packages for Birdhouse build ..."
-        brew install wget
+        brew install wget libmagic
     fi
 }
 
