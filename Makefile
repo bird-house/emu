@@ -137,6 +137,10 @@ install: bootstrap conda_pkgs
 	@echo "Installing application with buildout ..."
 	bin/buildout -c custom.cfg
 
+.PHONY: build
+build: install
+	@echo "Please use 'make install' instead of 'make build'"
+
 .PHONY: clean
 clean:
 	@echo "Cleaning buildout files ..."
