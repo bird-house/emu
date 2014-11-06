@@ -77,10 +77,12 @@ backup:
 bootstrap.sh:
 	@echo "Update bootstrap.sh ..."
 	@wget -q --no-check-certificate -O bootstrap.sh "https://raw.githubusercontent.com/bird-house/birdhousebuilder.bootstrap/master/bootstrap.sh"
+	@chmod 755 bootstrap.sh
 
 requirements.sh:
 	@echo "Setup default requirements.sh ..."
 	@wget -q --no-check-certificate -O requirements.sh "https://raw.githubusercontent.com/bird-house/birdhousebuilder.bootstrap/master/requirements.sh"
+	@chmod 755 requirements.sh
 
 .PHONY: Makefile
 Makefile: bootstrap.sh
