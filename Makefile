@@ -147,6 +147,7 @@ clean:
 .PHONY: distclean
 distclean: backup clean
 	@echo "Cleaning distribution ..."
+	@git diff --quiet HEAD || echo "There are uncommited changes! Not doing 'git clean' ..."
 	@-git clean -dfx --exclude=*.bak
 
 .PHONY: buildclean
