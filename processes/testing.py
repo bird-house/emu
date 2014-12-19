@@ -304,6 +304,8 @@ class ChomskyTextGeneratorProcess(WPSProcess):
 class InOutProcess(WPSProcess):
     """
     This process defines several types of literal type of in- and outputs.
+
+    TODO: add literal input with value range[(0,100)] ... see pywps doc
     """
 
     def __init__(self):
