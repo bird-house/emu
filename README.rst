@@ -50,7 +50,7 @@ After any change to your ``custom.cfg`` you **need** to run ``make install`` aga
 Example: Using Docker
 ---------------------
 
-If you just want to try the Emu Web Processing Service you can also use the `Docker https://www.docker.com`_ image::
+If you just want to try the Emu Web Processing Service you can also use the `Docker <https://registry.hub.docker.com/u/birdhouse/emu/>`_ image::
 
   $ docker run -i -d -p 9001:9001 -p 8090:8090 -p 8094:8094 --name=emu_wps birdhouse/emu
 
@@ -62,19 +62,19 @@ Show running docker containers::
 
   $ docker ps
 
-Open your browser and enter the url of the supervisor service:: 
+Open your browser and enter the url of the supervisor service:
 
   http://localhost:9001
 
-Run a GetCapabilites WPS request::
+Run a GetCapabilites WPS request:
 
   http://localhost:8094/wps?service=WPS&version=1.0.0&request=getcapabilities
 
-Run DescribeProcess WPS request for *Hello World*::
+Run DescribeProcess WPS request for *Hello World*:
 
   http://localhost:8094/wps?service=WPS&version=1.0.0&request=describeprocess&identifier=helloworld
 
-Execute *Hello World* process with you user name::
+Execute *Hello World* process with you user name:
 
   http://localhost:8094/wps?service=WPS&version=1.0.0&request=execute&identifier=helloworld&DataInputs=user=Pingu
 
