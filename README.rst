@@ -93,3 +93,14 @@ Stop and remove docker container::
 
   $ docker stop emu_wps
   $ docker rm emu_wps
+
+Example: IPython Notebooks
+--------------------------
+
+There are some IPython notebooks available to show the possiblities of WPS using the Emu WPS service. You can find them on GitHub:
+
+https://github.com/bird-house/pyramid-phoenix/tree/master/docs/notebook/tutorial
+
+Or use the NBViewer:
+
+http://nbviewer.ipython.org/github/bird-house/pyramid-phoenix/tree/master/docs/notebook/tutorial/
