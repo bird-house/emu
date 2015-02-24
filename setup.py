@@ -21,14 +21,14 @@ classifiers=[
         ]
 
 setup(name='emu',
-      version='0.1.2',
+      version='0.2.0',
       description='WPS processes for testing and demo',
       long_description=README + '\n\n' + CHANGES,
       classifiers=classifiers,
       author='Birdhouse',
       url='https://github.com/bird-house/emu',
       license = "Apache License v2.0",
-      keywords='wps PyWPS Python Malleefowl',
+      keywords='wps pywps malleefowl emu conda anaconda birdhouse',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,

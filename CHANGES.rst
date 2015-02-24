@@ -1,6 +1,11 @@
 Changes
 *******
 
+0.2.0 (2015-02-24)
+==================
+
+* Now possible to use shared anaconda for installation.
+
 0.1.2 (2014-11-24)
 ==================
 
