@@ -14,7 +14,7 @@ Emu is a Python package with some test proccess for  Web Processing Services (WP
 Installation
 ------------
 
-The installation is using the Python distribution system `Anaconda`_ to maintain software dependendies. 
+The installation is using the Python distribution system `Anaconda`_ to maintain software dependencies. 
 You may use an existing (shared, read-only access possible) Anaconda installation. For this set an environment variable to the location of your existing Anaconda, for example::
 
    $ export ANACONDA_HOME=/opt/anaconda
@@ -29,7 +29,7 @@ Now, check out the emu code from github and start the installation::
    $ cd emu
    $ make
 
-After successful installation you need to start the services. All installed files (config etc ...) are below the conda environment birdhouse which is by default in your home directory ``~/.conda/envs/birdhouse``. Now, start the services::
+After successful installation you need to start the services. All installed files (config etc ...) are below the conda environment ``birdhouse`` which is by default in your home directory ``~/.conda/envs/birdhouse``. Now, start the services::
 
    $ make start  # starts supervisor services
    $ make status # shows supervisor status
@@ -95,6 +95,7 @@ Execute *Hello World* process with you user name:
 
 Install *Birdy* WPS command line tool from Anaconda (Anaconda needs to be installed and in your ``PATH``)::
 
+  $ source activate birdhouse # activate birdhouse environment (optional)
   $ conda install -c https://conda.binstar.org/birdhouse birdhouse-birdy
 
 Use Birdy to access Emu WPS service::
