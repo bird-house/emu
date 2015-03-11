@@ -5,8 +5,6 @@
 
 .. _introduction:
 
-.. _`Birdhouse`: http://bird-house.github.io/
-
 Introduction
 ============
 
@@ -16,6 +14,8 @@ Emu (the bird)
 Emu is a Python package with some test proccess for  Web Processing Services (WPS). Currently it is using the `PyWPS <https://github.com/geopython/PyWPS>`_ server.
 
 Emu is part of the `Birdhouse`_ project.
+
+.. _`Birdhouse`: http://bird-house.github.io/
 
 
 Contents:
