@@ -3,13 +3,29 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Emu's documentation!
-===============================
+.. _introduction:
+
+.. _`Birdhouse`: http://bird-house.github.io/
+
+Introduction
+============
+
+Emu (the bird)
+  *Emus are curious birds who are known to follow and watch other animals and humans. Emus do not sleep continuously at night but in several short stints sitting down. [..].* (`Wikipedia <https://en.wikipedia.org/wiki/Emu>`_).
+
+Emu is a Python package with some test proccess for  Web Processing Services (WPS). Currently it is using the `PyWPS <https://github.com/geopython/PyWPS>`_ server.
+
+Emu is part of the `Birdhouse`_ project.
+
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
+
+   installation
+   configuration
+   tutorial
 
 
 
