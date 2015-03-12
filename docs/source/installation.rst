@@ -1,7 +1,5 @@
 .. _installation:
 
-.. _`Anaconda`: http://www.continuum.io/
-
 Installation
 ============
 
@@ -34,3 +32,5 @@ Check the log files for errors::
    $ tail -f  var/log/pywps/emu_trace.log
 
 You will find more information about the installation in the `Makefile documentation <http://birdhousebuilderbootstrap.readthedocs.org/en/latest/>`_.
+
+.. _`Anaconda`: http://www.continuum.io/
