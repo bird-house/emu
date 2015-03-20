@@ -158,7 +158,7 @@ class ChomskyTextGeneratorProcess(WPSProcess):
         WPSProcess.__init__(
             self,
             identifier="chomsky", 
-            title="Chomsky test generator",
+            title="Chomsky text generator",
             version = "1.0",
             metadata = [],
             abstract=" Generates a random chomsky text ...",
