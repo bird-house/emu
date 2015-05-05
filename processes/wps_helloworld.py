@@ -13,7 +13,7 @@ class HelloWorldProcess(WPSProcess):
             identifier="helloworld", 
             title="Hello World",
             version = "1.0",
-            metadata = [],
+            metadata = [{"title":"Documentation","href":"http://emu.readthedocs.org/en/latest/"}],
             abstract="Welcome user and say hello ...",
             )
 
@@ -30,6 +30,6 @@ class HelloWorldProcess(WPSProcess):
             type = type(''))
                                            
     def execute(self):
-        self.show_status("Starting ...", 5)
+        self.show_status("Starting ...", 1)
         self.output.setValue("Hello %s and welcome to WPS :)" % (self.user.getValue()))
-        self.show_status("Done", 95)
+        self.show_status("Done", 100)
