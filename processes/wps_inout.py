@@ -265,7 +265,7 @@ class InOutProcess(WPSProcess):
             )
        
     def execute(self):
-        self.show_status('execute inout', 10)
+        self.show_status('execute inout', 1)
 
         print 'start testing all data types'
 
@@ -320,6 +320,6 @@ class InOutProcess(WPSProcess):
                 fp.write( "<result>nothing</result>" )
             self.xml_url_out.setValue( fp.name )
 
-        self.show_status("inout process ... done", 95)
+        self.show_status("inout process ... done", 100)
         return
         
