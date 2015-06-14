@@ -1,6 +1,9 @@
 Emu
 ===
 
+.. image:: https://travis-ci.org/bird-house/emu.svg?branch=master
+   :alt: Travis Build
+
 Emu (the bird)
   *Emus are curious birds who are known to follow and watch other animals and humans. Emus do not sleep continuously at night but in several short stints sitting down. [..].* (`Wikipedia <https://en.wikipedia.org/wiki/Emu>`_).
 
