@@ -2,7 +2,7 @@ Emu
 ===
 
 .. image:: https://travis-ci.org/bird-house/emu.svg?branch=master
-   :target: https://travis-ci.org/bird-house/emu.svg
+   :target: https://travis-ci.org/bird-house/emu
    :alt: Travis Build
 
 Emu (the bird)
