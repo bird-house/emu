@@ -4,4 +4,5 @@ __all__ = [
            "wps_answertolife",
            "wps_wordcounter",
            "wps_inout",
+           "wps_multiplesources",
     ]
