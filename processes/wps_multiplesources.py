@@ -47,8 +47,8 @@ class MultipleSource(WPSProcess):
     def execute(self):
         self.show_status("Starting ...", 0)
 
-        model_files = self.getInputValues(identifier='model_data')
-        obs_files = self.getInputValues(identifier='obs_data')
+        model_files = self.getInputValues(identifier='model')
+        obs_files = self.getInputValues(identifier='obs')
 
         outfile = self.mktempfile(suffix='.txt')
         with open(outfile, 'w') as fout: 
