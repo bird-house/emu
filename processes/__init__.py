@@ -5,5 +5,5 @@ __all__ = [
            "wps_wordcounter",
            "wps_inout",
            "wps_multiplesources",
-           "wps_chomskytext.py",
+           "wps_chomskytext",
     ]
