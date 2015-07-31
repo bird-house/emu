@@ -28,8 +28,7 @@ The depolyed WPS service is available on http://localhost:8094/wps?service=WPS&v
 Check the log files for errors::
 
    $ cd ~/.conda/envs/birdhouse
-   $ tail -f  var/log/pywps/emu.log
-   $ tail -f  var/log/pywps/emu_trace.log
+   $ tail -f  var/log/supervisor/emu.log
 
 You will find more information about the installation in the `Makefile documentation <http://birdhousebuilderbootstrap.readthedocs.org/en/latest/>`_.
 
