@@ -1,5 +1,5 @@
 """
-Processes with cdo commands
+Zonal mean process
 """
 
 from malleefowl.process import WPSProcess
@@ -7,15 +7,15 @@ from malleefowl.process import WPSProcess
 from malleefowl import wpslogging as logging
 logger = logging.getLogger(__name__)
 
-class BfTest(WPSProcess):
-    """This process calculates zonal mean in example netcdf file"""
+class ZonalMean(WPSProcess):
+    """This process calculates zonal mean in netcdf file"""
     def __init__(self):
         WPSProcess.__init__(
             self,
             identifier = "zonal_mean",
-            title = "bf_test",
-            version = "0.1",
-            abstract="zonal means in example NetCDF File.",
+            title = "Zonal Mean",
+            version = "0.2",
+            abstract="zonal mean in NetCDF File.",
             )
 
         self.netcdf_file = self.addComplexInput(
@@ -38,7 +38,7 @@ class BfTest(WPSProcess):
             )
 
     def execute(self):
-        self.show_status("starting bftest", 0)
+        self.show_status("starting zonal mean ...", 0)
 
         nc_files = self.getInputValues(identifier='netcdf_file')
 
@@ -114,8 +114,8 @@ class BfTest(WPSProcess):
 
         outfile = self.mktempfile(suffix='.txt')
         with open(outfile, 'w') as fp:
-            fp.write( '*** SUCCESS reading example file testfile.nc!')
-            fp.write("mittlerer zonaler Druck %s hPa" % ( sum(press[:])/6. ) )
+            fp.write('*** SUCCESS reading example file testfile.nc!\n')
+            fp.write("mean zonal pressure %s hPa" % ( sum(press[:])/6. ) )
 
         # close the file.
         ncfile.close()
