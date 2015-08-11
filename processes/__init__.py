@@ -6,4 +6,5 @@ __all__ = [
            "wps_inout",
            "wps_multiplesources",
            "wps_chomskytext",
+	   "wps_bftest"
     ]
