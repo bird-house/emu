@@ -5,4 +5,5 @@ extends = buildout.cfg
 [settings]
 hostname = localhost
 http-port = 8094
+log-level = WARN
 
