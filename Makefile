@@ -173,6 +173,11 @@ install: bootstrap
 	@echo "Installing application with buildout ..."
 	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout -c custom.cfg"
 
+.PHONY: update
+update:
+	@echo "Update application with buildout ..."
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout -o -c custom.cfg"
+
 .PHONY: build
 build: install
 	@echo "\nPlease use 'make install' instead of 'make build'"
