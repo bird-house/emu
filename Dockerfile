@@ -1,39 +1,31 @@
 FROM ubuntu:14.04
 MAINTAINER Emu WPS Application
 
+# Add application sources
+ADD . /opt/birdhouse
 
-# Add user phoenix
-RUN useradd -d /home/phoenix -m phoenix
+# Set conda enviroment
+ENV ANACONDA_HOME /opt/anaconda
+ENV CONDA_ENVS_DIR /opt/conda_envs
 
-# Add bootstrap and application requirements
-ADD ./bootstrap.sh /tmp/bootstrap.sh
-ADD ./requirements.sh /tmp/requirements.sh
-
-WORKDIR /tmp
+# cd into application
+WORKDIR /opt/birdhouse
 
 # Install system dependencies
 RUN bash bootstrap.sh -i && bash requirements.sh
-
-# Add application sources
-ADD . /home/phoenix/src
-
-# Change permissions for user phoenix
-RUN chown -R phoenix /home/phoenix/src
-
-# cd into application
-WORKDIR /home/phoenix/src
-
-# Remaining tasks run as user phoenix
-USER phoenix
 
 # Update makefile and run install
 RUN bash bootstrap.sh -u && make clean install 
 
 # cd into conda birdhouse environment
-WORKDIR /home/phoenix/.conda/envs/birdhouse
+WORKDIR /opt/conda_envs/birdhouse
+
+# volume for variable data
+VOLUME /birdhouse
+RUN mv var var.orig && ln -s /birdhouse var
 
 # all currently used ports in birdhouse
-EXPOSE 8080 8081 8082 8090 8091 8092 8093 8094 9001 9002
+EXPOSE 8090 8094
 
 CMD ["bin/supervisord", "-n", "-c", "etc/supervisor/supervisord.conf"]
 
