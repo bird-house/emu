@@ -1,5 +1,7 @@
-FROM birdhouse/birdbase
+FROM birdhouse/bird-base
 MAINTAINER https://github.com/bird-house
+
+LABEL Description="Emu Web Processing Service" Vendor="Birdhouse" Version="0.2.1"
 
 # Add application sources
 ADD . /opt/birdhouse
@@ -15,16 +17,17 @@ WORKDIR /opt/birdhouse
 RUN bash bootstrap.sh -i && bash requirements.sh
 
 # Run install
-RUN rm -f custom.cfg
 RUN make clean install 
 
 # Volume for data, cache, logfiles, ...
+RUN chown -R www-data /opt/conda/envs/birdhouse
+RUN chown -R www-data /opt/birdhouse
+RUN mv /opt/conda/envs/birdhouse/var /data && ln -s /data /opt/conda/envs/birdhouse/var
 VOLUME /data
-RUN mv /opt/conda/envs/birdhouse/var var.orig && ln -s /data /opt/conda/envs/birdhouse/var
 
 # Configure hostname and user for services 
 ENV HOSTNAME localhost
-ENV USER nobody
+ENV USER www-data
 
 # Ports used in birdhouse
 EXPOSE 8090 8094 9001
