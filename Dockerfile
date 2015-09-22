@@ -1,7 +1,8 @@
-FROM birdhouse/bird-base
+FROM birdhouse/bird-base:latest
 MAINTAINER https://github.com/bird-house
 
-LABEL Description="Emu Web Processing Service" Vendor="Birdhouse" Version="0.2.1"
+LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.2.1"
+
 
 # Set current home
 ENV HOME /root
@@ -31,7 +32,7 @@ VOLUME /data
 ENV HOSTNAME localhost
 
 # Ports used in birdhouse
-EXPOSE 8090 8094 9001
+EXPOSE 8090 9001 8094 28094
 
 # Start supervisor in foreground
 ENV DAEMON_OPTS --nodaemon --user www-data
