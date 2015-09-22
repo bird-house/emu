@@ -17,7 +17,6 @@ PREFIX := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
 
 # Configuration used by update-config
 HOSTNAME ?= localhost
-USER ?= nobody
 
 # choose anaconda installer depending on your OS
 ANACONDA_URL = http://repo.continuum.io/miniconda
@@ -185,7 +184,7 @@ update:
 .PHONY: update-config
 update-config:
 	@echo "Update application with buildout ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout settings:hostname=$(HOSTNAME) settings:user=$(USER) -o"
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout settings:hostname=$(HOSTNAME) -o"
 
 .PHONY: build
 build: install
