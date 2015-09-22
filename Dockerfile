@@ -23,8 +23,8 @@ ENV CONDA_ENVS_DIR /opt/conda/envs
 RUN make clean install 
 
 # Volume for data, cache, logfiles, ...
-RUN mv $CONDA_ENVS_DIR/birdhouse/var /data && ln -s /data $CONDA_ENVS_DIR/birdhouse/var
 RUN chown -R www-data $CONDA_ENVS_DIR/birdhouse
+RUN mv $CONDA_ENVS_DIR/birdhouse/var /data && ln -s /data $CONDA_ENVS_DIR/birdhouse/var
 VOLUME /data
 
 # Configure hostname and user for services 
