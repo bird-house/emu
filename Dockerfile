@@ -9,6 +9,7 @@ ENV HOSTNAME localhost
 ENV USER www-data
 ENV OUTPUT_PORT 8090
 
+
 # Set current home
 ENV HOME /root
 
