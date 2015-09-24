@@ -8,6 +8,8 @@ LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Ve
 ENV HOSTNAME localhost
 ENV USER www-data
 ENV OUTPUT_PORT 8090
+ENV PHOENIX_PASSWORD "sha256:10761810a2f2:8535bf8468e0045ec2d33bd4d2f513d669bd31b79794614f23632c3b2cadc51c"
+ENV WPS_URL http://malleefowl:8094/wps
 
 
 # Set current home
