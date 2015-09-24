@@ -7,6 +7,7 @@ LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Ve
 # Configure hostname and user for services 
 ENV HOSTNAME localhost
 ENV USER www-data
+ENV OUTPUT_PORT 8090
 
 # Set current home
 ENV HOME /root
@@ -33,7 +34,7 @@ RUN mv $CONDA_ENVS_DIR/birdhouse/var /data && ln -s /data $CONDA_ENVS_DIR/birdho
 VOLUME /data
 
 # Ports used in birdhouse
-EXPOSE 8090 9001 8094 28094
+EXPOSE $OUTPUT_PORT 9001 8094 28094
 
 # Start supervisor in foreground
 ENV DAEMON_OPTS --nodaemon
