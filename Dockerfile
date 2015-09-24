@@ -40,7 +40,7 @@ VOLUME /data
 EXPOSE $OUTPUT_PORT 9001 8094 28094
 
 # Start supervisor in foreground
-ENV DAEMON_OPTS --nodaemon
+ENV DAEMON_OPTS --nodaemon --user $USER
 
 # Update config and start supervisor ...
 CMD ["make", "update-config", "start"]
