@@ -17,6 +17,8 @@ PREFIX := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
 
 # Configuration used by update-config
 HOSTNAME ?= localhost
+USER ?= www-data
+OUTPUT_PORT ?= 8090
 
 # choose anaconda installer depending on your OS
 ANACONDA_URL = http://repo.continuum.io/miniconda
@@ -178,13 +180,14 @@ install: bootstrap
 
 .PHONY: update
 update:
-	@echo "Update application with buildout ..."
+	@echo "Update application config with buildout ..."
 	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout -o -c custom.cfg"
 
 .PHONY: update-config
 update-config:
-	@echo "Update application with buildout ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout settings:hostname=$(HOSTNAME) -o"
+	@echo "Update application config with buildout ..."
+	chown -R $(USER) $(PREFIX)/var/.
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout settings:hostname=$(HOSTNAME) settings:user=$(USER) settings:output-port=$(OUTPUT_PORT) -o"
 
 .PHONY: build
 build: install
