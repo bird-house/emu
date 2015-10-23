@@ -4,4 +4,4 @@ emu
 .. toctree::
    :maxdepth: 4
 
-   processes
+   emu
