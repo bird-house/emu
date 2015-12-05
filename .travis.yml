@@ -6,7 +6,7 @@ python:
   - "2.7"
 os:
   - linux
-  - osx
+#  - osx
 sudo: false
 install:
   - make install
