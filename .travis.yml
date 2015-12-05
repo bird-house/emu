@@ -4,6 +4,9 @@ branches:
     - master
 python:
   - "2.7"
+os:
+  - linux
+  - osx
 sudo: false
 install:
   - make install
