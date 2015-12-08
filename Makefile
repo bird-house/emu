@@ -1,4 +1,4 @@
-VERSION := 0.2.8
+VERSION := 0.2.9
 RELEASE := master
 
 # Application
@@ -58,6 +58,7 @@ help:
 	@echo "\t version     \t- Prints version number of this Makefile."
 	@echo "\t info        \t- Prints information about your system."
 	@echo "\t install     \t- Installs your application by running 'bin/buildout -c custom.cfg'."
+	@echo "\t update      \t- Updates your application by running 'bin/buildout -o -c custom.cfg'."
 	@echo "\t test        \t- Run tests (but skip long running tests)."
 	@echo "\t testall     \t- Run all tests (including long running tests)."
 	@echo "\t clean       \t- Deletes all files that are created by running buildout."
@@ -229,7 +230,7 @@ test:
 .PHONY: testall
 testall:
 	@echo "Running all tests (include slow tests) ..."
-	bin/nosetests unit_tests
+	bin/nosetests tests
 
 .PHONY: docs
 docs:
