@@ -1,6 +1,6 @@
 # vim:set ft=dockerfile:
 FROM birdhouse/bird-base:latest
-MAINTAINER https://github.com/bird-house
+MAINTAINER https://github.com/bird-house/emu
 
 LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.2.1"
 
@@ -8,8 +8,6 @@ LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Ve
 ENV HOSTNAME localhost
 ENV USER www-data
 ENV OUTPUT_PORT 8090
-ENV PHOENIX_PASSWORD "sha256:10761810a2f2:8535bf8468e0045ec2d33bd4d2f513d669bd31b79794614f23632c3b2cadc51c"
-ENV WPS_URL http://malleefowl:8091/wps
 
 
 # Set current home
@@ -38,7 +36,7 @@ VOLUME /data/cache
 VOLUME /data/lib
 
 # Ports used in birdhouse
-EXPOSE $OUTPUT_PORT 9001 8094 28094
+EXPOSE 9001 8094 28094 $OUTPUT_PORT
 
 # Start supervisor in foreground
 ENV DAEMON_OPTS --nodaemon --user $USER
