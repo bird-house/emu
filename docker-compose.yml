@@ -2,6 +2,7 @@ emu:
   image: birdhouse/emu
   ports:
     - "38094:38094"
+    - "28094:28094"
     - "8094:8094"
   environment:
     HOSTNAME: localhost
