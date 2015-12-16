@@ -20,6 +20,7 @@ RUN mkdir -p /opt/birdhouse && curl -ksL https://github.com/bird-house/emu/archi
 WORKDIR /opt/birdhouse
 
 
+
 # Install system dependencies
 RUN bash bootstrap.sh -i && bash requirements.sh
 
@@ -37,11 +38,11 @@ VOLUME /data/cache
 VOLUME /data/lib
 
 # Ports used in birdhouse
-EXPOSE 9001 8094 28094 $OUTPUT_PORT
+EXPOSE 8094 28094 $OUTPUT_PORT
 
 # Start supervisor in foreground
 ENV DAEMON_OPTS --nodaemon --user $USER
 
-# Update config and start supervisor ...
-CMD ["make", "update-config", "start"]
+# Start service ...
+CMD ['make', 'update-config', 'start']
 
