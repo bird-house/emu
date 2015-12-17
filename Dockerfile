@@ -44,5 +44,5 @@ EXPOSE 8094 28094 $OUTPUT_PORT
 ENV DAEMON_OPTS --nodaemon --user $USER
 
 # Start service ...
-CMD ['make', 'update-config', 'start']
+CMD ["make", "update-config", "start"]
 
