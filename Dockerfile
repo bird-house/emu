@@ -7,7 +7,7 @@ LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Ve
 # Configure hostname and user for services 
 ENV HOSTNAME localhost
 ENV USER www-data
-ENV OUTPUT_PORT 8090
+ENV OUTPUT_PORT 38094
 
 
 # Set current home
