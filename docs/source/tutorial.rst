@@ -5,7 +5,7 @@ Example: Using Docker
 
 If you just want to try the Emu Web Processing Service you can also use the `Docker <https://registry.hub.docker.com/u/birdhouse/emu/>`_ image::
 
-  $ docker run -i -d -p 9001:9001 -p 8090:8090 -p 8094:8094 --name=emu_wps birdhouse/emu
+  $ docker run -i -d -p 38094:38094 -p 8094:8094 --name=emu_wps birdhouse/emu
 
 Check the docker logs::
 
@@ -14,10 +14,6 @@ Check the docker logs::
 Show running docker containers::
 
   $ docker ps
-
-Open your browser and enter the url of the supervisor service:
-
-  http://localhost:9001
 
 Run a GetCapabilites WPS request:
 

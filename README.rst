@@ -12,6 +12,12 @@ Emu is a Python package with some test proccess for  Web Processing Services (WP
 
 Full `documentation <http://emu.readthedocs.org/en/latest/>`_ is available on ReadTheDocs or in the docs directory.
 
+Start Emu with docker-compose
+-----------------------------
 
+Run Emu with mapped ports (8094) on localhost:
 
+.. code-block:: sh
+
+    $ docker-compose run --service-ports -e HOSTNAME=localhost emu
 
