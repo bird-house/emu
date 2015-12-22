@@ -13,8 +13,8 @@ ENV OUTPUT_PORT 38094
 # Set current home
 ENV HOME /root
 
-# Load sources from github
-RUN mkdir -p /opt/birdhouse && curl -ksL https://github.com/bird-house/emu/archive/master.tar.gz | tar -xzC /opt/birdhouse --strip-components=1
+# Copy application sources
+COPY . /opt/birdhouse
 
 # cd into application
 WORKDIR /opt/birdhouse
