@@ -7,10 +7,7 @@ emu:
   environment:
     HOSTNAME: localhost
     OUTPUT_PORT: 38094
-  volumes_from:
-    - base
-base:
-  image: birdhouse/bird-base
   volumes:
-    - /data
+    - data:/data
+  volume_driver: local
   
