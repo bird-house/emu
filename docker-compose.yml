@@ -1,11 +1,10 @@
 emu:
   image: birdhouse/emu
   ports:
+    - "48094:9001"
     - "38094:38094"
-    - "28094:28094"
     - "8094:8094"
   environment:
-    HOSTNAME: localhost
     OUTPUT_PORT: 38094
   volumes:
     - data:/data
