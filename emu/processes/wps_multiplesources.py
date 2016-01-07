@@ -1,8 +1,5 @@
-from malleefowl.process import WPSProcess
-
-from malleefowl import wpslogging as logging
-logger = logging.getLogger(__name__)
-
+from pywps.Process import WPSProcess
+from malleefowl.process import show_status, getInputValues, mktempfile
 
 class MultipleSource(WPSProcess):
     """
@@ -13,8 +10,10 @@ class MultipleSource(WPSProcess):
             self,
             identifier="multiplesources", 
             title="Multiple Sources",
-            version = "1.0",
+            version = "0.2",
             abstract="Process with multiple different sources ...",
+            statusSupported=True,
+            storeSupported=True
             )
 
         self.model_data = self.addComplexInput(
@@ -45,15 +44,15 @@ class MultipleSource(WPSProcess):
             )
                                            
     def execute(self):
-        self.show_status("Starting ...", 0)
+        show_status(self, "Starting ...", 0)
 
-        model_files = self.getInputValues(identifier='model')
-        obs_files = self.getInputValues(identifier='obs')
+        model_files = getInputValues(self, identifier='model')
+        obs_files = getInputValues(self, identifier='obs')
 
-        outfile = self.mktempfile(suffix='.txt')
+        outfile = mktempfile(suffix='.txt')
         with open(outfile, 'w') as fout: 
             fout.write('Comparing {0} model files with {0} obs files\n\n'.format(len(model_files), len(obs_files)))
             self.output.setValue( fout.name )
 
-        self.show_status("Done", 100)
+        show_status(self, "Done", 100)
 

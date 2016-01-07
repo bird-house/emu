@@ -1,7 +1,5 @@
-from malleefowl.process import WPSProcess
-
-from malleefowl import wpslogging as logging
-logger = logging.getLogger(__name__)
+from pywps.Process import WPSProcess
+from malleefowl.process import show_status
 
 class HelloWorldProcess(WPSProcess):
     """
@@ -12,9 +10,11 @@ class HelloWorldProcess(WPSProcess):
             self,
             identifier="helloworld", 
             title="Hello World",
-            version = "1.0",
+            version = "1.1",
             metadata = [{"title":"Documentation","href":"http://emu.readthedocs.org/en/latest/"}],
             abstract="Welcome user and say hello ...",
+            statusSupported=True,
+            storeSupported=True
             )
 
         self.user = self.addLiteralInput(
@@ -30,6 +30,6 @@ class HelloWorldProcess(WPSProcess):
             type = type(''))
                                            
     def execute(self):
-        self.show_status("Starting ...", 1)
+        show_status(self, "Starting ...", 0)
         self.output.setValue("Hello %s and welcome to WPS :)" % (self.user.getValue()))
-        self.show_status("Done", 100)
+        show_status(self, "Done", 100)

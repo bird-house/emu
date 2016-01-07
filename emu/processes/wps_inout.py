@@ -1,10 +1,8 @@
 from datetime import datetime, date
 import types
 
-from malleefowl.process import WPSProcess
-
-from malleefowl import wpslogging as logging
-logger = logging.getLogger(__name__)
+from pywps.Process import WPSProcess
+from malleefowl.process import show_status, mktempfile
 
 class InOutProcess(WPSProcess):
     """
@@ -17,15 +15,17 @@ class InOutProcess(WPSProcess):
         # definition of this process
         WPSProcess.__init__(
             self, 
-            identifier = "inout",
+            identifier="inout",
             title="Testing all Data Types",
-            version = "0.2",
+            version="0.3",
             # TODO: what can i do with this?
             metadata=[
                 {"title":"Foobar","href":"http://foo/bar"},
                 {"title":"Barfoo","href":"http://bar/foo"},
                 ],
             abstract="Just testing data types like date, datetime etc ...",
+            statusSupported=True,
+            storeSupported=True
             )
 
         # Literal Input Data
@@ -265,7 +265,7 @@ class InOutProcess(WPSProcess):
             )
        
     def execute(self):
-        self.show_status('execute inout', 1)
+        show_status(self, 'execute inout', 0)
 
         print 'start testing all data types'
 
@@ -284,7 +284,6 @@ class InOutProcess(WPSProcess):
         # more than one
         # TODO: handle multiple values (fix in pywps)
         value = self.stringMoreThenOneIn.getValue()
-        logger.debug('stringMoreThenOneIn = %s', value)
         if value != None:
             if type(value) == types.ListType:
                 values = value
@@ -298,28 +297,23 @@ class InOutProcess(WPSProcess):
 
         # complex
         # write my own
-        logger.debug('write my own xml')
-        xml_filename = self.mktempfile(suffix='.xml')
+        xml_filename = mktempfile(suffix='.xml')
         with open(xml_filename, 'w') as fp:
             fp.write('<xml>just testing</xml>')
             fp.close()
             self.xmlFileOut.setValue( fp.name )
 
         # write file with url from input data
-        logger.debug('write input xml_upload')
-        xml_filename = self.mktempfile(suffix='.xml')
+        xml_filename = mktempfile(suffix='.xml')
         with open(xml_filename, 'w') as fp:
             xml_url = self.xml_url.getValue()
             if xml_url is not None:
                 for xml in xml_url:
-                    logger.debug('read xml')
                     with open(xml, 'r') as fp2:
-                        logger.debug('reading content')
                         fp.write( fp2.read() )
             else:
                 fp.write( "<result>nothing</result>" )
             self.xml_url_out.setValue( fp.name )
 
-        self.show_status("inout process ... done", 100)
-        return
+        show_status(self, "Done", 100)
         

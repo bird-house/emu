@@ -1,8 +1,5 @@
-from malleefowl.process import WPSProcess
-
-from malleefowl import wpslogging as logging
-logger = logging.getLogger(__name__)
-
+from pywps.Process import WPSProcess
+from malleefowl.process import show_status, mktempfile
 
 class ChomskyTextGeneratorProcess(WPSProcess):
     """
@@ -23,9 +20,10 @@ class ChomskyTextGeneratorProcess(WPSProcess):
             self,
             identifier="chomsky", 
             title="Chomsky text generator",
-            version = "1.0",
-            metadata = [],
+            version = "1.1",
             abstract=" Generates a random chomsky text ...",
+            statusSupported=True,
+            storeSupported=True
             )
 
         self.times = self.addLiteralInput(
@@ -47,7 +45,7 @@ class ChomskyTextGeneratorProcess(WPSProcess):
             )
                                            
     def execute(self):
-        self.show_status("Starting ...", 5)
+        show_status(self, "Starting ...", 0)
 
         leadins = """To characterize a linguistic level L,
         On the other hand,
@@ -156,10 +154,8 @@ class ChomskyTextGeneratorProcess(WPSProcess):
             output = chain(*islice(izip(*parts), 0, times))
             return textwrap.fill(' '.join(output), line_length)
 
-        outfile = self.mktempfile(suffix='.txt')
+        outfile = mktempfile(suffix='.txt')
         with open(outfile, 'w') as fout:
-            logger.debug('writing to %s', outfile)
             fout.write( chomsky(self.times.getValue()) )
             self.output.setValue( fout.name )
 
-        self.show_status("Done", 100)

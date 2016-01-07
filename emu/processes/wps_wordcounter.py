@@ -1,8 +1,5 @@
-from malleefowl.process import WPSProcess
-
-from malleefowl import wpslogging as logging
-logger = logging.getLogger(__name__)
-
+from pywps.Process import WPSProcess
+from malleefowl.process import show_status, mktempfile
 
 class WordCountProcess(WPSProcess):
     """
@@ -13,16 +10,16 @@ class WordCountProcess(WPSProcess):
             self,
             identifier="wordcount", 
             title="Word Counter",
-            version = "1.0",
-            metadata = [],
+            version="1.1",
             abstract="Counts words in a given text ...",
+            statusSupported=True,
+            storeSupported=True
             )
 
         self.text = self.addComplexInput(
-            identifier = "text",
-            title = "Text document",
-            abstract = "URL of text document",
-            metadata=[],
+            identifier="text",
+            title="Text document",
+            abstract="URL of text document",
             minOccurs=1,
             maxOccurs=1,
             formats=[{"mimeType":"text/plain"}],
@@ -32,13 +29,12 @@ class WordCountProcess(WPSProcess):
         self.output = self.addComplexOutput(
             identifier = "output",
             title = "Word count result",
-            metadata=[],
             formats=[{"mimeType":"text/plain"}],
             asReference=True,
             )
                                            
     def execute(self):
-        self.show_status("Starting ...", 1)
+        show_status(self, "Starting ...", 0)
 
         import re
         wordre = re.compile(r'\w+')
@@ -49,17 +45,14 @@ class WordCountProcess(WPSProcess):
                     yield word
 
         text = self.text.getValue()
-        logger.debug('input file = %s', text)
         with open(text, 'r') as fin:
             from collections import Counter
             counts = Counter(words(fin))
             sorted_counts = sorted([(v,k) for (k,v) in counts.items()], reverse=True)
-            logger.debug('words counted')
-            outfile = self.mktempfile(suffix='.txt')
+            outfile = mktempfile(suffix='.txt')
             with open(outfile, 'w') as fout:
-                logger.debug('writing to %s', outfile)
                 fout.write( str(sorted_counts) )
                 self.output.setValue( fout.name )
 
-        self.show_status("Done", 100)
+        show_status(self, "Done", 100)
 

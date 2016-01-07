@@ -1,8 +1,5 @@
-from malleefowl.process import WPSProcess
-
-from malleefowl import wpslogging as logging
-logger = logging.getLogger(__name__)
-
+from pywps.Process import WPSProcess
+from malleefowl.process import show_status
 
 class UltimateQuestionProcess(WPSProcess):
     """
@@ -23,9 +20,10 @@ class UltimateQuestionProcess(WPSProcess):
             self,
             identifier="ultimatequestionprocess", #the same as the file name
             title="Answer to Life, the Universe and Everything",
-            version = "2.0",
-            metadata = [],
+            version="2.0",
             abstract="Numerical solution that is the answer to Life, Universe and Everything. The process is an improvement to Deep Tought computer (therefore version 2.0) since it no longer takes 7.5 milion years, but only a few seconds to give a response, with an update of status every 10 seconds.",
+            statusSupported=True,
+            storeSupported=True
             )
             #No need for inputs since Execute will start the process
         self.Answer = self.addLiteralOutput(
@@ -34,10 +32,10 @@ class UltimateQuestionProcess(WPSProcess):
                                            
     def execute(self):
         import time
-        self.show_status("Preparing....", 0)
+        show_status(self, "Preparing....", 0)
         for i in xrange(1, 11):
             time.sleep(1)
-            self.show_status("Thinking.....", i*10) 
+            show_status(self, "Thinking.....", i*10) 
         #The final answer    
         self.Answer.setValue("42")
         

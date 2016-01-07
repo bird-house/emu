@@ -2,10 +2,8 @@
 Zonal mean process
 """
 
-from malleefowl.process import WPSProcess
-
-from malleefowl import wpslogging as logging
-logger = logging.getLogger(__name__)
+from pywps.Process import WPSProcess
+from malleefowl.process import show_status, getInputValues, mktempfile
 
 class ZonalMean(WPSProcess):
     """This process calculates zonal mean in netcdf file"""
@@ -14,14 +12,15 @@ class ZonalMean(WPSProcess):
             self,
             identifier = "zonal_mean",
             title = "Zonal Mean",
-            version = "0.2",
+            version = "0.3",
             abstract="zonal mean in NetCDF File.",
+            statusSupported=True,
+            storeSupported=True
             )
 
-        self.netcdf_file = self.addComplexInput(
-            identifier="netcdf_file",
-            title="NetCDF File",
-            abstract="NetCDF File",
+        self.dataset = self.addComplexInput(
+            identifier="dataset",
+            title="Dataset (NetCDF)",
             minOccurs=1,
             maxOccurs=100,
             maxmegabites=5000,
@@ -32,15 +31,14 @@ class ZonalMean(WPSProcess):
             identifier="output",
             title="Output",
             abstract="Output",
-            metadata=[],
             formats=[{"mimeType":"text/plain"}],
             asReference=True,
             )
 
     def execute(self):
-        self.show_status("starting zonal mean ...", 0)
+        show_status(self, "starting zonal mean ...", 0)
 
-        nc_files = self.getInputValues(identifier='netcdf_file')
+        nc_files = getInputValues(self, identifier='dataset')
 
         # the Scientific Python netCDF 3 interface
         # http://dirac.cnrs-orleans.fr/ScientificPython/
@@ -112,7 +110,7 @@ class ZonalMean(WPSProcess):
             raise ValueError('longitude data not what was expected')
         
 
-        outfile = self.mktempfile(suffix='.txt')
+        outfile = mktempfile(suffix='.txt')
         with open(outfile, 'w') as fp:
             fp.write('*** SUCCESS reading example file testfile.nc!\n')
             fp.write("mean zonal pressure %s hPa" % ( sum(press[:])/6. ) )
@@ -122,7 +120,7 @@ class ZonalMean(WPSProcess):
 
         self.output.setValue( outfile )
 
-        self.show_status("done", 100)
+        show_status("done", 100)
 
 
 

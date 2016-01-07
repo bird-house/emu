@@ -11,7 +11,7 @@ class Process(WPSProcess):
          WPSProcess.__init__(self,
               identifier = "dummyprocess", # must be same, as filename
               title="Dummy Process",
-              version = "0.1",
+              version = "1.0",
               storeSupported = "true",
               statusSupported = "true",
               abstract="The Dummy process is used for testing the WPS structure. The process will accept 2 input numbers and will return the XML result with an add one and subtract one operation",
