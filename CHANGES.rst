@@ -1,11 +1,13 @@
 Changes
 *******
 
-
-0.2.2 (2015-mm-dd)
+0.2.2 (2016-01-07)
 ==================
 
-* update Dockerfile.
+* using pywps WPSProcess class.
+* zonal-mean process added.
+* docker-compose added.
+* updated Dockerfile.
 * updated pywps, supervisor and docker recipe.
 * log to stderr/supervisor.
 
