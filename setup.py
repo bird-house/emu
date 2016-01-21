@@ -7,7 +7,6 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
 requires = [
-    'malleefowl',
     'nose',
     ]
 
@@ -21,7 +20,7 @@ classifiers=[
         ]
 
 setup(name='emu',
-      version='0.2.2',
+      version='0.3.0',
       description='WPS processes for testing and demo',
       long_description=README + '\n\n' + CHANGES,
       classifiers=classifiers,
