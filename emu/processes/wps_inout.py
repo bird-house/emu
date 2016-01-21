@@ -1,8 +1,8 @@
 from datetime import datetime, date
 import types
+import tempfile
 
 from pywps.Process import WPSProcess
-from malleefowl.process import show_status, mktempfile
 
 class InOutProcess(WPSProcess):
     """
@@ -17,7 +17,7 @@ class InOutProcess(WPSProcess):
             self, 
             identifier="inout",
             title="Testing all Data Types",
-            version="0.3",
+            version="0.4",
             # TODO: what can i do with this?
             metadata=[
                 {"title":"Foobar","href":"http://foo/bar"},
@@ -265,10 +265,6 @@ class InOutProcess(WPSProcess):
             )
        
     def execute(self):
-        show_status(self, 'execute inout', 0)
-
-        print 'start testing all data types'
-
         # literals
         self.setOutputValue(
             identifier='intOut', 
@@ -304,7 +300,7 @@ class InOutProcess(WPSProcess):
             self.xmlFileOut.setValue( fp.name )
 
         # write file with url from input data
-        xml_filename = mktempfile(suffix='.xml')
+        xml_filename = tempfile.mkstemp(suffix='.xml')
         with open(xml_filename, 'w') as fp:
             xml_url = self.xml_url.getValue()
             if xml_url is not None:
@@ -315,5 +311,5 @@ class InOutProcess(WPSProcess):
                 fp.write( "<result>nothing</result>" )
             self.xml_url_out.setValue( fp.name )
 
-        show_status(self, "Done", 100)
+        self.status.set("Done", 100)
         

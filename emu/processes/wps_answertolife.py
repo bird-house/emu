@@ -1,5 +1,4 @@
 from pywps.Process import WPSProcess
-from malleefowl.process import show_status
 
 class UltimateQuestionProcess(WPSProcess):
     """
@@ -32,10 +31,10 @@ class UltimateQuestionProcess(WPSProcess):
                                            
     def execute(self):
         import time
-        show_status(self, "Preparing....", 0)
+        self.status.set("Preparing....", 0)
         for i in xrange(1, 11):
             time.sleep(1)
-            show_status(self, "Thinking.....", i*10) 
+            self.status.set("Thinking.....", i*10) 
         #The final answer    
         self.Answer.setValue("42")
         

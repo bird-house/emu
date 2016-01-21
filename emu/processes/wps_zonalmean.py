@@ -2,8 +2,8 @@
 Zonal mean process
 """
 
+import tempfile
 from pywps.Process import WPSProcess
-from malleefowl.process import show_status, getInputValues, mktempfile
 
 class ZonalMean(WPSProcess):
     """This process calculates zonal mean in netcdf file"""
@@ -12,7 +12,7 @@ class ZonalMean(WPSProcess):
             self,
             identifier = "zonal_mean",
             title = "Zonal Mean",
-            version = "0.3",
+            version = "0.4",
             abstract="zonal mean in NetCDF File.",
             statusSupported=True,
             storeSupported=True
@@ -36,9 +36,9 @@ class ZonalMean(WPSProcess):
             )
 
     def execute(self):
-        show_status(self, "starting zonal mean ...", 0)
+        self.status.set(self, "starting zonal mean ...", 0)
 
-        nc_files = getInputValues(self, identifier='dataset')
+        nc_files = self.getInputValues(identifier='dataset')
 
         # the Scientific Python netCDF 3 interface
         # http://dirac.cnrs-orleans.fr/ScientificPython/
@@ -110,7 +110,7 @@ class ZonalMean(WPSProcess):
             raise ValueError('longitude data not what was expected')
         
 
-        outfile = mktempfile(suffix='.txt')
+        _,outfile = tempfile.mkstemp(suffix='.txt')
         with open(outfile, 'w') as fp:
             fp.write('*** SUCCESS reading example file testfile.nc!\n')
             fp.write("mean zonal pressure %s hPa" % ( sum(press[:])/6. ) )
@@ -120,7 +120,7 @@ class ZonalMean(WPSProcess):
 
         self.output.setValue( outfile )
 
-        show_status("done", 100)
+        self.status.set("done", 100)
 
 
 

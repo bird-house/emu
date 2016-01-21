@@ -1,5 +1,5 @@
+import tempfile
 from pywps.Process import WPSProcess
-from malleefowl.process import show_status, mktempfile
 
 class WordCountProcess(WPSProcess):
     """
@@ -10,7 +10,7 @@ class WordCountProcess(WPSProcess):
             self,
             identifier="wordcount", 
             title="Word Counter",
-            version="1.1",
+            version="0.3",
             abstract="Counts words in a given text ...",
             statusSupported=True,
             storeSupported=True
@@ -34,8 +34,6 @@ class WordCountProcess(WPSProcess):
             )
                                            
     def execute(self):
-        show_status(self, "Starting ...", 0)
-
         import re
         wordre = re.compile(r'\w+')
 
@@ -49,10 +47,10 @@ class WordCountProcess(WPSProcess):
             from collections import Counter
             counts = Counter(words(fin))
             sorted_counts = sorted([(v,k) for (k,v) in counts.items()], reverse=True)
-            outfile = mktempfile(suffix='.txt')
+            _,outfile = tempfile.mkstemp(suffix='.txt')
             with open(outfile, 'w') as fout:
                 fout.write( str(sorted_counts) )
                 self.output.setValue( fout.name )
 
-        show_status(self, "Done", 100)
+        self.status.set("Done", 100)
 

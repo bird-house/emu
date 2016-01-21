@@ -1,5 +1,6 @@
+import tempfile
+
 from pywps.Process import WPSProcess
-from malleefowl.process import show_status, mktempfile
 
 class ChomskyTextGeneratorProcess(WPSProcess):
     """
@@ -20,7 +21,7 @@ class ChomskyTextGeneratorProcess(WPSProcess):
             self,
             identifier="chomsky", 
             title="Chomsky text generator",
-            version = "1.1",
+            version = "0.2",
             abstract=" Generates a random chomsky text ...",
             statusSupported=True,
             storeSupported=True
@@ -45,7 +46,7 @@ class ChomskyTextGeneratorProcess(WPSProcess):
             )
                                            
     def execute(self):
-        show_status(self, "Starting ...", 0)
+        self.status.set("Starting ...", 0)
 
         leadins = """To characterize a linguistic level L,
         On the other hand,
@@ -154,7 +155,7 @@ class ChomskyTextGeneratorProcess(WPSProcess):
             output = chain(*islice(izip(*parts), 0, times))
             return textwrap.fill(' '.join(output), line_length)
 
-        outfile = mktempfile(suffix='.txt')
+        _,outfile = self.mkstemp(suffix='.txt')
         with open(outfile, 'w') as fout:
             fout.write( chomsky(self.times.getValue()) )
             self.output.setValue( fout.name )

@@ -1,5 +1,5 @@
+import tempfile
 from pywps.Process import WPSProcess
-from malleefowl.process import show_status, getInputValues, mktempfile
 
 class MultipleSource(WPSProcess):
     """
@@ -10,7 +10,7 @@ class MultipleSource(WPSProcess):
             self,
             identifier="multiplesources", 
             title="Multiple Sources",
-            version = "0.2",
+            version = "0.3",
             abstract="Process with multiple different sources ...",
             statusSupported=True,
             storeSupported=True
@@ -44,15 +44,13 @@ class MultipleSource(WPSProcess):
             )
                                            
     def execute(self):
-        show_status(self, "Starting ...", 0)
+        model_files = self.getInputValues(identifier='model')
+        obs_files = self.getInputValues(identifier='obs')
 
-        model_files = getInputValues(self, identifier='model')
-        obs_files = getInputValues(self, identifier='obs')
-
-        outfile = mktempfile(suffix='.txt')
+        _,outfile = tempfile.mkstemp(suffix='.txt')
         with open(outfile, 'w') as fout: 
             fout.write('Comparing {0} model files with {0} obs files\n\n'.format(len(model_files), len(obs_files)))
             self.output.setValue( fout.name )
 
-        show_status(self, "Done", 100)
+        self.status.set("Done", 100)
 
