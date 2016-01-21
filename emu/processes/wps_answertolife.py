@@ -19,7 +19,7 @@ class UltimateQuestionProcess(WPSProcess):
             self,
             identifier="ultimatequestionprocess", #the same as the file name
             title="Answer to Life, the Universe and Everything",
-            version="2.0",
+            version="2.1",
             abstract="Numerical solution that is the answer to Life, Universe and Everything. The process is an improvement to Deep Tought computer (therefore version 2.0) since it no longer takes 7.5 milion years, but only a few seconds to give a response, with an update of status every 10 seconds.",
             statusSupported=True,
             storeSupported=True
@@ -28,7 +28,7 @@ class UltimateQuestionProcess(WPSProcess):
         self.delay = self.addLiteralInput(
             identifier="delay",
             title="Delay",
-            abstract="Delay in Seconds. Default: 10 secs.",
+            abstract="Delay in Seconds. Default: 1 second.",
             default=1,
             type=(1),
             )
