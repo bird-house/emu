@@ -24,8 +24,16 @@ class UltimateQuestionProcess(WPSProcess):
             statusSupported=True,
             storeSupported=True
             )
-            #No need for inputs since Execute will start the process
-        self.Answer = self.addLiteralOutput(
+
+        self.delay = self.addLiteralInput(
+            identifier="delay",
+            title="Delay",
+            abstract="Delay in Seconds. Default: 10 secs.",
+            default=1,
+            type=(1),
+            )
+        
+        self.answer = self.addLiteralOutput(
             identifier = "answer",
             title = "The numerical answer to Life, Universe and Everything")
                                            
@@ -33,8 +41,8 @@ class UltimateQuestionProcess(WPSProcess):
         import time
         self.status.set("Preparing....", 0)
         for i in xrange(1, 11):
-            time.sleep(1)
+            time.sleep( float(self.delay.getValue()) )
             self.status.set("Thinking.....", i*10) 
         #The final answer    
-        self.Answer.setValue("42")
+        self.answer.setValue("42")
         
