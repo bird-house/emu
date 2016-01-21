@@ -293,14 +293,14 @@ class InOutProcess(WPSProcess):
 
         # complex
         # write my own
-        xml_filename = mktempfile(suffix='.xml')
+        _,xml_filename = tempfile.mkstemp(suffix='.xml')
         with open(xml_filename, 'w') as fp:
             fp.write('<xml>just testing</xml>')
             fp.close()
             self.xmlFileOut.setValue( fp.name )
 
         # write file with url from input data
-        xml_filename = tempfile.mkstemp(suffix='.xml')
+        _,xml_filename = tempfile.mkstemp(suffix='.xml')
         with open(xml_filename, 'w') as fp:
             xml_url = self.xml_url.getValue()
             if xml_url is not None:
