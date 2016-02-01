@@ -2,7 +2,6 @@
 Zonal mean process
 """
 
-import tempfile
 from pywps.Process import WPSProcess
 
 class ZonalMean(WPSProcess):
@@ -36,7 +35,7 @@ class ZonalMean(WPSProcess):
             )
 
     def execute(self):
-        self.status.set(self, "starting zonal mean ...", 0)
+        self.status.set("starting zonal mean ...", 0)
 
         nc_files = self.getInputValues(identifier='dataset')
 
@@ -110,7 +109,7 @@ class ZonalMean(WPSProcess):
             raise ValueError('longitude data not what was expected')
         
 
-        _,outfile = tempfile.mkstemp(suffix='.txt')
+        outfile = 'out.txt'
         with open(outfile, 'w') as fp:
             fp.write('*** SUCCESS reading example file testfile.nc!\n')
             fp.write("mean zonal pressure %s hPa" % ( sum(press[:])/6. ) )

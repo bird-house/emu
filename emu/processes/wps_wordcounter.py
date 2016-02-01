@@ -1,4 +1,3 @@
-import tempfile
 from pywps.Process import WPSProcess
 
 class WordCountProcess(WPSProcess):
@@ -47,7 +46,7 @@ class WordCountProcess(WPSProcess):
             from collections import Counter
             counts = Counter(words(fin))
             sorted_counts = sorted([(v,k) for (k,v) in counts.items()], reverse=True)
-            _,outfile = tempfile.mkstemp(suffix='.txt')
+            outfile = 'out.txt'
             with open(outfile, 'w') as fout:
                 fout.write( str(sorted_counts) )
                 self.output.setValue( fout.name )
