@@ -1,4 +1,3 @@
-import tempfile
 from pywps.Process import WPSProcess
 
 class MultipleSource(WPSProcess):
@@ -47,7 +46,7 @@ class MultipleSource(WPSProcess):
         model_files = self.getInputValues(identifier='model')
         obs_files = self.getInputValues(identifier='obs')
 
-        _,outfile = tempfile.mkstemp(suffix='.txt')
+        outfile = 'out.txt'
         with open(outfile, 'w') as fout: 
             fout.write('Comparing {0} model files with {0} obs files\n\n'.format(len(model_files), len(obs_files)))
             self.output.setValue( fout.name )

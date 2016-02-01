@@ -1,6 +1,5 @@
 from datetime import datetime, date
 import types
-import tempfile
 
 from pywps.Process import WPSProcess
 
@@ -293,14 +292,14 @@ class InOutProcess(WPSProcess):
 
         # complex
         # write my own
-        _,xml_filename = tempfile.mkstemp(suffix='.xml')
+        xml_filename = 'out.xml'
         with open(xml_filename, 'w') as fp:
             fp.write('<xml>just testing</xml>')
             fp.close()
             self.xmlFileOut.setValue( fp.name )
 
         # write file with url from input data
-        _,xml_filename = tempfile.mkstemp(suffix='.xml')
+        xml_filename = 'out2.xml'
         with open(xml_filename, 'w') as fp:
             xml_url = self.xml_url.getValue()
             if xml_url is not None:
