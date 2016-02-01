@@ -15,7 +15,7 @@ install:
 before_script:
   - sleep 15
 script:
-  - make test
+  - make testall
 #after_success:
 # - coveralls
 matrix:
