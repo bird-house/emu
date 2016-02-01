@@ -6,6 +6,6 @@ __all__ = [
     "wps_wordcounter",
     "wps_inout",
     "wps_multiplesources",
-    "wps_chomskytext",
+    "wps_chomsky",
     "wps_zonalmean"
     ]
