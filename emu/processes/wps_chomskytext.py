@@ -1,5 +1,3 @@
-import tempfile
-
 from pywps.Process import WPSProcess
 
 class ChomskyTextGeneratorProcess(WPSProcess):
@@ -155,7 +153,7 @@ class ChomskyTextGeneratorProcess(WPSProcess):
             output = chain(*islice(izip(*parts), 0, times))
             return textwrap.fill(' '.join(output), line_length)
 
-        _,outfile = self.mkstemp(suffix='.txt')
+        outfile = 'out.txt'
         with open(outfile, 'w') as fout:
             fout.write( chomsky(self.times.getValue()) )
             self.output.setValue( fout.name )
