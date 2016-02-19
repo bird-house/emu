@@ -3,7 +3,7 @@
 Example: Using Docker
 =====================
 
-If you just want to try the Emu Web Processing Service you can also use the `Docker <https://registry.hub.docker.com/u/birdhouse/emu/>`_ image::
+If you just want to try the Emu Web Processing Service you can also use the `Docker <https://hub.docker.com/r/birdhouse/emu/>`_ image::
 
   $ docker run -i -d -p 38094:38094 -p 8094:8094 --name=emu_wps birdhouse/emu
 

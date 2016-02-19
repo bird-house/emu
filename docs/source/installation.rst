@@ -32,4 +32,4 @@ Check the log files for errors::
 
 You will find more information about the installation in the `Makefile documentation <http://birdhousebuilderbootstrap.readthedocs.org/en/latest/>`_.
 
-.. _`Anaconda`: http://www.continuum.io/
+.. _`Anaconda`: https://www.continuum.io/
