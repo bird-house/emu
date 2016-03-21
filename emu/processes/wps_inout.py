@@ -3,6 +3,9 @@ import types
 
 from pywps.Process import WPSProcess
 
+import logging
+logger = logging.getLogger()
+
 class InOutProcess(WPSProcess):
     """
     This process defines several types of literal type of in- and outputs.
@@ -16,7 +19,7 @@ class InOutProcess(WPSProcess):
             self, 
             identifier="inout",
             title="Testing all Data Types",
-            version="0.4",
+            version="0.5",
             # TODO: what can i do with this?
             metadata=[
                 {"title":"Foobar","href":"http://foo/bar"},
@@ -130,17 +133,14 @@ class InOutProcess(WPSProcess):
         # zero or more bounding-boxes
         # --------------------------
 
-        # TODO: bbox does not work yet in owslib
-
-        # self.bboxIn = self.addBBoxInput(
-        #     identifier="bbox",
-        #     title="Bounding Box",
-        #     abstract="Enter a bounding box",
-        #     metadata=[], #TODO: what for?
-        #     minOccurs=0,
-        #     maxOccurs=2,
-        #     crss=["EPSG:4326"],
-        #     )
+        self.bboxIn = self.addBBoxInput(
+            identifier="bbox",
+            title="Bounding Box",
+            abstract="Enter a bounding box",
+            minOccurs=0,
+            maxOccurs=1,
+            crss=["EPSG:4326"],
+            )
 
         self.dummyBBoxIn = self.addLiteralInput(
             identifier="dummybbox",
@@ -163,11 +163,7 @@ class InOutProcess(WPSProcess):
             identifier="int",
             title="Integer",
             abstract="This is an Integer",
-            #metadata=[],
-            #default=None,
             type=type(1),
-            #uoms=(),
-            #asReference=False,
             )
 
         self.stringOut = self.addLiteralOutput(
@@ -246,20 +242,21 @@ class InOutProcess(WPSProcess):
         # bounding-box
         # --------------------------
 
-        # self.bboxOut = self.addBBoxOutput(
-        #     identifier="bbox",
-        #     title="Bounding Box",
-        #     abstract="Enter a bounding box",
-        #     dimensions=2,
-        #     crs="EPSG:4326",
-        #     asReference=False
-        #     )
+        # TODO: bbox output is missing in owslib.wps
+        
+        ## self.bboxOut = self.addBBoxOutput(
+        ##     identifier="bboxout",
+        ##     title="Bounding Box",
+        ##     abstract="Enter a bounding box",
+        ##     dimensions=2,
+        ##     crs="EPSG:4326",
+        ##     asReference=False,
+        ##     )
 
         self.dummyBBoxOut = self.addLiteralOutput(
             identifier="dummybbox",
             title="Dummy BBox",
             abstract="This is a BBox: (minx,miny,maxx,maxy)",
-            #default="0,-90,180,90",
             type=type(''),
             )
        
@@ -286,8 +283,10 @@ class InOutProcess(WPSProcess):
                 values = [value]
             self.stringMoreThenOneOut.setValue( ','.join(values) )
 
-        #TODO: bbox does not work yet
-        #self.bboxOut.setValue(self.bboxIn.getValue())
+        # TODO: bbox output does not work yet
+        bbox = self.bboxIn.getValue()
+        if bbox is not None:
+            self.status.set("bbox={0}".format(bbox.coords), 90)
         self.dummyBBoxOut.setValue(self.dummyBBoxIn.getValue())
 
         # complex
