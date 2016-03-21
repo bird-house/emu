@@ -242,16 +242,14 @@ class InOutProcess(WPSProcess):
         # bounding-box
         # --------------------------
 
-        # TODO: bbox output is missing in owslib.wps
-        
-        ## self.bboxOut = self.addBBoxOutput(
-        ##     identifier="bboxout",
-        ##     title="Bounding Box",
-        ##     abstract="Enter a bounding box",
-        ##     dimensions=2,
-        ##     crs="EPSG:4326",
-        ##     asReference=False,
-        ##     )
+        self.bboxOut = self.addBBoxOutput(
+            identifier="bboxout",
+            title="Bounding Box",
+            abstract="This is a bbox",
+            dimensions=2,
+            crs="EPSG:4326",
+            asReference=False,
+            )
 
         self.dummyBBoxOut = self.addLiteralOutput(
             identifier="dummybbox",
@@ -274,19 +272,14 @@ class InOutProcess(WPSProcess):
         self.stringChoiceOut.setValue(self.stringChoiceIn.getValue())
 
         # more than one
-        # TODO: handle multiple values (fix in pywps)
-        value = self.stringMoreThenOneIn.getValue()
-        if value != None:
-            if type(value) == types.ListType:
-                values = value
-            else:
-                values = [value]
-            self.stringMoreThenOneOut.setValue( ','.join(values) )
+        values = self.getInputValues(identifier='stringMoreThenOne')
+        self.stringMoreThenOneOut.setValue( ','.join(values) )
 
-        # TODO: bbox output does not work yet
+        # TODO: bbox output is not working in pywps
         bbox = self.bboxIn.getValue()
         if bbox is not None:
             self.status.set("bbox={0}".format(bbox.coords), 90)
+        self.bboxOut.setValue(bbox.coords)
         self.dummyBBoxOut.setValue(self.dummyBBoxIn.getValue())
 
         # complex
