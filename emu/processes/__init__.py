@@ -5,6 +5,7 @@ __all__ = [
     "wps_dummyprocess",
     "wps_wordcounter",
     "wps_inout",
+    "wps_bbox",
     #"wps_multiplesources",
     "wps_chomsky",
     "wps_zonalmean"
