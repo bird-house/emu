@@ -243,7 +243,7 @@ class InOutProcess(WPSProcess):
         # --------------------------
 
         self.bboxOut = self.addBBoxOutput(
-            identifier="bboxout",
+            identifier="bbox",
             title="Bounding Box",
             abstract="This is a bbox",
             dimensions=2,
@@ -275,11 +275,13 @@ class InOutProcess(WPSProcess):
         values = self.getInputValues(identifier='stringMoreThenOne')
         self.stringMoreThenOneOut.setValue( ','.join(values) )
 
-        # TODO: bbox output is not working in pywps
+        # TODO: bbox output is not working as expected in pywps
         bbox = self.bboxIn.getValue()
         if bbox is not None:
             self.status.set("bbox={0}".format(bbox.coords), 90)
-        self.bboxOut.setValue(bbox.coords)
+            self.bboxOut.setValue(bbox.coords)
+        else:
+            self.bboxOut.setValue([[0,-90],[180,90]])
         self.dummyBBoxOut.setValue(self.dummyBBoxIn.getValue())
 
         # complex
