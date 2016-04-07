@@ -2,7 +2,7 @@
 FROM birdhouse/bird-base:latest
 MAINTAINER https://github.com/bird-house/emu
 
-LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.3.0"
+LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.3.1"
 
 # Configure hostname and user for services 
 ENV OUTPUT_PORT 38094
