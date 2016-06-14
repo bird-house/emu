@@ -1,6 +1,6 @@
 import pytest
 
-from tests.common import WpsTestClient, assert_response_success
+from emu.tests.common import WpsTestClient, assert_response_success
 
 @pytest.mark.slow
 def test_wps_ultimatequestionprocess():

@@ -1,5 +1,5 @@
 import pytest
-from tests.common import WpsTestClient, assert_response_success
+from emu.tests.common import WpsTestClient, assert_response_success
 
 @pytest.mark.online
 def test_wps_wordcount():

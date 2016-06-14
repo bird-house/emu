@@ -1,4 +1,4 @@
-from tests.common import WpsTestClient, assert_response_success
+from emu.tests.common import WpsTestClient, assert_response_success
 
 def test_wps_bbox():
     wps = WpsTestClient()

@@ -1,4 +1,4 @@
-from tests.common import WpsTestClient
+from emu.tests.common import WpsTestClient
 
 def test_caps():
     wps = WpsTestClient()
