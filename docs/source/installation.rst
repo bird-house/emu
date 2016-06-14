@@ -16,7 +16,7 @@ Now, check out the emu code from github and start the installation::
 
    $ git clone https://github.com/bird-house/emu.git
    $ cd emu
-   $ make
+   $ make clean install
 
 After successful installation you need to start the services. All installed files (config etc ...) are below the conda environment ``birdhouse`` which is by default in your home directory ``~/.conda/envs/birdhouse``. Now, start the services::
 
@@ -32,4 +32,11 @@ Check the log files for errors::
 
 You will find more information about the installation in the `Makefile documentation <http://birdhousebuilderbootstrap.readthedocs.org/en/latest/>`_.
 
-.. _`Anaconda`: https://www.continuum.io/
+Start Emu with docker-compose
+-----------------------------
+
+Run Emu with mapped ports (8094) on localhost:
+
+.. code-block:: sh
+
+    $ docker-compose run --service-ports -e HOSTNAME=localhost emu
