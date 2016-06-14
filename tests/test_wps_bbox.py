@@ -1,6 +1,3 @@
-import nose.tools
-from nose.plugins.attrib import attr
-
 from tests.common import WpsTestClient, assert_response_success
 
 def test_wps_bbox():

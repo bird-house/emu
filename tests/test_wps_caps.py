@@ -1,4 +1,3 @@
-import nose.tools
 from tests.common import WpsTestClient
 
 def test_caps():

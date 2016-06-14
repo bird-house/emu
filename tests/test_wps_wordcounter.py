@@ -1,9 +1,7 @@
-import nose.tools
-from nose.plugins.attrib import attr
-
+import pytest
 from tests.common import WpsTestClient, assert_response_success
 
-@attr('online')
+@pytest.mark.online
 def test_wps_wordcount():
     wps = WpsTestClient()
     datainputs = "text={0}".format("https://en.wikipedia.org/wiki/Web_Processing_Service")
