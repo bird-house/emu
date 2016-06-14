@@ -5,6 +5,7 @@ branches:
     - develop
 python:
   - "2.7"
+  - "3.5"
 os:
   - linux
 #  - osx
@@ -21,3 +22,5 @@ script:
 matrix:
   allow_failures:
     - os: osx
+    - python: 3.5
+
