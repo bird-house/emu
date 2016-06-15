@@ -8,5 +8,5 @@ __all__ = [
     "wps_bbox",
     #"wps_multiplesources",
     "wps_chomsky",
-    "wps_zonalmean"
+    #"wps_zonalmean"
     ]

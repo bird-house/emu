@@ -7,5 +7,5 @@ def test_caps():
                             '/wps:ProcessOfferings'
                             '/wps:Process'
                             '/ows:Identifier')
-    assert sorted(names.split()) == ['bbox', 'chomsky', 'dummyprocess', 'helloworld', 'inout', 'ultimatequestionprocess', 'wordcount', 'zonal_mean']
+    assert sorted(names.split()) == ['bbox', 'chomsky', 'dummyprocess', 'helloworld', 'inout', 'ultimatequestionprocess', 'wordcount']
 
