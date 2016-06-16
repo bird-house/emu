@@ -180,7 +180,7 @@ sysinstall:
 install: bootstrap
 	@echo "Installing application with buildout ..."
 	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout -c custom.cfg"
-	@echo "\nStart service with 'make start'"
+	@echo "\nStart service with \`make start'"
 
 .PHONY: update
 update:
@@ -196,10 +196,6 @@ update-config:
 update-user:
 	@echo "Update user permission on var/ ..."
 	chown -R $(USER) $(PREFIX)/var && chown -R $(USER) $(PREFIX)/var/lib/.
-
-.PHONY: build
-build: install
-	@echo "\nPlease use 'make install' instead of 'make build'"
 
 .PHONY: clean
 clean: srcclean
@@ -230,7 +226,7 @@ passwd: custom.cfg
 	@echo "Enter a password with at least 8 characters."
 	@bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV); python -c 'from IPython.lib import passwd; pw = passwd(algorithm=\"sha256\"); lines = [\"phoenix-password = \" + pw + \"\\n\" if line.startswith(\"phoenix-password\") else line for line in open(\"custom.cfg\", \"r\")]; file = open(\"custom.cfg\", \"w\"); file.writelines(lines); file.close()'"
 	@echo ""
-	@echo "Run 'make install restart' to activate this password." 
+	@echo "Run \`make install restart' to activate this password." 
 
 .PHONY: test
 test:
