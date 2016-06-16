@@ -17,7 +17,8 @@ BUILDOUT_VERSION=2.5.0
 ANACONDA_HOME ?= $(HOME)/anaconda
 CONDA_ENV ?= birdhouse
 CONDA_ENVS_DIR ?= $(HOME)/.conda/envs
-PREFIX := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
+CONDA_ENV_PATH := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
+PREFIX ?= $(CONDA_ENVS_DIR)/birdhouse
 
 # Configuration used by update-config
 HOSTNAME ?= localhost
@@ -156,17 +157,17 @@ conda_config: anaconda
 
 .PHONY: conda_env
 conda_env: anaconda conda_config
-	@test -d $(PREFIX) || "$(ANACONDA_HOME)/bin/conda" create -m -p $(PREFIX) -c ioos --yes python setuptools=$(SETUPTOOLS_VERSION) curl pyopenssl cryptography=1.0.2 genshi mako pyyaml
+	@test -d $(CONDA_ENV_PATH) || "$(ANACONDA_HOME)/bin/conda" create -m -p $(CONDA_EMV_PATH) -c ioos --yes python setuptools=$(SETUPTOOLS_VERSION) curl pyopenssl cryptography=1.0.2 genshi mako pyyaml
 	"$(ANACONDA_HOME)/bin/conda" install -y -n $(CONDA_ENV) setuptools=$(SETUPTOOLS_VERSION)
 
 .PHONY: conda_pinned
 conda_pinned: conda_env
 	@echo "Update pinned conda packages ..."
-	@test -d $(PREFIX) && curl https://raw.githubusercontent.com/bird-house/birdhousebuilder.bootstrap/master/conda_pinned --silent --insecure --output "$(PREFIX)/conda-meta/pinned" 
+	@test -d $(CONDA_ENV_PATH) && curl https://raw.githubusercontent.com/bird-house/birdhousebuilder.bootstrap/master/conda_pinned --silent --insecure --output "$(CONDA_ENV_PATH)/conda-meta/pinned" 
 
 .PHONY: conda_clean
 conda_clean: anaconda conda_config
-	@test -d $(PREFIX) && "$(ANACONDA_HOME)/bin/conda" env remove -n $(CONDA_ENV) 
+	@test -d $(CONDA_ENV_PATH) && "$(ANACONDA_HOME)/bin/conda" env remove -n $(CONDA_ENV) 
 
 ## Build targets
 
@@ -278,7 +279,7 @@ restart:
 .PHONY: status
 status:
 	@echo "Supervisor status ..."
-	$(PREFIX)/bin/supervisorctl -c ${PREFIX}/etc/supervisor/supervisord.conf status
+	$(CONDA_ENV_PATH)/bin/supervisorctl -c ${PREFIX}/etc/supervisor/supervisord.conf status
 
 
 ## Docker targets
