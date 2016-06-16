@@ -6,9 +6,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
-requires = [
-    'nose',
-    ]
+reqs = [line.strip() for line in open('requirements/deploy.txt')]
 
 classifiers=[
         'Development Status :: 3 - Alpha',
@@ -20,19 +18,20 @@ classifiers=[
         ]
 
 setup(name='emu',
-      version='0.3.1',
+      version='0.4.0',
       description='WPS processes for testing and demo',
       long_description=README + '\n\n' + CHANGES,
       classifiers=classifiers,
       author='Birdhouse',
+      author_email='',
       url='https://github.com/bird-house/emu',
       license = "Apache License v2.0",
-      keywords='wps pywps malleefowl emu conda anaconda birdhouse',
+      keywords='wps pywps malleefowl emu conda birdhouse',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      test_suite='nose.collector',
-      install_requires=requires,
+      test_suite='emu',
+      install_requires=reqs,
       entry_points = {
           'console_scripts': [
               ]}     
