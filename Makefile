@@ -83,17 +83,17 @@ version:
 
 .PHONY: info
 info:
-	@echo "Informations about your System:\n"
-	@echo "\t OS_NAME          \t= $(OS_NAME)"
-	@echo "\t CPU_ARCH         \t= $(CPU_ARCH)"
-	@echo "\t Anaconda         \t= $(FN)"
-	@echo "\t Anaconda Home    \t= $(ANACONDA_HOME)"
-	@echo "\t Birdhouse Env    \t= $(PREFIX)"
-	@echo "\t APP_NAME         \t= $(APP_NAME)"
-	@echo "\t APP_ROOT         \t= $(APP_ROOT)"
-	@echo "\t DOWNLOAD_CACHE   \t= $(DOWNLOAD_CACHE)"
-	@echo "\t DOCKER_IMAGE     \t= $(DOCKER_IMAGE)"
-	@echo "\t DOCKER_CONTAINER \t= $(DOCKER_CONTAINER)"
+	@echo "Informations about your Bird:"
+	@echo "  OS_NAME             $(OS_NAME)"
+	@echo "  CPU_ARCH            $(CPU_ARCH)"
+	@echo "  Anaconda Home       $(ANACONDA_HOME)"
+	@echo "  Conda Environment   $(CONDA_ENV). Use \`source activate $(CONDA_ENV)' to activate it."
+	@echo "  Conda Prefix        $(CONDA_ENV_PATH)"
+	@echo "  Installation Prefix $(PREFIX)"
+	@echo "  APP_NAME            $(APP_NAME)"
+	@echo "  APP_ROOT            $(APP_ROOT)"
+	@echo "  DOWNLOAD_CACHE      $(DOWNLOAD_CACHE)"
+	@echo "  DOCKER_IMAGE        $(DOCKER_IMAGE)"
 
 ## Helper targets ... ensure that Makefile etc are in place
 
@@ -124,7 +124,7 @@ custom.cfg:
 
 .PHONY: downloads
 downloads:
-	@echo "Using DOWNLOAD_CACHE = ${DOWNLOAD_CACHE}"
+	@echo "Using DOWNLOAD_CACHE $(DOWNLOAD_CACHE)"
 	@test -d $(DOWNLOAD_CACHE) || mkdir -v -p $(DOWNLOAD_CACHE)
 
 .PHONY: init
@@ -153,6 +153,7 @@ conda_config: anaconda
 
 .PHONY: conda_env
 conda_env: anaconda conda_config
+	@echo "Update conda environment $(CONDA_ENV) ..."
 	@test -d $(CONDA_ENV_PATH) || "$(ANACONDA_HOME)/bin/conda" env create -p $(CONDA_ENV_PATH) -f environment.yml
 	"$(ANACONDA_HOME)/bin/conda" install -y -n $(CONDA_ENV) setuptools=$(SETUPTOOLS_VERSION)
 
