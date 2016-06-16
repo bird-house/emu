@@ -154,7 +154,7 @@ conda_config: anaconda
 .PHONY: conda_env
 conda_env: anaconda conda_config
 	@echo "Update conda environment $(CONDA_ENV) ..."
-	@test -d $(CONDA_ENV_PATH) || "$(ANACONDA_HOME)/bin/conda" env create -p $(CONDA_ENV_PATH) -f environment.yml
+	@test -d $(CONDA_ENV_PATH) || "$(ANACONDA_HOME)/bin/conda" env create -n $(CONDA_ENV) -f environment.yml
 	"$(ANACONDA_HOME)/bin/conda" install -y -n $(CONDA_ENV) setuptools=$(SETUPTOOLS_VERSION)
 
 .PHONY: conda_pinned
@@ -230,12 +230,12 @@ passwd: custom.cfg
 
 .PHONY: test
 test:
-	@echo "Running tests (skip slow tests) ..."
-	bin/py.test -v -m 'not slow and not online and not testdata'
+	@echo "Running tests (skip slow and online tests) ..."
+	bin/py.test -v -m 'not slow and not online'
 
 .PHONY: testall
 testall:
-	@echo "Running all tests (include slow tests) ..."
+	@echo "Running all tests (including slow and online tests) ..."
 	bin/py.test -v
 
 .PHONY: docs
