@@ -1,4 +1,4 @@
-VERSION := 0.2.20
+VERSION := 0.3.0
 RELEASE := master
 
 # Application
@@ -18,7 +18,7 @@ ANACONDA_HOME ?= $(HOME)/anaconda
 CONDA_ENV ?= birdhouse
 CONDA_ENVS_DIR ?= $(HOME)/.conda/envs
 CONDA_ENV_PATH := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
-PREFIX ?= $(CONDA_ENVS_DIR)/birdhouse
+PREFIX ?= $(HOME)/birdhouse
 
 # Configuration used by update-config
 HOSTNAME ?= localhost
@@ -157,17 +157,13 @@ conda_config: anaconda
 
 .PHONY: conda_env
 conda_env: anaconda conda_config
-	@test -d $(CONDA_ENV_PATH) || "$(ANACONDA_HOME)/bin/conda" create -m -p $(CONDA_EMV_PATH) -c ioos --yes python setuptools=$(SETUPTOOLS_VERSION) curl pyopenssl cryptography=1.0.2 genshi mako pyyaml
+	@test -d $(CONDA_ENV_PATH) || "$(ANACONDA_HOME)/bin/conda" create -m -p $(CONDA_ENV_PATH) -c conda-forge --yes python setuptools=$(SETUPTOOLS_VERSION) curl pyopenssl cryptography=1.0.2 genshi=0.7 mako pyyaml
 	"$(ANACONDA_HOME)/bin/conda" install -y -n $(CONDA_ENV) setuptools=$(SETUPTOOLS_VERSION)
 
 .PHONY: conda_pinned
 conda_pinned: conda_env
 	@echo "Update pinned conda packages ..."
 	@test -d $(CONDA_ENV_PATH) && curl https://raw.githubusercontent.com/bird-house/birdhousebuilder.bootstrap/master/conda_pinned --silent --insecure --output "$(CONDA_ENV_PATH)/conda-meta/pinned" 
-
-.PHONY: conda_clean
-conda_clean: anaconda conda_config
-	@test -d $(CONDA_ENV_PATH) && "$(ANACONDA_HOME)/bin/conda" env remove -n $(CONDA_ENV) 
 
 ## Build targets
 
