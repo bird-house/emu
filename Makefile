@@ -181,18 +181,18 @@ sysinstall:
 .PHONY: install
 install: bootstrap
 	@echo "Installing application with buildout ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout -c custom.cfg"
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) buildout:birdhouse-home=$(PREFIX) -c custom.cfg"
 	@echo "\nStart service with \`make start'"
 
 .PHONY: update
 update:
 	@echo "Update application config with buildout (offline mode) ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout -o -c custom.cfg"
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) buildout:birdhouse-home=$(PREFIX) -o -c custom.cfg"
 
 .PHONY: update-config
 update-config:
 	@echo "Update application config with buildout (offline mode) and enviroment variables..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout settings:hostname=$(HOSTNAME) settings:output-port=$(OUTPUT_PORT) settings:log-level=$(LOG_LEVEL) -o -c custom.cfg"
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) buildout:birdhouse-home=$(PREFIX) settings:hostname=$(HOSTNAME) settings:output-port=$(OUTPUT_PORT) settings:log-level=$(LOG_LEVEL) -o -c custom.cfg"
 
 .PHONY: update-user
 update-user:
