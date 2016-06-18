@@ -201,6 +201,11 @@ clean: srcclean
             test -e $$i && rm -v -rf $$i; \
         done
 
+.PHONY: envclean
+envclean: 
+	@echo "Removing conda env $(CONDA_ENV)"
+	@"$(ANACONDA_HOME)/bin/conda" env remove -n $(CONDA_ENV)
+
 .PHONY: srcclean
 srcclean:
 	@echo "Removing *.pyc files ..."
