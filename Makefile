@@ -22,7 +22,6 @@ PREFIX ?= $(HOME)/birdhouse
 
 # Configuration used by update-config
 HOSTNAME ?= localhost
-USER ?= www-data
 OUTPUT_PORT ?= 8090
 LOG_LEVEL ?= WARN
 
