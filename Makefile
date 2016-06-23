@@ -18,7 +18,6 @@ ANACONDA_HOME ?= $(HOME)/anaconda
 CONDA_ENV ?= $(APP_NAME)
 CONDA_ENVS_DIR ?= $(HOME)/.conda/envs
 CONDA_ENV_PATH := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
-PREFIX ?= $(HOME)/birdhouse
 
 # Configuration used by update-config
 HOSTNAME ?= localhost
@@ -90,7 +89,6 @@ info:
 	@echo "  Anaconda Home       $(ANACONDA_HOME)"
 	@echo "  Conda Environment   $(CONDA_ENV). Use \`source activate $(CONDA_ENV)' to activate it."
 	@echo "  Conda Prefix        $(CONDA_ENV_PATH)"
-	@echo "  Installation Prefix $(PREFIX)"
 	@echo "  APP_NAME            $(APP_NAME)"
 	@echo "  APP_ROOT            $(APP_ROOT)"
 	@echo "  DOWNLOAD_CACHE      $(DOWNLOAD_CACHE)"
@@ -180,18 +178,18 @@ sysinstall:
 .PHONY: install
 install: bootstrap
 	@echo "Installing application with buildout ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) settings:prefix=$(PREFIX) -c custom.cfg"
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) -c custom.cfg"
 	@echo "\nStart service with \`make start'"
 
 .PHONY: update
 update:
 	@echo "Update application config with buildout (offline mode) ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) settings:prefix=$(PREFIX) -o -c custom.cfg"
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) -o -c custom.cfg"
 
 .PHONY: update-config
 update-config:
 	@echo "Update application config with buildout (offline mode) and enviroment variables..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) settings:prefix=$(PREFIX) settings:hostname=$(HOSTNAME) settings:output-port=$(OUTPUT_PORT) settings:log-level=$(LOG_LEVEL) -o -c custom.cfg"
+	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) settings:hostname=$(HOSTNAME) settings:output-port=$(OUTPUT_PORT) settings:log-level=$(LOG_LEVEL) -o -c custom.cfg"
 
 .PHONY: clean
 clean: srcclean
@@ -269,7 +267,7 @@ restart:
 .PHONY: status
 status:
 	@echo "Supervisor status ..."
-	$(CONDA_ENV_PATH)/bin/supervisorctl -c ${PREFIX}/etc/supervisor/supervisord.conf status
+	bin/supervisorctl status
 
 
 ## Docker targets
