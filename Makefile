@@ -150,7 +150,9 @@ anaconda:
 conda_config: anaconda
 	@echo "Update ~/.condarc"
 	@"$(ANACONDA_HOME)/bin/conda" config --add envs_dirs $(CONDA_ENVS_DIR)
-	@"$(ANACONDA_HOME)/bin/conda" config --set ssl_verify true
+	@"$(ANACONDA_HOME)/bin/conda" config --set ssl_verify True
+	@"$(ANACONDA_HOME)/bin/conda" config --set update_dependencies True
+	@"$(ANACONDA_HOME)/bin/conda" config --set use_pip True
 	@"$(ANACONDA_HOME)/bin/conda" config --add channels defaults
 	@"$(ANACONDA_HOME)/bin/conda" config --add channels birdhouse
 
