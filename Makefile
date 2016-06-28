@@ -1,6 +1,9 @@
 VERSION := 0.3.0
 RELEASE := develop
 
+# Include custom config if it is available
+-include Makefile.config
+
 # Application
 APP_ROOT := $(CURDIR)
 APP_NAME := $(shell basename $(APP_ROOT))
@@ -10,8 +13,8 @@ OS_NAME := $(shell uname -s 2>/dev/null || echo "unknown")
 CPU_ARCH := $(shell uname -m 2>/dev/null || uname -p 2>/dev/null || echo "unknown")
 
 # Python
-SETUPTOOLS_VERSION=23.0.0
-BUILDOUT_VERSION=2.5.2
+SETUPTOOLS_VERSION := 23.0.0
+BUILDOUT_VERSION := 2.5.2
 
 # Anaconda 
 ANACONDA_HOME ?= $(HOME)/anaconda
