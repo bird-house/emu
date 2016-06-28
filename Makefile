@@ -196,14 +196,14 @@ update-config:
 	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) settings:hostname=$(HOSTNAME) settings:output-port=$(OUTPUT_PORT) settings:log-level=$(LOG_LEVEL) -o -c custom.cfg"
 
 .PHONY: clean
-clean: srcclean
+clean: srcclean envclean
 	@echo "Cleaning buildout files ..."
 	@-for i in $(BUILDOUT_FILES); do \
             test -e $$i && rm -v -rf $$i; \
         done
 
 .PHONY: envclean
-envclean: 
+envclean: stop
 	@echo "Removing conda env $(CONDA_ENV)"
 	@"$(ANACONDA_HOME)/bin/conda" remove -n $(CONDA_ENV) --yes --all
 
@@ -217,11 +217,6 @@ distclean: backup clean
 	@echo "Cleaning distribution ..."
 	@git diff --quiet HEAD || echo "There are uncommited changes! Not doing 'git clean' ..."
 	@-git clean -dfx --exclude=*.bak
-
-.PHONY: buildclean
-buildclean:
-	@echo "Removing bootstrap.sh ..."
-	@test -e bootstrap.sh && rm -v bootstrap.sh
 
 .PHONY: passwd
 passwd: custom.cfg
@@ -261,7 +256,7 @@ start:
 .PHONY: stop
 stop:
 	@echo "Stopping supervisor service ..."
-	bin/supervisord stop
+	-bin/supervisord stop
 
 .PHONY: restart
 restart:
