@@ -16,7 +16,7 @@ BUILDOUT_VERSION=2.5.2
 # Anaconda 
 ANACONDA_HOME ?= $(HOME)/anaconda
 CONDA_ENV ?= $(APP_NAME)
-CONDA_ENVS_DIR ?= $(APP_ROOT)/parts/conda
+CONDA_ENVS_DIR ?= $(HOME)/.conda/envs
 CONDA_ENV_PATH := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
 
 # Configuration used by update-config
