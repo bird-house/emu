@@ -31,9 +31,9 @@ LOG_LEVEL ?= WARN
 # choose anaconda installer depending on your OS
 ANACONDA_URL = http://repo.continuum.io/miniconda
 ifeq "$(OS_NAME)" "Linux"
-FN := Miniconda-latest-Linux-x86_64.sh
+FN := Miniconda2-latest-Linux-x86_64.sh
 else ifeq "$(OS_NAME)" "Darwin"
-FN := Miniconda-3.7.0-MacOSX-x86_64.sh
+FN := Miniconda2-latest-MacOSX-x86_64.sh
 else
 FN := unknown
 endif
@@ -208,7 +208,7 @@ clean: srcclean envclean
 .PHONY: envclean
 envclean: stop
 	@echo "Removing conda env $(CONDA_ENV)"
-	@"$(ANACONDA_HOME)/bin/conda" remove -n $(CONDA_ENV) --yes --all
+	@-"$(ANACONDA_HOME)/bin/conda" remove -n $(CONDA_ENV) --yes --all
 
 .PHONY: srcclean
 srcclean:
