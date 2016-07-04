@@ -8,7 +8,7 @@ dependencies:
 - backports=1.0=py27_0
 - eventlet=0.16.1=py27_0
 - htmltmpl=1.22=py27_1
-- nginx=1.8.0=0
+- nginx=1.10.1=1
 - python-magic=0.4.6=py27_1
 - pywps=3.2.6=py27_0
 - cffi=1.6.0=py27_0
