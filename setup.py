@@ -20,7 +20,7 @@ classifiers=[
         ]
 
 setup(name='emu',
-      version='0.3.1',
+      version='0.3.2',
       description='WPS processes for testing and demo',
       long_description=README + '\n\n' + CHANGES,
       classifiers=classifiers,
