@@ -16,6 +16,7 @@ dependencies:
 - ipython=4.2.0
 # docs
 - sphinx=1.4.1
+- sphinx_rtd_theme
 # wps
 - pywps=3.2.6
 - gdal=1.11.2
