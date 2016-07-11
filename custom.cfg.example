@@ -6,4 +6,11 @@ extends = buildout.cfg
 hostname = localhost
 http-port = 8094
 output-port = 8090
-log-level = INFO
+log-level = WARN
+
+## deployment options
+#prefix =  /opt/birdhouse
+#user = www-data
+#etc-user = root
+
+

@@ -1,6 +1,12 @@
 Changes
 *******
 
+0.4.0 (2016-07-11)
+==================
+
+* using new buildout recipes.
+* using conda environment.yml 
+
 0.3.2 (2016-07-11)
 ==================
 
