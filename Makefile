@@ -1,5 +1,5 @@
 VERSION := 0.3.0
-RELEASE := develop
+RELEASE := master
 
 # Include custom config if it is available
 -include Makefile.config
