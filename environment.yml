@@ -29,4 +29,5 @@ dependencies:
 - eventlet=0.16.1
 - pip:
   - genshi==0.7
+  - sphinx-autoapi==0.4.0
 #  - eventlet==0.19.0
