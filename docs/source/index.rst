@@ -15,21 +15,11 @@ Emu is a Python package with some test proccess for  Web Processing Services (WP
 
 Emu is part of the `Birdhouse`_ project.
 
-Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    installation
    configuration
    tutorial
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
