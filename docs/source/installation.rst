@@ -29,7 +29,7 @@ Check the log files for errors::
 
    $ tail -f  ~/birdhouse/var/log/pywps/emu.log
 
-You will find more information about the installation in the `Makefile documentation <http://birdhousebuilderbootstrap.readthedocs.org/en/latest/>`_.
+You will find more information about the installation in the `Makefile documentation <http://birdhousebuilderbootstrap.readthedocs.io/en/latest/>`_.
 
 Start Emu with docker-compose
 -----------------------------

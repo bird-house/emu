@@ -15,9 +15,6 @@ Emu is a Python package with some test proccess for  Web Processing Services (WP
 
 Emu is part of the `Birdhouse`_ project.
 
-.. _`Birdhouse`: http://bird-house.github.io/
-
-
 Contents:
 
 .. toctree::
