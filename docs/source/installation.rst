@@ -4,21 +4,21 @@ Installation
 ============
 
 The installation is using the Python distribution system `Anaconda`_ to maintain software dependencies. 
-You may use an existing (shared, read-only access possible) Anaconda installation. For this set an environment variable to the location of your existing Anaconda, for example::
+Anaconda will be installed during the installation processes in your home directory ``~/anaconda``.
+ 
+The installation process setups a conda environment named ``emu`` with all dependent conda (and pip) packages. The installation folder (for configuration files etc) is by default ``~/birdhouse``. Configuration options can be overriden in the buildout ``custom.cfg`` file.
 
-   $ export ANACONDA_HOME=/opt/anaconda
+Now, check out the emu code from GitHub and start the installation:
 
-If Anaconda is not available then a minimal Anaconda will be installed during the installation processes in your home directory ``~/anaconda``. 
-
-The installation process setups a conda environment named ``birdhouse``. All additional packages and configuration files are going into this conda environment. The location is ``~/.conda/envs/birdhouse``.
-
-Now, check out the emu code from github and start the installation::
+.. code-block:: sh
 
    $ git clone https://github.com/bird-house/emu.git
    $ cd emu
    $ make clean install
 
-After successful installation you need to start the services. All installed files (config etc ...) are below the conda environment ``birdhouse`` which is by default in your home directory ``~/.conda/envs/birdhouse``. Now, start the services::
+After successful installation you need to start the services:
+
+.. code-block:: sh
 
    $ make start  # starts supervisor services
    $ make status # shows supervisor status
@@ -27,8 +27,7 @@ The depolyed WPS service is available on http://localhost:8094/wps?service=WPS&v
 
 Check the log files for errors::
 
-   $ cd ~/.conda/envs/birdhouse
-   $ tail -f  var/log/supervisor/emu.log
+   $ tail -f  ~/birdhouse/var/log/pywps/emu.log
 
 You will find more information about the installation in the `Makefile documentation <http://birdhousebuilderbootstrap.readthedocs.org/en/latest/>`_.
 
