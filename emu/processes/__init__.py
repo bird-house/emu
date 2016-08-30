@@ -1,7 +1,7 @@
 
 __all__ = [
     "wps_helloworld",
-    "wps_answertolife",
+    #"wps_answertolife",
     "wps_dummyprocess",
     "wps_wordcounter",
     "wps_inout",
@@ -10,3 +10,7 @@ __all__ = [
     "wps_chomsky",
     #"wps_zonalmean"
     ]
+
+from wps_answertolife import UltimateQuestionProcess
+
+#__processes__ = [UltimateQuestionProcess()]
