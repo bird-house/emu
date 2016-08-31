@@ -3,7 +3,7 @@ channels:
 - defaults
 - birdhouse
 dependencies:
-- python=2.7
+- python=3.5
 - pyopenssl=0.16.0
 - cryptography=1.4
 - pyyaml=3.11
@@ -20,9 +20,9 @@ dependencies:
 # wps
 - pywps=4.0.0_rc1
 - nginx=1.10.1
-- supervisor=3.3.1
+#- supervisor=3.3.1
 - gunicorn=19.1.0
-- gevent=1.1.1
+- gevent=1.1.2
 #- eventlet=0.16.1
 - pip:
   - genshi==0.7
