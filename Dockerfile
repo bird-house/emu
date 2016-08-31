@@ -5,9 +5,9 @@ MAINTAINER https://github.com/bird-house/emu
 LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.4.0"
 
 # Configure hostname and user for services 
+ENV USER www-data
 ENV OUTPUT_PORT 38094
 ENV HOSTNAME localhost
-ENV USER www-data
 
 
 # Set current home
