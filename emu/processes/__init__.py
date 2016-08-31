@@ -11,6 +11,6 @@ __all__ = [
     #"wps_zonalmean"
     ]
 
-from wps_answertolife import UltimateQuestionProcess
+from emu.processes.wps_answertolife import UltimateQuestionProcess
 
 #__processes__ = [UltimateQuestionProcess()]
