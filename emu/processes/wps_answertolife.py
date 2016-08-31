@@ -50,7 +50,7 @@ class UltimateQuestionProcess(Process):
         import time
         sleep_delay = request.inputs['delay'][0].data or 1
         response.update_status('PyWPS Process started. Waiting...', 0)
-        for i in xrange(1, 11):
+        for i in range(1, 11):
             time.sleep(sleep_delay)
             response.update_status('Thinking...', i*10)
             logging.info('doing something')
