@@ -1,33 +1,23 @@
-from pywps.Process import WPSProcess
+from pywps import Process, LiteralInput, LiteralOutput, OGCUNIT, UOM
 
-class HelloWorldProcess(WPSProcess):
-    """
-    Say hello to user ...
-    """
+
+class HelloWorld(Process):
     def __init__(self):
-        WPSProcess.__init__(
-            self,
-            identifier="helloworld", 
-            title="Hello World",
-            version = "1.2",
-            metadata = [{"title":"Documentation","href":"http://emu.readthedocs.org/en/latest/"}],
-            abstract="Welcome user and say hello ...",
-            statusSupported=True,
-            storeSupported=True
-            )
+        inputs = [LiteralInput('name', 'Input name', data_type='string')]
+        outputs = [LiteralOutput('output', 'Output response', data_type='string')]
 
-        self.user = self.addLiteralInput(
-            identifier = "user",
-            title = "Your name",
-            abstract = "Please enter your name",
-            type = type(''),
-            )
-        
-        self.output = self.addLiteralOutput(
-            identifier = "output",
-            title = "Welcome message",
-            type = type(''))
-                                           
-    def execute(self):
-        self.output.setValue("Hello %s and welcome to WPS :)" % (self.user.getValue()))
-        self.status.set("Done", 100)
+        super(HelloWorld, self).__init__(
+            self._handler,
+            identifier='helloworld',
+            title='Process Say Hello',
+            version='1.3',
+            inputs=inputs,
+            outputs=outputs,
+            store_supported=True,
+            status_supported=True
+        )
+
+    def _handler(self, request, response):
+        response.outputs['output'].data = 'Hello ' + request.inputs['name'][0].data
+        response.outputs['output'].uom = UOM('unity')
+        return response
