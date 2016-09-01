@@ -4,6 +4,7 @@ from .wps_bbox import Box
 from .wps_helloworld import HelloWorld
 from .wps_dummy import Dummy
 from .wps_wordcounter import WordCounter
+from .wps_chomsky import Chomsky
 
 processes = [
     UltimateQuestion(),
@@ -12,4 +13,5 @@ processes = [
     HelloWorld(),
     Dummy(),
     WordCounter(),
+    Chomsky(),
 ]
