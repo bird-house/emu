@@ -13,7 +13,8 @@ class WordCounter(Process):
             ]
         outputs = [
             ComplexOutput('output', 'Word counter result',
-                          supported_formats=[Format('text/plain')])
+                          as_reference=True,
+                          supported_formats=[Format('application/json')])
             ]
 
         super(WordCounter, self).__init__(
@@ -44,6 +45,6 @@ class WordCounter(Process):
                                reverse=True)
         with open('out.txt', 'w') as fout:
             fout.write(str(sorted_counts))
-            response.outputs['output'].output_format = Format('text/plain')
+            response.outputs['output'].output_format = FORMATS.JSON
             response.outputs['output'].file = fout.name
         return response
