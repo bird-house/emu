@@ -3,16 +3,20 @@ from pywps import Process, LiteralInput, LiteralOutput, OGCUNIT, UOM
 import logging
 LOGGER = logging.getLogger("PYWPS")
 
-class HelloWorld(Process):
-    def __init__(self):
-        inputs = [LiteralInput('name', 'Your name', data_type='string')]
-        outputs = [LiteralOutput('output', 'Output response', data_type='string')]
 
-        super(HelloWorld, self).__init__(
+class Hello(Process):
+    def __init__(self):
+        inputs = [
+            LiteralInput('name', 'Your name', data_type='string')]
+        outputs = [
+            LiteralOutput('output', 'Output response',
+                          data_type='string')]
+
+        super(Hello, self).__init__(
             self._handler,
-            identifier='helloworld',
-            title='Helloworld',
-            version='1.3',
+            identifier='hello',
+            title='Say Hello',
+            version='1.4',
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
