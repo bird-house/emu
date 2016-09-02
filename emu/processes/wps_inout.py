@@ -49,7 +49,12 @@ class InOut(Process):
                          abstract='Enter a URL pointing to a text document (optional)',
                          metadata=['Info'],
                          min_occurs=0,
-                         supported_formats=[Format('text/plain')])
+                         supported_formats=[Format('text/plain')]),
+            ComplexInput('nc', 'NetCDF',
+                         abstract='Enter a URL pointing to a NetCDF file (optional)',
+                         metadata=['Info'],
+                         min_occurs=0,
+                         supported_formats=[Format('application/x-netcdf')])
 
 
         ]
@@ -65,8 +70,13 @@ class InOut(Process):
                           data_type='string'),
             # BoundingBoxOutput('bbox', 'Boudning Box', ['epsg:4326']),
             ComplexOutput('text', 'Text',
+                          abstract='Copy of input text file.',
                           as_reference=True,
                           supported_formats=[Format('text/plain')]),
+            ComplexOutput('nc', 'NetCDF',
+                          abstract='Copy of input netcdf file.',
+                          as_reference=True,
+                          supported_formats=[Format('application/x-netcdf')]),
         ]
 
         super(InOut, self).__init__(
@@ -100,4 +110,7 @@ class InOut(Process):
         if 'text' in request.inputs:
             response.outputs['text'].output_format = FORMATS.TEXT
             response.outputs['text'].file = request.inputs['text'][0].file
+        if 'nc' in request.inputs:
+            response.outputs['nc'].output_format = FORMATS.NETCDF
+            response.outputs['nc'].file = request.inputs['nc'][0].file
         return response
