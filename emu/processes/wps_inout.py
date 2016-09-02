@@ -1,5 +1,6 @@
 from pywps import Process
 from pywps import LiteralInput, LiteralOutput
+from pywps import BoundingBoxInput, BoundingBoxOutput
 from pywps import ComplexInput, ComplexOutput
 from pywps import Format, FORMATS
 
@@ -24,10 +25,11 @@ class InOut(Process):
                          default="3.14"),
             LiteralInput('boolean', 'Boolean', data_type='boolean',
                          default='True'),
-            #LiteralInput('time', 'Time', data_type='time'),
+            LiteralInput('time', 'Time', data_type='time'),
             LiteralInput('string_choice', 'String Choice', data_type='string',
                          allowed_values=['one', 'two', 'three'],
                          default='two'),
+            # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
             ComplexInput('text', 'Text',
                          supported_formats=[Format('text/plain')])
 
@@ -40,6 +42,7 @@ class InOut(Process):
             LiteralOutput('boolean', 'Boolean', data_type='boolean'),
             LiteralOutput('time', 'Time', data_type='time'),
             LiteralOutput('string_choice', 'String Choice', data_type='string'),
+            # BoundingBoxOutput('bbox', 'Boudning Box', ['epsg:4326']),
             ComplexOutput('text', 'Text',
                           as_reference=True,
                           supported_formats=[Format('text/plain')]),
@@ -62,7 +65,11 @@ class InOut(Process):
         response.outputs['int'].data = request.inputs['int'][0].data
         response.outputs['float'].data = request.inputs['float'][0].data
         response.outputs['boolean'].data = request.inputs['boolean'][0].data
+        response.outputs['time'].data = request.inputs['time'][0].data
         response.outputs['string_choice'].data = request.inputs['string_choice'][0].data
+        # TODO: bbox is not working
+        # response.outputs['bbox'].data = request.inputs['bbox'][0].data
         response.outputs['text'].output_format = FORMATS.TEXT
-        response.outputs['text'].data = request.inputs['text'][0].data
+        # TODO: how to copy file?
+        response.outputs['text'].file = request.inputs['text'][0].file
         return response
