@@ -41,8 +41,8 @@ class InOut(Process):
                          abstract='Choose one or two items from list.',
                          metadata=['Info'],
                          data_type='string',
-                         allowed_values=['one', 'two', 'three', 'four'],
-                         min_occurs=1, max_occurs=2,
+                         allowed_values=['duck', 'goose', 'pinguin', 'albatros'],
+                         min_occurs=0, max_occurs=2,
                          default='three'),
             # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
             ComplexInput('text', 'Text',
@@ -76,13 +76,14 @@ class InOut(Process):
             ComplexOutput('nc', 'NetCDF',
                           abstract='Copy of input netcdf file.',
                           as_reference=True,
-                          supported_formats=[Format('application/x-netcdf')]),
+                          supported_formats=[Format('application/x-netcdf'),
+                                             Format('text/plain')]),
         ]
 
         super(InOut, self).__init__(
             self._handler,
             identifier="inout",
-            title="InOut",
+            title="In and Out",
             version="1.0",
             abstract="Testing all WPS input and output parameters.",
             profile='birdhouse',
@@ -102,15 +103,24 @@ class InOut(Process):
         response.outputs['time'].data = request.inputs['time'][0].data
         response.outputs['string_choice'].data = \
             request.inputs['string_choice'][0].data
-        response.outputs['string_multiple_choice'].data = ', '.join(
-            [inpt.data for inpt in request.inputs['string_multiple_choice']])
+        if 'string_multiple_choice' in request.inputs:
+            response.outputs['string_multiple_choice'].data = ', '.join(
+                [inpt.data for inpt in request.inputs['string_multiple_choice']])
+        else:
+            response.outputs['string_multiple_choice'].data = 'no value'
         # TODO: bbox is not working
         # response.outputs['bbox'].data = request.inputs['bbox'][0].data
         # TODO: how to copy file?
+        response.outputs['text'].output_format = FORMATS.TEXT
         if 'text' in request.inputs:
-            response.outputs['text'].output_format = FORMATS.TEXT
             response.outputs['text'].file = request.inputs['text'][0].file
+        else:
+            response.outputs['text'].data = "request didn't have a text file."
+
         if 'nc' in request.inputs:
             response.outputs['nc'].output_format = FORMATS.NETCDF
             response.outputs['nc'].file = request.inputs['nc'][0].file
+        else:
+            response.outputs['nc'].output_format = FORMATS.TEXT
+            response.outputs['nc'].data = "request didn't have a netcdf file."
         return response
