@@ -39,6 +39,7 @@ class InOut(Process):
                          default='two'),
             LiteralInput('string_multiple_choice', 'String Multiple Choice',
                          abstract='Choose one or two items from list.',
+                         metadata=['Info'],
                          data_type='string',
                          allowed_values=['one', 'two', 'three', 'four'],
                          min_occurs=1, max_occurs=2,
@@ -46,6 +47,7 @@ class InOut(Process):
             # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
             ComplexInput('text', 'Text',
                          abstract='Enter a URL pointing to a text document (optional)',
+                         metadata=['Info'],
                          min_occurs=0,
                          supported_formats=[Format('text/plain')])
 
@@ -73,6 +75,9 @@ class InOut(Process):
             title="InOut",
             version="1.0",
             abstract="Testing all WPS input and output parameters.",
+            profile='birdhouse',
+            metadata=[('Birdhouse', 'http://bird-house.github.io/'),
+                      ('User Guide', 'http://emu.readthedocs.io/en/latest/')],
             inputs=inputs,
             outputs=outputs,
             status_supported=True,
