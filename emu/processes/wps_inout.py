@@ -29,6 +29,10 @@ class InOut(Process):
             LiteralInput('string_choice', 'String Choice', data_type='string',
                          allowed_values=['one', 'two', 'three'],
                          default='two'),
+            LiteralInput('string_multiple_choice', 'String Multiple Choice', data_type='string',
+                         allowed_values=['one', 'two', 'three', 'four'],
+                         min_occurs=1, max_occurs=2,
+                         default='three'),
             # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
             ComplexInput('text', 'Text',
                          supported_formats=[Format('text/plain')])
@@ -41,7 +45,10 @@ class InOut(Process):
             LiteralOutput('float', 'Float', data_type='float'),
             LiteralOutput('boolean', 'Boolean', data_type='boolean'),
             LiteralOutput('time', 'Time', data_type='time'),
-            LiteralOutput('string_choice', 'String Choice', data_type='string'),
+            LiteralOutput('string_choice', 'String Choice',
+                          data_type='string'),
+            LiteralOutput('string_multiple_choice', 'String Multiple Choice',
+                          data_type='string'),
             # BoundingBoxOutput('bbox', 'Boudning Box', ['epsg:4326']),
             ComplexOutput('text', 'Text',
                           as_reference=True,
@@ -66,7 +73,10 @@ class InOut(Process):
         response.outputs['float'].data = request.inputs['float'][0].data
         response.outputs['boolean'].data = request.inputs['boolean'][0].data
         response.outputs['time'].data = request.inputs['time'][0].data
-        response.outputs['string_choice'].data = request.inputs['string_choice'][0].data
+        response.outputs['string_choice'].data = \
+            request.inputs['string_choice'][0].data
+        response.outputs['string_multiple_choice'].data = ', '.join(
+            [inpt.data for inpt in request.inputs['string_multiple_choice']])
         # TODO: bbox is not working
         # response.outputs['bbox'].data = request.inputs['bbox'][0].data
         response.outputs['text'].output_format = FORMATS.TEXT
