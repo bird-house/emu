@@ -30,12 +30,12 @@ class InOut(Process):
             LiteralInput('boolean', 'Boolean', data_type='boolean',
                          abstract='Make your choice :)',
                          default='1'),
-            # LiteralInput('time', 'Time', data_type='time',
-            #              abstract='Enter a time like 12:00:00',
-            #              default='12:00:00'),
-            # LiteralInput('date', 'Date', data_type='date',
-            #              abstract='Enter a date like 2012-05-01',
-            #              default='2012-05-01'),
+            LiteralInput('time', 'Time', data_type='time',
+                         abstract='Enter a time like 12:00:00',
+                         default='12:00:00'),
+            LiteralInput('date', 'Date', data_type='date',
+                         abstract='Enter a date like 2012-05-01',
+                         default='2012-05-01'),
             LiteralInput('datetime', 'Datetime', data_type='dateTime',
                          abstract='Enter a datetime like 2016-09-02T12:00:00Z',
                          default='2016-09-02T12:00:00Z'),
@@ -47,7 +47,8 @@ class InOut(Process):
                          abstract='Choose one or two items from list.',
                          metadata=['Info'],
                          data_type='string',
-                         allowed_values=['sitting duck', 'flying goose', 'happy pinguin', 'gentle albatros'],
+                         allowed_values=['sitting duck', 'flying goose',
+                                         'happy pinguin', 'gentle albatros'],
                          min_occurs=0, max_occurs=2,
                          default='gentle albatros'),
             # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
@@ -69,6 +70,8 @@ class InOut(Process):
             LiteralOutput('int', 'Integer', data_type='integer'),
             LiteralOutput('float', 'Float', data_type='float'),
             LiteralOutput('boolean', 'Boolean', data_type='boolean'),
+            LiteralOutput('time', 'Time', data_type='time'),
+            LiteralOutput('date', 'Date', data_type='date'),
             LiteralOutput('datetime', 'DateTime', data_type='dateTime'),
             LiteralOutput('string_choice', 'String Choice',
                           data_type='string'),
@@ -106,6 +109,8 @@ class InOut(Process):
         response.outputs['int'].data = request.inputs['int'][0].data
         response.outputs['float'].data = request.inputs['float'][0].data
         response.outputs['boolean'].data = request.inputs['boolean'][0].data
+        response.outputs['time'].data = request.inputs['time'][0].data
+        response.outputs['date'].data = request.inputs['date'][0].data
         response.outputs['datetime'].data = request.inputs['datetime'][0].data
         response.outputs['string_choice'].data = \
             request.inputs['string_choice'][0].data
