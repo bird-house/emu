@@ -1,3 +1,6 @@
+import re
+from collections import Counter
+
 from pywps import Process, ComplexInput, ComplexOutput, Format, FORMATS
 
 import logging
@@ -30,7 +33,6 @@ class WordCounter(Process):
             )
 
     def _handler(self, request, response):
-        import re
         wordre = re.compile(r'\w+')
 
         def words(f):
@@ -38,9 +40,7 @@ class WordCounter(Process):
                 for word in wordre.findall(line):
                     yield word
 
-        fin = request.inputs['text'][0].file
-        from collections import Counter
-        counts = Counter(words(fin))
+        counts = Counter(words(request.inputs['text'][0].stream))
         sorted_counts = sorted([(v, k) for (k, v) in counts.items()],
                                reverse=True)
         with open('out.txt', 'w') as fout:
