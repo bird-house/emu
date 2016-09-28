@@ -52,18 +52,21 @@ class InOut(Process):
                          min_occurs=0, max_occurs=2,
                          default='gentle albatros'),
             # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
+                            # abstract='Bounding Box with\
+                        #        EPSG:4326 and EPSG:3035.',
+                        #     crss=['epsg:4326', 'epsg:3035']),
             ComplexInput('text', 'Text',
-                         abstract='Enter a URL pointing to a text document (optional)',
+                         abstract='Enter a URL pointing\
+                            to a text document (optional)',
                          metadata=['Info'],
                          min_occurs=0,
                          supported_formats=[Format('text/plain')]),
             ComplexInput('nc', 'NetCDF',
-                         abstract='Enter a URL pointing to a NetCDF file (optional)',
+                         abstract='Enter a URL pointing\
+                            to a NetCDF file (optional)',
                          metadata=['Info'],
                          min_occurs=0,
-                         supported_formats=[Format('application/x-netcdf')])
-
-
+                         supported_formats=[Format('application/x-netcdf')]),
         ]
         outputs = [
             LiteralOutput('string', 'String', data_type='string'),
@@ -87,6 +90,8 @@ class InOut(Process):
                           as_reference=True,
                           supported_formats=[Format('application/x-netcdf'),
                                              Format('text/plain')]),
+            BoundingBoxOutput('bbox', 'Bounding Box',
+                              crss=['epsg:4326']),
         ]
 
         super(InOut, self).__init__(
@@ -134,4 +139,5 @@ class InOut(Process):
         else:
             response.outputs['nc'].output_format = FORMATS.TEXT
             response.outputs['nc'].data = "request didn't have a netcdf file."
+        response.outputs['bbox'].data = [0, 0, 10, 10]
         return response
