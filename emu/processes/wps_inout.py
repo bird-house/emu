@@ -198,7 +198,7 @@ class InOutProcess(WPSProcess):
         self.stringChoiceOut = self.addLiteralOutput(
             identifier="stringChoice",
             title="String Choice",
-            abstract="Choosen string",
+            abstract="Chosen string",
             default="one",
             type=type('')
             )
