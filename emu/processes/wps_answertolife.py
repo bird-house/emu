@@ -3,7 +3,7 @@ from pywps.Process import WPSProcess
 class UltimateQuestionProcess(WPSProcess):
     """
     The ultimate process to test the status and update capabilities of the server
-    The processes shoul be requested as follows:
+    The processes should be requested as follows:
     ../wps.py?request=execute
     &service=wps
     &version=1.0.0
@@ -20,7 +20,7 @@ class UltimateQuestionProcess(WPSProcess):
             identifier="ultimatequestionprocess", #the same as the file name
             title="Answer to Life, the Universe and Everything",
             version="2.1",
-            abstract="Numerical solution that is the answer to Life, Universe and Everything. The process is an improvement to Deep Tought computer (therefore version 2.0) since it no longer takes 7.5 milion years, but only a few seconds to give a response, with an update of status every 10 seconds.",
+            abstract="Numerical solution that is the answer to Life, Universe and Everything. The process is an improvement to Deep Thought computer (therefore version 2.0) since it no longer takes 7.5 milion years, but only a few seconds to give a response, with an update of status every 10 seconds.",
             statusSupported=True,
             storeSupported=True
             )
