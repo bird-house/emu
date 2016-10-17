@@ -12,25 +12,29 @@ NAMESPACES = {
 
 SERVICE = "http://localhost:8094/wps"
 
-TESTDATA = { 
+TESTDATA = {
     'noaa_nc_1': "http://www.esrl.noaa.gov/psd/thredds/fileServer/Datasets/ncep.reanalysis.dailyavgs/surface/slp.1955.nc",
     'noaa_catalog_1': "http://www.esrl.noaa.gov/psd/thredds/catalog/Datasets/ncep.reanalysis.dailyavgs/surface/catalog.xml?dataset=Datasets/ncep.reanalysis.dailyavgs/surface/air.sig995.1948.nc"
     }
-    
+
+
 class WpsTestClient(object):
     def __init__(self):
         pywps_path = os.path.dirname(pywps.__file__)
-        os.environ['PYWPS_CFG'] = os.path.abspath(os.path.join(os.environ['HOME'], 'birdhouse', 'etc', 'pywps', 'emu.cfg'))
+        os.environ['PYWPS_CFG'] = os.path.abspath(os.path.join(
+            os.environ['HOME'], 'birdhouse', 'etc', 'pywps', 'emu.cfg'))
         os.environ['REQUEST_METHOD'] = pywps.METHOD_GET
-        self.wps = pywps.Pywps(os.environ["REQUEST_METHOD"], os.environ.get("PYWPS_CFG"))
-   
+        self.wps = pywps.Pywps(
+            os.environ["REQUEST_METHOD"], os.environ.get("PYWPS_CFG"))
+
     def get(self, *args, **kwargs):
         query = ""
-        for key,value in kwargs.iteritems():
+        for key, value in kwargs.iteritems():
             query += "{0}={1}&".format(key, value)
         inputs = self.wps.parseRequest(query)
         self.wps.performRequest(inputs)
         return WpsTestResponse(self.wps.response)
+
 
 class WpsTestResponse(object):
 
@@ -46,8 +50,6 @@ class WpsTestResponse(object):
 
 
 def assert_response_success(resp):
-    success = resp.xpath('/wps:ExecuteResponse/wps:Status/wps:ProcessSucceeded')
+    success = resp.xpath(
+        '/wps:ExecuteResponse/wps:Status/wps:ProcessSucceeded')
     assert len(success) == 1
-    
-
-
