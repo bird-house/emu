@@ -3,6 +3,7 @@ from pywps import LiteralInput, LiteralOutput
 from pywps import BoundingBoxInput, BoundingBoxOutput
 from pywps import ComplexInput, ComplexOutput
 from pywps import Format, FORMATS
+from pywps.app.Common import Metadata
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
@@ -45,7 +46,7 @@ class InOut(Process):
                          default='scissor'),
             LiteralInput('string_multiple_choice', 'String Multiple Choice',
                          abstract='Choose one or two items from list.',
-                         metadata=['Info'],
+                         metadata=[Metadata('Info')],
                          data_type='string',
                          allowed_values=['sitting duck', 'flying goose',
                                          'happy pinguin', 'gentle albatros'],
@@ -58,13 +59,13 @@ class InOut(Process):
             ComplexInput('text', 'Text',
                          abstract='Enter a URL pointing\
                             to a text document (optional)',
-                         metadata=['Info'],
+                         metadata=[Metadata('Info')],
                          min_occurs=0,
                          supported_formats=[Format('text/plain')]),
             ComplexInput('nc', 'NetCDF',
                          abstract='Enter a URL pointing\
                             to a NetCDF file (optional)',
-                         metadata=['Info'],
+                         metadata=[Metadata('Info')],
                          min_occurs=0,
                          supported_formats=[Format('application/x-netcdf')]),
         ]
@@ -101,8 +102,9 @@ class InOut(Process):
             version="1.0",
             abstract="Testing all WPS input and output parameters.",
             profile='birdhouse',
-            metadata=[('Birdhouse', 'http://bird-house.github.io/'),
-                      ('User Guide', 'http://emu.readthedocs.io/en/latest/')],
+            metadata=[
+                Metadata('Birdhouse', 'http://bird-house.github.io/'),
+                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
             inputs=inputs,
             outputs=outputs,
             status_supported=True,

@@ -1,5 +1,6 @@
 import os
 import tempfile
+from pywps.app.Common import Metadata
 
 __author__ = 'Jachym'
 
@@ -25,8 +26,9 @@ class Box(Process):
             version='0.1',
             title="Bounding box in- and out",
             abstract='Give bounding box, return the same',
-            metadata=[('Birdhouse', 'http://bird-house.github.io/'),
-                      ('User Guide', 'http://emu.readthedocs.io/en/latest/')],
+            metadata=[
+                Metadata('Birdhouse', 'http://bird-house.github.io/'),
+                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,

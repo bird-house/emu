@@ -1,4 +1,5 @@
 from pywps import Process, LiteralInput, LiteralOutput
+from pywps.app.Common import Metadata
 
 
 class UltimateQuestion(Process):
@@ -13,7 +14,7 @@ class UltimateQuestion(Process):
             title='Answer to the ultimate question',
             abstract='This process gives the answer to the ultimate question of "What is the meaning of life?',
             profile='',
-            metadata=['Ultimate Question', 'What is the meaning of life'],
+            metadata=[Metadata('Ultimate Question'), Metadata('What is the meaning of life')],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
