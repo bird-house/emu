@@ -101,7 +101,7 @@ class InOut(Process):
             title="In and Out",
             version="1.0",
             abstract="Testing all WPS input and output parameters.",
-            profile='birdhouse',
+            #profile=['birdhouse'],
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
                 Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
