@@ -1,46 +1,40 @@
-import os
-import pywps
-import lxml
+##################################################################
+# Copyright 2016 OSGeo Foundation,                               #
+# represented by PyWPS Project Steering Committee,               #
+# licensed under MIT, Please consult LICENSE.txt for details     #
+##################################################################
 
-NAMESPACES = {
-    'xlink': "http://www.w3.org/1999/xlink",
-    'wps': "http://www.opengis.net/wps/1.0.0",
-    'ows': "http://www.opengis.net/ows/1.1",
-    'gml': "http://www.opengis.net/gml",
-    'xsi': "http://www.w3.org/2001/XMLSchema-instance"
-}
+import lxml.etree
+from werkzeug.test import Client
+from werkzeug.wrappers import BaseResponse
+from pywps import __version__, NAMESPACES
 
-SERVICE = "http://localhost:8094/wps"
+import logging
 
-TESTDATA = {
-    'noaa_nc_1': "http://www.esrl.noaa.gov/psd/thredds/fileServer/Datasets/ncep.reanalysis.dailyavgs/surface/slp.1955.nc",
-    'noaa_catalog_1': "http://www.esrl.noaa.gov/psd/thredds/catalog/Datasets/ncep.reanalysis.dailyavgs/surface/catalog.xml?dataset=Datasets/ncep.reanalysis.dailyavgs/surface/air.sig995.1948.nc"
-    }
+logging.disable(logging.CRITICAL)
 
 
-class WpsTestClient(object):
-    def __init__(self):
-        pywps_path = os.path.dirname(pywps.__file__)
-        os.environ['PYWPS_CFG'] = os.path.abspath(os.path.join(
-            os.environ['HOME'], 'birdhouse', 'etc', 'pywps', 'emu.cfg'))
-        os.environ['REQUEST_METHOD'] = pywps.METHOD_GET
-        self.wps = pywps.Pywps(
-            os.environ["REQUEST_METHOD"], os.environ.get("PYWPS_CFG"))
+class WpsClient(Client):
 
     def get(self, *args, **kwargs):
-        query = ""
+        query = "?"
         for key, value in kwargs.iteritems():
             query += "{0}={1}&".format(key, value)
-        inputs = self.wps.parseRequest(query)
-        self.wps.performRequest(inputs)
-        return WpsTestResponse(self.wps.response)
+        return super(WpsClient, self).get(query)
+
+    def post_xml(self, *args, **kwargs):
+        doc = kwargs.pop('doc')
+        data = lxml.etree.tostring(doc, pretty_print=True)
+        kwargs['data'] = data
+        return self.post(*args, **kwargs)
 
 
-class WpsTestResponse(object):
+class WpsTestResponse(BaseResponse):
 
-    def __init__(self, data):
-        self.data = data
-        self.xml = lxml.etree.fromstring(data)
+    def __init__(self, *args):
+        super(WpsTestResponse, self).__init__(*args)
+        if self.headers.get('Content-Type') == 'text/xml':
+            self.xml = lxml.etree.fromstring(self.get_data())
 
     def xpath(self, path):
         return self.xml.xpath(path, namespaces=NAMESPACES)
@@ -49,7 +43,42 @@ class WpsTestResponse(object):
         return ' '.join(e.text for e in self.xpath(path))
 
 
+def client_for(service):
+    return WpsClient(service, WpsTestResponse)
+
+
+def assert_response_accepted(resp):
+    assert resp.status_code == 200
+    assert resp.headers['Content-Type'] == 'text/xml'
+    success = resp.xpath_text('/wps:ExecuteResponse'
+                              '/wps:Status'
+                              '/wps:ProcessAccepted')
+    assert success is not None
+    # To Do: assert status URL is present
+
+
+def assert_process_started(resp):
+    assert resp.status_code == 200
+    assert resp.headers['Content-Type'] == 'text/xml'
+    success = resp.xpath_text('/wps:ExecuteResponse'
+                              '/wps:Status'
+                              'ProcessStarted')
+    # Is it still like this in PyWPS-4 ?
+    assert success.split[0] == "processstarted"
+
+
 def assert_response_success(resp):
-    success = resp.xpath(
-        '/wps:ExecuteResponse/wps:Status/wps:ProcessSucceeded')
+    assert resp.status_code == 200
+    assert resp.headers['Content-Type'] == 'text/xml'
+    success = resp.xpath('/wps:ExecuteResponse/wps:Status/wps:ProcessSucceeded')
     assert len(success) == 1
+
+
+def assert_pywps_version(resp):
+    # get first child of root element
+    root_firstchild = resp.xpath('/*')[0].getprevious()
+    assert isinstance(root_firstchild, lxml.etree._Comment)
+    tokens = root_firstchild.text.split()
+    assert len(tokens) == 2
+    assert tokens[0] == 'PyWPS'
+    assert tokens[1] == __version__
