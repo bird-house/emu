@@ -5,7 +5,6 @@ branches:
     - develop
 python:
   - "2.7"
-  - "3.5"
 os:
   - linux
 #  - osx
@@ -14,13 +13,13 @@ install:
   - make install
   - make start
 before_script:
-  - sleep 15
+  - sleep 10
 script:
   - make testall
+  - make pep8
 #after_success:
 # - coveralls
 matrix:
   allow_failures:
     - os: osx
-    - python: 3.5
 
