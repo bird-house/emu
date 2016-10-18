@@ -1,7 +1,6 @@
 from pywps import Service
 
 from emu.tests.common import client_for, assert_response_success
-
 from emu.processes.wps_hello import Hello
 
 
