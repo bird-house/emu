@@ -250,6 +250,11 @@ testall:
 	@echo "Running all tests (including slow and online tests) ..."
 	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV); bin/py.test -v"
 
+.PHONY: pep8
+pep8:
+		@echo "Running pep8 checks ..."
+		bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV); flake8 $(APP_NAME)"
+
 .PHONY: docs
 docs:
 	@echo "Generating docs with Sphinx ..."
