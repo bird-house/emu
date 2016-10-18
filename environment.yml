@@ -11,9 +11,10 @@ dependencies:
 # buildout
 - mako=1.0.4
 # tests
-- pytest=2.9.2
+- pytest
+- flake8
 # ipython
-- ipython=4.2.0
+- ipython
 # docs
 - sphinx=1.4.1
 - sphinx_rtd_theme
