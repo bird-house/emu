@@ -53,9 +53,9 @@ class InOut(Process):
                          min_occurs=0, max_occurs=2,
                          default='gentle albatros'),
             # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
-                            # abstract='Bounding Box with\
-                        #        EPSG:4326 and EPSG:3035.',
-                        #     crss=['epsg:4326', 'epsg:3035']),
+            # abstract='Bounding Box with\
+            #        EPSG:4326 and EPSG:3035.',
+            #     crss=['epsg:4326', 'epsg:3035']),
             ComplexInput('text', 'Text',
                          abstract='Enter a URL pointing\
                             to a text document (optional)',
@@ -101,15 +101,14 @@ class InOut(Process):
             title="In and Out",
             version="1.0",
             abstract="Testing all WPS input and output parameters.",
-            #profile=['birdhouse'],
+            # profile=['birdhouse'],
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
                 Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
             inputs=inputs,
             outputs=outputs,
             status_supported=True,
-            store_supported=True
-            )
+            store_supported=True)
 
     def _handler(self, request, response):
         response.outputs['string'].data = request.inputs['string'][0].data

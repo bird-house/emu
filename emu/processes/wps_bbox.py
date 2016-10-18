@@ -10,7 +10,7 @@ from pywps import Process, BoundingBoxInput, BoundingBoxOutput
 class Box(Process):
     def __init__(self):
         inputs = [
-            #BoundingBoxInput('bboxin', 'box in',
+            # BoundingBoxInput('bboxin', 'box in',
             #                 crss=['epsg:4326', 'epsg:3035'],
             #                 min_occurs=0)
         ]

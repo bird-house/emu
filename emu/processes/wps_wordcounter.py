@@ -12,13 +12,11 @@ class WordCounter(Process):
         inputs = [
             ComplexInput('text', 'Text document',
                          abstract='URL pointing to text document',
-                         supported_formats=[Format('text/plain')]),
-            ]
+                         supported_formats=[Format('text/plain')]), ]
         outputs = [
             ComplexOutput('output', 'Word counter result',
                           as_reference=True,
-                          supported_formats=[Format('application/json')])
-            ]
+                          supported_formats=[Format('application/json')]), ]
 
         super(WordCounter, self).__init__(
             self._handler,
@@ -29,8 +27,7 @@ class WordCounter(Process):
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
-            status_supported=True
-            )
+            status_supported=True)
 
     def _handler(self, request, response):
         wordre = re.compile(r'\w+')

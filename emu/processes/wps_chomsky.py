@@ -77,7 +77,7 @@ is, apparently, determined by
 is necessary to impose an interpretation on
 appears to correlate rather closely with
 is rather different from"""
-#List of VERBs chosen for autorecursive obfuscation.
+# List of VERBs chosen for autorecursive obfuscation.
 
 objects = """ problems of phonemic and morphological analysis.
 a corpus of utterance tokens upon which conformity has been defined by the paired utterance test.
@@ -118,13 +118,11 @@ class Chomsky(Process):
             LiteralInput('times', 'Times',
                          abstract='Generates a random chomsky text.',
                          default='5',
-                         data_type='integer')
-            ]
+                         data_type='integer')]
         outputs = [
             ComplexOutput('output', 'Chomsky text',
                           as_reference=True,
-                          supported_formats=[Format('text/plain')])
-        ]
+                          supported_formats=[Format('text/plain')])]
 
         super(Chomsky, self).__init__(
             self._handler,
@@ -135,8 +133,7 @@ class Chomsky(Process):
             inputs=inputs,
             outputs=outputs,
             status_supported=True,
-            store_supported=True
-            )
+            store_supported=True)
 
     def _handler(self, request, response):
         import textwrap
