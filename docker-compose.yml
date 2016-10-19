@@ -5,8 +5,10 @@ emu:
     - "38094:38094"
     - "8094:8094"
   environment:
+    HOSTNAME: localhost
+    HTTP_PORT: 8094
     OUTPUT_PORT: 38094
   volumes:
-    - data:/data
+    - /tmp/data:/opt/birdhouse/var/lib
+    - /tmp/log:/opt/birdhouse/var/log
   volume_driver: local
-  
