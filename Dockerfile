@@ -2,10 +2,11 @@
 FROM birdhouse/bird-base:latest
 MAINTAINER https://github.com/bird-house/emu
 
-LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.5.4"
+LABEL Description="emu application" Vendor="Birdhouse" Version="0.5.0"
 
 # Configure hostname and ports for services
 ENV HTTP_PORT 8094
+ENV HTTPS_PORT 28094
 ENV OUTPUT_PORT 38094
 ENV HOSTNAME localhost
 
@@ -36,7 +37,7 @@ VOLUME /opt/birdhouse/var/lib
 VOLUME /opt/birdhouse/var/log
 
 # Ports used in birdhouse
-EXPOSE 9001 $HTTP_PORT 28094 $OUTPUT_PORT
+EXPOSE 9001 $HTTP_PORT $HTTPS_PORT $OUTPUT_PORT
 
 # Start supervisor in foreground
 ENV DAEMON_OPTS --nodaemon
