@@ -2,9 +2,9 @@
 FROM birdhouse/bird-base:latest
 MAINTAINER https://github.com/bird-house/emu
 
-LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.5.0"
+LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.5.2"
 
-# Configure hostname and user for services 
+# Configure hostname and user for services
 ENV OUTPUT_PORT 38094
 ENV HOSTNAME localhost
 ENV USER www-data
@@ -14,10 +14,10 @@ ENV USER www-data
 ENV HOME /root
 
 # Copy application sources
-COPY . /opt/birdhouse
+COPY . /opt/birdhouse/src/emu
 
 # cd into application
-WORKDIR /opt/birdhouse
+WORKDIR /opt/birdhouse/src/emu
 
 
 # Provide custom.cfg with settings for docker image
@@ -31,20 +31,19 @@ ENV ANACONDA_HOME /opt/conda
 ENV CONDA_ENVS_DIR /opt/conda/envs
 
 # Run install
-RUN make clean install 
+RUN make clean install
 
 # Volume for data, cache, logfiles, ...
-RUN chown -R $USER $CONDA_ENVS_DIR/birdhouse
-RUN mkdir -p $CONDA_ENVS_DIR/birdhouse/var/lib && mv $CONDA_ENVS_DIR/birdhouse/var/lib /data && ln -s /data $CONDA_ENVS_DIR/birdhouse/var/lib
-RUN chown -R $USER /data
+# RUN chown -R $USER $CONDA_ENVS_DIR/birdhouse
+# RUN mkdir -p $CONDA_ENVS_DIR/birdhouse/var/lib && mv $CONDA_ENVS_DIR/birdhouse/var/lib /data && ln -s /data $CONDA_ENVS_DIR/birdhouse/var/lib
+# RUN chown -R $USER /data
 VOLUME /data
 
 # Ports used in birdhouse
 EXPOSE 9001 8094 28094 $OUTPUT_PORT
 
 # Start supervisor in foreground
-ENV DAEMON_OPTS --nodaemon --user $USER
+ENV DAEMON_OPTS --nodaemon
 
 # Start service ...
-CMD ["make", "update-config", "update-user", "start"]
-
+CMD ["make", "update-config", "start"]
