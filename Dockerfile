@@ -4,7 +4,7 @@ MAINTAINER https://github.com/bird-house/emu
 
 LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.5.4"
 
-# Configure hostname and user for services
+# Configure hostname and ports for services
 ENV HTTP_PORT 8094
 ENV OUTPUT_PORT 38094
 ENV HOSTNAME localhost
