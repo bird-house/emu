@@ -2,13 +2,11 @@
 FROM birdhouse/bird-base:latest
 MAINTAINER https://github.com/bird-house/emu
 
-LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.5.2"
+LABEL Description="Emu Web Processing Service Application" Vendor="Birdhouse" Version="0.5.3"
 
 # Configure hostname and user for services
 ENV OUTPUT_PORT 38094
 ENV HOSTNAME localhost
-ENV USER www-data
-
 
 # Set current home
 ENV HOME /root
@@ -19,9 +17,8 @@ COPY . /opt/birdhouse/src/emu
 # cd into application
 WORKDIR /opt/birdhouse/src/emu
 
-
 # Provide custom.cfg with settings for docker image
-COPY .docker.cfg custom.cfg
+RUN printf "[buildout]\nextends=profiles/docker.cfg" > custom.cfg
 
 # Install system dependencies
 RUN bash bootstrap.sh -i && bash requirements.sh
@@ -34,10 +31,8 @@ ENV CONDA_ENVS_DIR /opt/conda/envs
 RUN make clean install
 
 # Volume for data, cache, logfiles, ...
-# RUN chown -R $USER $CONDA_ENVS_DIR/birdhouse
-# RUN mkdir -p $CONDA_ENVS_DIR/birdhouse/var/lib && mv $CONDA_ENVS_DIR/birdhouse/var/lib /data && ln -s /data $CONDA_ENVS_DIR/birdhouse/var/lib
-# RUN chown -R $USER /data
-VOLUME /data
+VOLUME /opt/birdhouse/var/lib
+VOLUME /opt/birdhouse/var/log
 
 # Ports used in birdhouse
 EXPOSE 9001 8094 28094 $OUTPUT_PORT
