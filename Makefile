@@ -25,8 +25,9 @@ CONDA_PINNED := $(APP_ROOT)/requirements/conda_pinned
 
 # Configuration used by update-config
 HOSTNAME ?= localhost
-HTTP_PORT ?= 8094
-OUTPUT_PORT ?= 8090
+HTTP_PORT ?= 8080
+HTTPS_PORT ?= 8443
+OUTPUT_PORT ?= 8081
 
 # choose anaconda installer depending on your OS
 ANACONDA_URL = http://repo.continuum.io/miniconda
@@ -206,7 +207,7 @@ update:
 .PHONY: update-config
 update-config:
 	@echo "Update application config with buildout (offline mode) and environment variables..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) settings:hostname=$(HOSTNAME) settings:output-port=$(OUTPUT_PORT) settings:http-port=$(HTTP_PORT) -o -c custom.cfg"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);bin/buildout buildout:anaconda-home=$(ANACONDA_HOME) settings:hostname=$(HOSTNAME) settings:output-port=$(OUTPUT_PORT) settings:http-port=$(HTTP_PORT) settings:https-port=$(HTTPS_PORT) -o -c custom.cfg"
 
 .PHONY: clean
 clean: srcclean envclean
