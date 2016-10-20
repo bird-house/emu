@@ -1,6 +1,13 @@
 Changes
 *******
 
+0.5.0
+==================
+
+* using pywps-4.
+* updated all processes to pywps-4.
+* updated Dockerfile.
+
 0.4.1 (2016-10-20)
 ==================
 
