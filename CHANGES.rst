@@ -1,6 +1,12 @@
 Changes
 *******
 
+0.4.1 (2016-10-20)
+==================
+
+* fixed docs and comments.
+* updated recipes, using conda-offline.
+
 0.4.0 (2016-07-11)
 ==================
 
