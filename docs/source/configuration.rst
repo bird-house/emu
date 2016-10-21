@@ -3,7 +3,9 @@
 Configuration
 =============
 
-If you want to run on a different hostname or port then change the default values in ``custom.cfg``::
+If you want to run on a different hostname or port then change the default values in ``custom.cfg``:
+
+.. code-block:: sh
 
    $ cd emu
    $ vim custom.cfg
@@ -12,7 +14,9 @@ If you want to run on a different hostname or port then change the default value
    hostname = localhost
    http-port = 8094
 
-After any change to your ``custom.cfg`` you **need** to run ``make install`` again and restart the ``supervisor`` service::
+After any change to your ``custom.cfg`` you **need** to run ``make update`` again and restart the ``supervisor`` service:
 
-  $ make install
+.. code-block:: sh
+
+  $ make update    # or install
   $ make restart

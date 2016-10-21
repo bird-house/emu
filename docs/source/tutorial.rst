@@ -3,44 +3,64 @@
 Example: Using Docker
 =====================
 
-If you just want to try the Emu Web Processing Service you can also use the `Docker <https://hub.docker.com/r/birdhouse/emu/>`_ image::
+If you just want to try the Emu Web Processing Service you can also use the `Docker <https://hub.docker.com/r/birdhouse/emu/>`_ image:
 
-  $ docker run -i -d -p 38094:38094 -p 8094:8094 --name=emu_wps birdhouse/emu
+.. code-block:: sh
 
-Check the docker logs::
+  $ docker run -i -d -p 8080:8080 -p 8000:8000 -p 9001:9001 --name=emu birdhouse/emu
 
-  $ docker logs emu_wps
+Check the docker logs:
 
-Show running docker containers::
+.. code-block:: sh
+
+  $ docker logs emu
+
+Show running docker containers:
+
+.. code-block:: sh
 
   $ docker ps
 
 Run a GetCapabilites WPS request:
 
-  http://localhost:8094/wps?service=WPS&version=1.0.0&request=getcapabilities
+  http://localhost:8080/wps?service=WPS&version=1.0.0&request=getcapabilities
 
-Run DescribeProcess WPS request for *Hello World*:
+Run DescribeProcess WPS request for *Hello*:
 
-  http://localhost:8094/wps?service=WPS&version=1.0.0&request=describeprocess&identifier=helloworld
+  http://localhost:8080/wps?service=WPS&version=1.0.0&request=describeprocess&identifier=hello
 
-Execute *Hello World* process with you user name:
+Execute *Hello* process with you user name:
 
-  http://localhost:8094/wps?service=WPS&version=1.0.0&request=execute&identifier=helloworld&DataInputs=user=Pingu
+  http://localhost:8080/wps?service=WPS&version=1.0.0&request=execute&identifier=hello&DataInputs=name=Pingu
 
-Install *Birdy* WPS command line tool from Anaconda (Anaconda needs to be installed and in your ``PATH``)::
+Install *Birdy* WPS command line tool from Anaconda (Anaconda needs to be installed and in your ``PATH``):
 
-  $ source activate birdhouse # activate birdhouse environment (optional)
+.. code-block:: sh
+
   $ conda install -c birdhouse birdhouse-birdy
 
-Use Birdy to access Emu WPS service::
+Use Birdy to access Emu WPS service:
 
-  $ export WPS_SERVICE=http://localhost:8094/wps
+.. code-block:: sh
+
+  $ export WPS_SERVICE=http://localhost:8080/wps
   $ birdy -h
-  $ birdy helloworld -h
-  $ birdy helloworld --user Pingu
+  $ birdy hello -h
+  $ birdy hello --name Pingu
 
 Stop and remove docker container::
 
   $ docker stop emu_wps
   $ docker rm emu_wps
 
+Using docker-compose
+--------------------
+
+You can also start the docker container with ``docker-compose``:
+
+.. code-block:: sh
+
+   $ git clone https://github.com/bird-house/emu.git
+   $ cd emu
+   $ docker-compose up -d
+   $ docker-compose logs emu
