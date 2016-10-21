@@ -11,15 +11,14 @@ Introduction
 Emu (the bird)
   *Emus are curious birds who are known to follow and watch other animals and humans. Emus do not sleep continuously at night but in several short stints sitting down. [..].* (`Wikipedia <https://en.wikipedia.org/wiki/Emu>`_).
 
-Emu is a Python package with some test proccess for  Web Processing Services (WPS). Currently it is using the `PyWPS <https://github.com/geopython/PyWPS>`_ server.
+Emu is a Python package with some test proccess for Web Processing Services (WPS). Currently it is using the `PyWPS-4 <http://pywps.org>`_ server.
 
 Emu is part of the `Birdhouse`_ project.
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    installation
    configuration
    tutorial
-
