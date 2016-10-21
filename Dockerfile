@@ -7,7 +7,7 @@ LABEL Description="emu application" Vendor="Birdhouse" Version="0.5.0"
 # Configure hostname and ports for services
 ENV HTTP_PORT 8080
 ENV HTTPS_PORT 8443
-ENV OUTPUT_PORT 8081
+ENV OUTPUT_PORT 8000
 ENV HOSTNAME localhost
 
 # Set current home
