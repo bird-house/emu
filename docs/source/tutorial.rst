@@ -48,7 +48,9 @@ Use Birdy to access Emu WPS service:
   $ birdy hello -h
   $ birdy hello --name Pingu
 
-Stop and remove docker container::
+Stop and remove docker container:
+
+.. code-block:: sh
 
   $ docker stop emu_wps
   $ docker rm emu_wps
