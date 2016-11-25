@@ -28,6 +28,7 @@ class Dummy(Process):
             self._handler,
             identifier='dummyprocess',
             title="Dummy Process",
+            abstract="DummyProcess to check the WPS structure",
             version="2.0",
             inputs=inputs,
             outputs=outputs,
