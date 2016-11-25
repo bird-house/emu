@@ -1,6 +1,6 @@
 import pytest
 
-from emu.tests.common import client_for
+from .common import client_for
 
 
 @pytest.mark.skip(reason="init pywps service")
