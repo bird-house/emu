@@ -14,7 +14,7 @@ class ShowError(Process):
 
         super(ShowError, self).__init__(
             self._handler,
-            identifier='error',
+            identifier='show_error',
             title='Show a WPS Error',
             abstract='This process will fail intentionally with a WPS error message.',
             version='1.0',
