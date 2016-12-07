@@ -1,4 +1,5 @@
 from .wps_sleep import Sleep
+from .wps_nap import Nap
 from .wps_ultimate_question import UltimateQuestion
 from .wps_bbox import Box
 from .wps_hello import Hello
@@ -12,6 +13,7 @@ from .wps_error import ShowError
 processes = [
     UltimateQuestion(),
     Sleep(),
+    Nap(),
     Box(),
     Hello(),
     Dummy(),
