@@ -30,7 +30,8 @@ class BinaryOperator(Process):
                 This example process is taken from Climate4Impact.',
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
+                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
+                Metadata('Climate4Impact', 'https://dev.climate4impact.eu')],
             version='1.0',
             inputs=inputs,
             outputs=outputs,
