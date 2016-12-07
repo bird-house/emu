@@ -6,6 +6,7 @@ from .wps_dummy import Dummy
 from .wps_wordcounter import WordCounter
 from .wps_chomsky import Chomsky
 from .wps_inout import InOut
+from .wps_binaryoperator import BinaryOperator
 from .wps_error import ShowError
 
 processes = [
@@ -17,5 +18,6 @@ processes = [
     WordCounter(),
     Chomsky(),
     InOut(),
+    BinaryOperator(),
     ShowError(),
 ]
