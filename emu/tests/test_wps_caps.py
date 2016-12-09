@@ -1,16 +1,28 @@
 import pytest
 
+from pywps import Service
+from pywps.tests import assert_response_success
+
 from .common import client_for
+from emu.processes import processes
 
 
-@pytest.mark.skip(reason="init pywps service")
-def test_caps():
-    client = client_for()
-    resp = client.get(service='wps', request='getcapabilities')
+def test_wps_caps():
+    client = client_for(Service(processes=processes))
+    resp = client.get(service='wps', request='getcapabilities', version='1.0.0')
     names = resp.xpath_text('/wps:Capabilities'
                             '/wps:ProcessOfferings'
                             '/wps:Process'
                             '/ows:Identifier')
     assert sorted(names.split()) == [
-        'bbox', 'chomsky', 'dummyprocess',
-        'hello', 'inout', 'ultimate_question', 'wordcount']
+        'bbox',
+        'binaryoperatorfornumbers',
+        'chomsky',
+        'dummyprocess',
+        'hello',
+        'inout',
+        'nap',
+        'show_error',
+        'sleep',
+        'ultimate_question',
+        'wordcounter']
