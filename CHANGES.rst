@@ -5,6 +5,8 @@ Changes
 ==================
 
 * added processes: nap, binaryoperator, show_error.
+* updated pywps recipe 0.8.2.
+* updated pywps 4.0.0
 
 0.5.0 (2016-12-07)
 ==================
