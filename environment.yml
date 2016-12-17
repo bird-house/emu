@@ -24,6 +24,8 @@ dependencies:
 - supervisor=3.3.1
 - gunicorn=19.1.0
 - gevent=1.1.2
+- lxml=3.6.4
+- libxslt=1.1.28
 #- eventlet=0.16.1
 - pip:
   - genshi==0.7
