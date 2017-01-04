@@ -8,6 +8,8 @@ Changes
 * updated pywps recipe 0.8.2.
 * updated pywps 4.0.0.
 * fixed wps_caps test.
+* using __version__ constant.
+* fixed install on ubuntu 16.04: updated conda env (lxml, icu).
 
 0.5.0 (2016-12-07)
 ==================
