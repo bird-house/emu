@@ -1,7 +1,7 @@
 Changes
 *******
 
-0.5.1 (2016-12-xx)
+0.5.1 (2017-01-04)
 ==================
 
 * added processes: nap, binaryoperator, show_error.
