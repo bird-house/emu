@@ -2,6 +2,7 @@ import os
 
 from setuptools import setup, find_packages
 
+version = __import__('emu').__version__
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
@@ -18,7 +19,7 @@ classifiers = [
 ]
 
 setup(name='emu',
-      version='0.5.1',
+      version=version,
       description='WPS processes for testing and demo',
       long_description=README + '\n\n' + CHANGES,
       classifiers=classifiers,
