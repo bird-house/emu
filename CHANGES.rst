@@ -5,6 +5,9 @@ Changes
 ==================
 
 * updated pywps recipe 0.8.4.
+* updated supervisor recipe 0.3.6.
+* updated zc.buildout 2.7.1
+* update Makefile.
 
 0.5.1 (2017-01-04)
 ==================
