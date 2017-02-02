@@ -7,7 +7,7 @@ python:
   - "2.7"
 os:
   - linux
-  - osx
+#  - osx
 sudo: false
 install:
   - make install
@@ -19,6 +19,3 @@ script:
   - make pep8
 #after_success:
 # - coveralls
-matrix:
-  allow_failures:
-    - os: osx
