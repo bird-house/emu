@@ -22,7 +22,7 @@ dependencies:
 - sphinx_rtd_theme
 # wps
 - pywps=4.0.0
-- nginx=1.10.1
+- nginx=1.10.3
 - supervisor=3.3.1
 - gunicorn=19.1.0
 - gevent=1.2
