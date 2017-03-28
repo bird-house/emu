@@ -53,7 +53,7 @@ class InOut(Process):
                          min_occurs=0, max_occurs=2,
                          default='gentle albatros'),
             # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
-            # abstract='Bounding Box with\
+            # abstract='Bounding Box with
             #        EPSG:4326 and EPSG:3035.',
             #     crss=['epsg:4326', 'epsg:3035']),
             ComplexInput('text', 'Text',
@@ -62,10 +62,12 @@ class InOut(Process):
                          metadata=[Metadata('Info')],
                          min_occurs=0,
                          supported_formats=[Format('text/plain')]),
-            ComplexInput('nc', 'NetCDF',
-                         abstract='Enter a URL pointing\
-                            to a NetCDF file (optional)',
-                         metadata=[Metadata('Info')],
+            ComplexInput('dataset', 'Dataset',
+                         abstract="Enter a URL pointing to a NetCDF file (optional)",
+                         metadata=[
+                             Metadata('NetCDF Format', 'https://en.wikipedia.org/wiki/NetCDF',
+                                      role='http://www.opengis.net/spec/wps/2.0/def/process/description/documentation')
+                         ],
                          min_occurs=0,
                          supported_formats=[Format('application/x-netcdf')]),
         ]
@@ -86,7 +88,7 @@ class InOut(Process):
                           abstract='Copy of input text file.',
                           as_reference=True,
                           supported_formats=[Format('text/plain')]),
-            ComplexOutput('nc', 'NetCDF',
+            ComplexOutput('dataset', 'Dataset',
                           abstract='Copy of input netcdf file.',
                           as_reference=True,
                           supported_formats=[Format('application/x-netcdf'),
@@ -104,7 +106,8 @@ class InOut(Process):
             # profile=['birdhouse'],
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
+                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/',
+                         role='http://www.opengis.net/spec/wps/2.0/def/process/description/documentation')],
             inputs=inputs,
             outputs=outputs,
             status_supported=True,
@@ -134,11 +137,11 @@ class InOut(Process):
         else:
             response.outputs['text'].data = "request didn't have a text file."
 
-        if 'nc' in request.inputs:
-            response.outputs['nc'].output_format = FORMATS.NETCDF
-            response.outputs['nc'].file = request.inputs['nc'][0].file
+        if 'dataset' in request.inputs:
+            response.outputs['dataset'].output_format = FORMATS.NETCDF
+            response.outputs['dataset'].file = request.inputs['dataset'][0].file
         else:
-            response.outputs['nc'].output_format = FORMATS.TEXT
-            response.outputs['nc'].data = "request didn't have a netcdf file."
+            response.outputs['dataset'].output_format = FORMATS.TEXT
+            response.outputs['dataset'].data = "request didn't have a netcdf file."
         response.outputs['bbox'].data = [0, 0, 10, 10]
         return response
