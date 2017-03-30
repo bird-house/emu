@@ -52,10 +52,10 @@ class InOut(Process):
                                          'happy pinguin', 'gentle albatros'],
                          min_occurs=0, max_occurs=2,
                          default='gentle albatros'),
-            # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
-            # abstract='Bounding Box with
-            #        EPSG:4326 and EPSG:3035.',
-            #     crss=['epsg:4326', 'epsg:3035']),
+            # BoundingBoxInput('bbox', 'Bounding Box',
+            #                  abstract='Bounding Box with EPSG:4326 and EPSG:3035.',
+            #                  crss=['epsg:4326', 'epsg:3035'],
+            #                  min_occurs=0),
             ComplexInput('text', 'Text',
                          abstract='Enter a URL pointing\
                             to a text document (optional)',
@@ -83,7 +83,6 @@ class InOut(Process):
                           data_type='string'),
             LiteralOutput('string_multiple_choice', 'String Multiple Choice',
                           data_type='string'),
-            # BoundingBoxOutput('bbox', 'Boudning Box', ['epsg:4326']),
             ComplexOutput('text', 'Text',
                           abstract='Copy of input text file.',
                           as_reference=True,
