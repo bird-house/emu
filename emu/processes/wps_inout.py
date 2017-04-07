@@ -22,8 +22,9 @@ class InOut(Process):
                          abstract='Enter a simple string.',
                          default="This is just a string"),
             LiteralInput('int', 'Integer', data_type='integer',
-                         abstract='Enter an integer number.',
-                         default="7"),
+                         abstract='Choose an integer number from allowed values.',
+                         default="7",
+                         allowed_values=[1, 2, 3, 5, 7, 11]),
             LiteralInput('float', 'Float', data_type='float',
                          abstract='Enter a float number.',
                          default="3.14"),
@@ -52,20 +53,23 @@ class InOut(Process):
                                          'happy pinguin', 'gentle albatros'],
                          min_occurs=0, max_occurs=2,
                          default='gentle albatros'),
-            # BoundingBoxInput('bbox', 'Bounding Box', ['epsg:4326', 'epsg:3035']),
-            # abstract='Bounding Box with\
-            #        EPSG:4326 and EPSG:3035.',
-            #     crss=['epsg:4326', 'epsg:3035']),
+            # TODO: bbox is not supported yet by owslib
+            # BoundingBoxInput('bbox', 'Bounding Box',
+            #                  abstract='Bounding Box with EPSG:4326 and EPSG:3035.',
+            #                  crss=['epsg:4326', 'epsg:3035'],
+            #                  min_occurs=0),
             ComplexInput('text', 'Text',
                          abstract='Enter a URL pointing\
                             to a text document (optional)',
                          metadata=[Metadata('Info')],
                          min_occurs=0,
                          supported_formats=[Format('text/plain')]),
-            ComplexInput('nc', 'NetCDF',
-                         abstract='Enter a URL pointing\
-                            to a NetCDF file (optional)',
-                         metadata=[Metadata('Info')],
+            ComplexInput('dataset', 'Dataset',
+                         abstract="Enter a URL pointing to a NetCDF file (optional)",
+                         metadata=[
+                             Metadata('NetCDF Format', 'https://en.wikipedia.org/wiki/NetCDF',
+                                      role='http://www.opengis.net/spec/wps/2.0/def/process/description/documentation')
+                         ],
                          min_occurs=0,
                          supported_formats=[Format('application/x-netcdf')]),
         ]
@@ -81,12 +85,11 @@ class InOut(Process):
                           data_type='string'),
             LiteralOutput('string_multiple_choice', 'String Multiple Choice',
                           data_type='string'),
-            # BoundingBoxOutput('bbox', 'Boudning Box', ['epsg:4326']),
             ComplexOutput('text', 'Text',
                           abstract='Copy of input text file.',
                           as_reference=True,
                           supported_formats=[Format('text/plain')]),
-            ComplexOutput('nc', 'NetCDF',
+            ComplexOutput('dataset', 'Dataset',
                           abstract='Copy of input netcdf file.',
                           as_reference=True,
                           supported_formats=[Format('application/x-netcdf'),
@@ -104,7 +107,8 @@ class InOut(Process):
             # profile=['birdhouse'],
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
+                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/',
+                         role='http://www.opengis.net/spec/wps/2.0/def/process/description/documentation')],
             inputs=inputs,
             outputs=outputs,
             status_supported=True,
@@ -134,11 +138,11 @@ class InOut(Process):
         else:
             response.outputs['text'].data = "request didn't have a text file."
 
-        if 'nc' in request.inputs:
-            response.outputs['nc'].output_format = FORMATS.NETCDF
-            response.outputs['nc'].file = request.inputs['nc'][0].file
+        if 'dataset' in request.inputs:
+            response.outputs['dataset'].output_format = FORMATS.NETCDF
+            response.outputs['dataset'].file = request.inputs['dataset'][0].file
         else:
-            response.outputs['nc'].output_format = FORMATS.TEXT
-            response.outputs['nc'].data = "request didn't have a netcdf file."
+            response.outputs['dataset'].output_format = FORMATS.TEXT
+            response.outputs['dataset'].data = "request didn't have a netcdf file."
         response.outputs['bbox'].data = [0, 0, 10, 10]
         return response

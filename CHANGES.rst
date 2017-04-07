@@ -1,13 +1,16 @@
 Changes
 *******
 
-0.5.2 (2017-02-xx)
+0.5.2 (2017-04-xx)
 ==================
 
-* updated pywps recipe 0.8.4.
+* updated pywps recipe 0.8.7.
 * updated supervisor recipe 0.3.6.
 * updated zc.buildout 2.7.1
 * update Makefile.
+* enabled bbox parameter.
+* using Metadata role attribute.
+
 
 0.5.1 (2017-01-04)
 ==================
