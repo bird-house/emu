@@ -53,10 +53,11 @@ class InOut(Process):
                                          'happy pinguin', 'gentle albatros'],
                          min_occurs=0, max_occurs=2,
                          default='gentle albatros'),
-            BoundingBoxInput('bbox', 'Bounding Box',
-                             abstract='Bounding Box with EPSG:4326 and EPSG:3035.',
-                             crss=['epsg:4326', 'epsg:3035'],
-                             min_occurs=0),
+            # TODO: bbox is not supported yet by owslib
+            # BoundingBoxInput('bbox', 'Bounding Box',
+            #                  abstract='Bounding Box with EPSG:4326 and EPSG:3035.',
+            #                  crss=['epsg:4326', 'epsg:3035'],
+            #                  min_occurs=0),
             ComplexInput('text', 'Text',
                          abstract='Enter a URL pointing\
                             to a text document (optional)',
