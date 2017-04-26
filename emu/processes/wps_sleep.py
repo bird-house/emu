@@ -17,9 +17,12 @@ class Sleep(Process):
             identifier='sleep',
             version='1.0',
             title='Sleep Process',
-            abstract='This process will sleep for a given delay or 10 seconds if not a valid value',
+            abstract='This process will sleep for a given delay or 10 seconds if not a valid value.',
             profile='',
-            metadata=[Metadata('Sleep'), Metadata('Wait'), Metadata('Delay')],
+            metadata=[
+                Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
+                Metadata('PyWPS Demo', 'https://pywps-demo.readthedocs.io/en/latest/'),
+            ],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
