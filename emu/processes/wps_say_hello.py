@@ -22,7 +22,7 @@ class SayHello(Process):
             title='Say Hello',
             abstract='Returns a literal string output with Hello plus the inputed name.',
             metadata=[
-                Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/'),  # noqa
+                Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
                 Metadata('PyWPS Demo', 'https://pywps-demo.readthedocs.io/en/latest/'),
             ],
             version='1.5',
