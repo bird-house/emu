@@ -1,4 +1,5 @@
 from pywps import Process, LiteralInput, LiteralOutput, UOM
+from pywps.app.Common import Metadata
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
