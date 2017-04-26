@@ -2,7 +2,7 @@ from .wps_sleep import Sleep
 from .wps_nap import Nap
 from .wps_ultimate_question import UltimateQuestion
 from .wps_bbox import Box
-from .wps_hello import Hello
+from .wps_say_hello import SayHello
 from .wps_dummy import Dummy
 from .wps_wordcounter import WordCounter
 from .wps_chomsky import Chomsky
@@ -15,7 +15,7 @@ processes = [
     Sleep(),
     Nap(),
     Box(),
-    Hello(),
+    SayHello(),
     Dummy(),
     WordCounter(),
     Chomsky(),
