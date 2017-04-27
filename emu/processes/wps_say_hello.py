@@ -20,7 +20,8 @@ class SayHello(Process):
             self._handler,
             identifier='hello',
             title='Say Hello',
-            abstract='Returns a literal string output with Hello plus the inputed name.',
+            abstract='Just says a friendly Hello.'
+                     'Returns a literal string output with Hello plus the inputed name.',
             metadata=[
                 Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
                 Metadata('PyWPS Demo', 'https://pywps-demo.readthedocs.io/en/latest/'),

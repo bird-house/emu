@@ -17,7 +17,8 @@ class Sleep(Process):
             identifier='sleep',
             version='1.0',
             title='Sleep Process',
-            abstract='This process will sleep for a given delay or 10 seconds if not a valid value.',
+            abstract='Testing a long running process, in the sleep.'
+                     'This process will sleep for a given delay or 10 seconds if not a valid value.',
             profile='',
             metadata=[
                 Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
