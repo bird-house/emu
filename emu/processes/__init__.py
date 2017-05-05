@@ -9,6 +9,7 @@ from .wps_chomsky import Chomsky
 from .wps_inout import InOut
 from .wps_binaryoperator import BinaryOperator
 from .wps_error import ShowError
+from .wps_multiple_outputs import MultipleOutputs
 
 processes = [
     UltimateQuestion(),
@@ -22,4 +23,5 @@ processes = [
     InOut(),
     BinaryOperator(),
     ShowError(),
+    MultipleOutputs(),
 ]
