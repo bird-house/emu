@@ -11,6 +11,7 @@ current
 * enabled bbox parameter.
 * using Metadata role attribute.
 * updated say_hello process.
+* added multiple_outputs process.
 
 
 0.5.1 (2017-01-04)
