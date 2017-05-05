@@ -57,7 +57,9 @@ class MultipleOutputs(Process):
         for i in range(max_outputs):
             progress = int(i * 100.0 / max_outputs)
             response.update_status('working on document {}'.format(i), progress)
-            response.outputs['output'].data = "output file number {}".format(i)
+            with open("output_{}.txt".format(i), 'w') as fp:
+                fp.write("my output file number %s" % i)
+            response.outputs['output'].file = fp.name
             ref_url = response.outputs['output'].get_url()
             result['outputs'].append(dict(name=os.path.basename(ref_url), url=ref_url))
         # return document with outpus
