@@ -13,12 +13,16 @@ class MultipleOutputs(Process):
     def __init__(self):
         inputs = [
             LiteralInput('count', 'Number of output files',
-                         abstract='The number of output files is flexible.',
+                         abstract='The number of generated output files.',
                          data_type='integer',
                          default='1',
                          allowed_values=[1, 2, 5, 10])]
         outputs = [
             ComplexOutput('output', 'Output',
+                          abstract='Text document with dummy content.',
+                          as_reference=True,
+                          supported_formats=[Format('text/plain')]),
+            ComplexOutput('reference', 'Output References',
                           abstract='Document with references to produced output files.',
                           as_reference=True,
                           supported_formats=[Format('application/json')]), ]
@@ -45,19 +49,16 @@ class MultipleOutputs(Process):
             max_outputs = request.inputs['count'][0].data
         else:
             max_outputs = 1
-        # prepare dummy output object
-        temp_out = ComplexOutput('_output', 'Temp Output',
-                                 as_reference=True,
-                                 supported_formats=[Format('text/plain')])
-        temp_out.storage = FileStorage()
-        temp_out.output_format = FORMATS.TEXT
+        # prepare output
+        response.outputs['output'].storage = FileStorage()
+        response.outputs['output'].output_format = FORMATS.TEXT
         # generate outputs
         result = dict(count=max_outputs, outputs=[])
         for i in range(max_outputs):
-            temp_out.data = "output files {}".format(i)
-            ref_url = temp_out.get_url()
+            response.outputs['output'].data = "output file number {}".format(i)
+            ref_url = response.outputs['output'].get_url()
             result['outputs'].append(dict(name=os.path.basename(ref_url), url=ref_url))
         # return document with outpus
-        response.outputs['output'].output_format = FORMATS.JSON
-        response.outputs['output'].data = json.dumps(result)
+        response.outputs['reference'].output_format = FORMATS.JSON
+        response.outputs['reference'].data = json.dumps(result)
         return response
