@@ -21,6 +21,7 @@ def test_wps_caps():
         'dummyprocess',
         'hello',
         'inout',
+        'multiple_outputs',
         'nap',
         'show_error',
         'sleep',
