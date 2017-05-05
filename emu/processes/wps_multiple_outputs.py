@@ -31,8 +31,8 @@ class MultipleOutputs(Process):
             self._handler,
             identifier='multiple_outputs',
             title='Multiple Outputs',
-            abstract='Produces a multiple output files and returns a document'
-                     ' with references to this files.',
+            abstract='Produces multiple files and returns a document'
+                     ' with references to these files.',
             metadata=[
                 Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
             ],
