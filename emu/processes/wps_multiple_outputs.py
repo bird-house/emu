@@ -55,6 +55,8 @@ class MultipleOutputs(Process):
         # generate outputs
         result = dict(count=max_outputs, outputs=[])
         for i in range(max_outputs):
+            progress = int(i * 100.0 / max_outputs)
+            response.update_status('working on document {}'.format(i), progress)
             response.outputs['output'].data = "output file number {}".format(i)
             ref_url = response.outputs['output'].get_url()
             result['outputs'].append(dict(name=os.path.basename(ref_url), url=ref_url))
