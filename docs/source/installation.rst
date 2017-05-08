@@ -89,24 +89,4 @@ Run the installtion and start the services:
 Run Emu as Docker container
 ---------------------------
 
-Emu WPS is available as docker image. You can download the docker image from `DockerHub <https://hub.docker.com/r/birdhouse/emu/>`_
-or build it from the provided Dockerfile.
-
-Use `docker-compose <https://docs.docker.com/compose/install/>`_ (you need a recent version > 1.7) to start the container:
-
-.. code-block:: sh
-
-    $ docker-compose up
-
-By default the WPS is available on port 8080: http://localhost:8080/wps?service=WPS&version=1.0.0&request=GetCapabilities.
-
-You can change the ports and hostname with environment variables:
-
-.. code-block:: sh
-
-    $ HOSTNAME=emu HTTP_PORT=8094 SUPERVISOR_PORT=48094 docker-compose up
-
-Now the WPS is available on port 8094: http://emu:8094/wps?service=WPS&version=1.0.0&request=GetCapabilities.
-
-You can also customize the ``docker-compose.yml`` file.
-See the `docker-compose documentation <https://docs.docker.com/compose/environment-variables/>`_.
+You can also run Emu as a Docker container, see the :ref:`Tutorial <tutorial>`.

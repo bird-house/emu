@@ -1,13 +1,25 @@
 .. _tutorial:
 
-Example: Using Docker
-=====================
+Tutorial: using Docker
+======================
 
-If you just want to try the Emu Web Processing Service you can also use the `Docker <https://hub.docker.com/r/birdhouse/emu/>`_ image:
+Emu WPS is available as docker image. You can download the docker image from `DockerHub <https://hub.docker.com/r/birdhouse/emu/>`_
+or build it from the provided Dockerfile.
+
+Start the container with the following command:
 
 .. code-block:: sh
 
   $ docker run -i -d -p 8080:8080 -p 8000:8000 -p 9001:9001 --name=emu birdhouse/emu
+
+The ports are:
+
+  * PyWPS port: 8080
+  * NGINX file service port for the outputs: 8000
+  * Supervisor port: 9001 (optional)
+
+You can map the container port also to another port on your machine, for example: ``-p 8094:8080``
+(your machine port=8094, container port=8080).
 
 Check the docker logs:
 
@@ -58,7 +70,7 @@ Stop and remove docker container:
 Using docker-compose
 --------------------
 
-You can also start the docker container with ``docker-compose``:
+Use `docker-compose <https://docs.docker.com/compose/install/>`_ (you need a recent version > 1.7) to start the container:
 
 .. code-block:: sh
 
@@ -66,3 +78,14 @@ You can also start the docker container with ``docker-compose``:
    $ cd emu
    $ docker-compose up -d
    $ docker-compose logs emu
+
+You can change the ports and hostname with environment variables:
+
+.. code-block:: sh
+
+   $ HOSTNAME=emu HTTP_PORT=8094 SUPERVISOR_PORT=48094 docker-compose up
+
+Now the WPS is available on port 8094: http://emu:8094/wps?service=WPS&version=1.0.0&request=GetCapabilities.
+
+You can also customize the ``docker-compose.yml`` file.
+See the `docker-compose documentation <https://docs.docker.com/compose/environment-variables/>`_.
