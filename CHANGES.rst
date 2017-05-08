@@ -1,8 +1,8 @@
 Changes
 *******
 
-current
-=======
+0.5.2 (2017-05-08)
+==================
 
 * updated pywps recipe 0.8.8.
 * updated supervisor recipe 0.3.6.
@@ -12,6 +12,7 @@ current
 * using Metadata role attribute.
 * updated say_hello process.
 * added multiple_outputs process.
+* updated conda recipe 0.3.6.
 
 
 0.5.1 (2017-01-04)
