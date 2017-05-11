@@ -13,4 +13,5 @@ emu:
 #  volumes:
 #    - /tmp/data:/opt/birdhouse/var/lib
 #    - /tmp/log:/opt/birdhouse/var/log
+#    - /tmp/etc:/opt/birdhouse/etc
 #  volume_driver: local
