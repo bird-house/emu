@@ -4,7 +4,8 @@ Changes
 current
 =======
 
-* updated pywps recipe 0.8.9
+* updated pywps recipe 0.9.0.
+* added wsgi application.
 
 
 0.5.2 (2017-05-08)
