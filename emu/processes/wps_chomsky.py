@@ -1,4 +1,4 @@
-from pywps import Process, LiteralInput, ComplexOutput, Format, FORMATS
+from pywps import Process, LiteralInput, ComplexOutput, Format
 
 import logging
 LOGGER = logging.getLogger("PYWPS")

@@ -1,4 +1,3 @@
-import os
 import tempfile
 from pywps.app.Common import Metadata
 

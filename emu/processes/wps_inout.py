@@ -1,6 +1,7 @@
 from pywps import Process
 from pywps import LiteralInput, LiteralOutput
-from pywps import BoundingBoxInput, BoundingBoxOutput
+# from pywps import BoundingBoxInput
+from pywps import BoundingBoxOutput
 from pywps import ComplexInput, ComplexOutput
 from pywps import Format, FORMATS
 from pywps.app.Common import Metadata
