@@ -3,7 +3,7 @@ from pywps.app.Service import Service
 
 from emu.processes import processes
 
-__version__ = "0.5.2"
+__version__ = "0.5.3"
 
 
 def application(environ, start_response):
