@@ -1,7 +1,9 @@
 import re
 from collections import Counter
 
-from pywps import Process, ComplexInput, ComplexOutput, Format, FORMATS
+from pywps import Process
+from pywps import ComplexInput, ComplexOutput, Format, FORMATS
+from pywps.app.Common import Metadata
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
@@ -25,6 +27,11 @@ class WordCounter(Process):
             title='Word Counter',
             abstract="Counts words in a given text.",
             version='1.0',
+            metadata=[
+                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
+                Metadata('Free eBooks at Gutenberg', 'http://www.gutenberg.org/'),
+                Metadata('Example: Alice in Wonderland', 'http://www.gutenberg.org/cache/epub/19033/pg19033.txt'),
+            ],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
