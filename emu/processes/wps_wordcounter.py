@@ -11,7 +11,8 @@ class WordCounter(Process):
     def __init__(self):
         inputs = [
             ComplexInput('text', 'Text document',
-                         abstract='URL pointing to text document',
+                         abstract='URL pointing to a text document, for example "Alice in Wonderland":'
+                                  ' http://www.gutenberg.org/cache/epub/19033/pg19033.txt',
                          supported_formats=[Format('text/plain')]), ]
         outputs = [
             ComplexOutput('output', 'Word counter result',
