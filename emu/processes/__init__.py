@@ -10,6 +10,7 @@ from .wps_inout import InOut
 from .wps_binaryoperator import BinaryOperator
 from .wps_error import ShowError
 from .wps_multiple_outputs import MultipleOutputs
+from .wps_esgf import ESGFDemo
 
 processes = [
     UltimateQuestion(),
@@ -24,4 +25,5 @@ processes = [
     BinaryOperator(),
     ShowError(),
     MultipleOutputs(),
+    ESGFDemo(),
 ]
