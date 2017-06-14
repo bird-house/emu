@@ -1,4 +1,7 @@
-from pywps import Process, LiteralInput, LiteralOutput, UOM
+from pywps import Process, UOM
+from pywps import LiteralInput, LiteralOutput
+from pywps import ComplexInput
+from pywps import Format
 from pywps.app.Common import Metadata
 
 import logging
@@ -8,16 +11,22 @@ LOGGER = logging.getLogger("PYWPS")
 class ESGFDemo(Process):
     def __init__(self):
         inputs = [
-            LiteralInput('variable', 'Variable',
-                         abstract='Choose a variable.',
-                         metadata=[
-                             Metadata('variable',
-                                      role='https://www.earthsystemcog.org/spec/esgf_search/2.1.0/def/facet/variable',
-                                      href='http://esgf-data.dkrz.de/esg-search/search?project=CMIP5&time_frequency=mon&distrib=false&replica=false&latest=true&limit=0&facets=variable'),  # noqa
-                         ],
+            ComplexInput('dataset', 'Dataset',
+                         abstract='You may provide a URL or upload a NetCDF file.',
+                         min_occurs=0,
+                         max_occurs=100,
+                         supported_formats=[Format('application/x-netcdf')]),
+            LiteralInput('dataset_opendap', 'Remote OpenDAP Data URL',
                          data_type='string',
-                         allowed_values=['tas', 'tasmax', 'tasmin'],
-                         default='tas')]
+                         abstract="Or provide a remote OpenDAP data URL,"
+                                  " for example:"
+                                  " http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis2.dailyavgs/surface/mslp.2016.nc",  # noqa
+                         metadata=[
+                            Metadata(
+                                'application/x-ogc-dods',
+                                'https://www.iana.org/assignments/media-types/media-types.xhtml')],
+                         min_occurs=0,
+                         max_occurs=100)]
         outputs = [
             LiteralOutput('output', 'Output response',
                           abstract='A summary report.',
@@ -30,7 +39,7 @@ class ESGFDemo(Process):
             abstract='Shows how to use WPS metadata for processes using ESGF data.',
             metadata=[
                 Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
-                Metadata('Allowed CMIP5 Datasets',
+                Metadata('ESGF Constraints',
                          role='https://www.earthsystemcog.org/spec/esgf_search/2.1.0/def/constraints',  # noqa
                          href='http://esgf-data.dkrz.de/esg-search/search?project=CMIP5&time_frequency=mon&variable=tas,tasmax,tasmin'),  # noqa
             ],
@@ -43,6 +52,17 @@ class ESGFDemo(Process):
 
     def _handler(self, request, response):
         LOGGER.info("starting ...")
-        response.outputs['output'].data = 'Variable={0}'.format(request.inputs['variable'][0].data)
+        datasets = []
+        # append file urls
+        if 'dataset' in request.inputs:
+            for dataset in request.inputs['dataset']:
+                datasets.append(dataset.file)
+        # append opendap urls
+        if 'dataset_opendap' in request.inputs:
+            for dataset in request.inputs['dataset_opendap']:
+                datasets.append(dataset.data)
+        if not datasets:
+            raise Exception("You need to provide at least one dataset.")
+        response.outputs['output'].data = 'Number of datasets = {}'.format(len(datasets))
         response.update_status('done', 100)
         return response
