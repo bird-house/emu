@@ -40,8 +40,8 @@ class ESGFDemo(Process):
             metadata=[
                 Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
                 Metadata('ESGF Constraints',
-                         role='https://www.earthsystemcog.org/spec/esgf_search/2.1.0/def/constraints',  # noqa
-                         href='http://esgf-data.dkrz.de/esg-search/search?project=CMIP5&time_frequency=mon&variable=tas,tasmax,tasmin'),  # noqa
+                         role='https://www.earthsystemcog.org/spec/esgf_search/4.12.0/def/constraints',  # noqa
+                         href='http://esgf-data.dkrz.de/esg-search/search?project=CMIP5&time_frequency=mon&variable=tas,tasmax,tasmin&experiment=historical'),  # noqa
             ],
             version='1.0',
             inputs=inputs,
