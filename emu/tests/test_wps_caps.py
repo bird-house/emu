@@ -17,6 +17,7 @@ def test_wps_caps():
         'binaryoperatorfornumbers',
         'chomsky',
         'dummyprocess',
+        'esgf_demo',
         'hello',
         'inout',
         'multiple_outputs',
