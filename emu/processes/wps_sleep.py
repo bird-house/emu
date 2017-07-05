@@ -33,9 +33,8 @@ class Sleep(Process):
     def _handler(self, request, response):
         import time
 
-        sleep_delay = request.inputs['delay'][0].data
-        if sleep_delay:
-            sleep_delay = float(sleep_delay)
+        if 'delay' in request.inputs:
+            sleep_delay = request.inputs['delay'][0].data
         else:
             sleep_delay = 10
 
