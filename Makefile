@@ -272,7 +272,7 @@ linkcheck:
 .PHONY: doc8
 doc8:
 	@echo "Running doc8 doc style checks ..."
-	bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV); pep8 docs/source"
+	$(CONDA_ENV_PATH)/bin/doc8 docs/
 
 .PHONY: selfupdate
 selfupdate: bootstrap.sh requirements.sh .gitignore
