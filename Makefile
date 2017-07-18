@@ -256,7 +256,7 @@ testall:
 .PHONY: pep8
 pep8:
 		@echo "Running pep8 code style checks ..."
-		bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV); flake8"
+		$(CONDA_ENV_PATH)/bin/flake8
 
 .PHONY: docs
 docs:
