@@ -20,8 +20,9 @@ dependencies:
 # ipython
 - ipython
 # docs
-- sphinx=1.4.1
+- sphinx=1.6
 - sphinx_rtd_theme
+- doc8
 # wps
 - pywps=4.0.0
 - nginx=1.10.3
