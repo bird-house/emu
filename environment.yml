@@ -35,5 +35,8 @@ dependencies:
 - genshi=0.7
 # postgres
 - psycopg2
+# scheduler
+- dill
+- drmaa
 - pip:
   - sphinx-autoapi==0.4.0
