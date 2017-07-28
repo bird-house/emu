@@ -7,6 +7,7 @@ current
 
 * added esgf_demo process.
 * added psycopg2 conda package for postgres
+* added dill and drmaa package for scheduler.
 * updated pywps recipe 0.9.2.
 
 
