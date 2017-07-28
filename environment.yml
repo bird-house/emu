@@ -33,5 +33,7 @@ dependencies:
 - libxslt=1.1.29
 - eventlet
 - genshi=0.7
+# postgres
+- psycopg2
 - pip:
   - sphinx-autoapi==0.4.0
