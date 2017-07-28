@@ -6,6 +6,8 @@ current
 ==================
 
 * added esgf_demo process.
+* added psycopg2 conda package for postgres
+* updated pywps recipe 0.9.2.
 
 
 0.5.3 (2017-05-18)
