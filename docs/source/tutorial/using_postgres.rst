@@ -25,6 +25,14 @@ If you don't have one yet you can use a `postgres docker container <https://stor
 
 The postgres database is now available on default port 5432.
 
+SQLAlchemy needs the  `psycopg2 <https://pypi.python.org/pypi/psycopg2>`_  postgres adapter.
+This was installed by the Emu installation process. You can also install it manually via conda:
+
+.. code-block:: sh
+
+    $ conda install psycopg2
+
+
 The `SQLAlchemy connection string <http://docs.sqlalchemy.org/en/latest/dialects/postgresql.html#dialect-postgresql-psycopg2-connect>`_
 for this database is::
 
