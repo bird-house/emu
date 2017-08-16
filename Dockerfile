@@ -2,7 +2,7 @@
 FROM birdhouse/bird-base:latest
 MAINTAINER https://github.com/bird-house/emu
 
-LABEL Description="emu application" Vendor="Birdhouse" Version="0.5"
+LABEL Description="emu application" Vendor="Birdhouse" Version="0.6"
 
 # Configure hostname and ports for services
 ENV HTTP_PORT 8080
