@@ -21,5 +21,5 @@ Emu is part of the `Birdhouse`_ project.
 
    installation
    configuration
-   processes
+   dev_guide
    tutorial
