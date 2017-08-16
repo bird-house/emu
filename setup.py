@@ -24,16 +24,18 @@ setup(name='emu',
       long_description=README + '\n\n' + CHANGES,
       classifiers=classifiers,
       author='Birdhouse',
-      author_email='',
+      author_email='wps@dkrz.de',
       url='https://github.com/bird-house/emu',
       license="Apache License v2.0",
-      keywords='wps pywps malleefowl emu conda birdhouse',
+      keywords='wps pywps emu birdhouse',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
       test_suite='emu',
       install_requires=reqs,
       entry_points={
-          'console_scripts': []
+          'console_scripts': [
+             'emu=emu:main'
+          ]
       },
       )
