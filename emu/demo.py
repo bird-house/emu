@@ -25,18 +25,19 @@ def get_host():
 
     parsed_url = urlparse(url)
     if ':' in parsed_url.netloc:
-        bind_host, port = parsed_url.netloc.split(':')
+        host, port = parsed_url.netloc.split(':')
         port = int(port)
     else:
-        bind_host = parsed_url.netloc
+        host = parsed_url.netloc
         port = 80
-    return bind_host, port
+    return host, port
 
 
-def _run(application, daemon=False):
+def _run(application, bind_host=None, daemon=False):
     from werkzeug.serving import run_simple
     # call this *after* app is initialized ... needs pywps config.
-    bind_host, port = get_host()
+    host, port = get_host()
+    bind_host = bind_host or host
     # need to serve the wps outputs
     static_files = {
         '/outputs': configuration.get_config_value('server', 'outputpath')
@@ -67,6 +68,9 @@ def main():
                         action="store_true", help="enable debug logging mode")
     parser.add_argument('-c', '--config',
                         help="path to pywps configuration file")
+    parser.add_argument('-a', '--all-addresses',
+                        action='store_true', help="run service using IPv4 0.0.0.0 (all network interfaces), "
+                        "otherwise bind to 127.0.0.1 (localhost).")
     parser.add_argument('-d', '--daemon',
                         action='store_true', help="run in daemon mode")
     args = parser.parse_args()
@@ -76,6 +80,10 @@ def main():
         LOGGER.warn('using pywps configuration: %s', args.config)
     if args.debug:
         cfgfiles.append(os.path.join(os.path.dirname(__file__), 'debug.cfg'))
+    if args.all_addresses:
+        bind_host = '0.0.0.0'
+    else:
+        bind_host = '127.0.0.1'
     app = wsgi.create_app(cfgfiles)
     # let's start the service ...
     if args.daemon:
@@ -90,12 +98,12 @@ def main():
 
         if (pid == 0):
             os.setsid()
-            _run(app, daemon=True)
+            _run(app, bind_host=bind_host, daemon=True)
         else:
             os._exit(0)
     else:
         # no daemon
-        _run(app)
+        _run(app, bind_host=bind_host)
 
 
 if __name__ == '__main__':
