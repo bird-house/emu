@@ -1,14 +1,14 @@
 Changes
 *******
 
-
-current
+0.6.0 (2017-08-16)
 ==================
 
 * added esgf_demo process.
 * added psycopg2 conda package for postgres
 * added dill and drmaa package for scheduler.
 * updated pywps recipe 0.9.2.
+* added demo module.
 
 
 0.5.3 (2017-05-18)
