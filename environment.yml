@@ -39,4 +39,4 @@ dependencies:
 - dill
 - drmaa
 - pip:
-  - sphinx-autoapi==0.4.0
+  - sphinx-autoapi==0.5.0
