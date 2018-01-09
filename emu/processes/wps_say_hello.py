@@ -10,10 +10,12 @@ class SayHello(Process):
         inputs = [
             LiteralInput('name', 'Your name',
                          abstract='Please enter your name.',
+                         keywords=['name', 'firstname'],
                          data_type='string')]
         outputs = [
             LiteralOutput('output', 'Output response',
                           abstract='A friendly Hello from us.',
+                          keywords=['output', 'result', 'response'],
                           data_type='string')]
 
         super(SayHello, self).__init__(
@@ -22,6 +24,7 @@ class SayHello(Process):
             title='Say Hello',
             abstract='Just says a friendly Hello.'
                      'Returns a literal string output with Hello plus the inputed name.',
+            keywords=['hello', 'demo'],
             metadata=[
                 Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
                 Metadata('PyWPS Demo', 'https://pywps-demo.readthedocs.io/en/latest/'),
