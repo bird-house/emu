@@ -1,3 +1,5 @@
+import pytest
+
 from pywps import Service
 from pywps.tests import assert_response_success
 
@@ -14,6 +16,7 @@ def test_wps_hello():
     assert_response_success(resp)
 
 
+@pytest.mark.skip(reason="build_request_response method not available anymore")
 def test_wps_hello_again():
     """Example of how to debug this process, running outside a PyWPS instance.
     """
