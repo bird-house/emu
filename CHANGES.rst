@@ -1,6 +1,13 @@
 Changes
 *******
 
+0.6.1 (2018-01-10)
+==================
+
+* hello process: using keywords in metadata for description.
+* updated dependencies.
+* updated demo service.
+
 0.6.0 (2017-08-16)
 ==================
 
@@ -60,7 +67,7 @@ Changes
 ==================
 
 * using new buildout recipes.
-* using conda environment.yml 
+* using conda environment.yml
 
 0.3.2 (2016-07-11)
 ==================
@@ -112,5 +119,3 @@ Changes
 ==================
 
 Initial Paris Release
-
-
