@@ -2,7 +2,7 @@ import re
 from collections import Counter
 
 from pywps import Process
-from pywps import ComplexInput, ComplexOutput, Format, FORMATS
+from pywps import ComplexInput, ComplexOutput, FORMATS
 from pywps.app.Common import Metadata
 
 import logging
@@ -15,11 +15,11 @@ class WordCounter(Process):
             ComplexInput('text', 'Text document',
                          abstract='URL pointing to a text document, for example "Alice in Wonderland":'
                                   ' http://www.gutenberg.org/cache/epub/19033/pg19033.txt',
-                         supported_formats=[Format('text/plain')]), ]
+                         supported_formats=[FORMATS.TEXT]), ]
         outputs = [
             ComplexOutput('output', 'Word counter result',
                           as_reference=True,
-                          supported_formats=[Format('application/json')]), ]
+                          supported_formats=[FORMATS.JSON]), ]
 
         super(WordCounter, self).__init__(
             self._handler,
@@ -50,6 +50,5 @@ class WordCounter(Process):
                                reverse=True)
         with open('out.txt', 'w') as fout:
             fout.write(str(sorted_counts))
-            response.outputs['output'].output_format = FORMATS.JSON
             response.outputs['output'].file = fout.name
         return response
