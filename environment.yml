@@ -1,15 +1,15 @@
 name: emu
 channels:
-- defaults
 - birdhouse
 - conda-forge
+- defaults
 dependencies:
 - python=2.7
 - pyopenssl=0.16
 - cryptography=1.4
 - pyyaml=3.11
 - curl=7.45.0
-- icu=56
+- icu=58
 # buildout
 - mako
 # tests
