@@ -6,6 +6,7 @@ from pywps import ComplexInput, ComplexOutput
 from pywps import Format, FORMATS
 from pywps.app.Common import Metadata
 
+
 import logging
 LOGGER = logging.getLogger("PYWPS")
 
@@ -72,7 +73,7 @@ class InOut(Process):
                                       role='http://www.opengis.net/spec/wps/2.0/def/process/description/documentation')
                          ],
                          min_occurs=0,
-                         supported_formats=[Format('application/x-netcdf')]),
+                         supported_formats=[FORMATS.NETCDF]),
         ]
         outputs = [
             LiteralOutput('string', 'String', data_type='string'),
@@ -93,8 +94,8 @@ class InOut(Process):
             ComplexOutput('dataset', 'Dataset',
                           abstract='Copy of input netcdf file.',
                           as_reference=True,
-                          supported_formats=[Format('application/x-netcdf'),
-                                             Format('text/plain')]),
+                          supported_formats=[FORMATS.NETCDF,
+                                             FORMATS.TEXT]),
             BoundingBoxOutput('bbox', 'Bounding Box',
                               crss=['epsg:4326']),
         ]
@@ -133,17 +134,17 @@ class InOut(Process):
         # TODO: bbox is not working
         # response.outputs['bbox'].data = request.inputs['bbox'][0].data
         # TODO: how to copy file?
-        response.outputs['text'].output_format = FORMATS.TEXT
+        response.outputs['text'].data_format = Format('text/plain')
         if 'text' in request.inputs:
             response.outputs['text'].file = request.inputs['text'][0].file
         else:
             response.outputs['text'].data = "request didn't have a text file."
 
         if 'dataset' in request.inputs:
-            response.outputs['dataset'].output_format = FORMATS.NETCDF
+            response.outputs['dataset'].data_format = FORMATS.NETCDF
             response.outputs['dataset'].file = request.inputs['dataset'][0].file
         else:
-            response.outputs['dataset'].output_format = FORMATS.TEXT
+            response.outputs['dataset'].data_format = FORMATS.TEXT
             response.outputs['dataset'].data = "request didn't have a netcdf file."
         response.outputs['bbox'].data = [0, 0, 10, 10]
         return response
