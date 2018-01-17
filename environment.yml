@@ -21,7 +21,6 @@ dependencies:
 - ipython
 # docs
 - sphinx=1.6
-- sphinx_rtd_theme
 - six
 - doc8
 # wps
