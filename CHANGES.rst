@@ -1,6 +1,13 @@
 Changes
 *******
 
+current
+==================
+
+* using pywps autodoc extension for Sphinx.
+* added badges for chat, docs and license.
+* fixed pywps output format.
+
 0.6.1 (2018-01-10)
 ==================
 
