@@ -1,6 +1,10 @@
 Emu
 ===
 
+.. image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
+   :target: http://emu.readthedocs.org/en/latest/?badge=latest
+   :alt: Documentation Status
+
 .. image:: https://travis-ci.org/bird-house/emu.svg?branch=master
    :target: https://travis-ci.org/bird-house/emu
    :alt: Travis Build
