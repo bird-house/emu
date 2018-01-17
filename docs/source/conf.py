@@ -18,7 +18,7 @@ import shlex
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-# sys.path.insert(0, os.path.abspath(os.path.join('..', '..', 'emu')))
+#sys.path.insert(0, os.path.abspath('.'))
 
 # -- General configuration ------------------------------------------------
 
@@ -313,8 +313,8 @@ intersphinx_mapping = {'python': ('http://docs.python.org/', None),
 
 # linkcheck options
 # http://www.sphinx-doc.org/en/stable/config.html?highlight=linkchecker#options-for-the-linkcheck-builder
-linkcheck_ignore = [r'http[s]*://localhost.*/', 'https://mouflon.dkrz.de/', 'https://esgf-data.dkrz.de/']
-linkcheck_timeout = 5
+linkcheck_ignore = [r'http[s]*://localhost.*/', 'https://mouflon.dkrz.de/', 'https://esgf-data.dkrz.de/', 'https://indico.egi.eu/']
+linkcheck_timeout = 15
 
 # Link references always present on RST page.
 rst_epilog = """
