@@ -23,7 +23,7 @@ import shlex
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = '1.3'
+needs_sphinx = '1.6'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -33,6 +33,8 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon',
+    'pywps.ext_autodoc',
 ]
 
 autoapi_type = 'python'
@@ -331,7 +333,7 @@ rst_epilog = """
 .. _reStructuredText: http://sphinx-doc.org/rest.html
 .. _Read the Docs: https://readthedocs.org
 .. _Anaconda: https://www.continuum.io/
-.. _Buildout: http://www.buildout.org/en/latest/ 
+.. _Buildout: http://www.buildout.org/en/latest/
 .. _Birdhouse: http://birdhouse.readthedocs.io/en/latest/
 .. _Phoenix: http://pyramid-phoenix.readthedocs.io/en/latest/
 .. _Malleefowl: http://malleefowl.readthedocs.io/en/latest/
@@ -346,4 +348,3 @@ rst_epilog = """
 .. _dispel4py: https://github.com/dispel4py/dispel4py
 .. _esgf-pyclient: https://github.com/ESGF/esgf-pyclient
 """
-
