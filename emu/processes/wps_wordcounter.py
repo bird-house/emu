@@ -10,6 +10,12 @@ LOGGER = logging.getLogger("PYWPS")
 
 
 class WordCounter(Process):
+    """
+    Notes
+    -----
+
+    Counts ocurrences of all words in a document.
+    """
     def __init__(self):
         inputs = [
             ComplexInput('text', 'Text document',
