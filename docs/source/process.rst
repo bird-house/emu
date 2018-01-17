@@ -3,9 +3,14 @@
 Processes
 #########
 
-Currently availabe processes.
+We describe here the availabe processes.
+
+Chomsky
+=======
+
+.. autoprocess:: emu.processes.Chomsky
 
 Word Counter
 ============
 
-.. autoprocess:: emu.processes.wps_wordcounter.WordCounter
+.. autoprocess:: emu.processes.WordCounter
