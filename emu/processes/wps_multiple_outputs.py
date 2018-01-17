@@ -1,6 +1,6 @@
 import os
 from pywps import Process, LiteralInput, ComplexOutput
-from pywps import Format, FORMATS
+from pywps import FORMATS
 from pywps.app.Common import Metadata
 from pywps.inout.storage import FileStorage
 import json
@@ -21,11 +21,11 @@ class MultipleOutputs(Process):
             ComplexOutput('output', 'Output',
                           abstract='Text document with dummy content.',
                           as_reference=True,
-                          supported_formats=[Format('text/plain')]),
+                          supported_formats=[FORMATS.TEXT]),
             ComplexOutput('reference', 'Output References',
                           abstract='Document with references to produced output files.',
                           as_reference=True,
-                          supported_formats=[Format('application/json')]), ]
+                          supported_formats=[FORMATS.JSON]), ]
 
         super(MultipleOutputs, self).__init__(
             self._handler,
@@ -36,7 +36,7 @@ class MultipleOutputs(Process):
             metadata=[
                 Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
             ],
-            version='1.0',
+            version='1.1',
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
@@ -51,7 +51,6 @@ class MultipleOutputs(Process):
             max_outputs = 1
         # prepare output
         response.outputs['output'].storage = FileStorage()
-        response.outputs['output'].output_format = FORMATS.TEXT
         # generate outputs
         result = dict(count=max_outputs, outputs=[])
         for i in range(max_outputs):
@@ -63,6 +62,5 @@ class MultipleOutputs(Process):
             ref_url = response.outputs['output'].get_url()
             result['outputs'].append(dict(name=os.path.basename(ref_url), url=ref_url))
         # return document with outpus
-        response.outputs['reference'].output_format = FORMATS.JSON
         response.outputs['reference'].data = json.dumps(result)
         return response
