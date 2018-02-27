@@ -56,8 +56,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="""Script for starting a demo Malleefowl WPS
-                       instance with processes for climate data access.
+        description="""Script for starting a demo WPS.
                        This service is by default available at http://localhost:5000/wps""",
         epilog="""Do not use this service in a production environment.
          It's intended to be running in a test environment only!
