@@ -10,16 +10,15 @@ Start the container with the following command:
 
 .. code-block:: sh
 
-  $ docker run -i -d -p 8080:8080 -p 8000:8000 -p 9001:9001 --name=emu birdhouse/emu
+  $ docker run -i -d -p 5000:5000 -p 8000:8000 --name=emu birdhouse/emu
 
 The ports are:
 
-  * PyWPS port: 8080
+  * PyWPS port: 5000
   * NGINX file service port for the outputs: 8000
-  * Supervisor port: 9001 (optional)
 
-You can map the container port also to another port on your machine, for example: ``-p 8094:8080``
-(your machine port=8094, container port=8080).
+You can map the container port also to another port on your machine, for example: ``-p 8094:5000``
+(your machine port=8094, container port=5000).
 
 Check the docker logs:
 
@@ -35,15 +34,15 @@ Show running docker containers:
 
 Run a GetCapabilites WPS request:
 
-  http://localhost:8080/wps?service=WPS&version=1.0.0&request=getcapabilities
+  http://localhost:5000/wps?service=WPS&version=1.0.0&request=getcapabilities
 
 Run DescribeProcess WPS request for *Hello*:
 
-  http://localhost:8080/wps?service=WPS&version=1.0.0&request=describeprocess&identifier=hello
+  http://localhost:5000/wps?service=WPS&version=1.0.0&request=describeprocess&identifier=hello
 
 Execute *Hello* process with you user name:
 
-  http://localhost:8080/wps?service=WPS&version=1.0.0&request=execute&identifier=hello&DataInputs=name=Pingu
+  http://localhost:5000/wps?service=WPS&version=1.0.0&request=execute&identifier=hello&DataInputs=name=Pingu
 
 Install *Birdy* WPS command line tool from Anaconda (Anaconda needs to be installed and in your ``PATH``):
 
@@ -55,7 +54,7 @@ Use Birdy to access Emu WPS service:
 
 .. code-block:: sh
 
-  $ export WPS_SERVICE=http://localhost:8080/wps
+  $ export WPS_SERVICE=http://localhost:5000/wps
   $ birdy -h
   $ birdy hello -h
   $ birdy hello --name Pingu
@@ -79,13 +78,28 @@ Use `docker-compose <https://docs.docker.com/compose/install/>`_ (you need a rec
    $ docker-compose up -d
    $ docker-compose logs emu
 
+Execute ``tail`` command in the running container to see the logs::
+
+  $ docker ps   # get the container name
+  NAMES
+  emu_emu_1
+  $ docker exec -it emu_emu_1 tail -f /opt/birdhouse/var/log/supervisor/emu.log
+  $ docker exec -it emu_emu_1 tail -f /opt/birdhouse/var/log/pywps/emu.log
+
 You can change the ports and hostname with environment variables:
 
 .. code-block:: sh
 
-   $ HOSTNAME=emu HTTP_PORT=8094 SUPERVISOR_PORT=48094 docker-compose up
+   $ HOSTNAME=emu HTTP_PORT=8094 docker-compose up
 
 Now the WPS is available on port 8094: http://emu:8094/wps?service=WPS&version=1.0.0&request=GetCapabilities.
 
 You can also customize the ``docker-compose.yml`` file.
 See the `docker-compose documentation <https://docs.docker.com/compose/environment-variables/>`_.
+
+Build image using docker-compose
+--------------------------------
+
+You can build locally a new docker image from the Dockerfile by running docker-compose::
+
+    $ docker-compose build

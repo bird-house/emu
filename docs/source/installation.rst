@@ -69,7 +69,7 @@ Edit ``custom.cfg``:
     [settings]
     hostname = emu
     http-port = 80
-    output-port = 500
+    output-port = 8000
     log-level = WARN
 
     # deployment options
