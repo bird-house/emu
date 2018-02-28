@@ -1,4 +1,4 @@
-VERSION := 0.3.14
+VERSION := 0.3.15
 RELEASE := master
 
 # Include custom config if it is available
