@@ -2,18 +2,17 @@
 
 extends = buildout.cfg
 
+## development options
+#log-level = WARN
+#versions = noversions
+
 [settings]
 hostname = localhost
 http-port = 8094
 output-port = 8090
-
-## development options
-#log-level = WARN
-#versions = noversions
 
 ## deployment options
 #prefix =  /opt/birdhouse
 #user = www-data
 #etc-user = root
 
-[noversions]
