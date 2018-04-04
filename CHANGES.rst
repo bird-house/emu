@@ -9,6 +9,10 @@ Issues solved:
 * Clean up directory structure and files #13
 * clean up of buildout and docker #14
 
+Others:
+
+* Updated buildout conda recipe 0.4.0.
+
 0.6.2 (2018-02-07)
 ==================
 
