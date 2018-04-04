@@ -1,6 +1,14 @@
 Changes
 *******
 
+0.6.3 (2018-04-04)
+==================
+
+Issues solved:
+
+* Clean up directory structure and files #13
+* clean up of buildout and docker #14
+
 0.6.2 (2018-02-07)
 ==================
 
