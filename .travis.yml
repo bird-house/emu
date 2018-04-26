@@ -1,20 +1,35 @@
 language: python
-#branches:
-#  only:
-#    - master
 python:
   - "2.7"
+  - "3.6"
 os:
   - linux
 #  - osx
 sudo: false
 install:
-  - make install
-  - make start
+  # We do this conditionally because it saves us some downloading if the
+  # version is the same.
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
+    else
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+    fi
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  # Useful for debugging any issues with conda
+  - conda info -a
+  # Packages for testing
+  - conda install pytest flake8
+
+  # Replace dep1 dep2 ... with your dependencies
+  - conda env create -f environment.yml
+  - source activate emu
+  - python setup.py install
 before_script:
   - sleep 10
 script:
-  - make testall
-  - make pep8
-#after_success:
-# - coveralls
+  - pytest
+  - flake8
