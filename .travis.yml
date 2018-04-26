@@ -21,12 +21,13 @@ install:
   - conda update -q conda
   # Useful for debugging any issues with conda
   - conda info -a
-  # Packages for testing
-  - conda install pytest flake8
 
   # Replace dep1 dep2 ... with your dependencies
   - conda env create -f environment.yml
   - source activate emu
+  # Packages for testing
+  - conda install pytest flake8
+  # Install Emu WPS
   - python setup.py install
 before_script:
   - sleep 10
