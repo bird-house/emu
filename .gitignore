@@ -24,10 +24,11 @@ __pycache__
 .cache
 .coverage
 .tox
+.pytest_cache
 nosetests.xml
 unit_tests/testdata.json
 
-# R 
+# R
 *.Rhistory
 
 # Eclipse / PyDev
@@ -81,5 +82,3 @@ testdata.json
 *.a
 *.mod
 *.out
-
-
