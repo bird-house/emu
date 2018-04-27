@@ -1,1 +1,1 @@
-pywps
+pywps>=4.0.0
