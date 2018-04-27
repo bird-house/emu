@@ -1,1 +1,1 @@
-Carsten Ehbrecht <ehbrecht@dkrz.de>
+* Carsten Ehbrecht <ehbrecht@dkrz.de>
