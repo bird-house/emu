@@ -4,4 +4,4 @@ channels:
 - conda-forge
 - defaults
 dependencies:
-- pywps=4.0.0
+- pywps=4.1.0
