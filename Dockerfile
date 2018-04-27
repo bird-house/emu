@@ -1,47 +1,29 @@
 # vim:set ft=dockerfile:
-FROM birdhouse/bird-base:latest
+FROM alpine:latest
 MAINTAINER https://github.com/bird-house/emu
 
-LABEL Description="Emu WPS" Vendor="Birdhouse"
+RUN apk add --no-cache \
+	git \
+	gcc \
+	bash \
+	openssh \
+	musl-dev  \
+	python3 \
+	python3-dev \
+	libxml2-dev  \
+	libxslt-dev \
+	linux-headers
 
-# Configure hostname and ports for services
-ENV HTTP_PORT 5000
-ENV OUTPUT_PORT 8000
-ENV HOSTNAME localhost
+RUN git clone https://github.com/bird-house/emu.git
 
-# Set current home
-ENV HOME /root
+WORKDIR /emu
+RUN pip3 install -r requirements.txt
+RUN python3 setup.py install
 
-# Copy application sources
-COPY . /opt/birdhouse/src/emu
+EXPOSE 5000
+ENTRYPOINT ["/usr/bin/python3", "emu","-a"]
 
-# cd into application
-WORKDIR /opt/birdhouse/src/emu
-
-# Provide custom.cfg with settings for docker image
-COPY .docker.cfg custom.cfg
-
-# Install system dependencies
-RUN bash bootstrap.sh -i
-
-# Set conda enviroment
-ENV ANACONDA_HOME /opt/conda
-ENV CONDA_ENVS_DIR /opt/conda/envs
-
-# Run install and fix permissions
-RUN make clean install && chmod 755 /opt/birdhouse/etc && chmod 755 /opt/birdhouse/var/run
-
-# Volume for data, cache, logfiles, ...
-VOLUME /opt/birdhouse/var/lib
-VOLUME /opt/birdhouse/var/log
-# Volume for configs
-VOLUME /opt/birdhouse/etc
-
-# Ports used in birdhouse
-EXPOSE $HTTP_PORT $OUTPUT_PORT
-
-# Start supervisor in foreground
-ENV DAEMON_OPTS --nodaemon
-
-# Start service ...
-CMD ["make", "update-config", "start"]
+#docker build -t emu .
+#docker run -p 5000:5000 emu
+#http://localhost:5000/wps?request=GetCapabilities&service=WPS
+#http://localhost:5000/wps?request=DescribeProcess&service=WPS&identifier=all&version=1.0.0
