@@ -21,6 +21,7 @@ Makefile.config
 __pycache__
 
 # Unit test / Coverage reports
+.pytest_cache
 .cache
 .coverage
 .tox
