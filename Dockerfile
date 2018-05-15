@@ -3,26 +3,31 @@ FROM continuumio/miniconda3
 MAINTAINER https://github.com/bird-house/emu
 LABEL Description="Emu: Demo PyWPS" Vendor="Birdhouse" Version="0.6"
 
+# Update Debian system
+RUN apt-get update && apt-get install -y \
+ build-essential \
+&& rm -rf /var/lib/apt/lists/*
+
 # Update conda
 RUN conda update -n base conda
 
 # Copy WPS project
-COPY . /opt/emu
+COPY . /opt/wps
 
-WORKDIR /opt/emu
+WORKDIR /opt/wps
 
 # Create conda environment
-RUN conda env update -f environment.yml
+RUN conda env create -n wps -f environment.yml
 
 # Install WPS
-RUN /opt/conda/envs/emu/bin/python setup.py install
+RUN ["/bin/bash", "-c", "source activate wps && python setup.py develop"]
 
 # Start WPS service on port 5000 on 0.0.0.0
 EXPOSE 5000
-ENTRYPOINT ["/opt/conda/envs/emu/bin/emu", "-a"]
-CMD ["-c", "/opt/emu/emu/default.cfg"]
+ENTRYPOINT ["/bin/bash", "-c"]
+CMD ["source activate wps && exec emu -a -c /opt/wps/etc/demo.cfg"]
 
-# docker build -t emu .
-# docker run -p 5000:5000 emu
+# docker build -t birdhouse/emu .
+# docker run -p 5000:5000 birdhouse/emu
 # http://localhost:5000/wps?request=GetCapabilities&service=WPS
 # http://localhost:5000/wps?request=DescribeProcess&service=WPS&identifier=all&version=1.0.0

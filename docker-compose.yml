@@ -5,3 +5,9 @@ services:
     image: birdhouse/emu
     ports:
       - "5000:5000"
+
+
+# docker-compose build
+# docker-compose up
+# docker-compose down
+# docker-compose rm
