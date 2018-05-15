@@ -1,29 +1,28 @@
 # vim:set ft=dockerfile:
-FROM alpine:latest
+FROM continuumio/miniconda3
 MAINTAINER https://github.com/bird-house/emu
+LABEL Description="Emu: Demo PyWPS" Vendor="Birdhouse" Version="0.6"
 
-RUN apk add --no-cache \
-	git \
-	gcc \
-	bash \
-	openssh \
-	musl-dev  \
-	python3 \
-	python3-dev \
-	libxml2-dev  \
-	libxslt-dev \
-	linux-headers
+# Update conda
+RUN conda update -n base conda
 
-RUN git clone https://github.com/bird-house/emu.git
+# Copy WPS project
+COPY . /opt/emu
 
-WORKDIR /emu
-RUN pip3 install -r requirements.txt
-RUN python3 setup.py install
+WORKDIR /opt/emu
 
+# Create conda environment
+RUN conda env update -f environment.yml
+
+# Install WPS
+RUN /opt/conda/envs/emu/bin/python setup.py install
+
+# Start WPS service on port 5000 on 0.0.0.0
 EXPOSE 5000
-ENTRYPOINT ["/usr/bin/python3", "emu","-a"]
+ENTRYPOINT ["/opt/conda/envs/emu/bin/emu", "-a"]
+CMD ["-c", "/opt/emu/emu/default.cfg"]
 
-#docker build -t emu .
-#docker run -p 5000:5000 emu
-#http://localhost:5000/wps?request=GetCapabilities&service=WPS
-#http://localhost:5000/wps?request=DescribeProcess&service=WPS&identifier=all&version=1.0.0
+# docker build -t emu .
+# docker run -p 5000:5000 emu
+# http://localhost:5000/wps?request=GetCapabilities&service=WPS
+# http://localhost:5000/wps?request=DescribeProcess&service=WPS&identifier=all&version=1.0.0

@@ -3,10 +3,5 @@ services:
   emu:
     build: .
     image: birdhouse/emu
-    environment:
-      HOSTNAME: $HOSTNAME
-      HTTP_PORT: $HTTP_PORT
-      OUTPUT_PORT: $OUTPUT_PORT
     ports:
-      - "$HTTP_PORT:$HTTP_PORT"
-      - "$OUTPUT_PORT:$OUTPUT_PORT"
+      - "5000:5000"
