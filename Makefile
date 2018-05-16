@@ -30,6 +30,10 @@ help:
 	@echo "  install     to install $(APP_NAME) by running 'python setup.py develop'."
 	@echo "  start       to start $(APP_NAME) as daemon service."
 	@echo "  clean       to remove *all* files that are not controlled by 'git'. WARNING: use it *only* if you know what you do!"
+	@echo "\nTesting targets:"
+	@echo "  test        to run tests (but skip long running tests)."
+	@echo "  testall     to run all tests (including long running tests)."
+	@echo "  pep8        to run pep8 code style checks."
 
 ## Anaconda targets
 
@@ -48,7 +52,7 @@ conda_env: anaconda
 ## Build targets
 
 .PHONY: bootstrap
-bootstrap: conda_env
+bootstrap: conda_env bootstrap_tests
 	@echo "Bootstrap ..."
 
 .PHONY: install
@@ -67,3 +71,25 @@ clean:
 	@echo "Cleaning ..."
 	@git diff --quiet HEAD || echo "There are uncommited changes! Not doing 'git clean' ..."
 	@-git clean -dfx -e *.bak -e custom.cfg
+
+## Test targets
+
+.PHONY: bootstrap_tests
+bootstrap_tests:
+	@echo "Install pytest and flake8 ..."
+	@-bash -c "$(ANACONDA_HOME)/bin/conda install -y -n $(CONDA_ENV) pytest flake8"
+
+.PHONY: test
+test:
+	@echo "Running tests (skip slow and online tests) ..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);pytest -v -m 'not slow and not online'"
+
+.PHONY: testall
+testall:
+	@echo "Running all tests (including slow and online tests) ..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);pytest -v"
+
+.PHONY: pep8
+pep8:
+	@echo "Running pep8 code style checks ..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);flake8"
