@@ -10,7 +10,7 @@ import os
 from pywps import configuration
 
 from . import wsgi
-from six.moves.urllib import parse as urlparse
+from six.moves.urllib.parse import urlparse
 
 import logging
 logging.basicConfig(format='%(message)s', level=logging.INFO)
@@ -46,8 +46,10 @@ def _run(application, bind_host=None, daemon=False):
         hostname=bind_host,
         port=port,
         application=application,
-        use_debugger=True,
-        use_reloader=True,
+        use_debugger=False,
+        use_reloader=False,
+        threaded=True,
+        # processes=2,
         use_evalex=not daemon,
         static_files=static_files)
 
@@ -60,11 +62,9 @@ def main():
                        This service is by default available at http://localhost:5000/wps""",
         epilog="""Do not use this service in a production environment.
          It's intended to be running in a test environment only!
-         For more documentation, visit http://bird-house.github.io/
+         For more documentation, visit http://pywps.org/doc
         """
     )
-    parser.add_argument('--debug',
-                        action="store_true", help="enable debug logging mode")
     parser.add_argument('-c', '--config',
                         help="path to pywps configuration file")
     parser.add_argument('-a', '--all-addresses',
@@ -77,14 +77,15 @@ def main():
     if args.config:
         cfgfiles.append(args.config)
         LOGGER.warn('using pywps configuration: %s', args.config)
-    if args.debug:
-        cfgfiles.append(os.path.join(os.path.dirname(__file__), 'debug.cfg'))
     if args.all_addresses:
         bind_host = '0.0.0.0'
     else:
         bind_host = '127.0.0.1'
     app = wsgi.create_app(cfgfiles)
     # let's start the service ...
+    # See:
+    # * https://github.com/geopython/pywps-flask/blob/master/demo.py
+    # * http://werkzeug.pocoo.org/docs/0.14/serving/
     if args.daemon:
         # daemon (fork) mode
         pid = None
@@ -95,7 +96,7 @@ def main():
         except OSError as e:
             raise Exception("%s [%d]" % (e.strerror, e.errno))
 
-        if (pid == 0):
+        if pid == 0:
             os.setsid()
             _run(app, bind_host=bind_host, daemon=True)
         else:
