@@ -1,10 +1,10 @@
-.DEFAULT_GOAL := all
+# Application
+APP_ROOT := $(CURDIR)
+APP_NAME := $(shell basename $(APP_ROOT))
 
 # Anaconda
-ANACONDA_HOME ?= $(HOME)/anaconda
-CONDA_ENV ?= $(APP_NAME)
-CONDA_ENVS_DIR ?= $(HOME)/.conda/envs
-CONDA_ENV_PATH := $(CONDA_ENVS_DIR)/$(CONDA_ENV)
+ANACONDA_HOME := $(HOME)/anaconda
+CONDA_ENV := $(APP_NAME)
 
 # Choose Anaconda installer depending on your OS
 ANACONDA_URL = https://repo.continuum.io/miniconda
@@ -15,6 +15,10 @@ FN := Miniconda3-latest-MacOSX-x86_64.sh
 else
 FN := unknown
 endif
+
+# end of configuration
+
+.DEFAULT_GOAL := all
 
 .PHONY: all
 all: help
@@ -34,13 +38,11 @@ anaconda:
 	@test -d $(ANACONDA_HOME) || curl $(ANACONDA_URL)/$(FN) --silent --insecure --output "$(DOWNLOAD_CACHE)/$(FN)"
 	@test -d $(ANACONDA_HOME) || bash "$(DOWNLOAD_CACHE)/$(FN)" -b -p $(ANACONDA_HOME)
 	@echo "Add '$(ANACONDA_HOME)/bin' to your PATH variable in '.bashrc'."
-	@echo "Update conda ..."
-	"$(ANACONDA_HOME)/bin/conda" update -y -n base conda
 
 .PHONY: conda_env
 conda_env: anaconda
 	@echo "Update conda environment $(CONDA_ENV) ..."
-	@test -d $(CONDA_ENV_PATH) || "$(ANACONDA_HOME)/bin/conda" env update -n $(CONDA_ENV) -f environment.yml
+	"$(ANACONDA_HOME)/bin/conda" env update -n $(CONDA_ENV) -f environment.yml
 
 ## Build targets
 
@@ -51,7 +53,7 @@ bootstrap: conda_env
 .PHONY: install
 install: bootstrap
 	@echo "Installing application ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);python setup.py develop"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && python setup.py develop"
 	@echo "\nStart service with \`make start'"
 
 .PHONY: clean
