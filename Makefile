@@ -3,8 +3,8 @@ APP_ROOT := $(CURDIR)
 APP_NAME := $(shell basename $(APP_ROOT))
 
 # Anaconda
-ANACONDA_HOME := $(HOME)/anaconda
-CONDA_ENV := $(APP_NAME)
+ANACONDA_HOME ?= $(HOME)/anaconda
+CONDA_ENV ?= $(APP_NAME)
 
 # Choose Anaconda installer depending on your OS
 ANACONDA_URL = https://repo.continuum.io/miniconda
@@ -27,7 +27,8 @@ all: help
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  help        to print this help message. (Default)"
-	@echo "  install     to install $(APP_NAME) in Conda environment $(CONDA_ENV) by running 'python setup.py develop'."
+	@echo "  install     to install $(APP_NAME) by running 'python setup.py develop'."
+	@echo "  start       to start $(APP_NAME) as daemon service."
 	@echo "  clean       to remove *all* files that are not controlled by 'git'. WARNING: use it *only* if you know what you do!"
 
 ## Anaconda targets
