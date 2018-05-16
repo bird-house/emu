@@ -1,13 +1,3 @@
-# installer
-#Makefile
-
-# Docker
-#Dockerfile
-
-# custom configs
-custom.cfg
-Makefile.config
-
 # Python / Extensions etc.
 *~
 *.mo
