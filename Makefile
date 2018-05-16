@@ -37,7 +37,7 @@ anaconda:
 	@echo "Installing Anaconda ..."
 	@test -d $(ANACONDA_HOME) || curl $(ANACONDA_URL)/$(FN) --silent --insecure --output "$(DOWNLOAD_CACHE)/$(FN)"
 	@test -d $(ANACONDA_HOME) || bash "$(DOWNLOAD_CACHE)/$(FN)" -b -p $(ANACONDA_HOME)
-	@echo "Add '$(ANACONDA_HOME)/bin' to your PATH variable in '.bashrc'."
+	@echo "Please add '$(ANACONDA_HOME)/bin' to your PATH variable in '.bashrc'."
 
 .PHONY: conda_env
 conda_env: anaconda
@@ -55,6 +55,11 @@ install: bootstrap
 	@echo "Installing application ..."
 	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && python setup.py develop"
 	@echo "\nStart service with \`make start'"
+
+.PHONY: start
+start:
+	@echo "Starting application ..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) -a -d"
 
 .PHONY: clean
 clean:
