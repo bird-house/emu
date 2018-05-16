@@ -16,6 +16,8 @@ else
 FN := unknown
 endif
 
+TEMP_FILES := *.egg-info *.log *.sqlite
+
 # end of configuration
 
 .DEFAULT_GOAL := all
@@ -67,7 +69,24 @@ start:
 	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && $(APP_NAME) -a -d"
 
 .PHONY: clean
-clean:
+clean: srcclean envclean
+	@echo "Cleaning generated files ..."
+	@-for i in $(TEMP_FILES); do \
+  	test -e $$i && rm -v -rf $$i; \
+  done
+
+.PHONY: envclean
+envclean:
+	@echo "Removing conda env $(CONDA_ENV)"
+	@-"$(ANACONDA_HOME)/bin/conda" remove -n $(CONDA_ENV) --yes --all
+
+.PHONY: srcclean
+srcclean:
+	@echo "Removing *.pyc files ..."
+	@-find $(APP_ROOT) -type f -name "*.pyc" -print | xargs rm
+
+.PHONY: distclean
+distclean: clean
 	@echo "Cleaning ..."
 	@git diff --quiet HEAD || echo "There are uncommited changes! Not doing 'git clean' ..."
 	@-git clean -dfx -e *.bak -e custom.cfg
