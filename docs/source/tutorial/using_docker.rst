@@ -60,8 +60,7 @@ Stop and remove docker container:
 
 .. code-block:: sh
 
-  $ docker stop emu_wps
-  $ docker rm emu_wps
+  $ docker stop emu
 
 Using docker-compose
 --------------------
@@ -84,6 +83,12 @@ Execute ``tail`` command in the running container to see the logs::
 
 You can customize the ``docker-compose.yml`` file.
 See the `docker-compose documentation`_.
+
+Stop the container with:
+
+.. code-block:: sh
+
+  $ docker-compose down
 
 Build image using docker-compose
 --------------------------------
