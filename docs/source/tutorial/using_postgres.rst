@@ -4,8 +4,7 @@ Tutorial: using postgres database
 =================================
 
 You can use a postgres database for PyWPS, the default is sqlite.
-PyWPS is using `SQLAlchemy <http://docs.sqlalchemy.org/en/latest/index.html>`_,
-see the `PYWPS documentation <http://pywps.readthedocs.io/en/latest/>`_ for details.
+PyWPS is using `SQLAlchemy`_, see the `PYWPS documentation`_ for details.
 
 First run the Emu default installation:
 
@@ -26,11 +25,11 @@ If you don't have one yet you can use a `postgres docker container <https://stor
 The postgres database is now available on default port 5432.
 
 SQLAlchemy needs the  `psycopg2 <https://pypi.python.org/pypi/psycopg2>`_  postgres adapter.
-This was installed by the Emu installation process. You can also install it manually via conda:
+You can install it via Conda into the ``emu`` environment.
 
 .. code-block:: sh
 
-    $ conda install psycopg2
+    $ conda install -n emu psycopg2
 
 
 The `SQLAlchemy connection string <http://docs.sqlalchemy.org/en/latest/dialects/postgresql.html#dialect-postgresql-psycopg2-connect>`_
@@ -39,42 +38,26 @@ for this database is::
     # postgresql+psycopg2://user:password@host:port/dbname
     postgresql+psycopg2://postgres:postgres@localhost:5432/postgres
 
-Configure this connection string in ``custom.cfg``,
-``pywps`` section, ``database`` option:
+Configure this connection string in ``etc/custom.cfg``, ``logging`` section, ``database`` option:
 
 .. code-block:: sh
 
-    $ vim custom.cfg
-    [settings]
-    hostname = localhost
-    # http-port = 8094
-    # output-port = 8090
-
-    [pywps]
-    database = postgresql+psycopg2://postgres:postgres@localhost:5432/postgres
-
-Update the pywps configuration:
-
-.. code-block:: sh
-
-    $ make update
-
-Check the updated pywps configuration (optional):
-
-.. code-block:: sh
-
-    $ less $HOME/birdhouse/etc/pywps/emu.cfg
+    $ vim etc/custom.cfg
     [logging]
-    database=postgresql+psycopg2://postgres:postgres@localhost:5432/postgres
+    level = INFO
+    database = postgresql+psycopg2://postgres:postgres@localhost:5432/postgres
 
 Start the emu service:
 
 .. code-block:: sh
 
-    $ make restart
+    $ emu -c etc/custom.cfg
 
 Your Emu WPS service should be available at the following URL:
 
 .. code-block:: sh
 
-    $ firefox http://localhost:8094/wps?request=GetCapabilities&service=WPS
+    $ firefox http://localhost:5000/wps?request=GetCapabilities&service=WPS
+
+.. _SQLAlchemy: http://docs.sqlalchemy.org/en/latest/index.html
+.. _PYWPS documentation: http://pywps.readthedocs.io/en/latest/

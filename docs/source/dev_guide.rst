@@ -9,77 +9,47 @@ Developer Guide
 
 .. _testing:
 
-Running unit tests
----------------------------------------
+Running tests
+-------------
 
-Run quick tests::
+Run tests using `pytest`_.
+
+First activate the ``emu`` Conda environment and install ``pytest``.
+
+.. code-block:: sh
+
+   $ cd emu
+   $ source activate emu
+   $ conda install pytest flake8  # if not already installed
+
+Run quick tests (skip slow and online):
+
+.. code-block:: sh
+
+    $ pytest -m 'not slow and not online'"
+
+Run all tests:
+
+.. code-block:: sh
+
+    $ pytest
+
+Check pep8:
+
+.. code-block:: sh
+
+    $ flake8
+
+Run tests the lazy way
+----------------------
+
+Do the same as above using the ``Makefile``.
+
+.. code-block:: sh
 
     $ make test
-
-Run all tests (slow, online)::
-
     $ make testall
-
-Check pep8::
-
     $ make pep8
 
-.. _wps_test_env:
 
-Running WPS service in test environment
----------------------------------------
-
-For development purposes you can run the WPS service without nginx and supervisor.
-Use the following instructions:
-
-.. code-block:: sh
-
-    # get the source code
-    $ git clone https://github.com/bird-house/emu.git
-    $ cd emu
-
-    # create conda environment
-    $ conda env create -f environment.yml
-
-    # activate conda environment
-    $ source activate emu
-
-    # install emu code into conda environment
-    $ python setup.py develop
-
-    # start the WPS service
-    $ emu
-
-    # open your browser on the default service url
-    $ firefox http://localhost:5000/wps
-
-    # ... and service capabilities url
-    $ firefox http://localhost:5000/wps?service=WPS&request=GetCapabilities
-
-The ``emu`` service command-line has more options:
-
-.. code-block:: sh
-
-    $ emu -h
-
-For example you can start the WPS with enabled debug logging mode:
-
-.. code-block:: sh
-
-    $ emu --debug
-
-Or you can overwrite the default `PyWPS`_ configuration by providing your own
-PyWPS configuration file (just modifiy the options you want to change):
-
-.. code-block:: sh
-
-    # edit your local pywps configuration file
-    $ cat mydev.cfg
-    [logging]
-    level = WARN
-    file = /tmp/mydev.log
-
-    # start the service with this configuration
-    $ emu -c mydev.cfg
-
-.. _PyWPS: http://pywps.org/
+.. _pytest: https://docs.pytest.org/en/latest/

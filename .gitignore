@@ -62,6 +62,7 @@ docs/build/
 
 # External Sources
 #src/external
+src/
 
 # tests
 *.log
