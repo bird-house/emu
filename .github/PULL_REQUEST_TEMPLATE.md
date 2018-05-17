@@ -6,7 +6,7 @@ Changes:
 
 * Added ...
 
-# Related Issue / Discussion
+## Related Issue / Discussion
 
 ## Additional Information
 
