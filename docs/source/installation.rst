@@ -66,3 +66,12 @@ Run Emu as Docker container
 ---------------------------
 
 You can also run Emu as a Docker container, see the :ref:`Tutorial <tutorial>`.
+
+Use Ansible to deploy Emu on your System
+----------------------------------------
+
+Use the `Ansible playbook`_ for PyWPS to deploy Emu on your system.
+Follow the `example`_ for Emu given in the playbook.
+
+.. _Ansible playbook: http://ansible-wps-playbook.readthedocs.io/en/latest/index.html
+.. _example: http://ansible-wps-playbook.readthedocs.io/en/latest/tutorial.html
