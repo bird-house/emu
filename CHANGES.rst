@@ -1,13 +1,28 @@
 Changes
 *******
 
+0.7.0 (2018-05-17)
+==================
+
+This is the last release using Buildout for deployment.
+This release will be maintained on the 0.7.x branch.
+
+Issues solved:
+
+* Fix async mode in demo service (#26)
+* Fix WSGI app initialisation (#17)
+* Use six for Python 2/3 compatibility (#20)
+* Reference Readme in Sphinx docs (#22)
+* Move ``tests/`` folder to top-level directory (#21)
+* Updated gunicorn 19.x (#19)
+
 0.6.3 (2018-04-04)
 ==================
 
 Issues solved:
 
-* Clean up directory structure and files #13
-* clean up of buildout and docker #14
+* Clean up directory structure and files (#13)
+* clean up of buildout and docker (#14)
 
 Others:
 
