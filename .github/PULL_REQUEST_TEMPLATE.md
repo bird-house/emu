@@ -1,11 +1,12 @@
-## Description
+## Overview
 
-This PR fixes issue [issue id]
+This PR fixes [issue id]
 
-## Changes
+Changes:
 
 * Added ...
-* Removed ...
+
+# Related Issue / Discussion
 
 ## Additional Information
 
