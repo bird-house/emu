@@ -36,6 +36,8 @@ help:
 	@echo "  test        to run tests (but skip long running tests)."
 	@echo "  testall     to run all tests (including long running tests)."
 	@echo "  pep8        to run pep8 code style checks."
+	@echo "\nSphinx targets:"
+	@echo "  docs        to generate HTML documentation with Sphinx."
 
 ## Anaconda targets
 
@@ -48,14 +50,20 @@ anaconda:
 
 .PHONY: conda_env
 conda_env: anaconda
-	@echo "Update conda environment $(CONDA_ENV) ..."
+	@echo "Updating conda environment $(CONDA_ENV) ..."
 	"$(ANACONDA_HOME)/bin/conda" env update -n $(CONDA_ENV) -f environment.yml
 
 ## Build targets
 
 .PHONY: bootstrap
-bootstrap: conda_env bootstrap_tests
+bootstrap: conda_env bootstrap_dev
 	@echo "Bootstrap ..."
+
+.PHONY: bootstrap_dev
+bootstrap_dev:
+	@echo "Installing development requirements for tests and docs ..."
+	@-bash -c "$(ANACONDA_HOME)/bin/conda install -y -n $(CONDA_ENV) pytest flake8 sphinx"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pip install -r requirements_dev.txt"
 
 .PHONY: install
 install: bootstrap
@@ -93,11 +101,6 @@ distclean: clean
 
 ## Test targets
 
-.PHONY: bootstrap_tests
-bootstrap_tests:
-	@echo "Install pytest and flake8 ..."
-	@-bash -c "$(ANACONDA_HOME)/bin/conda install -y -n $(CONDA_ENV) pytest flake8"
-
 .PHONY: test
 test:
 	@echo "Running tests (skip slow and online tests) ..."
@@ -106,9 +109,17 @@ test:
 .PHONY: testall
 testall:
 	@echo "Running all tests (including slow and online tests) ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);pytest -v"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pytest -v"
 
 .PHONY: pep8
 pep8:
 	@echo "Running pep8 code style checks ..."
-	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);flake8"
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && flake8"
+
+##  Sphinx targets
+
+.PHONY: docs
+docs:
+	@echo "Generating docs with Sphinx ..."
+	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV);$(MAKE) -C $@ clean html"
+	@echo "open your browser: firefox docs/build/html/index.html"

@@ -3,88 +3,64 @@
 Installation
 ============
 
-The installation is using the Python distribution system `Anaconda`_ to maintain software dependencies.
-Anaconda will be installed during the installation process in your home directory ``~/anaconda``.
+Install from Anaconda
+---------------------
 
-The installation process setups a conda environment named ``emu`` with all dependent conda (and pip) packages.
-The installation folder (for configuration files etc) is by default ``~/birdhouse``.
-Configuration options can be overriden in the buildout ``custom.cfg`` file. The ``ANACONDA_HOME`` and ``CONDA_ENVS_DIR`` locations
-can be changed in the ``Makefile.config`` file.
+.. TODO:: Prepare Conda package for Emu. See Birdy.
 
-The default installation *does not need admin rights* and files will only be written into the ``$HOME`` folder of the installation user.
-The services are started using `supervisor <http://supervisord.org/>`_ and run as the installation user.
+Install from GitHub
+-------------------
 
-Now, check out the emu code from GitHub and start the installation:
+Check out code from the Emu GitHub repo and start the installation:
 
 .. code-block:: sh
 
    $ git clone https://github.com/bird-house/emu.git
    $ cd emu
-   $ make clean install
+   $ conda env create -f environment.yml
+   $ source activate emu
+   $ python setup.py develop
 
-After successful installation you need to start the services:
+Install the lazy way
+--------------------
+
+The previous installation instructions assume you have Anaconda installed.
+We provide also a ``Makefile`` to run this installation without additional steps:
 
 .. code-block:: sh
 
-   $ make start  # starts supervisor services
-   $ make status # shows supervisor status
+   $ git clone https://github.com/bird-house/emu.git
+   $ cd emu
+   $ make clean    # cleans up a previous Conda environment
+   $ make install  # installs Conda if necessary and runs the above installation steps
 
-The depolyed WPS service is by default available on http://localhost:8094/wps?service=WPS&version=1.0.0&request=GetCapabilities.
+Start Emu PyWPS service
+-----------------------
+
+After successful installation you can start the service using the ``emu`` command-line.
+
+.. code-block:: sh
+
+   $ emu -h    # show help
+   $ emu -a    # start service with default configuration
+
+   OR
+
+   $ emu -a -d # start service as daemon
+   loading configuration
+   forked process id: 42
+
+The deployed WPS service is by default available on:
+
+http://localhost:5000/wps?service=WPS&version=1.0.0&request=GetCapabilities.
+
+.. NOTE:: Remember the process ID (PID) so you can stop the service with ``kill PID``.
 
 Check the log files for errors:
 
 .. code-block:: sh
 
-   $ tail -f  ~/birdhouse/var/log/pywps/emu.log
-   $ tail -f  ~/birdhouse/var/log/supervisor/emu.log
-
-You will find more information about the installation in the `Makefile documentation <http://birdhousebuilderbootstrap.readthedocs.io/en/latest/>`_.
-
-Non-default installation
-------------------------
-
-You can customize the installation to use different ports, locations and run user.
-
-To change the anaconda location edit the ``Makefile.config``, for example::
-
-   ANACONDA_HOME ?= /opt/anaconda
-   CONDA_ENVS_DIR ?= /opt/anaconda/envs
-
-You can install emu as ``root`` and run it as unprivileged user like ``www-data``:
-
-.. code-block:: sh
-
-   root$ mkdir -p /opt/birdhouse/src
-   root$ cd /opt/birdhouse/src
-   root$ git clone https://github.com/bird-house/emu.git
-   root$ cd emu
-
-Edit ``custom.cfg``:
-
-.. code-block:: ini
-
-    [buildout]
-    extends = buildout.cfg
-
-    [settings]
-    hostname = emu
-    http-port = 80
-    output-port = 8000
-    log-level = WARN
-
-    # deployment options
-    prefix = /opt/birdhouse
-    user = www-data
-    etc-user = root
-
-Run the installtion and start the services:
-
-.. code-block:: sh
-
-    root$ make clean install
-    root$ make start      # stop or restart
-    root$ make status
-
+   $ tail -f  pywps.log
 
 Run Emu as Docker container
 ---------------------------
