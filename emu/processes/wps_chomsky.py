@@ -142,15 +142,15 @@ class Chomsky(Process):
     def _handler(self, request, response):
         import textwrap
         import random
-        from itertools import chain, islice, izip
+        from itertools import chain, islice
 
         def chomsky(times=5, line_length=72):
             parts = []
             for part in (leadins, subjects, verbs, objects):
-                phraselist = map(str.strip, part.splitlines())
+                phraselist = [str.strip(x) for x in part.splitlines()]
                 random.shuffle(phraselist)
                 parts.append(phraselist)
-            output = chain(*islice(izip(*parts), 0, times))
+            output = chain(*islice(zip(*parts), 0, times))
             return textwrap.fill(' '.join(output), line_length)
 
         with open('out.txt', 'w') as fout:
