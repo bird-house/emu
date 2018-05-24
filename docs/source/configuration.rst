@@ -3,6 +3,23 @@
 Configuration
 =============
 
+Command-line options
+--------------------
+
+You can overwrite the default `PyWPS`_ configuration by using command-line options.
+See the Emu help which options are available::
+
+    $ emu --help
+    --hostname HOSTNAME        hostname in PyWPS configuration.
+    --port PORT                port in PyWPS configuration.
+
+Start service with different hostname and port::
+
+    $ emu --hostname localhost --port 5001
+
+Use a custom configuration file
+-------------------------------
+
 You can overwrite the default `PyWPS`_ configuration by providing your own
 PyWPS configuration file (just modifiy the options you want to change).
 Use one of the existing ``sample-*.cfg`` files as example and copy them to ``etc/custom.cfg``.

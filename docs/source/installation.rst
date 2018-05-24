@@ -41,12 +41,12 @@ After successful installation you can start the service using the ``emu`` comman
 
 .. code-block:: sh
 
-   $ emu -h    # show help
-   $ emu -a    # start service with default configuration
+   $ emu --help # show help
+   $ emu        # start service with default configuration
 
    OR
 
-   $ emu -a -d # start service as daemon
+   $ emu --daemon # start service as daemon
    loading configuration
    forked process id: 42
 

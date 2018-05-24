@@ -35,7 +35,7 @@ setup(name='emu',
       install_requires=reqs,
       entry_points={
           'console_scripts': [
-             'emu=emu:main'
+             'emu=emu:cli'
           ]
       },
       )

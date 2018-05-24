@@ -6,3 +6,4 @@ channels:
 dependencies:
 - pywps=4.1.0
 - jinja2
+- click

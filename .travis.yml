@@ -27,7 +27,7 @@ install:
   - python setup.py install
 before_script:
   # Start WPS service on port 5000 on 0.0.0.0
-  - emu -d -a
+  - emu --daemon --bind-host 0.0.0.0 --port 5000
   - sleep 5
 script:
   - pytest
