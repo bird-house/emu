@@ -6,7 +6,7 @@
 ###########################################################
 
 import os
-
+from jinja2 import Environment, PackageLoader, select_autoescape
 from pywps import configuration
 
 from . import wsgi
@@ -15,6 +15,20 @@ from six.moves.urllib.parse import urlparse
 import logging
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 LOGGER = logging.getLogger('DEMO')
+
+template_env = Environment(
+    loader=PackageLoader('emu', 'templates'),
+    autoescape=select_autoescape(['yml', 'xml'])
+)
+
+
+def write_user_config(**kwargs):
+    config_templ = template_env.get_template('pywps.cfg')
+    rendered_config = config_templ.render(**kwargs)
+    config_file = os.path.abspath(os.path.join(os.path.curdir, "custom.cfg"))
+    with open(config_file, 'w') as fp:
+        fp.write(rendered_config)
+    return config_file
 
 
 def get_host():
@@ -72,8 +86,33 @@ def main():
                         "otherwise bind to 127.0.0.1 (localhost).")
     parser.add_argument('-d', '--daemon',
                         action='store_true', help="run in daemon mode")
+    parser.add_argument('-H', '--hostname', default='localhost',
+                        help="hostname in PyWPS configuration")
+    parser.add_argument('-p', '--port', default='5000',
+                        help="port in PyWPS configuration")
+    parser.add_argument('--maxsingleinputsize', default='200mb',
+                        help="maxsingleinputsize in PyWPS configuration")
+    parser.add_argument('--maxprocesses', default='10',
+                        help="maxprocesses in PyWPS configuration")
+    parser.add_argument('--parallelprocesses', default='2',
+                        help="parallelprocesses in PyWPS configuration")
+    parser.add_argument('-l', '--log-level', default='INFO',
+                        help="log level in PyWPS configuration")
+    parser.add_argument('-o', '--log-file', default='pywps.log',
+                        help="log file in PyWPS configuration")
+    parser.add_argument('-D', '--database', default='sqlite:///pywps-logs.sqlite',
+                        help="database in PyWPS configuration")
     args = parser.parse_args()
     cfgfiles = []
+    cfgfiles.append(write_user_config(
+        wps_hostname=args.hostname,
+        wps_port=args.port,
+        wps_maxprocesses=args.maxprocesses,
+        wps_parallelprocesses=args.parallelprocesses,
+        wps_log_level=args.log_level,
+        wps_log_file=args.log_file,
+        wsp_database=args.database,
+    ))
     if args.config:
         cfgfiles.append(args.config)
         LOGGER.warn('using pywps configuration: %s', args.config)

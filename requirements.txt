@@ -1,1 +1,2 @@
 pywps>=4.0.0
+jinja2
