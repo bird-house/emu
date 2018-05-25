@@ -139,7 +139,8 @@ class Chomsky(Process):
             status_supported=True,
             store_supported=True)
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         import textwrap
         import random
         from itertools import chain, islice
