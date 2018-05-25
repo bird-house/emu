@@ -39,7 +39,8 @@ class BinaryOperator(Process):
             status_supported=True
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         logger.info("run binary_operator")
         operator = request.inputs['operator'][0].data
         input_a = request.inputs['inputa'][0].data

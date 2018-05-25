@@ -21,7 +21,8 @@ class UltimateQuestion(Process):
             status_supported=True
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         import time
         sleep_delay = 2
         time.sleep(sleep_delay)

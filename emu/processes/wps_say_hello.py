@@ -36,7 +36,8 @@ class SayHello(Process):
             status_supported=True
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         LOGGER.info("say hello")
         response.outputs['output'].data = 'Hello ' + request.inputs['name'][0].data
         response.outputs['output'].uom = UOM('unity')

@@ -43,7 +43,8 @@ class MultipleOutputs(Process):
             status_supported=True
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         LOGGER.info("starting ...")
         if 'count' in request.inputs:
             max_outputs = request.inputs['count'][0].data

@@ -50,7 +50,8 @@ class ESGFDemo(Process):
             status_supported=True
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         LOGGER.info("starting ...")
         datasets = []
         # append file urls
