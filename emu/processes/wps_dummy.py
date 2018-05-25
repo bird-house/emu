@@ -36,7 +36,8 @@ class Dummy(Process):
             status_supported=True
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         LOGGER.debug("input1 %s", request.inputs['input1'][0].data)
         LOGGER.debug("input2 %s", request.inputs['input2'][0].data)
         response.outputs['output1'].data = request.inputs['input1'][0].data + 1

@@ -30,7 +30,8 @@ class Nap(Process):
             status_supported=False
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         import time
 
         nap_delay = request.inputs['delay'][0].data

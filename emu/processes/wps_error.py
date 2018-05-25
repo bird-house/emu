@@ -28,6 +28,7 @@ class ShowError(Process):
             status_supported=True
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         logger.info("wps_error started ...")
         raise Exception(request.inputs['message'][0].data)

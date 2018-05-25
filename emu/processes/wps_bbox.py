@@ -38,7 +38,8 @@ class Box(Process):
             status_supported=True
         )
 
-    def _handler(self, request, response):
+    @staticmethod
+    def _handler(request, response):
         LOGGER.debug('bbox: coords=%s, crs=%s', request.inputs['bbox'][0].data, request.inputs['bbox'][0].crs)
         response.outputs['bbox'].data = request.inputs['bbox'][0].data
         response.outputs['bbox'].crs = request.inputs['bbox'][0].crs
