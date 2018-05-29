@@ -3,10 +3,16 @@
 Installation
 ============
 
-Install from Anaconda
+Install from Conda
 ---------------------
 
-.. TODO:: Prepare Conda package for Emu. See Birdy.
+Install the ``emu`` Conda package:
+
+.. code-block:: sh
+
+    $ conda install -c birdhouse -c conda-forge emu
+    $ emu --help
+
 
 Install from GitHub
 -------------------
@@ -21,8 +27,9 @@ Check out code from the Emu GitHub repo and start the installation:
    $ source activate emu
    $ python setup.py develop
 
-Install the lazy way
---------------------
+... or do it the lazy way
++++++++++++++++++++++++++
+
 
 The previous installation instructions assume you have Anaconda installed.
 We provide also a ``Makefile`` to run this installation without additional steps:
