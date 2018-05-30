@@ -13,6 +13,8 @@ from pywps import configuration
 from . import wsgi
 from six.moves.urllib.parse import urlparse
 
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+
 template_env = Environment(
     loader=PackageLoader('emu', 'templates'),
     autoescape=select_autoescape(['yml', 'xml'])
@@ -65,8 +67,9 @@ def _run(application, bind_host=None, daemon=False):
         static_files=static_files)
 
 
-@click.command()
-@click.option('--config', metavar='PATH', help='path to pywps configuration file.')
+@click.command(context_settings=CONTEXT_SETTINGS)
+@click.version_option()
+@click.option('--config', '-c', metavar='PATH', help='path to pywps configuration file.')
 @click.option('--bind-host', metavar='IP-ADDRESS', default='0.0.0.0',
               help='IP address used to bind service.')
 @click.option('--daemon/--no-daemon', default=False, help='run in daemon mode.')

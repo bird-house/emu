@@ -10,7 +10,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 reqs = [line.strip() for line in open('requirements.txt')]
 
 classifiers = [
-    'Development Status :: 3 - Alpha',
+    'Development Status :: 4 - Beta',
     'Intended Audience :: Science/Research',
     'Operating System :: MacOS :: MacOS X',
     'Operating System :: POSIX',
@@ -35,7 +35,7 @@ setup(name='emu',
       install_requires=reqs,
       entry_points={
           'console_scripts': [
-             'emu=emu:cli'
+             'emu=emu.cli:cli'
           ]
       },
       )
