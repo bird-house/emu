@@ -80,5 +80,13 @@ Use Ansible to deploy Emu on your System
 Use the `Ansible playbook`_ for PyWPS to deploy Emu on your system.
 Follow the `example`_ for Emu given in the playbook.
 
+Building the docs
+-----------------
+
+First install dependencies for the documentation::
+
+  $ make bootstrap_dev
+  $ make docs
+
 .. _Ansible playbook: http://ansible-wps-playbook.readthedocs.io/en/latest/index.html
 .. _example: http://ansible-wps-playbook.readthedocs.io/en/latest/tutorial.html
