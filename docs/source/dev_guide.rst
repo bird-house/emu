@@ -51,5 +51,18 @@ Do the same as above using the ``Makefile``.
     $ make testall
     $ make pep8
 
+Bump a new version
+------------------
 
+Make a new version of Emu in the following steps:
+
+* Make sure everything is commit to GitHub.
+* Update ``CHANGES.rst`` with the next version.
+* Dry Run: ``bumpversion --dry-run --verbose --new-version 0.8.1 patch``
+* Do it: ``bumpversion --new-version 0.8.1 patch``
+* Push it: ``git push --tags``
+
+See the bumpversion_ documentation for details.
+
+.. _bumpversion: https://pypi.org/project/bumpversion/
 .. _pytest: https://docs.pytest.org/en/latest/
