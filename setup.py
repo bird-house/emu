@@ -8,6 +8,7 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
 reqs = [line.strip() for line in open('requirements.txt')]
+extra_reqs = [line.strip() for line in open('requirements_dev.txt')]
 
 classifiers = [
     'Development Status :: 4 - Beta',
@@ -30,9 +31,8 @@ setup(name='emu',
       keywords='wps pywps emu birdhouse',
       packages=find_packages(),
       include_package_data=True,
-      zip_safe=False,
-      test_suite='emu',
       install_requires=reqs,
+      extra_requires=extra_reqs,
       entry_points={
           'console_scripts': [
              'emu=emu.cli:cli'

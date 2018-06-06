@@ -1,5 +1,6 @@
+include Makefile
 include *.txt
 include *.rst
 recursive-include emu *
-global-exclude *pyc
 
+global-exclude *.py[co]
