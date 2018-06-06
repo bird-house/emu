@@ -20,7 +20,7 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 template_env = Environment(
     loader=PackageLoader('emu', 'templates'),
-    autoescape=select_autoescape(['yml', 'xml'])
+    autoescape=True
 )
 
 
@@ -120,7 +120,7 @@ def stop():
 
 @cli.command()
 @click.option('--config', '-c', metavar='PATH', help='path to pywps configuration file.')
-@click.option('--bind-host', '-b', metavar='IP-ADDRESS', default='0.0.0.0',
+@click.option('--bind-host', '-b', metavar='IP-ADDRESS', default='127.0.0.1',
               help='IP address used to bind service.')
 @click.option('--daemon', '-d', is_flag=True, help='run in daemon mode.')
 @click.option('--hostname', metavar='HOSTNAME', default='localhost', help='hostname in PyWPS configuration.')
