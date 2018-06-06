@@ -1,6 +1,23 @@
 Changes
 *******
 
+0.8.0 (2018-06-06)
+==================
+
+This is the first release without Buildout.
+Is has a command-line interface ``emu`` to start/stop the PyWPS service using Werkzeug.
+
+Changes:
+
+* Removed Buildout configuration and relying only on Conda and Werkzeug.
+* Support for Python 2.7/3.x (#6).
+* Added templates for issues, PRs and contribution guide (#15).
+* Use bumpversion (#36).
+* Makefile with clean, install, start, stop and status targets (#35).
+* Use staticmethod for PyWPS handler (#33).
+* Using Click CLI to start/stop PyWPS service (#31).
+* Using jinja template for pywps configuration (#29)
+
 0.7.0 (2018-05-17)
 ==================
 
