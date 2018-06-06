@@ -4,7 +4,23 @@ Installation
 ============
 
 Install from Conda
----------------------
+------------------
+
+.. image:: http://anaconda.org/birdhouse/emu/badges/installer/conda.svg
+   :target: http://anaconda.org/birdhouse/emu
+   :alt: Ananconda Install
+
+.. image:: http://anaconda.org/birdhouse/emu/badges/build.svg
+   :target: http://anaconda.org/birdhouse/emu
+   :alt: Anaconda Build
+
+.. image:: http://anaconda.org/birdhouse/emu/badges/version.svg
+   :target: http://anaconda.org/birdhouse/emu
+   :alt: Anaconda Version
+
+.. image:: http://anaconda.org/birdhouse/emu/badges/downloads.svg
+   :target: http://anaconda.org/birdhouse/emu
+   :alt: Anaconda Downloads
 
 Install the ``emu`` Conda package:
 
@@ -30,7 +46,6 @@ Check out code from the Emu GitHub repo and start the installation:
 ... or do it the lazy way
 +++++++++++++++++++++++++
 
-
 The previous installation instructions assume you have Anaconda installed.
 We provide also a ``Makefile`` to run this installation without additional steps:
 
@@ -48,12 +63,12 @@ After successful installation you can start the service using the ``emu`` comman
 
 .. code-block:: sh
 
-   $ emu --help # show help
-   $ emu        # start service with default configuration
+   $ emu start --help # show help
+   $ emu start       # start service with default configuration
 
    OR
 
-   $ emu --daemon # start service as daemon
+   $ emu start --daemon # start service as daemon
    loading configuration
    forked process id: 42
 
@@ -68,6 +83,18 @@ Check the log files for errors:
 .. code-block:: sh
 
    $ tail -f  pywps.log
+
+... or do it the lazy way
++++++++++++++++++++++++++
+
+You can also use the ``Makefile`` to start and stop the service:
+
+.. code-block:: sh
+
+  $ make start
+  $ make status
+  $ tail -f pywps.log
+  $ make stop
 
 Run Emu as Docker container
 ---------------------------
