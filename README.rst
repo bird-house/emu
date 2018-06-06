@@ -10,8 +10,8 @@ Emu
    :alt: Travis Build
 
 .. image:: https://api.codacy.com/project/badge/Grade/a5a5cf4ded364e14a0b1ea1d67a098ff
-    :target: https://www.codacy.com/app/cehbrecht/emu?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bird-house/emu&amp;utm_campaign=Badge_Grade
-    :alt: Codacy Code Checks
+   :target: https://www.codacy.com/app/cehbrecht/emu?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bird-house/emu&amp;utm_campaign=Badge_Grade
+   :alt: Codacy Code Checks
 
 .. image:: https://img.shields.io/github/license/bird-house/emu.svg
     :target: https://github.com/bird-house/emu/blob/master/LICENSE.txt
