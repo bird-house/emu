@@ -9,13 +9,13 @@ Command-line options
 You can overwrite the default `PyWPS`_ configuration by using command-line options.
 See the Emu help which options are available::
 
-    $ emu --help
+    $ emu start --help
     --hostname HOSTNAME        hostname in PyWPS configuration.
     --port PORT                port in PyWPS configuration.
 
 Start service with different hostname and port::
 
-    $ emu --hostname localhost --port 5001
+    $ emu start --hostname localhost --port 5001
 
 Use a custom configuration file
 -------------------------------
@@ -43,7 +43,7 @@ Start the service with your custom configuration:
 .. code-block:: sh
 
    # start the service with this configuration
-   $ emu -c etc/custom.cfg
+   $ emu start -c etc/custom.cfg
 
 
 .. _PyWPS: http://pywps.org/

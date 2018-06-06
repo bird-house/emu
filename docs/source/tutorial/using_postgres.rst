@@ -51,7 +51,7 @@ Start the emu service:
 
 .. code-block:: sh
 
-    $ emu -c etc/custom.cfg
+    $ emu start -c etc/custom.cfg
 
 Your Emu WPS service should be available at the following URL:
 
