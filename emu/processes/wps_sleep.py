@@ -3,6 +3,7 @@ from pywps.app.Common import Metadata
 
 
 class Sleep(Process):
+    """A long running process, just sleeping."""
     def __init__(self):
         inputs = [
             LiteralInput('delay', 'Delay between every update',

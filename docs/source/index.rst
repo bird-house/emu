@@ -7,3 +7,4 @@
    configuration
    dev_guide
    tutorial
+   processes
