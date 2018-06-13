@@ -17,7 +17,7 @@ class BinaryOperator(Process):
             LiteralInput('operator', 'Operator', data_type='string',
                          abstract='Choose a binary Operator',
                          default='add',
-                         allowed_values=['add', 'substract', 'divide', 'multipy'])]
+                         allowed_values=['add', 'substract', 'divide', 'multiply'])]
         outputs = [
             LiteralOutput('output', 'Binary operator result',
                           data_type='float')]
