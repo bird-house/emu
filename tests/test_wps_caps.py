@@ -22,7 +22,9 @@ def test_wps_caps():
         'inout',
         'multiple_outputs',
         'nap',
+        'output_formats',
         'show_error',
         'sleep',
         'ultimate_question',
-        'wordcounter']
+        'wordcounter',
+        ]
