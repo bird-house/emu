@@ -17,16 +17,14 @@ class OutputFormats(Process):
     def __init__(self):
         inputs = []
         outputs = [
-        ComplexOutput('netcdf', 'netCDF dummy output file.',
-                      abstract="A very small test netCDF file. ",
-                      as_reference=True,
-                      supported_formats=[FORMATS.NETCDF,]
-                      ),
-        ComplexOutput('json', 'json dummy output file.',
-                      abstract="A very small test json file. ",
-                      as_reference=True,
-                      supported_formats=[FORMATS.JSON,]
-                      ),
+            ComplexOutput('netcdf', 'netCDF dummy output file.',
+                          abstract="A very small test netCDF file. ",
+                          as_reference=True,
+                          supported_formats=[FORMATS.NETCDF, ]),
+            ComplexOutput('json', 'json dummy output file.',
+                          abstract="A very small test json file. ",
+                          as_reference=True,
+                          supported_formats=[FORMATS.JSON, ]),
         ]
 
         super(OutputFormats, self).__init__(
