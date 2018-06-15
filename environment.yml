@@ -8,4 +8,4 @@ dependencies:
 - jinja2
 - click
 - psutil
-- eggshell
+- birdhouse-eggshell
