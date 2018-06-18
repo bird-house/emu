@@ -8,4 +8,4 @@ dependencies:
 - jinja2
 - click
 - psutil
-- birdhouse-eggshell
+- birdhouse-eggshell=0.3
