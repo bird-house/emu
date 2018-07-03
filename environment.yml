@@ -9,3 +9,4 @@ dependencies:
 - click
 - psutil
 - birdhouse-eggshell=0.3
+- libiconv
