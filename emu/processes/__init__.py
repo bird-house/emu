@@ -12,6 +12,7 @@ from .wps_error import ShowError
 from .wps_multiple_outputs import MultipleOutputs
 from .wps_esgf import ESGFDemo
 from .wps_output_formats import OutputFormats
+from .wps_poly_centroid import PolyCentroid
 
 processes = [
     UltimateQuestion(),
@@ -28,4 +29,5 @@ processes = [
     MultipleOutputs(),
     ESGFDemo(),
     OutputFormats(),
+    PolyCentroid(),
 ]

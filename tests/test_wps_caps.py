@@ -27,4 +27,5 @@ def test_wps_caps():
         'sleep',
         'ultimate_question',
         'wordcounter',
+        'poly_centroid',
     ]
