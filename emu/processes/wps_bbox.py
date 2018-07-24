@@ -1,4 +1,3 @@
-import tempfile
 from pywps.app.Common import Metadata
 
 __author__ = 'Jachym'
