@@ -23,9 +23,10 @@ def test_wps_caps():
         'multiple_outputs',
         'nap',
         'output_formats',
+        'poly_centroid',
         'show_error',
         'sleep',
         'ultimate_question',
         'wordcounter',
-        'poly_centroid',
+
     ]

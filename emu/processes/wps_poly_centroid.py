@@ -14,7 +14,6 @@ class PolyCentroid(Process):
         inputs = [
             ComplexInput('polygon', 'Region definition',
                          abstract="A polygon defining a region.",
-                         #min_occurs=1, max_occurs=1,
                          supported_formats=[FORMATS.GML, ]),
         ]
         outputs = [
@@ -26,9 +25,9 @@ class PolyCentroid(Process):
             self._handler,
             identifier='poly_centroid',
             title="Approximate centroid of a polygon.",
-            abstract="Return the polygon's centroid coordinates. If the geometry contains multiple polygons, only the centroid "
-                     "of the first one will be computed. Do not use for serious computations, this is only a test "
-                     "process and uses a crude approximation. ",
+            abstract="Return the polygon's centroid coordinates. If the geometry contains multiple polygons, "
+                     "only the centroid of the first one will be computed. Do not use for serious computations"
+                     ", this is only a test process and uses a crude approximation. ",
             version="1.0",
             inputs=inputs,
             outputs=outputs,
@@ -54,8 +53,8 @@ class PolyCentroid(Process):
         # Compute the average
         n = len(coords)
         x, y = zip(*coords)
-        cx = sum(x)/n
-        cy = sum(y)/n
+        cx = sum(x) / n
+        cy = sum(y) / n
 
         response.outputs['centroid'].data = '{},{}'.format(cx, cy)
         return response

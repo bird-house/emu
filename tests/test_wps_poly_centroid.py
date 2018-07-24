@@ -12,6 +12,7 @@ paths = Paths(emu)
 TESTS_HOME = os.path.abspath(os.path.dirname(__file__))
 cfgfiles = os.path.join(TESTS_HOME, 'test.cfg')
 
+
 def test_wps_poly_centroid():
     client = client_for(Service(processes=[PolyCentroid(), ], cfgfiles=cfgfiles))
     fn = os.path.join(TESTS_HOME, 'testdata', 'poly.xml')
