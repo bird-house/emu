@@ -37,7 +37,7 @@ class PolyCentroid(Process):
 
     @staticmethod
     def _handler(request, response):
-        from xml.etree import ElementTree
+        from defusedxml import ElementTree
         fn = request.inputs['polygon'][0].file
 
         ns = {'gml': 'http://www.opengis.net/gml'}
