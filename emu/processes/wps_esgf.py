@@ -1,4 +1,4 @@
-from pywps import Process, UOM
+from pywps import Process
 from pywps import LiteralInput, LiteralOutput
 from pywps import ComplexInput
 from pywps import Format

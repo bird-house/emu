@@ -1,4 +1,4 @@
-from pywps import Process, LiteralInput, LiteralOutput
+from pywps import Process, LiteralOutput
 from pywps.app.Common import Metadata
 
 
@@ -24,7 +24,7 @@ class UltimateQuestion(Process):
     @staticmethod
     def _handler(request, response):
         import time
-        sleep_delay = 2
+        sleep_delay = .1
         time.sleep(sleep_delay)
         response.update_status('Thinking...', 20)
         time.sleep(sleep_delay)

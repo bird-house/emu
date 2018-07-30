@@ -10,3 +10,4 @@ dependencies:
 - psutil
 - birdhouse-eggshell=0.3
 - libiconv
+- pytest-flake8
