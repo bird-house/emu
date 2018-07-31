@@ -49,7 +49,7 @@ class WordCounter(Process):
 
         def words(f):
             for line in f:
-                for word in wordre.findall(line):
+                for word in wordre.findall(line.decode('UTF-8')):
                     yield word
 
         counts = Counter(words(request.inputs['text'][0].stream))
