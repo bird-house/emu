@@ -17,7 +17,7 @@ class PolyCentroid(Process):
                          supported_formats=[FORMATS.GML, ]),
         ]
         outputs = [
-            LiteralOutput('centroid', 'The centroid of the polygon geometry.',
+            LiteralOutput('output', 'The centroid of the polygon geometry.',
                           abstract="The coordinates of the polygon's approximate centroid.",)
         ]
 
@@ -56,5 +56,5 @@ class PolyCentroid(Process):
         cx = sum(x) / n
         cy = sum(y) / n
 
-        response.outputs['centroid'].data = '{},{}'.format(cx, cy)
+        response.outputs['output'].data = '{:.5f},{:.5f}'.format(cx, cy)
         return response
