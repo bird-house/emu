@@ -43,8 +43,7 @@ class MultipleOutputs(Process):
             status_supported=True
         )
 
-    @staticmethod
-    def _handler(request, response):
+    def _handler(self, request, response):
         LOGGER.info("starting ...")
         if 'count' in request.inputs:
             max_outputs = request.inputs['count'][0].data
@@ -57,7 +56,7 @@ class MultipleOutputs(Process):
         for i in range(max_outputs):
             progress = int(i * 100.0 / max_outputs)
             response.update_status('working on document {}'.format(i), progress)
-            with open("output_{}.txt".format(i), 'w') as fp:
+            with open(os.path.join(self.workdir, "output_{}.txt".format(i)), 'w') as fp:
                 fp.write("my output file number %s" % i)
             response.outputs['output'].file = fp.name
             ref_url = response.outputs['output'].get_url()

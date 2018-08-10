@@ -1,3 +1,4 @@
+import os
 from pywps import Process, LiteralInput, ComplexOutput, Format
 
 import logging
@@ -139,8 +140,7 @@ class Chomsky(Process):
             status_supported=True,
             store_supported=True)
 
-    @staticmethod
-    def _handler(request, response):
+    def _handler(self, request, response):
         import textwrap
         import random
         from itertools import chain, islice
@@ -154,7 +154,7 @@ class Chomsky(Process):
             output = chain(*islice(zip(*parts), 0, times))
             return textwrap.fill(' '.join(output), line_length)
 
-        with open('out.txt', 'w') as fout:
+        with open(os.path.join(self.workdir, 'out.txt'), 'w') as fout:
             fout.write(chomsky(request.inputs['times'][0].data))
             response.outputs['output'].file = fout.name
         return response
