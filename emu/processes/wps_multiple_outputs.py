@@ -2,7 +2,7 @@ import os
 from pywps import Process, LiteralInput, ComplexOutput
 from pywps import FORMATS
 from pywps.app.Common import Metadata
-from pywps.inout.storage import FileStorage
+from pywps.inout.outputs import FileStorage
 import json
 
 import logging
