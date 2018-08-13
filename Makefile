@@ -3,18 +3,9 @@ APP_ROOT := $(CURDIR)
 APP_NAME := $(shell basename $(APP_ROOT))
 
 # Anaconda
-ANACONDA_HOME ?= $(HOME)/anaconda
+CONDA := $(shell command -v conda 2> /dev/null)
+ANACONDA_HOME := $(shell conda info --base 2> /dev/null)
 CONDA_ENV ?= $(APP_NAME)
-
-# Choose Anaconda installer depending on your OS
-ANACONDA_URL = https://repo.continuum.io/miniconda
-ifeq "$(OS_NAME)" "Linux"
-FN := Miniconda3-latest-Linux-x86_64.sh
-else ifeq "$(OS_NAME)" "Darwin"
-FN := Miniconda3-latest-MacOSX-x86_64.sh
-else
-FN := unknown
-endif
 
 TEMP_FILES := *.egg-info *.log *.sqlite
 
@@ -24,6 +15,9 @@ TEMP_FILES := *.egg-info *.log *.sqlite
 
 .PHONY: all
 all: help
+ifndef CONDA
+	$(error "Conda is not available. Please install miniconda: https://conda.io/miniconda.html")
+endif
 
 .PHONY: help
 help:
@@ -43,17 +37,10 @@ help:
 
 ## Anaconda targets
 
-.PHONY: anaconda
-anaconda:
-	@echo "Installing Anaconda ..."
-	@test -d $(ANACONDA_HOME) || curl $(ANACONDA_URL)/$(FN) --silent --insecure --output "$(DOWNLOAD_CACHE)/$(FN)"
-	@test -d $(ANACONDA_HOME) || bash "$(DOWNLOAD_CACHE)/$(FN)" -b -p $(ANACONDA_HOME)
-	@echo "Please add '$(ANACONDA_HOME)/bin' to your PATH variable in '.bashrc'."
-
 .PHONY: conda_env
-conda_env: anaconda
+conda_env:
 	@echo "Updating conda environment $(CONDA_ENV) ..."
-	"$(ANACONDA_HOME)/bin/conda" env update -n $(CONDA_ENV) -f environment.yml
+	"$(CONDA)" env update -n $(CONDA_ENV) -f environment.yml
 
 ## Build targets
 
@@ -64,7 +51,7 @@ bootstrap: conda_env bootstrap_dev
 .PHONY: bootstrap_dev
 bootstrap_dev:
 	@echo "Installing development requirements for tests and docs ..."
-	@-bash -c "$(ANACONDA_HOME)/bin/conda install -y -n $(CONDA_ENV) pytest flake8 sphinx bumpversion"
+	@-bash -c "$(CONDA) install -y -n $(CONDA_ENV) pytest flake8 sphinx bumpversion"
 	@-bash -c "source $(ANACONDA_HOME)/bin/activate $(CONDA_ENV) && pip install -r requirements_dev.txt"
 
 .PHONY: install
@@ -98,7 +85,7 @@ clean: srcclean envclean
 .PHONY: envclean
 envclean:
 	@echo "Removing conda env $(CONDA_ENV)"
-	@-"$(ANACONDA_HOME)/bin/conda" remove -n $(CONDA_ENV) --yes --all
+	@-"$(CONDA)" remove -n $(CONDA_ENV) --yes --all
 
 .PHONY: srcclean
 srcclean:
