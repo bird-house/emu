@@ -36,8 +36,6 @@ class WordCounter(Process):
             version='1.0',
             metadata=[
                 Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
-                Metadata('Free eBooks at Gutenberg', 'http://www.gutenberg.org/'),
-                Metadata('Example: Alice in Wonderland', 'http://www.gutenberg.org/cache/epub/19033/pg19033.txt'),
             ],
             inputs=inputs,
             outputs=outputs,
