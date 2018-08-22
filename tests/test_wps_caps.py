@@ -21,11 +21,11 @@ def test_wps_caps():
         'inout',
         'multiple_outputs',
         'nap',
+        'ncmeta',
         'output_formats',
         'poly_centroid',
         'show_error',
         'sleep',
         'ultimate_question',
         'wordcounter',
-
     ]

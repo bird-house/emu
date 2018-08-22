@@ -4,12 +4,14 @@ channels:
 - conda-forge
 - defaults
 dependencies:
-- pywps=4.1.6
+- pywps=4.1.7
 - jinja2
 - click
 - psutil
 - birdhouse-eggshell=0.3
 - libiconv
 - defusedxml
+# opendap support
+- netcdf4
 # tests
 - pytest-flake8
