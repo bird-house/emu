@@ -5,10 +5,24 @@ from pywps import ComplexInput, ComplexOutput, FORMATS, Format
 from pywps.validator.mode import MODE
 from pywps.app.Common import Metadata
 
+import requests
+from netCDF4 import Dataset
+
 import logging
 LOGGER = logging.getLogger("PYWPS")
 
 FORMAT_OPENDAP = Format('application/x-ogc-dods')
+
+
+def nc_resource(inpt):
+    # we assume opendap
+    resource = inpt.url
+    # check if it is netcdf
+    resp = requests.head(resource)
+    if resp.headers['content-type'] == FORMATS.NETCDF.mime_type:
+        # ... then use file (may download from url)
+        resource = inpt.file
+    return resource
 
 
 class NCMeta(Process):
@@ -21,12 +35,7 @@ class NCMeta(Process):
     def __init__(self):
         inputs = [
             ComplexInput('dataset', 'Dataset',
-                         supported_formats=[FORMATS.NETCDF],
-                         min_occurs=0,
-                         mode=MODE.NONE),
-            ComplexInput('dataset_opendap', 'Dataset OpenDAP',
-                         supported_formats=[FORMAT_OPENDAP],
-                         min_occurs=0,
+                         supported_formats=[FORMAT_OPENDAP, FORMATS.NETCDF],
                          mode=MODE.NONE),
         ]
         outputs = [
@@ -48,13 +57,8 @@ class NCMeta(Process):
             status_supported=True)
 
     def _handler(self, request, response):
-        from netCDF4 import Dataset
-        if 'dataset_opendap' in request.inputs:
-            inpt = request.inputs['dataset_opendap'][0]
-            ds = Dataset(inpt.url)
-        else:
-            inpt = request.inputs['dataset'][0]
-            ds = Dataset(inpt.file)
+        inpt = request.inputs['dataset'][0]
+        ds = Dataset(nc_resource(inpt))
         with open(os.path.join(self.workdir, 'out.txt'), "w") as fp:
             response.outputs['output'].file = fp.name
             fp.write("URL: {}\n\n".format(inpt.url))
