@@ -5,7 +5,6 @@ from pywps import ComplexInput, ComplexOutput, FORMATS, Format
 from pywps.validator.mode import MODE
 from pywps.app.Common import Metadata
 
-import requests
 from netCDF4 import Dataset
 
 import logging
@@ -15,13 +14,19 @@ FORMAT_OPENDAP = Format('application/x-ogc-dods')
 
 
 def nc_resource(inpt):
-    # we assume opendap
-    resource = inpt.url
-    # check if it is netcdf
-    resp = requests.head(resource)
-    if resp.headers['content-type'] == FORMATS.NETCDF.mime_type:
-        # ... then use file (may download from url)
+    import requests
+    from six.moves.urllib.parse import urlparse
+    # do we have a file?
+    if urlparse(inpt.url).scheme == 'file':
         resource = inpt.file
+    else:
+        # we assume opendap
+        resource = inpt.url
+        # check if it is netcdf
+        resp = requests.head(resource)
+        if resp.headers['content-type'] == FORMATS.NETCDF.mime_type:
+            # ... then use file (may download from url)
+            resource = inpt.file
     return resource
 
 
