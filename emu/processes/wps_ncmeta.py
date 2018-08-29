@@ -2,6 +2,7 @@ import os
 
 from pywps import Process
 from pywps import ComplexInput, ComplexOutput, FORMATS, Format
+from pywps.inout.basic import SOURCE_TYPE
 from pywps.validator.mode import MODE
 from pywps.app.Common import Metadata
 
@@ -42,16 +43,18 @@ class NCMeta(Process):
         inputs = [
             ComplexInput('dataset', 'NetCDF Dataset',
                          abstract="{}.nc4".format(TEST_URL),
-                         # default="{}.nc4".format(TEST_URL),
+                         default="{}.nc4".format(TEST_URL),
                          supported_formats=[FORMATS.NETCDF],
                          min_occurs=0, max_occurs=1,
+                         default_type=SOURCE_TYPE.URL,
                          mode=MODE.STRICT),
 
             ComplexInput('dataset_opendap', 'OpenDAP Dataset',
                          abstract=TEST_URL,
-                         # default=TEST_URL,
+                         default=TEST_URL,
                          supported_formats=[FORMATS.DODS],
                          min_occurs=0, max_occurs=1,
+                         default_type=SOURCE_TYPE.URL,
                          mode=MODE.STRICT),
         ]
         outputs = [
