@@ -10,7 +10,8 @@ from netCDF4 import Dataset
 import logging
 LOGGER = logging.getLogger("PYWPS")
 
-FORMAT_OPENDAP = Format('application/x-ogc-dods')
+
+TEST_URL = 'http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm3_0_run1_200001.nc'
 
 
 def nc_resource(inpt):
@@ -39,9 +40,19 @@ class NCMeta(Process):
     """
     def __init__(self):
         inputs = [
-            ComplexInput('dataset', 'Dataset',
-                         supported_formats=[FORMAT_OPENDAP, FORMATS.NETCDF],
-                         mode=MODE.NONE),
+            ComplexInput('dataset', 'NetCDF Dataset',
+                         abstract="{}.nc4".format(TEST_URL),
+                         # default="{}.nc4".format(TEST_URL),
+                         supported_formats=[FORMATS.NETCDF],
+                         min_occurs=0, max_occurs=1,
+                         mode=MODE.STRICT),
+
+            ComplexInput('dataset_opendap', 'OpenDAP Dataset',
+                         abstract=TEST_URL,
+                         # default=TEST_URL,
+                         supported_formats=[FORMATS.DODS],
+                         min_occurs=0, max_occurs=1,
+                         mode=MODE.STRICT),
         ]
         outputs = [
             ComplexOutput('output', 'Metadata',
@@ -62,7 +73,10 @@ class NCMeta(Process):
             status_supported=True)
 
     def _handler(self, request, response):
-        inpt = request.inputs['dataset'][0]
+        if 'dataset_opendap' in request.inputs:
+            inpt = request.inputs['dataset_opendap'][0]
+        else:
+            inpt = request.inputs['dataset'][0]
         ds = Dataset(nc_resource(inpt))
         with open(os.path.join(self.workdir, 'out.txt'), "w") as fp:
             response.outputs['output'].file = fp.name

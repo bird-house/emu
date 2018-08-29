@@ -14,7 +14,7 @@ NC_FILE_URL = "file://{}".format(resource_file('test.nc'))
 @pytest.mark.online
 def test_wps_ncmeta_opendap():
     client = client_for(Service(processes=[NCMeta()]))
-    datainputs = "dataset=@xlink:href={0}".format(OPENDAP_URL)
+    datainputs = "dataset_opendap=@xlink:href={0}".format(OPENDAP_URL)
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
         identifier='ncmeta',
