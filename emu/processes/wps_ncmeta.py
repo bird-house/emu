@@ -15,23 +15,6 @@ LOGGER = logging.getLogger("PYWPS")
 TEST_URL = 'http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm3_0_run1_200001.nc'
 
 
-def nc_resource(inpt):
-    import requests
-    from six.moves.urllib.parse import urlparse
-    # do we have a file?
-    if urlparse(inpt.url).scheme == 'file':
-        resource = inpt.file
-    else:
-        # we assume opendap
-        resource = inpt.url
-        # check if it is netcdf
-        resp = requests.head(resource)
-        if resp.headers['content-type'] == FORMATS.NETCDF.mime_type:
-            # ... then use file (may download from url)
-            resource = inpt.file
-    return resource
-
-
 class NCMeta(Process):
     """
     Notes
@@ -43,18 +26,18 @@ class NCMeta(Process):
         inputs = [
             ComplexInput('dataset', 'NetCDF Dataset',
                          abstract="{}.nc4".format(TEST_URL),
-                         default="{}.nc4".format(TEST_URL),
+                         # default="{}.nc4".format(TEST_URL),
                          supported_formats=[FORMATS.NETCDF],
                          min_occurs=0, max_occurs=1,
-                         default_type=SOURCE_TYPE.URL,
+                         # default_type=SOURCE_TYPE.URL,
                          mode=MODE.STRICT),
 
             ComplexInput('dataset_opendap', 'OpenDAP Dataset',
                          abstract=TEST_URL,
-                         default=TEST_URL,
+                         # default=TEST_URL,
                          supported_formats=[FORMATS.DODS],
                          min_occurs=0, max_occurs=1,
-                         default_type=SOURCE_TYPE.URL,
+                         # default_type=SOURCE_TYPE.URL,
                          mode=MODE.STRICT),
         ]
         outputs = [
@@ -66,6 +49,7 @@ class NCMeta(Process):
             self._handler,
             identifier='ncmeta',
             title='Show NetCDF Metadata',
+            abstract="Dataset can be either a NetCDF file or an OpenDAP service.",
             version='4',
             metadata=[
                 Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
@@ -76,11 +60,15 @@ class NCMeta(Process):
             status_supported=True)
 
     def _handler(self, request, response):
+        # TODO: can't set default value for input otherwise I will always get
+        # both dataset and dataset_opendap
         if 'dataset_opendap' in request.inputs:
             inpt = request.inputs['dataset_opendap'][0]
+            resource = inpt.url
         else:
             inpt = request.inputs['dataset'][0]
-        ds = Dataset(nc_resource(inpt))
+            resource = inpt.file
+        ds = Dataset(resource)
         with open(os.path.join(self.workdir, 'out.txt'), "w") as fp:
             response.outputs['output'].file = fp.name
             fp.write("URL: {}\n\n".format(inpt.url))
