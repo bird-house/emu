@@ -6,8 +6,8 @@ from pywps.tests import assert_response_success
 from .common import client_for, resource_file
 from emu.processes.wps_ncmeta import NCMeta
 
-OPENDAP_URL = 'http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/surface/air.mon.ltm.nc'
-NC_URL = 'https://www.esrl.noaa.gov/psd/thredds/fileServer/Datasets/ncep.reanalysis.derived/surface/air.mon.ltm.nc'
+OPENDAP_URL = 'http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm3_0_run1_200001.nc'
+NC_URL = 'http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm3_0_run1_200001.nc.nc4'
 NC_FILE_URL = "file://{}".format(resource_file('test.nc'))
 
 
