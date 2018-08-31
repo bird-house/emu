@@ -78,6 +78,12 @@ http://localhost:5000/wps?service=WPS&version=1.0.0&request=GetCapabilities.
 
 .. NOTE:: Remember the process ID (PID) so you can stop the service with ``kill PID``.
 
+You can find which process uses a given port using the following command (here for port 5000):
+
+.. code-block:: sh
+
+   $ netstat -nlp | grep :5000
+
 Check the log files for errors:
 
 .. code-block:: sh
