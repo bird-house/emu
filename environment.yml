@@ -5,7 +5,7 @@ channels:
 - defaults
 dependencies:
 - six
-- pywps=4.1.13
+- pywps=4.1.14
 - jinja2
 - click
 - psutil
