@@ -27,3 +27,17 @@ Wordcounter
 .. autoprocess:: emu.processes.wps_wordcounter.WordCounter
    :docstring:
    :skiplines: 1
+
+Chomsky
+-------
+
+.. autoprocess:: emu.processes.wps_chomsky.Chomsky
+  :docstring:
+  :skiplines: 1
+
+NCMeta
+------
+
+.. autoprocess:: emu.processes.wps_ncmeta.NCMeta
+   :docstring:
+   :skiplines: 1
