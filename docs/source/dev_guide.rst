@@ -7,6 +7,16 @@ Developer Guide
     :local:
     :depth: 1
 
+Building the docs
+-----------------
+
+First install dependencies for the documentation:
+
+.. code-block:: sh
+
+  $ make bootstrap_dev
+  $ make docs
+
 .. _testing:
 
 Running tests
