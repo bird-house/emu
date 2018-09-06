@@ -1,6 +1,18 @@
 Changes
 *******
 
+0.9.0 (2018-09-06)
+==================
+
+This is the release for FOSS4G in Dar Es Salaam.
+
+Changes:
+
+* Enabled Conda support on ReadTheDocs (#40).
+* Added ``ncmeta`` process with PyWPS OpenDAP support (#54).
+* Added ``output_formats`` process to test NetCDF and JSON output formats (#42).
+* Numerous fixes.
+
 0.8.0 (2018-06-06)
 ==================
 
