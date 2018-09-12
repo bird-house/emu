@@ -34,6 +34,11 @@ def get_output(doc):
     for output_el in xpath_ns(doc, '/wps:ExecuteResponse'
                                    '/wps:ProcessOutputs/wps:Output'):
         [identifier_el] = xpath_ns(output_el, './ows:Identifier')
-        [value_el] = xpath_ns(output_el, './wps:Data/wps:LiteralData')
-        output[identifier_el.text] = value_el.text
+        value_el = xpath_ns(output_el, './wps:Data/wps:LiteralData')
+        if value_el == []:
+            [value_el] = xpath_ns(output_el, './wps:Reference')
+            output[identifier_el.text] = value_el.attrib['href']
+        else:
+            output[identifier_el.text] = value_el[0].text
+
     return output

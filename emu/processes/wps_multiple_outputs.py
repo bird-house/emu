@@ -61,6 +61,6 @@ class MultipleOutputs(Process):
             response.outputs['output'].file = fp.name
             ref_url = response.outputs['output'].get_url()
             result['outputs'].append(dict(name=os.path.basename(ref_url), url=ref_url))
-        # return document with outpus
+        # return document with outputs
         response.outputs['reference'].data = json.dumps(result)
         return response
