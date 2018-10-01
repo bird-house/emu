@@ -38,7 +38,7 @@ class NCMeta(Process):
                          supported_formats=[FORMATS.DODS],
                          min_occurs=0, max_occurs=1,
                          # default_type=SOURCE_TYPE.URL,
-                         mode=MODE.STRICT),
+                         mode=MODE.NONE),
         ]
         outputs = [
             ComplexOutput('output', 'Metadata',
