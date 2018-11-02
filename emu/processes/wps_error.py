@@ -30,5 +30,7 @@ class ShowError(Process):
 
     @staticmethod
     def _handler(request, response):
+        response.update_status('PyWPS Process started.', 0)
+
         logger.info("wps_error started ...")
         raise Exception(request.inputs['message'][0].data)

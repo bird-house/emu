@@ -145,6 +145,8 @@ class Chomsky(Process):
         import random
         from itertools import chain, islice
 
+        response.update_status('PyWPS Process started.', 0)
+
         def chomsky(times=5, line_length=72):
             parts = []
             for part in (leadins, subjects, verbs, objects):
@@ -157,4 +159,6 @@ class Chomsky(Process):
         with open(os.path.join(self.workdir, 'out.txt'), 'w') as fout:
             fout.write(chomsky(request.inputs['times'][0].data))
             response.outputs['output'].file = fout.name
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

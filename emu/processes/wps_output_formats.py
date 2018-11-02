@@ -41,6 +41,10 @@ class OutputFormats(Process):
 
     @staticmethod
     def _handler(request, response):
+        response.update_status('PyWPS Process started.', 0)
+
         response.outputs['netcdf'].file = os.path.join(paths.data, 'dummy.nc')
         response.outputs['json'].file = os.path.join(paths.data, 'dummy.json')
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

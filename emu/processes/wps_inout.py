@@ -117,6 +117,8 @@ class InOut(Process):
 
     @staticmethod
     def _handler(request, response):
+        response.update_status('PyWPS Process started.', 0)
+
         response.outputs['string'].data = request.inputs['string'][0].data
         response.outputs['int'].data = request.inputs['int'][0].data
         response.outputs['float'].data = request.inputs['float'][0].data
@@ -147,4 +149,6 @@ class InOut(Process):
             response.outputs['dataset'].data_format = FORMATS.TEXT
             response.outputs['dataset'].data = "request didn't have a netcdf file."
         response.outputs['bbox'].data = [0, 0, 10, 10]
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

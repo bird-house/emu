@@ -39,7 +39,11 @@ class Box(Process):
 
     @staticmethod
     def _handler(request, response):
+        response.update_status('PyWPS Process started.', 0)
+
         LOGGER.debug('bbox: coords=%s, crs=%s', request.inputs['bbox'][0].data, request.inputs['bbox'][0].crs)
         response.outputs['bbox'].data = request.inputs['bbox'][0].data
         response.outputs['bbox'].crs = request.inputs['bbox'][0].crs
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

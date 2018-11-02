@@ -43,6 +43,8 @@ class WordCounter(Process):
             status_supported=True)
 
     def _handler(self, request, response):
+        response.update_status('PyWPS Process started.', 0)
+
         wordre = re.compile(r'\w+')
 
         def words(f):
@@ -56,4 +58,6 @@ class WordCounter(Process):
         with open(os.path.join(self.workdir, 'out.txt'), 'w') as fout:
             fout.write(str(sorted_counts))
             response.outputs['output'].file = fout.name
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

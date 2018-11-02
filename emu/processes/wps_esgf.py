@@ -52,6 +52,8 @@ class ESGFDemo(Process):
 
     @staticmethod
     def _handler(request, response):
+        response.update_status('PyWPS Process started.', 0)
+
         LOGGER.info("starting ...")
         datasets = []
         # append file urls
@@ -65,5 +67,6 @@ class ESGFDemo(Process):
         if not datasets:
             raise Exception("You need to provide at least one dataset.")
         response.outputs['output'].data = 'Number of datasets = {}'.format(len(datasets))
-        response.update_status('done', 100)
+
+        response.update_status('PyWPS Process completed.', 100)
         return response
