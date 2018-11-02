@@ -25,7 +25,8 @@ class MultipleOutputs(Process):
             ComplexOutput('reference', 'Output References',
                           abstract='Document with references to produced output files.',
                           as_reference=True,
-                          supported_formats=[FORMATS.JSON]), ]
+                          supported_formats=[FORMATS.JSON]),
+        ]
 
         super(MultipleOutputs, self).__init__(
             self._handler,
@@ -44,6 +45,8 @@ class MultipleOutputs(Process):
         )
 
     def _handler(self, request, response):
+        response.update_status('PyWPS Process started.', 0)
+
         LOGGER.info("starting ...")
         if 'count' in request.inputs:
             max_outputs = request.inputs['count'][0].data
@@ -63,4 +66,6 @@ class MultipleOutputs(Process):
             result['outputs'].append(dict(name=os.path.basename(ref_url), url=ref_url))
         # return document with outputs
         response.outputs['reference'].data = json.dumps(result)
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

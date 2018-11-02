@@ -39,7 +39,10 @@ class SayHello(Process):
 
     @staticmethod
     def _handler(request, response):
+        response.update_status('PyWPS Process started.', 0)
         LOGGER.info("say hello")
+
         response.outputs['output'].data = 'Hello ' + request.inputs['name'][0].data
         response.outputs['output'].uom = UOM('unity')
+        response.update_status('PyWPS Process completed.', 100)
         return response

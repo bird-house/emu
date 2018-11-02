@@ -38,6 +38,8 @@ class PolyCentroid(Process):
     @staticmethod
     def _handler(request, response):
         from defusedxml import ElementTree
+        response.update_status('PyWPS Process started.', 0)
+
         fn = request.inputs['polygon'][0].file
 
         ns = {'gml': 'http://www.opengis.net/gml'}
@@ -57,4 +59,6 @@ class PolyCentroid(Process):
         cy = sum(y) / n
 
         response.outputs['output'].data = '{:.5f},{:.5f}'.format(cx, cy)
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

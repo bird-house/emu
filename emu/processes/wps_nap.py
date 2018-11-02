@@ -40,6 +40,7 @@ class Nap(Process):
         else:
             nap_delay = 1
 
+        response.update_status('PyWPS Process started.', 0)
         time.sleep(nap_delay)
         response.update_status('PyWPS Process started. Waiting...', 25)
         time.sleep(nap_delay)
@@ -49,4 +50,5 @@ class Nap(Process):
         time.sleep(nap_delay)
         response.outputs['output'].data = 'done sleeping'
 
+        response.update_status('PyWPS Process completed.', 100)
         return response
