@@ -62,6 +62,8 @@ class NCMeta(Process):
     def _handler(self, request, response):
         # TODO: can't set default value for input otherwise I will always get
         # both dataset and dataset_opendap
+        response.update_status('PyWPS Process started.', 0)
+
         if 'dataset_opendap' in request.inputs:
             inpt = request.inputs['dataset_opendap'][0]
             resource = inpt.url
@@ -75,4 +77,6 @@ class NCMeta(Process):
             fp.write("MIME Type: {}\n\n".format(inpt.data_format.mime_type))
             for attr in ds.ncattrs():
                 fp.write("{}: {}\n\n".format(attr, ds.getncattr(attr)))
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

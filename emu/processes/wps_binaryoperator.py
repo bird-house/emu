@@ -41,6 +41,8 @@ class BinaryOperator(Process):
 
     @staticmethod
     def _handler(request, response):
+        response.update_status('PyWPS Process started.', 0)
+
         logger.info("run binary_operator")
         operator = request.inputs['operator'][0].data
         input_a = request.inputs['inputa'][0].data
@@ -54,4 +56,6 @@ class BinaryOperator(Process):
             response.outputs['output'].data = input_a / input_b
         else:
             response.outputs['output'].data = input_a + input_b
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

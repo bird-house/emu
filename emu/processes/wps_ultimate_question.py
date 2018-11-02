@@ -24,6 +24,8 @@ class UltimateQuestion(Process):
     @staticmethod
     def _handler(request, response):
         import time
+        response.update_status('PyWPS Process started.', 0)
+
         sleep_delay = .1
         time.sleep(sleep_delay)
         response.update_status('Thinking...', 20)
@@ -34,4 +36,6 @@ class UltimateQuestion(Process):
         time.sleep(sleep_delay)
         response.update_status('Thinking...', 80)
         response.outputs['answer'].data = '42'
+
+        response.update_status('PyWPS Process completed.', 100)
         return response

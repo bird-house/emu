@@ -40,6 +40,7 @@ class Sleep(Process):
         else:
             sleep_delay = 2
 
+        response.update_status('PyWPS Process started. Waiting...', 0)
         time.sleep(sleep_delay)
         response.update_status('PyWPS Process started. Waiting...', 20)
         time.sleep(sleep_delay)
@@ -51,4 +52,5 @@ class Sleep(Process):
         time.sleep(sleep_delay)
         response.outputs['sleep_output'].data = 'done sleeping'
 
+        response.update_status('PyWPS Process completed.', 100)
         return response
