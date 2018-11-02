@@ -61,8 +61,7 @@ class InOut(Process):
             #                  crss=['epsg:4326', 'epsg:3035'],
             #                  min_occurs=0),
             ComplexInput('text', 'Text',
-                         abstract='Enter a URL pointing\
-                            to a text document (optional)',
+                         abstract='Enter a URL pointing to a text document (optional)',
                          metadata=[Metadata('Info')],
                          min_occurs=0,
                          supported_formats=[Format('text/plain')]),
