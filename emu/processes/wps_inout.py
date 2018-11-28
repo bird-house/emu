@@ -82,6 +82,7 @@ class InOut(Process):
             LiteralOutput('int', 'Integer', data_type='integer'),
             LiteralOutput('float', 'Float', data_type='float'),
             LiteralOutput('boolean', 'Boolean', data_type='boolean'),
+            LiteralOutput('angle', 'Angle', data_type='angle'),
             LiteralOutput('time', 'Time', data_type='time'),
             LiteralOutput('date', 'Date', data_type='date'),
             LiteralOutput('datetime', 'DateTime', data_type='dateTime'),
@@ -126,6 +127,7 @@ class InOut(Process):
         response.outputs['int'].data = request.inputs['int'][0].data
         response.outputs['float'].data = request.inputs['float'][0].data
         response.outputs['boolean'].data = request.inputs['boolean'][0].data
+        response.outputs['angle'].data = request.inputs['angle'][0].data
         response.outputs['time'].data = request.inputs['time'][0].data
         response.outputs['date'].data = request.inputs['date'][0].data
         response.outputs['datetime'].data = request.inputs['datetime'][0].data
