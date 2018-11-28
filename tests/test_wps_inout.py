@@ -7,7 +7,6 @@ from .common import client_for
 from emu.processes.wps_inout import InOut
 
 
-@pytest.mark.skip(reason="fix default values in pywps")
 def test_wps_inout():
     client = client_for(Service(processes=[InOut()]))
     datainputs = "string=onetwothree;int=7;float=2.0;boolean=0"
