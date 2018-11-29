@@ -23,7 +23,7 @@ class SayHello(Process):
             self._handler,
             identifier='hello',
             title='Say Hello',
-            abstract='Just says a friendly Hello.'
+            abstract='Just says a friendly Hello. '
                      'Returns a literal string output with Hello plus the inputed name.',
             keywords=['hello', 'demo'],
             metadata=[

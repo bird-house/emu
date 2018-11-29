@@ -26,8 +26,8 @@ class BinaryOperator(Process):
             self._handler,
             identifier='binaryoperatorfornumbers',
             title='Binary Operator for Numbers',
-            abstract='Performs operation on two numbers and returns the answer.\
-                This example process is taken from Climate4Impact.',
+            abstract='Performs operation on two numbers and returns the answer. '
+                     'This example process is taken from Climate4Impact.',
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
                 Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
