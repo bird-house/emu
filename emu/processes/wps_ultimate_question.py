@@ -12,7 +12,7 @@ class UltimateQuestion(Process):
             identifier='ultimate_question',
             version='2.0',
             title='Answer to the ultimate question',
-            abstract='This process gives the answer to the ultimate question of "What is the meaning of life?',
+            abstract='This process gives the answer to the ultimate question of "What is the meaning of life?"',
             profile='',
             metadata=[Metadata('Ultimate Question'), Metadata('What is the meaning of life')],
             inputs=inputs,
