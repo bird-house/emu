@@ -1,9 +1,12 @@
+import re
 import os
 
 from setuptools import setup, find_packages
 
-version = __import__('emu').__version__
 here = os.path.abspath(os.path.dirname(__file__))
+for line in open(os.path.join(here, 'emu', '__init__.py')):
+    if line.startswith('__version__'):
+        version = re.match('__version__ ?= ?(.+)', line).group(1)
 README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
