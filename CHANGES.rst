@@ -1,6 +1,17 @@
 Changes
 *******
 
+0.9.1 (2018-12-04)
+==================
+
+This is the Washington release.
+
+Changes:
+
+* Using `emu.__version__.py` in `setup.py` (#67 and #68).
+* Added Angle data type (#65).
+* Added test for wps_multiple_outputs (#60).
+
 0.9.0 (2018-09-06)
 ==================
 
