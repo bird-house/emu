@@ -17,9 +17,9 @@ class Nap(Process):
             identifier='nap',
             version='1.0',
             title='Afternoon Nap (supports sync calls only)',
-            abstract='This process will have a short nap for a given delay or 1 second if not a valid value.\
-                This procces only supports synchronous WPS requests ... \
-                so, make sure the nap does not take to long.',
+            abstract='This process will have a short nap for a given delay or 1 second if not a valid value. '
+                     'This process only supports synchronous WPS requests... '
+                     'so, make sure the nap does not take to long.',
             profile='',
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),

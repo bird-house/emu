@@ -1,3 +1,3 @@
-from .wsgi import application
+from .__version__ import __version__
 
-__version__ = '0.9.0'
+from .wsgi import application
