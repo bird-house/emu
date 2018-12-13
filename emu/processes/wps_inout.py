@@ -93,7 +93,7 @@ class InOut(Process):
             ComplexOutput('text', 'Text',
                           abstract='Copy of input text file.',
                           as_reference=False,
-                          supported_formats=[FORMATS.TEXT,]),
+                          supported_formats=[FORMATS.TEXT, ]),
             ComplexOutput('dataset', 'Dataset',
                           abstract='Copy of input netcdf file.',
                           as_reference=True,
