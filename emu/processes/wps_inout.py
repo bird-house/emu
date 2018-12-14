@@ -92,8 +92,8 @@ class InOut(Process):
                           data_type='string'),
             ComplexOutput('text', 'Text',
                           abstract='Copy of input text file.',
-                          as_reference=True,
-                          supported_formats=[Format('text/plain')]),
+                          as_reference=False,
+                          supported_formats=[FORMATS.TEXT, ]),
             ComplexOutput('dataset', 'Dataset',
                           abstract='Copy of input netcdf file.',
                           as_reference=True,
@@ -141,7 +141,7 @@ class InOut(Process):
         # TODO: bbox is not working
         # response.outputs['bbox'].data = request.inputs['bbox'][0].data
         # TODO: how to copy file?
-        response.outputs['text'].data_format = Format('text/plain')
+        response.outputs['text'].data_format = FORMATS.TEXT
         if 'text' in request.inputs:
             response.outputs['text'].file = request.inputs['text'][0].file
         else:

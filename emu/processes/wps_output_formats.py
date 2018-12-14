@@ -23,7 +23,7 @@ class OutputFormats(Process):
                           supported_formats=[FORMATS.NETCDF, ]),
             ComplexOutput('json', 'json dummy output file.',
                           abstract="A very small test json file. ",
-                          as_reference=True,
+                          as_reference=False,
                           supported_formats=[FORMATS.JSON, ]),
         ]
 

@@ -48,8 +48,8 @@ class NCMeta(Process):
         super(NCMeta, self).__init__(
             self._handler,
             identifier='ncmeta',
-            title='Show NetCDF Metadata',
-            abstract="Dataset can be either a NetCDF file or an OpenDAP service.",
+            title='Return NetCDF Metadata',
+            abstract="Return metadata from a netCDF dataset, either on file or an OpenDAP service.",
             version='4',
             metadata=[
                 Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
