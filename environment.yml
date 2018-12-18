@@ -1,15 +1,13 @@
 name: emu
 channels:
-- birdhouse
 - conda-forge
 - defaults
 dependencies:
 - six
-- pywps>=4.1.26
+- pywps>=4.2.1
 - jinja2
 - click
 - psutil
-- birdhouse-eggshell=0.3
 - libiconv
 - defusedxml
 # opendap support

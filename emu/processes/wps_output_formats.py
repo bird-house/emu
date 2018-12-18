@@ -6,11 +6,12 @@ Author: David Huard
 import os
 from pywps import Process, ComplexOutput
 from pywps import FORMATS
-from eggshell.config import Paths
-import emu
+
 import logging
 LOGGER = logging.getLogger("PYWPS")
-paths = Paths(emu)
+
+# TODO: can be replaced by eggshell function.
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 
 
 class OutputFormats(Process):
@@ -43,8 +44,8 @@ class OutputFormats(Process):
     def _handler(request, response):
         response.update_status('PyWPS Process started.', 0)
 
-        response.outputs['netcdf'].file = os.path.join(paths.data, 'dummy.nc')
-        response.outputs['json'].file = os.path.join(paths.data, 'dummy.json')
+        response.outputs['netcdf'].file = os.path.join(DATA_DIR, 'dummy.nc')
+        response.outputs['json'].file = os.path.join(DATA_DIR, 'dummy.json')
 
         response.update_status('PyWPS Process completed.', 100)
         return response
