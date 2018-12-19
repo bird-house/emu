@@ -26,8 +26,9 @@ def test_wps_wordcount_href():
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
         identifier='wordcounter',
-        datainputs=datainputs)
+        datainputs=datainputs,
+        rawdataoutput='output=@mimetype=application/json'
+    )
 
-    assert_response_success(resp)
-    out = get_output(resp.xml)
-    json.loads(out['output'])
+    assert resp.status_code == 200
+    json.loads(resp.data)
