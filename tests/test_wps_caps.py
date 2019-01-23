@@ -12,6 +12,7 @@ def test_wps_caps():
                             '/wps:Process'
                             '/ows:Identifier')
     assert sorted(names.split()) == [
+        'CDAT.subset',
         'bbox',
         'binaryoperatorfornumbers',
         'chomsky',
