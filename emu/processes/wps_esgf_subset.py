@@ -1,4 +1,5 @@
 import os
+import json
 
 from pywps import Process
 from pywps import ComplexInput, ComplexOutput, FORMATS, Format
@@ -19,23 +20,36 @@ class CDATSubset(Process):
     """
     def __init__(self):
         inputs = [
-            ComplexInput('variable', 'Variable',
+            ComplexInput('variable', 'variable',
                          abstract="",
                          supported_formats=[FORMATS.JSON],
                          min_occurs=0, max_occurs=1,
-                         # mode=MODE.STRICT
+                         mode=MODE.SIMPLE
+                         ),
+            ComplexInput('domain', 'domain',
+                         abstract="",
+                         supported_formats=[FORMATS.JSON],
+                         min_occurs=0, max_occurs=1,
+                         mode=MODE.SIMPLE
+                         ),
+            ComplexInput('operation', 'operation',
+                         abstract="",
+                         supported_formats=[FORMATS.JSON],
+                         min_occurs=0, max_occurs=1,
+                         mode=MODE.SIMPLE
                          ),
         ]
         outputs = [
             ComplexOutput('output', 'Output',
                           as_reference=True,
-                          supported_formats=[FORMATS.TEXT]), ]
+                          supported_formats=[FORMATS.JSON],
+                          mode=MODE.SIMPLE), ]
 
         super(CDATSubset, self).__init__(
             self._handler,
             identifier='CDAT.subset',
             title='CDAT.subset',
-            abstract="",
+            abstract="subset netcdf files",
             version='1',
             metadata=[
                 Metadata('ESGF Compute API', 'https://github.com/ESGF/esgf-compute-api'),
@@ -48,6 +62,11 @@ class CDATSubset(Process):
 
     def _handler(self, request, response):
         response.update_status('PyWPS Process started.', 0)
-        response.outputs['output'].data = request.inputs['variable'][0].data
+        data = {}
+        output = {'output': data}
+        for param in ['variable', 'domain', 'operation']:
+            if param in request.inputs:
+                data[param] = json.loads(request.inputs[param][0].data)
+        response.outputs['output'].data = json.dumps(output)
         response.update_status('PyWPS Process completed.', 100)
         return response
