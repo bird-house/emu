@@ -6,12 +6,12 @@ from pywps import ComplexInput, ComplexOutput, FORMATS, Format
 from pywps.inout.basic import SOURCE_TYPE
 from pywps.validator.mode import MODE
 from pywps.app.Common import Metadata
-
+from owslib import esgfapi
 import logging
 LOGGER = logging.getLogger("PYWPS")
 
 
-class CDATSubset(Process):
+class EmuSubset(Process):
     """
     Notes
     -----
@@ -45,10 +45,10 @@ class CDATSubset(Process):
                           supported_formats=[FORMATS.JSON],
                           mode=MODE.SIMPLE), ]
 
-        super(CDATSubset, self).__init__(
+        super(EmuSubset, self).__init__(
             self._handler,
-            identifier='CDAT.subset',
-            title='CDAT.subset',
+            identifier='Emu.subset',
+            title='xarray.subset',
             abstract="subset netcdf files",
             version='1',
             metadata=[
@@ -61,12 +61,25 @@ class CDATSubset(Process):
             status_supported=True)
 
     def _handler(self, request, response):
+        import xarray as xr
         response.update_status('PyWPS Process started.', 0)
-        data = {}
-        output = {'output': data}
-        for param in ['variable', 'domain', 'operation']:
-            if param in request.inputs:
-                data[param] = json.loads(request.inputs[param][0].data)
-        response.outputs['output'].data = json.dumps(output)
+
+        variable = esgfapi.Variable.from_json(json.loads(request.inputs['variable'][0].data))
+        domain = esgfapi.Domain.from_json(json.loads(request.inputs['domain'][0].data))
+
+        # TODO: Use chunks for parallel processing with dask.distributed
+        with xr.open_dataset(variable.uri) as ds:
+            da = ds[variable.var_name]
+            sl = {}
+            for dim in domain.dimensions:
+                sl = {dim['name']: slice(dim['start'], dim['end'], dim['step'])}
+                if dim['crs'] == 'values':
+                    da = da.sel(**sl)
+                elif dim['crs'] == 'indices':
+                    da = da.isel(**sl)
+
+            da.to_netcdf(self.workdir + '/out.nc')
+
+        response.outputs['output'].file = self.workdir + '/out.nc'
         response.update_status('PyWPS Process completed.', 100)
         return response
