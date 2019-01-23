@@ -39,6 +39,7 @@ class CDATSubset(Process):
             version='1',
             metadata=[
                 Metadata('ESGF Compute API', 'https://github.com/ESGF/esgf-compute-api'),
+                Metadata('ESGF Compute WPS', 'https://github.com/ESGF/esgf-compute-wps'),
             ],
             inputs=inputs,
             outputs=outputs,
