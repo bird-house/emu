@@ -14,6 +14,9 @@ dependencies:
 - netcdf4
 # dask
 - xarray
+# plot
+- cartopy
+- matplotlib
 # tests
 - pytest-flake8
 - pip:
