@@ -12,5 +12,9 @@ dependencies:
 - defusedxml
 # opendap support
 - netcdf4
+# dask
+- xarray
 # tests
 - pytest-flake8
+- pip:
+  - -e git+https://github.com/bird-house/OWSLib.git@esgfwps#egg=owslib
