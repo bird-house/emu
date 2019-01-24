@@ -1,5 +1,6 @@
 import os
 import json
+import six
 
 import matplotlib
 matplotlib.use('agg')
@@ -9,14 +10,40 @@ from cartopy import config
 
 from netCDF4 import Dataset
 
+from subprocess import check_output, CalledProcessError
+
 from pywps import Process
 from pywps import ComplexInput, ComplexOutput, FORMATS, Format
 from pywps.inout.basic import SOURCE_TYPE
 from pywps.validator.mode import MODE
 from pywps.app.Common import Metadata
 from owslib import esgfapi
+
 import logging
 LOGGER = logging.getLogger("PYWPS")
+
+
+def ncdump(dataset):
+    '''
+    Returns the metadata of the dataset
+
+    Code taken from https://github.com/ioos/compliance-checker-web
+    '''
+
+    try:
+        output = check_output(['ncdump', '-h', dataset])
+        if not isinstance(output, six.string_types):
+            output = output.decode('utf-8')
+        lines = output.split('\n')
+        # replace the filename for safety
+        dataset_id = os.path.basename(dataset)  # 'uploaded-file'
+        lines[0] = 'netcdf {} {{'.format(dataset_id)
+        # decode to ascii
+        filtered_lines = ['{}\n'.format(line) for line in lines]
+    except Exception as err:
+        LOGGER.error("Could not generate ncdump: {}".format(err))
+        return "Error: generating ncdump failed"
+    return filtered_lines
 
 
 def plot_preview(filename, variable, title=None, output_dir='.'):
@@ -74,12 +101,15 @@ class EmuSubset(Process):
         outputs = [
             ComplexOutput('output', 'Output',
                           as_reference=True,
-                          supported_formats=[FORMATS.JSON],
-                          mode=MODE.SIMPLE),
+                          supported_formats=[FORMATS.NETCDF], ),
+            ComplexOutput('ncdump', 'Metadata',
+                          abstract='ncdump of subsetted Dataset.',
+                          as_reference=True,
+                          supported_formats=[FORMATS.TEXT], ),
             ComplexOutput('preview', 'Preview',
                           abstract='Preview of subsetted Dataset.',
                           as_reference=True,
-                          supported_formats=[Format('image/png')]), ]
+                          supported_formats=[Format('image/png')],), ]
         super(EmuSubset, self).__init__(
             self._handler,
             identifier='Emu.subset',
@@ -118,6 +148,7 @@ class EmuSubset(Process):
         response.update_status('subsetting done.', 70)
         # plot preview
         try:
+            # TODO: regrid outpuf file before plotting
             response.outputs['preview'].file = plot_preview(
                 output_file, title="Test", variable=variable.var_name,
                 output_dir=self.workdir)
@@ -125,6 +156,11 @@ class EmuSubset(Process):
         except Exception:
             response.outputs['preview'].data = 'plot failed'
             response.update_status('plot failed.', 80)
+        # run ncdump
+        with open(os.path.join(self.workdir, "nc_dump.txt"), 'w') as fp:
+            fp.writelines(ncdump(output_file))
+        response.outputs['ncdump'].file = fp.name
+        response.update_status('ncdump done.', 90)
         # done
         response.update_status('PyWPS Process completed.', 100)
         return response
