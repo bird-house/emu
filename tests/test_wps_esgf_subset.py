@@ -13,6 +13,7 @@ NC_FILE_URL = resource_file('test.nc')
 variable = esgfapi.Variable(var_name='meantemp', uri=NC_FILE_URL, name='test')
 domain = esgfapi.Domain([esgfapi.Dimension('time', 0, 10, crs='indices')])
 
+
 @pytest.mark.online
 def test_wps_esgf_subset():
     client = client_for(Service(processes=[EmuSubset()]))

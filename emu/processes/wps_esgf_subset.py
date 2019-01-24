@@ -127,7 +127,7 @@ class EmuSubset(Process):
 
     def _handler(self, request, response):
         # TODO: handle api_key in pywps or twitcher middleware
-        api_key = request.http_request.headers.get('Api-Key')
+        # api_key = request.http_request.headers.get('Api-Key')
 
         # subsetting
         import xarray as xr
