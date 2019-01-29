@@ -112,7 +112,7 @@ class EmuSubset(Process):
                           supported_formats=[Format('image/png')],), ]
         super(EmuSubset, self).__init__(
             self._handler,
-            identifier='Emu.subset',
+            identifier='emu_subset',
             title='xarray.subset',
             abstract="subset netcdf files",
             version='1',
