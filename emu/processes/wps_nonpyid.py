@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 """
 Dummy process with non-pythonic identifiers.
 
@@ -25,7 +26,7 @@ class NonPyID(Process):
 
         super(NonPyID, self).__init__(
             self._handler,
-            identifier='Fake.process-for testing',
+            identifier=u'fake.process-for testing &é;',
             title="Dummy process including non-pythonic identifiers",
             abstract="Dummy process whose process, input and output identifiers include characters not allowed "
                      "in Python.",

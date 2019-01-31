@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from pywps import Service
 from pywps.tests import assert_response_success
 
@@ -12,7 +13,7 @@ def test_wps_nonpyid():
     datainputs = "input 1=10;input-2={}".format(json.dumps(d))
     resp = client.get(
         service='WPS', request='Execute', version='1.0.0',
-        identifier='Fake.process-for testing',
+        identifier=u'fake.process-for testing &é;',
         datainputs=datainputs)
     assert_response_success(resp)
     assert get_output(resp.xml) == {'output.1': '11', 'output 2': json.dumps(d)}

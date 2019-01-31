@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from pywps import Service
 
 from .common import client_for
@@ -17,6 +18,7 @@ def test_wps_caps():
         'chomsky',
         'dummyprocess',
         'esgf_demo',
+        u'fake.process-for testing &é;',
         'hello',
         'inout',
         'multiple_outputs',
