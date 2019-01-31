@@ -21,6 +21,6 @@ def test_wps_esgf_subset():
                  "domain={domain}".format(variable=variable.value, domain=domain.value)
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
-        identifier='Emu.subset',
+        identifier='emu_subset',
         datainputs=datainputs)
     assert_response_success(resp)

@@ -12,11 +12,11 @@ def test_wps_caps():
                             '/wps:Process'
                             '/ows:Identifier')
     assert sorted(names.split()) == [
-        'Emu.subset',
         'bbox',
         'binaryoperatorfornumbers',
         'chomsky',
         'dummyprocess',
+        'emu_subset',
         'esgf_demo',
         'hello',
         'inout',

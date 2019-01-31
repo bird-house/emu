@@ -70,6 +70,35 @@ def plot_preview(filename, variable, title=None, output_dir='.'):
     return output
 
 
+def esgfapi(F):
+    inputs = [
+        ComplexInput('variable', 'variable',
+                     abstract="",
+                     supported_formats=[FORMATS.JSON],
+                     min_occurs=0, max_occurs=1,
+                     mode=MODE.SIMPLE
+                     ),
+        ComplexInput('domain', 'domain',
+                     abstract="",
+                     supported_formats=[FORMATS.JSON],
+                     min_occurs=0, max_occurs=1,
+                     mode=MODE.SIMPLE
+                     ),
+        ComplexInput('operation', 'operation',
+                     abstract="",
+                     supported_formats=[FORMATS.JSON],
+                     min_occurs=0, max_occurs=1,
+                     mode=MODE.SIMPLE
+                     ),
+    ]
+
+    def wrapper(self):
+        F(self)
+        self.profile.append('ESGF-API')
+        self.inputs.extend(inputs)
+    return wrapper
+
+
 class EmuSubset(Process):
     """
     Notes
@@ -77,27 +106,9 @@ class EmuSubset(Process):
 
     subset netcdf files
     """
+    @esgfapi
     def __init__(self):
-        inputs = [
-            ComplexInput('variable', 'variable',
-                         abstract="",
-                         supported_formats=[FORMATS.JSON],
-                         min_occurs=0, max_occurs=1,
-                         mode=MODE.SIMPLE
-                         ),
-            ComplexInput('domain', 'domain',
-                         abstract="",
-                         supported_formats=[FORMATS.JSON],
-                         min_occurs=0, max_occurs=1,
-                         mode=MODE.SIMPLE
-                         ),
-            ComplexInput('operation', 'operation',
-                         abstract="",
-                         supported_formats=[FORMATS.JSON],
-                         min_occurs=0, max_occurs=1,
-                         mode=MODE.SIMPLE
-                         ),
-        ]
+        inputs = []
         outputs = [
             ComplexOutput('output', 'Output',
                           as_reference=True,
