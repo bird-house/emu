@@ -17,9 +17,9 @@ class NonPyID(Process):
                          supported_formats=[FORMATS.JSON, ]),
         ]
         outputs = [
-            LiteralOutput('output.1', 'Output1 add 1 result',
+            LiteralOutput('output.1', 'Add 1 to `input 1`.',
                           data_type='string'),
-            ComplexOutput('output 2', 'Output2 substract 1 result',
+            ComplexOutput('output 2', 'Same thing as input-2.',
                           supported_formats=[FORMATS.JSON, ]),
         ]
 
@@ -27,7 +27,8 @@ class NonPyID(Process):
             self._handler,
             identifier='Fake.process-for testing',
             title="Dummy process including non-pythonic identifiers",
-            abstract="DummyProcess to check the WPS structure",
+            abstract="Dummy process whose process, input and output identifiers include characters not allowed "
+                     "in Python.",
             version="1.0",
             inputs=inputs,
             outputs=outputs,
