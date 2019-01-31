@@ -70,7 +70,7 @@ def plot_preview(filename, variable, title=None, output_dir='.'):
     return output
 
 
-def esgfapi(F):
+def esgf_api(F):
     inputs = [
         ComplexInput('variable', 'variable',
                      abstract="",
@@ -106,7 +106,7 @@ class EmuSubset(Process):
 
     subset netcdf files
     """
-    @esgfapi
+    @esgf_api
     def __init__(self):
         inputs = []
         outputs = [
