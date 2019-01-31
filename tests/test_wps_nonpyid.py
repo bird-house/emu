@@ -5,6 +5,7 @@ from .common import client_for, get_output
 from emu.processes.wps_nonpyid import NonPyID
 import json
 
+
 def test_wps_nonpyid():
     d = {'a': 1}
     client = client_for(Service(processes=[NonPyID()]))
