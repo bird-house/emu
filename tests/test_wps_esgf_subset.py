@@ -3,7 +3,7 @@ import pytest
 from pywps import Service
 from pywps.tests import assert_response_success
 
-from .common import client_for, resource_file
+from .common import client_for, resource_file, get_output
 from emu.processes.wps_esgf_subset import EmuSubset
 import owslib.wps
 from owslib import esgfapi
@@ -26,3 +26,5 @@ def test_wps_esgf_subset():
         identifier='emu_subset',
         datainputs=datainputs)
     assert_response_success(resp)
+    out = get_output(resp.xml)
+    assert out['preview'] != 'plot failed'

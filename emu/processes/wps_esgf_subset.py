@@ -168,9 +168,10 @@ class EmuSubset(Process):
         # plot preview
         try:
             # TODO: regrid outpuf file before plotting
-            response.outputs['preview'].file = plot_preview(
-                output_file, title="Test", variable=variable.var_name,
-                output_dir=self.workdir)
+            #response.outputs['preview'].file = plot_preview(
+            #    output_file, title="Test", variable=variable.var_name,
+            #    output_dir=self.workdir)
+            response.outputs['preview'].file = self.simple_plot_preview(da)
             response.update_status('plot done.', 80)
         except Exception:
             response.outputs['preview'].data = 'plot failed'
@@ -183,3 +184,12 @@ class EmuSubset(Process):
         # done
         response.update_status('PyWPS Process completed.', 100)
         return response
+
+    def simple_plot_preview(self, da):
+        """Plot map of first time step."""
+        fig, ax = plt.subplots(1, 1)
+        da.isel(time=0).plot(ax=ax)
+        fn = os.path.join(self.workdir, 'preview.png')
+        fig.savefig(fn)
+        plt.close()
+        return fn
