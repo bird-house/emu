@@ -11,7 +11,9 @@ from owslib import esgfapi
 NC_FILE_URL = resource_file('test.nc')
 
 variable = esgfapi.Variable(var_name='meantemp', uri=NC_FILE_URL, name='test')
-domain = esgfapi.Domain([esgfapi.Dimension('time', 0, 10, crs='indices')])
+domain = esgfapi.Domain([
+    esgfapi.Dimension('time', 0, 10, crs='indices'),
+    esgfapi.Dimension('lat', 30, 35, crs='values')])
 
 
 @pytest.mark.online
