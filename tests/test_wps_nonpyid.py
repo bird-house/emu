@@ -13,7 +13,7 @@ def test_wps_nonpyid():
     datainputs = "input 1=10;input-2={}".format(json.dumps(d))
     resp = client.get(
         service='WPS', request='Execute', version='1.0.0',
-        identifier='fake.process_for-testing',
+        identifier='non.py-id',
         datainputs=datainputs)
     assert_response_success(resp)
-    assert get_output(resp.xml) == {'output.1': '11', 'output 2': json.dumps(d)}
+    assert get_output(resp.xml) == {'output.1': '11.0', 'output 2': json.dumps(d)}
