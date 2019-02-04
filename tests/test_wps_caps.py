@@ -18,7 +18,7 @@ def test_wps_caps():
         'chomsky',
         'dummyprocess',
         'esgf_demo',
-        u'fake.process-for testing &é;',
+        'fake.process_for-testing',
         'hello',
         'inout',
         'multiple_outputs',

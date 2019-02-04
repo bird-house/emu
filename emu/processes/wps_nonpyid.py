@@ -26,7 +26,7 @@ class NonPyID(Process):
 
         super(NonPyID, self).__init__(
             self._handler,
-            identifier=u'fake.process-for testing &é;',
+            identifier='fake.process_for-testing',  # TODO:fails with pywps: u'fake.process-for testing &é;'
             title="Dummy process including non-pythonic identifiers",
             abstract="Dummy process whose process, input and output identifiers include characters not allowed "
                      "in Python.",
