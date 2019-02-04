@@ -19,14 +19,14 @@ class NonPyID(Process):
         ]
         outputs = [
             LiteralOutput('output.1', 'Add 1 to `input 1`.',
-                          data_type='string'),
+                          data_type='float'),
             ComplexOutput('output 2', 'Same thing as input-2.',
                           supported_formats=[FORMATS.JSON, ]),
         ]
 
         super(NonPyID, self).__init__(
             self._handler,
-            identifier='fake.process_for-testing',  # TODO:fails with pywps: u'fake.process-for testing &é;'
+            identifier='non.py-id',  # TODO:fails with pywps: u'fake.process-for testing &é;'
             title="Dummy process including non-pythonic identifiers",
             abstract="Dummy process whose process, input and output identifiers include characters not allowed "
                      "in Python.",
