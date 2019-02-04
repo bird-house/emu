@@ -158,6 +158,10 @@ class EmuSubset(Process):
                     da = da.sel(**sl)
                 elif dim['crs'] == 'indices':
                     da = da.isel(**sl)
+            if 0 in da.shape:
+                raise ValueError("Subsetting operation yields no values for `{}` dimension.".
+                                 format(da.dims[da.shape.index(0)]))
+
             da.to_netcdf(output_file)
         response.outputs['output'].file = output_file
         response.update_status('subsetting done.', 70)
