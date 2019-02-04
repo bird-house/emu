@@ -168,7 +168,7 @@ class EmuSubset(Process):
         # plot preview
         try:
             # TODO: regrid outpuf file before plotting
-            #response.outputs['preview'].file = plot_preview(
+            # response.outputs['preview'].file = plot_preview(
             #    output_file, title="Test", variable=variable.var_name,
             #    output_dir=self.workdir)
             response.outputs['preview'].file = self.simple_plot_preview(da)
