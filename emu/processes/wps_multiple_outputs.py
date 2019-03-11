@@ -15,17 +15,13 @@ class MultipleOutputs(Process):
             LiteralInput('count', 'Number of output files',
                          abstract='The number of generated output files.',
                          data_type='integer',
-                         default='1',
+                         default='2',
                          allowed_values=[1, 2, 5, 10])]
         outputs = [
-            ComplexOutput('output', 'Output',
-                          abstract='Text document with dummy content.',
+            ComplexOutput('output', 'METALINK output',
+                          abstract='Testing metalink output',
                           as_reference=True,
-                          supported_formats=[FORMATS.TEXT]),
-            ComplexOutput('reference', 'Output References',
-                          abstract='Document with references to produced output files.',
-                          as_reference=True,
-                          supported_formats=[FORMATS.JSON]),
+                          supported_formats=[FORMATS.METALINK])
         ]
 
         super(MultipleOutputs, self).__init__(
@@ -51,21 +47,13 @@ class MultipleOutputs(Process):
         if 'count' in request.inputs:
             max_outputs = request.inputs['count'][0].data
         else:
-            max_outputs = 1
-        # prepare output
-        response.outputs['output'].storage = FileStorage()
+            max_outputs = 2
         # generate outputs
-        result = dict(count=max_outputs, outputs=[])
         for i in range(max_outputs):
-            progress = int(i * 100.0 / max_outputs)
-            response.update_status('working on document {}'.format(i), progress)
-            with open(os.path.join(self.workdir, "output_{}.txt".format(i)), 'w') as fp:
-                fp.write("my output file number %s" % i)
-            response.outputs['output'].file = fp.name
-            ref_url = response.outputs['output'].get_url()
-            result['outputs'].append(dict(name=os.path.basename(ref_url), url=ref_url))
-        # return document with outputs
-        response.outputs['reference'].data = json.dumps(result)
+            # with open(os.path.join(self.workdir, "output_{}.txt".format(i)), 'w') as fp:
+            #    fp.write("my output file number %s" % i)
+            # response.outputs['output']['out_{}'.format(i)].file = fp.name
+            response.outputs['output']['out_{}'.format(i)].data = 'output {}'.format(i)
 
         response.update_status('PyWPS Process completed.', 100)
         return response

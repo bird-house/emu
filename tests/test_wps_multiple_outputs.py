@@ -16,4 +16,3 @@ def test_wps_multiple_outputs():
     assert_response_success(resp)
     out = get_output(resp.xml)
     assert 'output' in out.keys()
-    assert 'reference' in out.keys()
