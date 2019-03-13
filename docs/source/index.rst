@@ -8,3 +8,4 @@
    dev_guide
    tutorial
    processes
+   changes

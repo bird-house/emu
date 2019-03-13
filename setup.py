@@ -1,4 +1,8 @@
-import re
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""The setup script."""
+
 import os
 
 from setuptools import setup, find_packages
@@ -7,40 +11,44 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
-reqs = [line.strip() for line in open('requirements.txt')]
-extra_reqs = [line.strip() for line in open('requirements_dev.txt')]
-
-# copied from `requests`
 about = {}
 with open(os.path.join(here, 'emu', '__version__.py'), 'r') as f:
     exec(f.read(), about)
 
+reqs = [line.strip() for line in open('requirements.txt')]
+extra_reqs = [line.strip() for line in open('requirements_dev.txt')]
+
 classifiers = [
-    'Development Status :: 4 - Beta',
+    'Development Status :: 3 - Alpha',
+    'Intended Audience :: Developers',
     'Intended Audience :: Science/Research',
     'Operating System :: MacOS :: MacOS X',
     'Operating System :: POSIX',
     'Programming Language :: Python',
+    'Natural Language :: English',
+    "Programming Language :: Python :: 2",
+    'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.6',
     'Topic :: Scientific/Engineering :: Atmospheric Science',
+    'License :: OSI Approved :: Apache Software License',
 ]
 
 setup(name='emu',
       version=about['__version__'],
-      description='WPS processes for testing and demo',
+      description="WPS processes for testing and demo",
       long_description=README + '\n\n' + CHANGES,
-      classifiers=classifiers,
-      author='Birdhouse',
-      author_email='wps@dkrz.de',
+      author=about['__author__'],
+      author_email=about['__email__'],
       url='https://github.com/bird-house/emu',
-      license="Apache License v2.0",
-      keywords='wps pywps emu birdhouse',
+      classifiers=classifiers,
+      license="Apache Software License 2.0",
+      keywords='wps pywps birdhouse emu',
       packages=find_packages(),
       include_package_data=True,
       install_requires=reqs,
       extra_requires=extra_reqs,
       entry_points={
           'console_scripts': [
-             'emu=emu.cli:cli'
-          ]
-      },
-      )
+              'emu=emu.cli:cli',
+          ]},)
