@@ -49,19 +49,10 @@ class MultipleOutputs(Process):
         else:
             max_outputs = 2
         # generate outputs
-        ml = MetaLink('test-ml-1', 'Testing MetaLink with text files.')
+        ml = MetaLink('test-ml-1', 'Testing MetaLink with text files.', workdir=self.workdir)
         for i in range(max_outputs):
-            # with open(os.path.join(self.workdir, "output_{}.txt".format(i)), 'w') as fp:
-            #    fp.write("my output file number %s" % i)
-            # response.outputs['output']['out_{}'.format(i)].file = fp.name
-            o = ComplexOutput(
-                'output_{}'.format(i), 'Test output',
-                abstract='Test output',
-                as_reference=True,
-                supported_formats=[FORMATS.TEXT])
-            o.data = u'output: {}'.format(i)
-            o.workdir = self.workdir
-            mf = MetaFile(o)
+            mf = MetaFile('output_{}'.format(i), 'Test output', format=FORMATS.TEXT)
+            mf.data = 'output: {}'.format(i)
             ml.append(mf)
         response.outputs['output'].data = ml.xml
 
