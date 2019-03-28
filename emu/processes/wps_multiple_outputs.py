@@ -15,7 +15,7 @@ class MultipleOutputs(Process):
             LiteralInput('count', 'Number of output files',
                          abstract='The number of generated output files.',
                          data_type='integer',
-                         default='2',
+                         default=2,
                          allowed_values=[1, 2, 5, 10])]
         outputs = [
             ComplexOutput('output', 'METALINK output',
@@ -44,10 +44,8 @@ class MultipleOutputs(Process):
         response.update_status('PyWPS Process started.', 0)
 
         LOGGER.info("starting ...")
-        if 'count' in request.inputs:
-            max_outputs = request.inputs['count'][0].data
-        else:
-            max_outputs = 2
+        max_outputs = request.inputs['count'][0].data
+
         # generate outputs
         ml = MetaLink('test-ml-1', 'Testing MetaLink with text files.', workdir=self.workdir)
         for i in range(max_outputs):

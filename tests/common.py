@@ -4,6 +4,7 @@ from pywps.app.basic import get_xpath_ns
 from pywps.tests import WpsClient, WpsTestResponse
 
 TESTS_HOME = os.path.abspath(os.path.dirname(__file__))
+CFG_FILE = os.path.join(TESTS_HOME, 'test.cfg')
 
 VERSION = "1.0.0"
 WPS, OWS = get_ElementMakerForVersion(VERSION)
