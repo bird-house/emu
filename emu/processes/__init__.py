@@ -15,6 +15,7 @@ from .wps_output_formats import OutputFormats
 from .wps_poly_centroid import PolyCentroid
 from .wps_ncmeta import NCMeta
 from .wps_nonpyid import NonPyID
+from .wps_dry_run import SimpleDryRun
 
 processes = [
     UltimateQuestion(),
@@ -34,4 +35,5 @@ processes = [
     PolyCentroid(),
     NCMeta(),
     NonPyID(),
+    SimpleDryRun(),
 ]
