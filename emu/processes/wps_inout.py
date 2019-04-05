@@ -1,9 +1,13 @@
 from pywps import Process
 from pywps import LiteralInput, LiteralOutput
+from pywps.inout.literaltypes import AllowedValue
+from pywps.inout.literaltypes import AnyValue
+from pywps.inout.literaltypes import ValuesReference
 # from pywps import BoundingBoxInput
 from pywps import BoundingBoxOutput
 from pywps import ComplexInput, ComplexOutput
 from pywps import Format, FORMATS
+from pywps.validator.mode import MODE
 from pywps.app.Common import Metadata
 
 
@@ -22,7 +26,8 @@ class InOut(Process):
         inputs = [
             LiteralInput('string', 'String', data_type='string',
                          abstract='Enter a simple string.',
-                         default="This is just a string"),
+                         default="This is just a string",
+                         mode=MODE.SIMPLE),
             LiteralInput('int', 'Integer', data_type='integer',
                          abstract='Choose an integer number from allowed values.',
                          default="7",
@@ -52,12 +57,42 @@ class InOut(Process):
                          default='scissor'),
             LiteralInput('string_multiple_choice', 'String Multiple Choice',
                          abstract='Choose one or two items from list.',
-                         metadata=[Metadata('Info')],
                          data_type='string',
                          allowed_values=['sitting duck', 'flying goose',
                                          'happy pinguin', 'gentle albatros'],
                          min_occurs=0, max_occurs=2,
                          default='gentle albatros'),
+            LiteralInput('int_range', 'Integer Range',
+                         abstract='Choose number from range: 1-10 (step 1), 100-200 (step 10)',
+                         metadata=[
+                            Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AllowedValue'),  # noqa
+                            Metadata('AllowedValue Example', 'http://docs.opengeospatial.org/is/14-065/14-065.html#98'),  # noqa
+                            Metadata('Not implemented yet')],
+                         data_type='integer',
+                         default='1',
+                         allowed_values=[
+                             AllowedValue(minval=1, maxval=10, spacing=1),
+                             AllowedValue(minval=100, maxval=200, spacing=10)
+                         ],
+                         mode=MODE.NONE,),
+            LiteralInput('any_value', 'Any Value',
+                         abstract='Enter any value.',
+                         metadata=[
+                            Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AnyValue'),  # noqa
+                            Metadata('Not implemented yet')],
+                         data_type='string',
+                         allowed_values=[AnyValue()],
+                         default='any value',
+                         mode=MODE.NONE,),
+            LiteralInput('ref_value', 'Referenced Value',
+                         abstract='Choose a referenced value',
+                         metadata=[
+                            Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/_modules/pywps/inout/literaltypes.html'),  # noqa
+                            Metadata('Not implemented yet')],
+                         data_type='string',
+                         allowed_values=[ValuesReference()],
+                         default='a reference value',
+                         mode=MODE.NONE,),
             # TODO: bbox is not supported yet by owslib
             # BoundingBoxInput('bbox', 'Bounding Box',
             #                  abstract='Bounding Box with EPSG:4326 and EPSG:3035.',
@@ -89,6 +124,12 @@ class InOut(Process):
             LiteralOutput('string_choice', 'String Choice',
                           data_type='string'),
             LiteralOutput('string_multiple_choice', 'String Multiple Choice',
+                          data_type='string'),
+            LiteralOutput('int_range', 'Integer Range',
+                          data_type='integer'),
+            LiteralOutput('any_value', 'Any Value',
+                          data_type='string'),
+            LiteralOutput('ref_value', 'Referenced Value',
                           data_type='string'),
             ComplexOutput('text', 'Text',
                           abstract='Copy of input text file.',
@@ -138,6 +179,12 @@ class InOut(Process):
                 [inpt.data for inpt in request.inputs['string_multiple_choice']])
         else:
             response.outputs['string_multiple_choice'].data = 'no value'
+        response.outputs['int_range'].data = \
+            request.inputs['int_range'][0].data
+        response.outputs['any_value'].data = \
+            request.inputs['any_value'][0].data
+        response.outputs['ref_value'].data = \
+            request.inputs['ref_value'][0].data
         # TODO: bbox is not working
         # response.outputs['bbox'].data = request.inputs['bbox'][0].data
         # TODO: how to copy file?
