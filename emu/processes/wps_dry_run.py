@@ -1,6 +1,7 @@
 from pywps import Process, LiteralInput, LiteralOutput
 from pywps.inout.literaltypes import AllowedValue
 from pywps.app.Common import Metadata
+from pywps.validator.mode import MODE
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
@@ -17,7 +18,8 @@ class SimpleDryRun(Process):
                          abstract='How many files do you want to download? The limit is 10',
                          data_type='integer',
                          allowed_values=[AllowedValue(minval=1, maxval=100)],
-                         default=1,), ]
+                         default=1,
+                         mode=MODE.NONE), ]
         outputs = [
             LiteralOutput('output', 'Output response',
                           data_type='string')]
