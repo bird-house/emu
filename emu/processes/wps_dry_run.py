@@ -16,6 +16,7 @@ class SimpleDryRun(Process):
             LiteralInput('num_files', 'Number of Files (Limit 10)',
                          abstract='How many files do you want to download? The limit is 10',
                          data_type='integer',
+                         allowed_values=[AllowedValue(minval=1, maxval=100)],
                          default=1,), ]
         outputs = [
             LiteralOutput('output', 'Output response',
