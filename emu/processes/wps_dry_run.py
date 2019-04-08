@@ -14,12 +14,12 @@ class SimpleDryRun(Process):
             LiteralInput('dry_run', 'Dry run mode. Default false',
                          data_type='boolean',
                          default=False,),
-            LiteralInput('num_files', 'Number of Files (Limit 10)',
+            LiteralInput('count', 'Number of Files (Limit 10)',
                          abstract='How many files do you want to download? The limit is 10',
                          data_type='integer',
-                         allowed_values=[AllowedValue(minval=1, maxval=100)],
+                         allowed_values=[AllowedValue(minval=1, maxval=20)],
                          default=1,
-                         mode=MODE.NONE), ]
+                         mode=MODE.SIMPLE), ]
         outputs = [
             LiteralOutput('output', 'Output response',
                           data_type='string')]
@@ -44,7 +44,7 @@ class SimpleDryRun(Process):
         # TODO: we need a more informational user exception in pywps.
         response.update_status('PyWPS Process started.', 0)
 
-        num_files = request.inputs['num_files'][0].data
+        num_files = request.inputs['count'][0].data
 
         if num_files > 10:
             msg = "Too many files too download: {} > 10".format(num_files)
