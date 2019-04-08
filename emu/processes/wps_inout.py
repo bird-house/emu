@@ -67,14 +67,14 @@ class InOut(Process):
                          metadata=[
                             Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AllowedValue'),  # noqa
                             Metadata('AllowedValue Example', 'http://docs.opengeospatial.org/is/14-065/14-065.html#98'),  # noqa
-                            Metadata('Not implemented yet')],
+                            ],
                          data_type='integer',
                          default='1',
                          allowed_values=[
-                             AllowedValue(minval=1, maxval=10, spacing=1),
+                             AllowedValue(minval=1, maxval=10),
                              AllowedValue(minval=100, maxval=200, spacing=10)
                          ],
-                         mode=MODE.NONE,),
+                         mode=MODE.SIMPLE,),
             LiteralInput('any_value', 'Any Value',
                          abstract='Enter any value.',
                          metadata=[
