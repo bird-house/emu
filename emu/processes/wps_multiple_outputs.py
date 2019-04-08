@@ -53,7 +53,7 @@ class MultipleOutputs(Process):
         # generate MetaLink v3 output
         ml3 = MetaLink('test-ml-1', 'Testing MetaLink with text files.', workdir=self.workdir)
         for i in range(max_outputs):
-            mf = MetaFile('output_{}'.format(i), 'Test output', format=FORMATS.TEXT)
+            mf = MetaFile('output_{}'.format(i), 'Test output', fmt=FORMATS.TEXT)
             mf.data = 'output: {}'.format(i)
             ml3.append(mf)
         response.outputs['output'].data = ml3.xml
@@ -61,7 +61,7 @@ class MultipleOutputs(Process):
         # ... OR generate MetaLink v4 output (recommended)
         ml4 = MetaLink4('test-ml-1', 'Testing MetaLink with text files.', workdir=self.workdir)
         for i in range(max_outputs):
-            mf = MetaFile('output_{}'.format(i), 'Test output', format=FORMATS.TEXT)
+            mf = MetaFile('output_{}'.format(i), 'Test output', fmt=FORMATS.TEXT)
             mf.data = 'output: {}'.format(i)
             ml4.append(mf)
         response.outputs['output_meta4'].data = ml4.xml
