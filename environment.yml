@@ -4,8 +4,9 @@ channels:
 - conda-forge
 - defaults
 dependencies:
+- python=3.6
 - six
-- pywps>=4.3.2
+# - pywps>=4.3.3
 - jinja2
 - click
 - psutil
@@ -15,3 +16,5 @@ dependencies:
 - netcdf4
 # tests
 - pytest-flake8
+- pip:
+  - -e git+https://github.com/geopython/pywps@master#egg=pywps

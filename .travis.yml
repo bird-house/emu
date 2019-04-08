@@ -1,6 +1,5 @@
 language: python
 python:
-  - "2.7"
   - "3.6"
 os:
   - linux
@@ -30,5 +29,5 @@ before_script:
   - emu start --daemon --bind-host 0.0.0.0 --port 5000
   - sleep 2
 script:
-  - pytest
+  - pytest -v -m 'not online' tests/
   - flake8
