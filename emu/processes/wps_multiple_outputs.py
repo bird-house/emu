@@ -1,6 +1,7 @@
 import os
 from pywps import Process, LiteralInput, ComplexOutput
 from pywps import FORMATS
+from pywps.inout.literaltypes import AllowedValue
 from pywps.app.Common import Metadata
 from pywps.inout.outputs import MetaLink, MetaLink4, MetaFile
 import json
@@ -16,7 +17,7 @@ class MultipleOutputs(Process):
                          abstract='The number of generated output files.',
                          data_type='integer',
                          default=2,
-                         allowed_values=[1, 2, 5, 10])]
+                         allowed_values=[AllowedValue(minval=1, maxval=10)])]
         outputs = [
             ComplexOutput('output', 'METALINK v3 output',
                           abstract='Testing metalink v3 output',
