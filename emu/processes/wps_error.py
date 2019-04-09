@@ -1,8 +1,9 @@
 from pywps import Process, LiteralInput
 from pywps.app.Common import Metadata
+from pywps.app.exceptions import ProcessError
 
 import logging
-logger = logging.getLogger("PYWPS")
+LOGGER = logging.getLogger("PYWPS")
 
 
 class ShowError(Process):
@@ -10,7 +11,7 @@ class ShowError(Process):
         inputs = [
             LiteralInput('message', 'Error Message', data_type='string',
                          abstract='Enter an error message that will be returned.',
-                         default="This process failed intentionally :)",
+                         default="This process failed intentionally.",
                          min_occurs=1,)]
 
         super(ShowError, self).__init__(
@@ -32,5 +33,6 @@ class ShowError(Process):
     def _handler(request, response):
         response.update_status('PyWPS Process started.', 0)
 
-        logger.info("wps_error started ...")
-        raise Exception(request.inputs['message'][0].data)
+        LOGGER.info("wps_error started ...")
+        # raise Exception("something bad happend")
+        raise ProcessError(request.inputs['message'][0].data)
