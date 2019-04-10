@@ -1,8 +1,9 @@
 from pywps import Process, LiteralInput, LiteralOutput
 from pywps.inout.literaltypes import AllowedValue
 from pywps.app.Common import Metadata
-from pywps.app.exceptions import StorageLimitExceeded, DryRunWarning
 from pywps.validator.mode import MODE
+
+from emu.exceptions import DryRunWarning, StorageLimitExceeded
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
