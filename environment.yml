@@ -1,10 +1,10 @@
 name: emu
 channels:
-- birdhouse
-- conda-forge
+#- birdhouse
+#- conda-forge
 - defaults
 dependencies:
-- python=3.6
+#- python=3.6
 - six
 # - pywps>=4.3.3
 - jinja2
