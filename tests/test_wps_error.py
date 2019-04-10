@@ -7,7 +7,7 @@ from emu.processes.wps_error import ShowError
 def test_wps_error():
     client = client_for(Service(processes=[ShowError()]))
     datainputs = "message=tomorrow-is-another-day;nice=true"
-    resp = client.get(
+    client.get(
         "?service=WPS&request=Execute&version=1.0.0&identifier=hello&datainputs={}".format(
             datainputs))
     # TODO: parse ows:Exception
