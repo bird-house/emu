@@ -12,7 +12,11 @@ class ShowError(Process):
             LiteralInput('message', 'Error Message', data_type='string',
                          abstract='Enter an error message that will be returned.',
                          default="This process failed intentionally.",
-                         min_occurs=1,)]
+                         min_occurs=1,),
+            LiteralInput('be_nice', 'Be nice and show a friendly error message. Default: true',
+                         data_type='boolean',
+                         default=True, ),
+        ]
 
         super(ShowError, self).__init__(
             self._handler,
@@ -34,5 +38,7 @@ class ShowError(Process):
         response.update_status('PyWPS Process started.', 0)
 
         LOGGER.info("wps_error started ...")
-        # raise Exception("something bad happend")
-        raise ProcessError(request.inputs['message'][0].data)
+        if request.inputs['be_nice'][0].data is True:
+            raise ProcessError(request.inputs['message'][0].data)
+        else:
+            raise Exception("Sorry, we have no explanation for this error.")
