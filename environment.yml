@@ -1,21 +1,17 @@
 name: emu
 channels:
-#- birdhouse
 #- conda-forge
 - defaults
 dependencies:
-#- python=3.6
-- six
-# - pywps>=4.3.3
+#- pywps=4.2
 - jinja2
 - click
 - psutil
-- libiconv
 - defusedxml
 # opendap support
 - netcdf4
+- xarray
 # tests
 - pytest
-# - pytest-flake8
 - pip:
   - -e git+https://github.com/geopython/pywps@master#egg=pywps

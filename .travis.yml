@@ -24,12 +24,12 @@ install:
   - source activate emu
   # Packages for testing
   - conda install pytest flake8
-  # Install Emu WPS
+  # Install WPS
   - python setup.py install
 before_script:
   # Start WPS service on port 5000 on 0.0.0.0
   - emu start --daemon --bind-host 0.0.0.0 --port 5000
   - sleep 2
 script:
-  - pytest -v -m 'not online' tests/
+  - pytest
   - flake8
