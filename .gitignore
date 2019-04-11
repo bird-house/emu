@@ -1,4 +1,10 @@
-# PyWPS
+# installer
+#Makefile
+
+# Docker
+#Dockerfile
+
+# PyWPS 
 custom.cfg
 .custom.cfg
 *.pid
@@ -17,10 +23,9 @@ __pycache__
 
 # Unit test / Coverage reports
 .cache
+.pytest_cache
 .coverage
-.pytest_cache
 .tox
-.pytest_cache
 nosetests.xml
 unit_tests/testdata.json
 
@@ -79,7 +84,3 @@ testdata.json
 *.a
 *.mod
 *.out
-
-# snappy
-esa-snap_sentinel_unix_6_0.sh
-response.varfile

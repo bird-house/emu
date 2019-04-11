@@ -11,11 +11,11 @@ class ShowError(Process):
 
     An example request::
 
-        http://localhost:5000/wps? \
-            version=1.0.0& \
-            service=wps& \
-            request=Execute& \
-            identifier=show_error& \
+        http://localhost:5000/wps?
+            version=1.0.0&
+            service=wps&
+            request=Execute&
+            identifier=show_error&
             DataInputs=message=bad-day;nice=true
     """
     def __init__(self):

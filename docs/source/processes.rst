@@ -41,3 +41,21 @@ NCMeta
 .. autoprocess:: emu.processes.wps_ncmeta.NCMeta
    :docstring:
    :skiplines: 1
+
+
+ShowError
+---------
+
+.. autoprocess:: emu.processes.wps_error.ShowError
+   :docstring:
+   :skiplines: 1
+
+MultipleOutputs
+---------------
+
+.. autoprocess:: emu.processes.wps_multiple_outputs.MultipleOutputs
+   :docstring:
+   :skiplines: 1
+
+
+
