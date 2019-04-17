@@ -79,20 +79,20 @@ class InOut(Process):
                          abstract='Enter any value.',
                          metadata=[
                             Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AnyValue'),  # noqa
-                            Metadata('Not implemented yet')],
-                         data_type='string',
-                         allowed_values=[AnyValue()],
+                         ],
+                         allowed_values=AnyValue(),
                          default='any value',
-                         mode=MODE.NONE,),
+                         mode=MODE.SIMPLE,),
             LiteralInput('ref_value', 'Referenced Value',
                          abstract='Choose a referenced value',
                          metadata=[
                             Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/_modules/pywps/inout/literaltypes.html'),  # noqa
-                            Metadata('Not implemented yet')],
+                         ],
                          data_type='string',
-                         allowed_values=[ValuesReference()],
-                         default='a reference value',
-                         mode=MODE.NONE,),
+                         allowed_values=ValuesReference(
+                             reference="https://en.wikipedia.org/w/api.php?action=opensearch&search=scotland&format=json"),  # noqa
+                         default='Scotland',
+                         mode=MODE.SIMPLE,),
             # TODO: bbox is not supported yet by owslib
             # BoundingBoxInput('bbox', 'Bounding Box',
             #                  abstract='Bounding Box with EPSG:4326 and EPSG:3035.',
