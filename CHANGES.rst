@@ -1,6 +1,19 @@
 Changes
 *******
 
+0.10.0 (2019-04-17)
+===================
+
+This is the San Francisco release.
+
+Changes:
+
+* Added example for Metalink as process output response (#84).
+* Updated `inout` process with examples for AllowedValue, AnyValue and ValuesReference (#88, #85, #82).
+* Using pywps `ProcessError` exception (#86)
+* Added example process for *dry-run* usage (#83).
+* Updated to latest cookiecutter template (#87).
+
 0.9.1 (2018-12-04)
 ==================
 
