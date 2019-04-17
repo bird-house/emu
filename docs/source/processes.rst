@@ -50,6 +50,13 @@ ShowError
    :docstring:
    :skiplines: 1
 
+SimpleDryRun
+------------
+
+.. autoprocess:: emu.processes.wps_dry_run.SimpleDryRun
+   :docstring:
+   :skiplines: 1
+
 MultipleOutputs
 ---------------
 
@@ -57,5 +64,9 @@ MultipleOutputs
    :docstring:
    :skiplines: 1
 
+InOut
+-----
 
-
+.. autoprocess:: emu.processes.wps_inout.InOut
+   :docstring:
+   :skiplines: 1
