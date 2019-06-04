@@ -34,7 +34,9 @@ class InOut(Process):
                          allowed_values=[1, 2, 3, 5, 7, 11]),
             LiteralInput('float', 'Float', data_type='float',
                          abstract='Enter a float number.',
-                         default="3.14"),
+                         default="3.14",
+                         min_occurs=0,
+                         max_occurs=5),
             # TODO: boolean default is not displayed in phoenix
             LiteralInput('boolean', 'Boolean', data_type='boolean',
                          abstract='Make your choice :)',
@@ -166,7 +168,7 @@ class InOut(Process):
 
         response.outputs['string'].data = request.inputs['string'][0].data
         response.outputs['int'].data = request.inputs['int'][0].data
-        response.outputs['float'].data = request.inputs['float'][0].data
+        response.outputs['float'].data = sum([f.data for f in request.inputs['float']])
         response.outputs['boolean'].data = request.inputs['boolean'][0].data
         response.outputs['angle'].data = request.inputs['angle'][0].data
         response.outputs['time'].data = request.inputs['time'][0].data
