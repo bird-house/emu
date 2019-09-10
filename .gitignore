@@ -4,7 +4,7 @@
 # Docker
 #Dockerfile
 
-# PyWPS 
+# PyWPS
 custom.cfg
 .custom.cfg
 *.pid
@@ -28,6 +28,7 @@ __pycache__
 .tox
 nosetests.xml
 unit_tests/testdata.json
+coverage/
 
 # R
 *.Rhistory
