@@ -51,7 +51,12 @@ class PolyCentroid(Process):
             try:
                 fn = request.inputs['wkt'][0].data
                 poly = wkt.loads(fn)
-                coordinates = poly['coordinates']
+
+                # Get the coordinates of the first feature
+                if len(poly['coordinates']) == 1:  # For Polygons and Multipolygons
+                    coordinates = poly['coordinates'][0]
+                else:
+                    coordinates = poly['coordinates']  # For other geometries
 
             except Exception as e:
                 msg = "{}: WKT not found.".format(e)
