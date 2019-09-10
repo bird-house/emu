@@ -3,8 +3,9 @@ Process using an application/xml+gml input. Used to test UI interactions.
 
 Author: David Huard
 """
-from pywps import Process, ComplexInput, LiteralOutput
+from pywps import Process, ComplexInput,LiteralInput, LiteralOutput
 from pywps import FORMATS
+from geomet import wkt
 import logging
 LOGGER = logging.getLogger("PYWPS")
 
@@ -12,7 +13,10 @@ LOGGER = logging.getLogger("PYWPS")
 class PolyCentroid(Process):
     def __init__(self):
         inputs = [
-            ComplexInput('polygon', 'Region definition',
+            LiteralInput("wkt", "Region definition (WKT: Well-Known-Text)",
+                         abstract="A Well-Known-Test definition for a region.",
+                         data_type="string"),
+            ComplexInput('xml', 'Region definition (XML)',
                          abstract="A polygon defining a region.",
                          supported_formats=[FORMATS.GML, ]),
         ]
@@ -40,25 +44,46 @@ class PolyCentroid(Process):
         from defusedxml import ElementTree
         response.update_status('PyWPS Process started.', 0)
 
-        fn = request.inputs['polygon'][0].file
+        coordinates = None
 
-        ns = {'gml': 'http://www.opengis.net/gml'}
-        poly = ElementTree.parse(fn)
+        if 'wkt' in request.inputs:
 
-        # Find the first polygon in the file.
-        e = poly.find('.//gml:Polygon', ns)
+            try:
+                fn = request.inputs['wkt'][0].data
+                poly = wkt.loads(fn)
+                coordinates = poly['coordinates']
 
-        # Get the coordinates
-        c = e.find('.//gml:coordinates', ns).text
-        coords = [tuple(map(float, p.split(','))) for p in c.split(' ')]
+            except Exception as e:
+                msg = "{}: WKT not found.".format(e)
+                logging.warning(msg=msg)
+                raise
+
+        elif 'xml' in request.inputs:
+
+            try:
+                fn = request.inputs['xml'][0].file
+                poly = ElementTree.parse(fn)
+                ns = {'gml': 'http://www.opengis.net/gml'}
+
+                # Find the first polygon in the file.
+                e = poly.find('.//gml:Polygon', ns)
+
+                # Get the coordinates
+                c = e.find('.//gml:coordinates', ns).text
+                coordinates = [tuple(map(float, p.split(','))) for p in c.split(' ')]
+
+            except Exception as e:
+                msg = "{}: XML not found.".format(e)
+                logging.warning(msg=msg)
+                raise
 
         # Compute the average
-        n = len(coords)
-        x, y = zip(*coords)
-        cx = sum(x) / n
-        cy = sum(y) / n
+        n = len(coordinates)
+        x, y = zip(*coordinates)
+        centroid_x = sum(x) / n
+        centroid_y = sum(y) / n
 
-        response.outputs['output'].data = '{:.5f},{:.5f}'.format(cx, cy)
+        response.outputs['output'].data = '{:.5f},{:.5f}'.format(centroid_x, centroid_y)
 
         response.update_status('PyWPS Process completed.', 100)
         return response
