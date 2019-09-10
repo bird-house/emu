@@ -8,7 +8,7 @@ or build it from the provided Dockerfile.
 
 Start the container with the following command:
 
-.. code-block:: sh
+.. code-block:: console
 
   $ docker run -d -p 5000:5000 --name=emu birdhouse/emu
 
@@ -19,13 +19,13 @@ You can map the container port also to another port on your machine, for example
 
 Check the docker logs:
 
-.. code-block:: sh
+.. code-block:: console
 
   $ docker logs emu
 
 Show running docker containers:
 
-.. code-block:: sh
+.. code-block:: console
 
   $ docker ps
 
@@ -43,13 +43,13 @@ Execute *Hello* process with you user name:
 
 Install *Birdy* WPS command line tool from Conda:
 
-.. code-block:: sh
+.. code-block:: console
 
   $ conda install -c birdhouse birdhouse-birdy
 
 Use Birdy to access Emu WPS service:
 
-.. code-block:: sh
+.. code-block:: console
 
   $ export WPS_SERVICE=http://localhost:5000/wps
   $ birdy -h
@@ -58,7 +58,7 @@ Use Birdy to access Emu WPS service:
 
 Stop and remove docker container:
 
-.. code-block:: sh
+.. code-block:: console
 
   $ docker stop emu
 
@@ -67,7 +67,7 @@ Using docker-compose
 
 Use `docker-compose`_ (you need a recent version > 1.7) to start the container:
 
-.. code-block:: sh
+.. code-block:: console
 
    $ git clone https://github.com/bird-house/emu.git
    $ cd emu
@@ -86,7 +86,7 @@ See the `docker-compose documentation`_.
 
 Stop the container with:
 
-.. code-block:: sh
+.. code-block:: console
 
   $ docker-compose down
 
@@ -95,7 +95,7 @@ Build image using docker-compose
 
 You can build locally a new docker image from the Dockerfile by running docker-compose:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ docker-compose build
 

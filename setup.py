@@ -16,7 +16,7 @@ with open(os.path.join(here, 'emu', '__version__.py'), 'r') as f:
     exec(f.read(), about)
 
 reqs = [line.strip() for line in open('requirements.txt')]
-extra_reqs = [line.strip() for line in open('requirements_dev.txt')]
+dev_reqs = [line.strip() for line in open('requirements_dev.txt')]
 
 classifiers = [
     'Development Status :: 3 - Alpha',
@@ -47,7 +47,9 @@ setup(name='emu',
       packages=find_packages(),
       include_package_data=True,
       install_requires=reqs,
-      extra_requires=extra_reqs,
+      extras_require={
+          "dev": dev_reqs,              # pip install ".[dev]"
+      },
       entry_points={
           'console_scripts': [
               'emu=emu.cli:cli',

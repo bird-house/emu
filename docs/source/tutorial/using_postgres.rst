@@ -8,16 +8,18 @@ PyWPS is using `SQLAlchemy`_, see the `PYWPS documentation`_ for details.
 
 First run the Emu default installation:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ git clone https://github.com/bird-house/emu.git
     $ cd emu
+    $ conda env create -f environment.yml
+    $ source activate emu
     $ make clean install
 
 The default installation is using sqlite. We now need a postgres database.
 If you don't have one yet you can use a `postgres docker container <https://store.docker.com/images/postgres>`_.
 
-.. code-block:: sh
+.. code-block:: console
 
     $ docker pull postgres
     $ docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
@@ -27,7 +29,7 @@ The postgres database is now available on default port 5432.
 SQLAlchemy needs the  `psycopg2 <https://pypi.python.org/pypi/psycopg2>`_  postgres adapter.
 You can install it via Conda into the ``emu`` environment.
 
-.. code-block:: sh
+.. code-block:: console
 
     $ conda install -n emu psycopg2
 
@@ -40,7 +42,7 @@ for this database is::
 
 Configure this connection string in ``etc/custom.cfg``, ``logging`` section, ``database`` option:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ vim etc/custom.cfg
     [logging]
@@ -49,13 +51,13 @@ Configure this connection string in ``etc/custom.cfg``, ``logging`` section, ``d
 
 Start the emu service:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ emu start -c etc/custom.cfg
 
 Your Emu WPS service should be available at the following URL:
 
-.. code-block:: sh
+.. code-block:: console
 
     $ firefox http://localhost:5000/wps?request=GetCapabilities&service=WPS
 
