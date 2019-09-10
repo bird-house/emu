@@ -1,11 +1,10 @@
 """
 Process using an application/xml+gml input. Used to test UI interactions.
 
-Author: David Huard
+Author: David Huard and Trevor James Smith
 """
-from pywps import Process, ComplexInput,LiteralInput, LiteralOutput
+from pywps import Process, ComplexInput, LiteralInput, LiteralOutput
 from pywps import FORMATS
-from geomet import wkt
 import logging
 LOGGER = logging.getLogger("PYWPS")
 
@@ -13,12 +12,12 @@ LOGGER = logging.getLogger("PYWPS")
 class PolyCentroid(Process):
     def __init__(self):
         inputs = [
-            LiteralInput("wkt", "Region definition (WKT: Well-Known-Text)",
+            LiteralInput("wkt", "Region definition in WKT: Well-Known-Text format",
                          abstract="A Well-Known-Test definition for a region.",
-                         data_type="string"),
-            ComplexInput('xml', 'Region definition (XML)',
+                         data_type="string", default=""),
+            ComplexInput('xml', 'Region definition in XML format',
                          abstract="A polygon defining a region.",
-                         supported_formats=[FORMATS.GML, ]),
+                         min_occurs=0, supported_formats=[FORMATS.GML, ]),
         ]
         outputs = [
             LiteralOutput('output', 'The centroid of the polygon geometry.',
@@ -41,12 +40,13 @@ class PolyCentroid(Process):
 
     @staticmethod
     def _handler(request, response):
+        from geomet import wkt
         from defusedxml import ElementTree
         response.update_status('PyWPS Process started.', 0)
 
         coordinates = None
 
-        if 'wkt' in request.inputs:
+        if request.inputs['wkt'][0].data != "":
 
             try:
                 fn = request.inputs['wkt'][0].data
@@ -63,7 +63,7 @@ class PolyCentroid(Process):
                 logging.warning(msg=msg)
                 raise
 
-        elif 'xml' in request.inputs:
+        elif request.inputs['xml'][0].file is not None:
 
             try:
                 fn = request.inputs['xml'][0].file
