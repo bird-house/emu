@@ -14,7 +14,7 @@ class PolyCentroid(Process):
         inputs = [
             LiteralInput("wkt", "Region definition in WKT: Well-Known-Text format",
                          abstract="A Well-Known-Test definition for a region.",
-                         data_type="string", default=""),
+                         min_occurs=0, data_type="string", default=""),
             ComplexInput('xml', 'Region definition in XML format',
                          abstract="A polygon defining a region.",
                          min_occurs=0, supported_formats=[FORMATS.GML, ]),
@@ -30,7 +30,7 @@ class PolyCentroid(Process):
             title="Approximate centroid of a polygon.",
             abstract="Return the polygon's centroid coordinates. If the geometry contains multiple polygons, "
                      "only the centroid of the first one will be computed. Do not use for serious computations"
-                     ", this is only a test process and uses a crude approximation. ",
+                     ", this is only a test process and uses a crude approximation.",
             version="1.0",
             inputs=inputs,
             outputs=outputs,
@@ -81,6 +81,8 @@ class PolyCentroid(Process):
                 msg = "{}: XML not found.".format(e)
                 logging.warning(msg=msg)
                 raise
+        else:
+            raise ValueError("Process requires a WKT string or XML file.")
 
         # Compute the average
         n = len(coordinates)
