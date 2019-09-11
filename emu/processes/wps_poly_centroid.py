@@ -44,8 +44,6 @@ class PolyCentroid(Process):
         from defusedxml import ElementTree
         response.update_status('PyWPS Process started.', 0)
 
-        coordinates = None
-
         if request.inputs['wkt'][0].data != "":
 
             try:
