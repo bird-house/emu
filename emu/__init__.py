@@ -4,4 +4,6 @@
 
 from .__version__ import __author__, __email__, __version__
 
-from .wsgi import application
+from pywps.application import make_app
+
+application = make_app()

@@ -28,7 +28,7 @@ install:
   - python setup.py install
 before_script:
   # Start WPS service on port 5000 on 0.0.0.0
-  - emu start --daemon --bind-host 0.0.0.0 --port 5000
+  - pywps start --bind-host 0.0.0.0 -c pywps.cfg &
   - sleep 2
 script:
   - pytest -v -m 'not online' tests/

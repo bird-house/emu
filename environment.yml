@@ -4,10 +4,7 @@ channels:
 - defaults
 dependencies:
 - pip
-#- pywps=4.2
-- jinja2
-- click
-- psutil
+# - pywps=4.2
 - defusedxml
 # opendap support
 - netcdf4
@@ -15,5 +12,6 @@ dependencies:
 # tests
 - pytest
 - pip:
-  - -e git+https://github.com/geopython/pywps@master#egg=pywps
+  #- -e git+https://github.com/geopython/pywps@master#egg=pywps
+  - -e git+https://github.com/cehbrecht/pywps@watchdog#egg=pywps
   - geomet
