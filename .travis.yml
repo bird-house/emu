@@ -26,6 +26,8 @@ install:
   - conda install pytest flake8
   # Install WPS
   - python setup.py install
+  # Init DB
+  - pywps -c pywps.cfg migrate
 before_script:
   # Start WPS service on port 5000 on 0.0.0.0
   - pywps -c pywps.cfg start --bind-host 0.0.0.0 &
