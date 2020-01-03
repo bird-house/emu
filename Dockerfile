@@ -22,6 +22,9 @@ RUN conda env create -n wps -f environment.yml
 # Install WPS
 RUN ["/bin/bash", "-c", "source activate wps && python setup.py develop"]
 
+# Init DB
+RUN ["/bin/bash", "-c", "source activate wps && pywps -c /opt/wps/pywps.cfg migrate"]
+
 # Start WPS service on port 5000 on 0.0.0.0
 EXPOSE 5000
 ENTRYPOINT ["/bin/bash", "-c"]
