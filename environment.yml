@@ -1,6 +1,6 @@
 name: emu
 channels:
-#- conda-forge
+- conda-forge
 - defaults
 dependencies:
 - pip
