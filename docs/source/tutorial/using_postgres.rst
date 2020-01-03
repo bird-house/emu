@@ -40,20 +40,20 @@ for this database is::
     # postgresql+psycopg2://user:password@host:port/dbname
     postgresql+psycopg2://postgres:postgres@localhost:5432/postgres
 
-Configure this connection string in ``etc/custom.cfg``, ``logging`` section, ``database`` option:
+Configure this connection string in ``custom.cfg``, ``logging`` section, ``database`` option:
 
 .. code-block:: console
 
-    $ vim etc/custom.cfg
+    $ vim custom.cfg
     [logging]
     level = INFO
     database = postgresql+psycopg2://postgres:postgres@localhost:5432/postgres
 
-Start the emu service:
+Start the PyWPS service:
 
 .. code-block:: console
 
-    $ emu start -c etc/custom.cfg
+    $ pywps -c custom.cfg start
 
 Your Emu WPS service should be available at the following URL:
 
