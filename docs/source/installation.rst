@@ -29,7 +29,6 @@ Install the ``emu`` Conda package:
     $ conda install -c birdhouse -c conda-forge emu
     $ emu --help
 
-
 Install from GitHub
 -------------------
 
@@ -62,6 +61,15 @@ For development you can use this command:
   $ pip install -e .[dev]
   OR
   $ make develop
+
+Initialize Database
+-------------------
+
+Before you can start the service you need to initialize or upgrade the database:
+
+.. code-block:: console
+
+  $ make migrate
 
 Start PyWPS service
 -------------------
