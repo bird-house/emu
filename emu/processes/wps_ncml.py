@@ -45,11 +45,17 @@ class NcMLAgg(Process):
     def _handler(self, request, response):
         import xarray.tests.test_dataset as td
 
+        # Create test datasets
         d1, d2, d3 = td.create_append_test_data()
 
-        d1fn = Path(self.workdir) / "d1.nc"
-        d2fn = Path(self.workdir) / "d2.nc"
+        # Save datasets to disk
+        d1fn = os.path.join(self.workdir, "d1.nc")
+        d2fn = os.path.join(self.workdir, "d2.nc")
 
+        d1.to_netcdf(d1fn)
+        d2.to_netcdf(d2fn)
+
+        # Create NcML aggregation
         ncml = """
         <netcdf xmlns="http://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2">
             <aggregation dimName="time" type="joinExisting">
@@ -58,8 +64,9 @@ class NcMLAgg(Process):
         </netcdf>
         """
 
-        d1.to_netcdf(d1fn)
-        d2.to_netcdf(d2fn)
+        # Write response
+        response.outputs["d1"].file = d1fn
+        response.outputs["d2"].file = d2fn
 
         with open(os.path.join(self.workdir, 'agg.ncml'), "w") as fp:
             response.outputs['ncml'].file = fp.name
