@@ -14,6 +14,9 @@ from .wps_esgf import ESGFDemo
 from .wps_output_formats import OutputFormats
 from .wps_poly_centroid import PolyCentroid
 from .wps_ncmeta import NCMeta
+from .wps_nonpyid import NonPyID
+from .wps_dry_run import SimpleDryRun
+from .wps_ncml import NcMLAgg
 
 processes = [
     UltimateQuestion(),
@@ -32,4 +35,7 @@ processes = [
     OutputFormats(),
     PolyCentroid(),
     NCMeta(),
+    NonPyID(),
+    SimpleDryRun(),
+    NcMLAgg(),
 ]
