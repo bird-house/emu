@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from pywps import Service
 
 from .common import client_for
@@ -27,6 +28,7 @@ def test_wps_caps():
         'output_formats',
         'poly_centroid',
         'show_error',
+        'simple_dry_run',
         'sleep',
         'ultimate_question',
         'wordcounter',

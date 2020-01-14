@@ -1,9 +1,9 @@
 import pytest
-
+import json
 from pywps import Service
 from pywps.tests import assert_response_success
 
-from .common import client_for, resource_file
+from .common import client_for, resource_file, get_output
 from emu.processes.wps_wordcounter import WordCounter
 
 
@@ -26,5 +26,9 @@ def test_wps_wordcount_href():
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
         identifier='wordcounter',
-        datainputs=datainputs)
-    assert_response_success(resp)
+        datainputs=datainputs,
+        rawdataoutput='output=@mimetype=application/json'
+    )
+
+    assert resp.status_code == 200
+    json.loads(resp.data)

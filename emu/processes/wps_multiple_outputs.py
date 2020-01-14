@@ -1,8 +1,9 @@
 import os
 from pywps import Process, LiteralInput, ComplexOutput
 from pywps import FORMATS
+from pywps.inout.literaltypes import AllowedValue
 from pywps.app.Common import Metadata
-from pywps.inout.outputs import FileStorage
+from pywps.inout.outputs import MetaLink, MetaLink4, MetaFile
 import json
 
 import logging
@@ -15,17 +16,17 @@ class MultipleOutputs(Process):
             LiteralInput('count', 'Number of output files',
                          abstract='The number of generated output files.',
                          data_type='integer',
-                         default='1',
-                         allowed_values=[1, 2, 5, 10])]
+                         default=2,
+                         allowed_values=[AllowedValue(minval=1, maxval=10)])]
         outputs = [
-            ComplexOutput('output', 'Output',
-                          abstract='Text document with dummy content.',
+            ComplexOutput('output', 'METALINK v3 output',
+                          abstract='Testing metalink v3 output',
                           as_reference=True,
-                          supported_formats=[FORMATS.TEXT]),
-            ComplexOutput('reference', 'Output References',
-                          abstract='Document with references to produced output files.',
+                          supported_formats=[FORMATS.METALINK]),
+            ComplexOutput('output_meta4', 'METALINK v4 output',
+                          abstract='Testing metalink v4 output',
                           as_reference=True,
-                          supported_formats=[FORMATS.JSON]),
+                          supported_formats=[FORMATS.META4])
         ]
 
         super(MultipleOutputs, self).__init__(
@@ -48,24 +49,23 @@ class MultipleOutputs(Process):
         response.update_status('PyWPS Process started.', 0)
 
         LOGGER.info("starting ...")
-        if 'count' in request.inputs:
-            max_outputs = request.inputs['count'][0].data
-        else:
-            max_outputs = 1
-        # prepare output
-        response.outputs['output'].storage = FileStorage()
-        # generate outputs
-        result = dict(count=max_outputs, outputs=[])
+        max_outputs = request.inputs['count'][0].data
+
+        # generate MetaLink v3 output
+        ml3 = MetaLink('test-ml-1', 'Testing MetaLink with text files.', workdir=self.workdir)
         for i in range(max_outputs):
-            progress = int(i * 100.0 / max_outputs)
-            response.update_status('working on document {}'.format(i), progress)
-            with open(os.path.join(self.workdir, "output_{}.txt".format(i)), 'w') as fp:
-                fp.write("my output file number %s" % i)
-            response.outputs['output'].file = fp.name
-            ref_url = response.outputs['output'].get_url()
-            result['outputs'].append(dict(name=os.path.basename(ref_url), url=ref_url))
-        # return document with outputs
-        response.outputs['reference'].data = json.dumps(result)
+            mf = MetaFile('output_{}'.format(i), 'Test output', fmt=FORMATS.TEXT)
+            mf.data = 'output: {}'.format(i)
+            ml3.append(mf)
+        response.outputs['output'].data = ml3.xml
+
+        # ... OR generate MetaLink v4 output (recommended)
+        ml4 = MetaLink4('test-ml-1', 'Testing MetaLink with text files.', workdir=self.workdir)
+        for i in range(max_outputs):
+            mf = MetaFile('output_{}'.format(i), 'Test output', fmt=FORMATS.TEXT)
+            mf.data = 'output: {}'.format(i)
+            ml4.append(mf)
+        response.outputs['output_meta4'].data = ml4.xml
 
         response.update_status('PyWPS Process completed.', 100)
         return response

@@ -1,7 +1,7 @@
 # vim:set ft=dockerfile:
 FROM continuumio/miniconda3
 MAINTAINER https://github.com/bird-house/emu
-LABEL Description="Emu: Demo PyWPS" Vendor="Birdhouse" Version="0.9.1"
+LABEL Description="Emu: Demo PyWPS" Vendor="Birdhouse" Version="0.11.0"
 
 # Update Debian system
 RUN apt-get update && apt-get install -y \

@@ -1,6 +1,30 @@
 Changes
 *******
 
+0.11.0 (2019-09-27)
+===================
+
+This is the Bucharest release.
+
+Changes:
+
+* Skipped conda handling in Makefile (#91).
+* Support WKT as input format in poly_centroid process (#49).
+* Added input with multiple values (max_occurs > 1) (#89).
+
+0.10.0 (2019-04-17)
+===================
+
+This is the San Francisco release.
+
+Changes:
+
+* Added example for Metalink as process output response (#84).
+* Updated `inout` process with examples for AllowedValue, AnyValue and ValuesReference (#88, #85, #82).
+* Using pywps `ProcessError` exception (#86)
+* Added example process for *dry-run* usage (#83).
+* Updated to latest cookiecutter template (#87).
+
 0.9.1 (2018-12-04)
 ==================
 

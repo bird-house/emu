@@ -1,5 +1,6 @@
-import os
+import json
 import re
+
 from collections import Counter
 
 from pywps import Process
@@ -15,7 +16,7 @@ class WordCounter(Process):
     Notes
     -----
 
-    Counts ocurrences of all words in a document.
+    Counts occurrences of all words in a document.
     """
     def __init__(self):
         inputs = [
@@ -55,9 +56,8 @@ class WordCounter(Process):
         counts = Counter(words(request.inputs['text'][0].stream))
         sorted_counts = sorted([(v, k) for (k, v) in counts.items()],
                                reverse=True)
-        with open(os.path.join(self.workdir, 'out.txt'), 'w') as fout:
-            fout.write(str(sorted_counts))
-            response.outputs['output'].file = fout.name
+
+        response.outputs['output'].data = json.dumps(sorted_counts)
 
         response.update_status('PyWPS Process completed.', 100)
         return response
