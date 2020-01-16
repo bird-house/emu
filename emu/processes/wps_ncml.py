@@ -1,15 +1,11 @@
 import os
 
 from pywps import Process
-from pywps import ComplexInput, ComplexOutput, FORMATS, Format
-from pywps.inout.basic import SOURCE_TYPE
-from pywps.validator.mode import MODE
+from pywps import ComplexOutput, FORMATS
 from pywps.app.Common import Metadata
-from pathlib import Path
-
-from netCDF4 import Dataset
-
 import logging
+
+
 LOGGER = logging.getLogger("PYWPS")
 
 
@@ -46,7 +42,7 @@ class NcMLAgg(Process):
         import xarray.tests.test_dataset as td
 
         # Create test datasets
-        d1, d2, d3 = td.create_append_test_data()
+        d1, d2, _ = td.create_append_test_data()
 
         # Save datasets to disk
         d1fn = os.path.join(self.workdir, "d1.nc")
