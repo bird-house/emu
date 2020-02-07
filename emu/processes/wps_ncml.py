@@ -21,7 +21,7 @@ class NcMLAgg(Process):
                           supported_formats=[FORMATS.NETCDF]),
             ComplexOutput('ncml', 'NcML aggregation',
                           as_reference=True,
-                          supported_formats=[FORMATS.DODS, FORMATS.TEXT]),
+                          supported_formats=[FORMATS.NCML, FORMATS.DODS]),
         ]
 
         super(NcMLAgg, self).__init__(

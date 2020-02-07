@@ -14,8 +14,8 @@ class NcToDap(Process):
     def __init__(self):
         inputs = [
             ComplexInput('resource', "NetCDF file",
-                         abstract="Link to NetCDF file on this server",
-                         supported_formats=[FORMATS.NETCDF],
+                         abstract="Link to NetCDF or NcML file on this server",
+                         supported_formats=[FORMATS.NETCDF, FORMATS.NCML],
                          min_occurs=1,
                          max_occurs=1)
         ]
@@ -29,7 +29,7 @@ class NcToDap(Process):
             self._handler,
             identifier='nc_to_dap',
             title="Convert file URL to DAP URL",
-            abstract="Return Data Access Protocol link to a netCDF file.",
+            abstract="Return Data Access Protocol link to a netCDF or NcML file.",
             version="1",
             metadata=[
                 Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
