@@ -17,6 +17,7 @@ from .wps_ncmeta import NCMeta
 from .wps_nonpyid import NonPyID
 from .wps_dry_run import SimpleDryRun
 from .wps_ncml import NcMLAgg
+from .wps_nc_to_dap import NcToDap
 
 processes = [
     UltimateQuestion(),
@@ -38,4 +39,5 @@ processes = [
     NonPyID(),
     SimpleDryRun(),
     NcMLAgg(),
+    NcToDap(),
 ]
