@@ -22,6 +22,7 @@ def test_wps_caps():
         'inout',
         'multiple_outputs',
         'nap',
+        'nc_to_dap',
         'ncmeta',
         'ncml',
         'non.py-id',
