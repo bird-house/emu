@@ -21,13 +21,13 @@ class NcMLAgg(Process):
                           supported_formats=[FORMATS.NETCDF]),
             ComplexOutput('ncml', 'NcML aggregation',
                           as_reference=True,
-                          supported_formats=[FORMATS.TEXT]),
+                          supported_formats=[FORMATS.DODS, FORMATS.TEXT]),
         ]
 
         super(NcMLAgg, self).__init__(
             self._handler,
             identifier='ncml',
-            title="Tets NcML THREDDS capability",
+            title="Test NcML THREDDS capability",
             abstract="Return links to an NcML file aggregating netCDF files with moving time units.",
             version="1",
             metadata=[
