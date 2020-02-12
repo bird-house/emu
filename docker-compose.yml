@@ -1,12 +1,23 @@
 version: '3'
 services:
   emu:
+    # http://localhost:5000/wps
     build: .
     image: birdhouse/emu:dev
     ports:
       - "5000:5000"
     volumes:
       - outputpath:/tmp
+
+  thredds:
+    # Thredds is used as DAP server for Emu outputs
+    # http://localhost:8080/thredds/catalog.html
+    image: unidata/thredds-docker:4.6.14
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./threddsCatalog.xml:/usr/local/tomcat/content/thredds/catalog.xml:ro
+      - outputpath:/wps_outputs:ro
 
 volumes:
     outputpath: {}
