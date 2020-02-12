@@ -2,7 +2,7 @@ version: '3'
 services:
   emu:
     build: .
-    image: birdhouse/emu
+    image: birdhouse/emu:dev
     ports:
       - "5000:5000"
 
