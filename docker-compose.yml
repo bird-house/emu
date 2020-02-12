@@ -5,9 +5,16 @@ services:
     image: birdhouse/emu:dev
     ports:
       - "5000:5000"
+    volumes:
+      - outputpath:/tmp
 
+volumes:
+    outputpath: {}
 
 # docker-compose build
 # docker-compose up
-# docker-compose down
+# docker-compose down -v
+#    -v, --volumes       Remove named volumes declared in the `volumes` section
+#                        of the Compose file and anonymous volumes
+#                        attached to containers.
 # docker-compose rm
