@@ -4,6 +4,7 @@ channels:
 - defaults
 dependencies:
 - pip
+- python=3.6
 - pywps=4.2
 - jinja2
 - click
