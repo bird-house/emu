@@ -12,12 +12,12 @@ class Translation(Process):
         inputs = [
             LiteralInput('input1', 'Input1 number',
                          default='100', data_type='integer',
-                         translations={"fr_ca": {"title": "Entrée #1", "abstract": "Entier #1"}}),
+                         translations={"fr-CA": {"title": "Entrée #1", "abstract": "Entier #1"}}),
         ]
         outputs = [
             LiteralOutput('output1', 'Output1 add 1 result',
                           data_type='string',
-                          translations={"fr_ca": {"title": "Sortie #1", "abstract": "Chaîne de charactères"}}),
+                          translations={"fr-CA": {"title": "Sortie #1", "abstract": "Chaîne de charactères"}}),
         ]
 
         super(Translation, self).__init__(
@@ -31,7 +31,7 @@ class Translation(Process):
             store_supported=True,
             status_supported=True,
             keywords=["languages"],
-            translations={"fr_ca": {"title": "Processus traduit", "abstract": "Processus incluant des traductions",
+            translations={"fr-CA": {"title": "Processus traduit", "abstract": "Processus incluant des traductions",
                                     "keywords": ["langues"]}}
         )
 
