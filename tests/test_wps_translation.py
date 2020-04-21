@@ -12,9 +12,9 @@ def test_wps_translation_execute():
         service='wps', request='execute', version='1.0.0',
         identifier='translation',
         datainputs=datainputs,
-        language="en-US")
+        language="fr-CA")
     print(resp.data)
     assert_response_success(resp)
 
-    # outputs = list(resp.xpath('/wps:ExecuteResponse/wps:ProcessOutputs/wps:Output')[0])
-    # assert outputs[1].text == "Sortie #1"
+    outputs = list(resp.xpath('/wps:ExecuteResponse/wps:ProcessOutputs/wps:Output')[0])
+    assert outputs[1].text == "Sortie #1"
