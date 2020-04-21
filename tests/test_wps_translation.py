@@ -5,6 +5,21 @@ from .common import client_for
 from emu.processes.wps_translation import Translation
 
 
+def test_wps_translation_describe():
+    client = client_for(Service(processes=[Translation()]))
+    resp = client.get(
+        service='wps', request='DescribeProcess', version='1.0.0',
+        identifier='translation',
+        language="fr-CA")
+    print(resp.data)
+    title = resp.xpath_text(
+        '/wps:ProcessDescriptions'
+        '/ProcessDescription'
+        '/ows:Title'
+    )
+    assert title == 'Processus traduit'
+
+
 def test_wps_translation_execute():
     client = client_for(Service(processes=[Translation()]))
     datainputs = "input1=10"
