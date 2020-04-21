@@ -12,12 +12,18 @@ class Translation(Process):
         inputs = [
             LiteralInput('input1', 'Input1 number',
                          default='100', data_type='integer',
-                         translations={"fr-CA": {"title": "Entrée #1", "abstract": "Entier #1"}}),
+                         translations={
+                             "fr-CA": {"title": "Entrée #1", "abstract": "Entier #1"},
+                             "de-DE": {"title": "Eingabe #1", "abstract": "Eingabe #1"},
+                         }),
         ]
         outputs = [
             LiteralOutput('output1', 'Output1 add 1 result',
                           data_type='string',
-                          translations={"fr-CA": {"title": "Sortie #1", "abstract": "Chaîne de charactères"}}),
+                          translations={
+                              "fr-CA": {"title": "Sortie #1", "abstract": "Chaîne de charactères"},
+                              "de-DE": {"title": "Ausgabe #1", "abstract": "Ergebnis"}
+                          }),
         ]
 
         super(Translation, self).__init__(
@@ -31,8 +37,14 @@ class Translation(Process):
             store_supported=True,
             status_supported=True,
             keywords=["languages"],
-            translations={"fr-CA": {"title": "Processus traduit", "abstract": "Processus incluant des traductions",
-                                    "keywords": ["langues"]}}
+            translations={
+                "fr-CA": {"title": "Processus traduit",
+                          "abstract": "Processus incluant des traductions",
+                          "keywords": ["langues"]},
+                "de-DE": {"title": "Mehrsprachiger Prozess",
+                          "abstract": "Prozess mit mehreren Sprachen.",
+                          "keywords": ["sprachen"]}
+            }
         )
 
     @staticmethod
