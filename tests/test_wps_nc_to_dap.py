@@ -8,7 +8,7 @@ from emu.processes.wps_nc_to_dap import NcToDap
 from emu.processes.wps_output_formats import OutputFormats
 
 
-@pytest.mark.online
+@pytest.mark.skip
 def test_wps_nc_to_dap():
     # Create netCDF file on server
     client = client_for(Service(processes=[OutputFormats()]))

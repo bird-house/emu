@@ -1,5 +1,6 @@
 import os
-
+import xarray
+import xarray.tests.test_dataset as td
 from pywps import Process
 from pywps import ComplexOutput, FORMATS
 from pywps.app.Common import Metadata
@@ -21,7 +22,7 @@ class NcMLAgg(Process):
                           supported_formats=[FORMATS.NETCDF]),
             ComplexOutput('ncml', 'NcML aggregation',
                           as_reference=True,
-                          supported_formats=[FORMATS.NCML, FORMATS.DODS]),
+                          supported_formats=[FORMATS.DODS]),  # FORMATS.NCML To become available in PyWPS 4.2.5
         ]
 
         super(NcMLAgg, self).__init__(
@@ -39,7 +40,6 @@ class NcMLAgg(Process):
             status_supported=True)
 
     def _handler(self, request, response):
-        import xarray.tests.test_dataset as td
 
         # Create test datasets
         d1, d2, _ = td.create_append_test_data()
@@ -64,8 +64,6 @@ class NcMLAgg(Process):
         response.outputs["d1"].file = d1fn
         response.outputs["d2"].file = d2fn
 
-        with open(os.path.join(self.workdir, 'agg.ncml'), "w") as fp:
-            response.outputs['ncml'].file = fp.name
-            fp.write(ncml)
+        response.outputs['ncml'].data = ncml
 
         return response

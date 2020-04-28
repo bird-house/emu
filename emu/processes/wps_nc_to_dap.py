@@ -9,13 +9,16 @@ import logging
 
 LOGGER = logging.getLogger("PYWPS")
 
+# This needs some more thoughts before going live to decide how the WPS server should be configured to communicate
+# with the DAP server.
+
 
 class NcToDap(Process):
     def __init__(self):
         inputs = [
             ComplexInput('resource', "NetCDF file",
                          abstract="Link to NetCDF or NcML file on this server",
-                         supported_formats=[FORMATS.NETCDF, FORMATS.NCML],
+                         supported_formats=[FORMATS.NETCDF, ],  # FORMATS.NCML], to become available in PyWPS 4.2.5
                          min_occurs=1,
                          max_occurs=1)
         ]
