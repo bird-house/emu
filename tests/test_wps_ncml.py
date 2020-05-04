@@ -23,5 +23,3 @@ def test_wps_ncml():
     d1, d2, d3 = ex.processOutputs
     ncml = d3.retrieveData()
     assert ncml.strip().startswith("<")
-
-

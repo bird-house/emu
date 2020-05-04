@@ -26,5 +26,3 @@ def test_wps_nc_to_dap():
         datainputs=datainputs)
     assert_response_success(resp)
     assert 'dodsC' in get_output(resp.xml)['dap']
-
-
