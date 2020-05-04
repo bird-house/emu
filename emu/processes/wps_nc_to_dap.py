@@ -1,5 +1,3 @@
-import os
-
 from pywps import Process
 from pywps import ComplexInput, ComplexOutput, FORMATS
 from pywps.app.Common import Metadata
@@ -42,6 +40,7 @@ class NcToDap(Process):
             store_supported=True,
             status_supported=True)
 
+    @staticmethod
     def _handler(self, request, response):
         url = request.inputs['resource'][0].url
 

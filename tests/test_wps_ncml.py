@@ -4,7 +4,7 @@ from pywps import Service
 from pywps.tests import assert_response_success
 from emu.processes.wps_ncml import NcMLAgg
 from .common import client_for, CFG_FILE
-# from owslib.wps import WPSExecution
+from owslib.wps import WPSExecution
 
 
 @pytest.mark.online
@@ -18,10 +18,10 @@ def test_wps_ncml():
 
     assert_response_success(resp)
 
-    # ex = WPSExecution()
-    # ex.parseResponse(resp.xml)
-    # d1, d2, d3 = ex.processOutputs
-    # ncml = d3.retrieveData()
-    # assert ncml.strip().startswith("<")
+    ex = WPSExecution()
+    ex.parseResponse(resp.xml)
+    d1, d2, d3 = ex.processOutputs
+    ncml = d3.retrieveData()
+    assert ncml.strip().startswith("<")
 
 

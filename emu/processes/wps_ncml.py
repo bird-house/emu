@@ -1,5 +1,4 @@
 import os
-import xarray
 import xarray.tests.test_dataset as td
 from pywps import Process
 from pywps import ComplexOutput, FORMATS
