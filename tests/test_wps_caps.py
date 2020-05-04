@@ -23,6 +23,7 @@ def test_wps_caps():
         'multiple_outputs',
         'nap',
         'ncmeta',
+        'ncml',
         'non.py-id',
         'output_formats',
         'poly_centroid',

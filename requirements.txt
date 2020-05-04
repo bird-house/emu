@@ -4,3 +4,4 @@ click
 psutil
 defusedxml
 geomet
+netCDF4
