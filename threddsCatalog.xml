@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog name="Emu Thredds Catalog"
+         xmlns="http://www.unidata.ucar.edu/namespaces/thredds/InvCatalog/v1.0"
+         xmlns:xlink="http://www.w3.org/1999/xlink" >
+
+    <service name="all" serviceType="Compound" base="" >
+        <!-- HTTPServer works for all file types. -->
+        <service name="http" serviceType="HTTPServer" base="/thredds/fileServer/" />
+
+        <!-- Services below known to work with .nc and .ncml files only. -->
+        <service name="odap" serviceType="OpenDAP" base="/thredds/dodsC/" />
+        <service name="ncml" serviceType="NCML" base="/thredds/ncml/"/>
+        <service name="uddc" serviceType="UDDC" base="/thredds/uddc/"/>
+        <service name="iso" serviceType="ISO" base="/thredds/iso/"/>
+    </service>
+
+    <datasetScan name="Emu" ID="emu" path="emu" location="/wps_outputs">
+
+      <metadata inherited="true">
+        <serviceName>all</serviceName>
+      </metadata>
+
+      <filter>
+        <!-- basic file types -->
+        <include wildcard="*.nc" />
+        <include wildcard="*.ncml" />
+        <include wildcard="*.txt" />
+        <include wildcard="*.md" />
+        <include wildcard="*.rst" />
+
+        <!-- file types from emu.multiple_outputs -->
+        <include wildcard="*.metalink" />
+        <include wildcard="*.meta4" />
+
+        <!-- file types from emu.output_formats -->
+        <include wildcard="*.json" />
+      </filter>
+
+    </datasetScan>
+
+</catalog>
