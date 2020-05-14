@@ -16,6 +16,5 @@ dependencies:
 # tests
 - pytest
 - pip:
-  #- -e git+https://github.com/geopython/pywps@master#egg=pywps
-  - -e git+https://github.com/cehbrecht/pywps@watchdog#egg=pywps
+  - -e git+https://github.com/geopython/pywps@master#egg=pywps
   - geomet
