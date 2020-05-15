@@ -24,6 +24,7 @@ def test_wps_ncmeta_opendap():
 
 
 @pytest.mark.online
+@pytest.mark.netcdf
 def test_wps_ncmeta_netcdf():
     client = client_for(Service(processes=[NCMeta()], cfgfiles=[CFG_FILE]))
     datainputs = "dataset=@xlink:href={0}".format(NC_URL)

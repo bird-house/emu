@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 from pywps import Service
 
-from .common import client_for
+from .common import client_for, CFG_FILE
 from emu.processes import processes
 
 
 def test_wps_caps():
-    client = client_for(Service(processes=processes))
+    client = client_for(Service(processes=processes, cfgfiles=CFG_FILE))
     resp = client.get(service='wps', request='getcapabilities', version='1.0.0', language='en-US')
     names = resp.xpath_text('/wps:Capabilities'
                             '/wps:ProcessOfferings'

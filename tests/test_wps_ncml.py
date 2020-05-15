@@ -8,6 +8,7 @@ from owslib.wps import WPSExecution
 
 
 @pytest.mark.online
+@pytest.mark.netcdf
 def test_wps_ncml():
 
     client = client_for(Service(processes=[NcMLAgg()], cfgfiles=CFG_FILE))

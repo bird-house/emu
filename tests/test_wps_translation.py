@@ -1,12 +1,12 @@
 from pywps import Service
 from pywps.tests import assert_response_success
 
-from .common import client_for
+from .common import client_for, CFG_FILE
 from emu.processes.wps_translation import Translation
 
 
 def test_wps_translation_describe_fr():
-    client = client_for(Service(processes=[Translation()]))
+    client = client_for(Service(processes=[Translation()], cfgfiles=CFG_FILE))
     resp = client.get(
         service='wps', request='DescribeProcess', version='1.0.0',
         identifier='translation',
@@ -21,7 +21,7 @@ def test_wps_translation_describe_fr():
 
 
 def test_wps_translation_describe_de():
-    client = client_for(Service(processes=[Translation()]))
+    client = client_for(Service(processes=[Translation()], cfgfiles=CFG_FILE))
     resp = client.get(
         service='wps', request='DescribeProcess', version='1.0.0',
         identifier='translation',
@@ -36,7 +36,7 @@ def test_wps_translation_describe_de():
 
 
 def test_wps_translation_execute():
-    client = client_for(Service(processes=[Translation()]))
+    client = client_for(Service(processes=[Translation()], cfgfiles=CFG_FILE))
     datainputs = "input1=10"
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
