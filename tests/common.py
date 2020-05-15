@@ -10,6 +10,8 @@ VERSION = "1.0.0"
 WPS, OWS = get_ElementMakerForVersion(VERSION)
 xpath_ns = get_xpath_ns(VERSION)
 
+os.environ['PYWPS_CFG'] = CFG_FILE
+
 
 def resource_file(filepath):
     return os.path.join(TESTS_HOME, 'testdata', filepath)
