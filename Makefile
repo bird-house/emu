@@ -2,8 +2,8 @@
 APP_ROOT := $(abspath $(lastword $(MAKEFILE_LIST))/..)
 APP_NAME := emu
 
-WPS_URL = http://localhost:5000/
-OUTPUT_URL = $(WPS_URL)/wpsoutputs
+WPS_URL = http://localhost:5000
+OUTPUT_URL = https://pavics.ouranos.ca/wpsoutputs
 
 SANITIZE_FILE := https://github.com/Ouranosinc/PAVICS-e2e-workflow-tests/raw/master/notebooks/output-sanitize.cfg
 

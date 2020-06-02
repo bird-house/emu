@@ -38,3 +38,4 @@ script:
   - pytest
   - make test-notebooks
   - flake8
+  - make docs

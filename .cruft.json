@@ -1,6 +1,6 @@
 {
     "template": "https://github.com/bird-house/cookiecutter-birdhouse.git",
-    "commit": "90aa958fbcd10f1e77d0636a05fe29d744831d27",
+    "commit": "deda27034c75445e1c2726f94b96ae80d38d970e",
     "skip": [
         "emu/processes/wps_say_hello.py",
         "tests/test_wps_hello.py",
@@ -28,7 +28,7 @@
             "open_source_license": "Apache Software License 2.0",
             "http_port": "5000",
             "_copy_without_render": [
-                "emu/templates/*.cfg"
+                "{{cookiecutter.project_slug}}/templates/*.cfg"
             ],
             "_template": "https://github.com/bird-house/cookiecutter-birdhouse.git"
         }
