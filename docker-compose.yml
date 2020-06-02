@@ -1,6 +1,6 @@
 version: '3'
 services:
-  emu:
+  wps:
     # http://localhost:5000/wps
     build: .
     image: birdhouse/emu:dev

@@ -1,0 +1,23 @@
+{
+    "template": "https://github.com/bird-house/cookiecutter-birdhouse.git",
+    "commit": "90aa958fbcd10f1e77d0636a05fe29d744831d27",
+    "context": {
+        "cookiecutter": {
+            "full_name": "Carsten Ehbrecht",
+            "email": "ehbrecht@dkrz.de",
+            "github_username": "bird-house",
+            "project_name": "Emu",
+            "project_slug": "emu",
+            "project_repo_name": "emu",
+            "project_readthedocs_name": "emu",
+            "project_short_description": "WPS processes for testing and demos.",
+            "version": "0.11.1",
+            "open_source_license": "Apache Software License 2.0",
+            "http_port": "5000",
+            "_copy_without_render": [
+                "emu/templates/*.cfg"
+            ],
+            "_template": "https://github.com/bird-house/cookiecutter-birdhouse.git"
+        }
+    }
+}
