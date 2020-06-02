@@ -26,10 +26,8 @@ install:
   # Update now the env with our environment
   - conda env update -f environment.yml
   - source activate emu
-  # Packages for testing
-  - conda install pytest flake8
-  # Install WPS
-  - python setup.py install
+  # Packages for testing, generating docs and installing WPS
+  - make develop
 before_script:
   # Start WPS service on port 5000 on 0.0.0.0
   - emu start --daemon --bind-host 0.0.0.0 --port 5000
