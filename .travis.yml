@@ -34,6 +34,7 @@ before_script:
   - sleep 2
 script:
   - pytest
-  - make test-notebooks
+  # No notebooks in emu yet.
+  #- make test-notebooks
   - flake8
   - make docs
