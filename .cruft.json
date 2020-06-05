@@ -1,0 +1,36 @@
+{
+    "template": "https://github.com/bird-house/cookiecutter-birdhouse.git",
+    "commit": "73eee18ca4a16763335d18ed9512cc617fbcc777",
+    "skip": [
+        "emu/processes/wps_say_hello.py",
+        "tests/test_wps_hello.py",
+        "docs/source/notebooks/example.ipynb",
+        "environment.yml",
+        "requirements.txt",
+        "AUTHORS.rst",
+        "CHANGES.rst",
+        "docs/source/notebooks/index.rst",
+        "docs/source/processes.rst",
+        "emu/processes/__init__.py",
+        "tests/test_wps_caps.py"
+    ],
+    "context": {
+        "cookiecutter": {
+            "full_name": "Carsten Ehbrecht",
+            "email": "ehbrecht@dkrz.de",
+            "github_username": "bird-house",
+            "project_name": "Emu",
+            "project_slug": "emu",
+            "project_repo_name": "emu",
+            "project_readthedocs_name": "emu",
+            "project_short_description": "WPS processes for testing and demos.",
+            "version": "0.11.1",
+            "open_source_license": "Apache Software License 2.0",
+            "http_port": "5000",
+            "_copy_without_render": [
+                "{{cookiecutter.project_slug}}/templates/*.cfg"
+            ],
+            "_template": "https://github.com/bird-house/cookiecutter-birdhouse.git"
+        }
+    }
+}

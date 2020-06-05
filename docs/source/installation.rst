@@ -3,6 +3,10 @@
 Installation
 ============
 
+.. contents::
+    :local:
+    :depth: 1
+
 Install from Conda
 ------------------
 
@@ -70,8 +74,8 @@ After successful installation you can start the service using the ``emu`` comman
 
 .. code-block:: console
 
-   $ emu start --help # show help
-   $ emu start       # start service with default configuration
+   $ emu --help # show help
+   $ emu start  # start service with default configuration
 
    OR
 
@@ -91,6 +95,7 @@ You can find which process uses a given port using the following command (here f
 
    $ netstat -nlp | grep :5000
 
+
 Check the log files for errors:
 
 .. code-block:: console
@@ -109,6 +114,7 @@ You can also use the ``Makefile`` to start and stop the service:
   $ tail -f pywps.log
   $ make stop
 
+
 Run Emu as Docker container
 ---------------------------
 
@@ -118,5 +124,6 @@ Use Ansible to deploy Emu on your System
 ----------------------------------------
 
 Use the `Ansible playbook`_ for PyWPS to deploy Emu on your system.
+
 
 .. _Ansible playbook: http://ansible-wps-playbook.readthedocs.io/en/latest/index.html

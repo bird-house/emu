@@ -1,8 +1,8 @@
 Emu
-===
+===============================
 
 .. image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
-   :target: http://emu.readthedocs.org/en/latest/?badge=latest
+   :target: http://emu.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
 .. image:: https://travis-ci.org/bird-house/emu.svg?branch=master
@@ -25,6 +25,37 @@ Emu
 Emu (the bird)
   *Emus are curious birds who are known to follow and watch other animals and humans. Emus do not sleep continuously at night but in several short stints sitting down. [..].* (`Wikipedia <https://en.wikipedia.org/wiki/Emu>`_).
 
+WPS processes for testing and demos.
+
 Emu is a Python package with some test proccess for Web Processing Services (WPS). Currently it is using the `PyWPS 4.x <http://pywps.org/>`_ server.
 
-Full `documentation <http://emu.readthedocs.io/en/latest/>`_ is available on ReadTheDocs or in the docs directory.
+Documentation
+-------------
+
+Learn more about Emu in its official documentation at
+https://emu.readthedocs.io.
+
+Submit bug reports, questions and feature requests at
+https://github.com/bird-house/emu/issues
+
+Contributing
+------------
+
+You can find information about contributing in our `Developer Guide`_.
+
+Please use bumpversion_ to release a new version.
+
+License
+-------
+
+Free software: Apache Software License 2.0
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `bird-house/cookiecutter-birdhouse`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`bird-house/cookiecutter-birdhouse`: https://github.com/bird-house/cookiecutter-birdhouse
+.. _`Developer Guide`: https://emu.readthedocs.io/en/latest/dev_guide.html
+.. _bumpversion: https://emu.readthedocs.io/en/latest/dev_guide.html#bump-a-new-version
