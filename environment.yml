@@ -5,7 +5,7 @@ channels:
 dependencies:
 - pip
 - python=3.6
-- pywps=4.2
+- pywps>=4.2.6,<4.3
 - jinja2
 - click
 - psutil
@@ -16,5 +16,4 @@ dependencies:
 # tests
 - pytest
 - pip:
-  # - -e git+https://github.com/geopython/pywps@master#egg=pywps
   - geomet
