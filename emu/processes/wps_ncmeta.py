@@ -17,8 +17,7 @@ TEST_URL = 'http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm
 
 class NCMeta(Process):
     """
-    Notes
-    -----
+    Notes:
 
     Returns metadata of a NetCDF file or OpenDAP resource.
     """
