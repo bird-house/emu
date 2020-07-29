@@ -1,5 +1,6 @@
 from pywps import Process, LiteralInput
 from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 from pywps.app.exceptions import ProcessError
 
 import logging
@@ -37,7 +38,10 @@ class ShowError(Process):
             metadata=[
                 Metadata('PyWPS', 'https://pywps.org/'),
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
+                MetadataUrl('User Guide',
+                            'http://emu.readthedocs.io/en/latest/',
+                            anonymous=True),
+            ],
             version='1.0',
             inputs=inputs,
             # outputs=outputs,

@@ -1,4 +1,5 @@
 from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 __author__ = 'Jachym'
 
@@ -30,7 +31,9 @@ class Box(Process):
             abstract='Give bounding box, return the same',
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
+                MetadataUrl('User Guide',
+                            'http://emu.readthedocs.io/en/latest/',
+                            anonymous=True)],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,

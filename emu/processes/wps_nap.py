@@ -1,5 +1,6 @@
 from pywps import Process, LiteralInput, LiteralOutput
 from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 
 class Nap(Process):
@@ -23,7 +24,10 @@ class Nap(Process):
             profile='',
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/')],
+                MetadataUrl('User Guide',
+                            'http://emu.readthedocs.io/en/latest/',
+                            anonymous=True),
+            ],
             inputs=inputs,
             outputs=outputs,
             store_supported=False,

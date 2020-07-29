@@ -1,6 +1,6 @@
 from pywps import Process, LiteralInput, LiteralOutput
 from pywps.inout.literaltypes import AllowedValue
-from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 from pywps.validator.mode import MODE
 
 from emu.exceptions import DryRunWarning, StorageLimitExceeded
@@ -32,7 +32,9 @@ class SimpleDryRun(Process):
             title='Simple Dry Run',
             abstract='A dummy download as simple dry-run example.',
             metadata=[
-                Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
+                MetadataUrl('User Guide',
+                            'https://emu.readthedocs.io/en/latest/processes.html',
+                            anonymous=True),
             ],
             version='1.0',
             inputs=inputs,

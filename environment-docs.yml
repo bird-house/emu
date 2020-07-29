@@ -4,7 +4,12 @@ channels:
 - conda-forge
 - defaults
 dependencies:
-- pywps>=4.2
+# restore once an official pywps release contain the fix
+#- pywps>=4.2
 - sphinx
 - nbsphinx
 - ipython
+- pip
+- pip:
+  # delete once an official pywps release contain this fix, also delete in Makefile
+  - https://github.com/Ouranosinc/pywps/archive/2a55b6e95f51c648dc94bf3c89db7370b56c1c9c.zip

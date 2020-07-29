@@ -1,6 +1,6 @@
 from pywps import Process
 from pywps import ComplexInput, ComplexOutput, FORMATS
-from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 from pywps import configuration
 import logging
 
@@ -33,7 +33,9 @@ class NcToDap(Process):
             abstract="Return Data Access Protocol link to a netCDF or NcML file.",
             version="1",
             metadata=[
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
+                MetadataUrl('User Guide',
+                            'http://emu.readthedocs.io/en/latest/',
+                            anonymous=True),
             ],
             inputs=inputs,
             outputs=outputs,

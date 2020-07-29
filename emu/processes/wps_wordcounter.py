@@ -5,7 +5,7 @@ from collections import Counter
 
 from pywps import Process
 from pywps import ComplexInput, ComplexOutput, FORMATS
-from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
@@ -35,7 +35,9 @@ class WordCounter(Process):
             abstract="Counts words in a given text.",
             version='1.0',
             metadata=[
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
+                MetadataUrl('User Guide',
+                            'http://emu.readthedocs.io/en/latest/',
+                            anonymous=True),
             ],
             inputs=inputs,
             outputs=outputs,

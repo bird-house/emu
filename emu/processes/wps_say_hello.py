@@ -1,5 +1,6 @@
 from pywps import Process, LiteralInput, LiteralOutput, UOM
 from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
@@ -27,7 +28,9 @@ class SayHello(Process):
                      'Returns a literal string output with Hello plus the inputed name.',
             keywords=['hello', 'demo'],
             metadata=[
-                Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
+                MetadataUrl('User Guide',
+                            'https://emu.readthedocs.io/en/latest/processes.html',
+                            anonymous=True),  # noqa
                 Metadata('PyWPS Demo', 'https://pywps-demo.readthedocs.io/en/latest/'),
             ],
             version='1.5',

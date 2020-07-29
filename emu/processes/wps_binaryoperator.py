@@ -1,5 +1,6 @@
 from pywps import Process, LiteralInput, LiteralOutput
 from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 import logging
 logger = logging.getLogger("PYWPS")
@@ -30,7 +31,9 @@ class BinaryOperator(Process):
                      'This example process is taken from Climate4Impact.',
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
+                MetadataUrl('User Guide',
+                            'http://emu.readthedocs.io/en/latest/',
+                            anonymous=True),
                 Metadata('Climate4Impact', 'https://dev.climate4impact.eu')],
             version='1.0',
             inputs=inputs,

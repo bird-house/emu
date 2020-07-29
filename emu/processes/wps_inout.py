@@ -9,6 +9,7 @@ from pywps import ComplexInput, ComplexOutput
 from pywps import Format, FORMATS
 from pywps.validator.mode import MODE
 from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 
 import logging
@@ -67,8 +68,10 @@ class InOut(Process):
             LiteralInput('int_range', 'Integer Range',
                          abstract='Choose number from range: 1-10 (step 1), 100-200 (step 10)',
                          metadata=[
-                            Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AllowedValue'),  # noqa
-                            Metadata('AllowedValue Example', 'http://docs.opengeospatial.org/is/14-065/14-065.html#98'),  # noqa
+                             MetadataUrl('PyWPS Docs',
+                                         'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AllowedValue',  # noqa
+                                         anonymous=True),
+                             Metadata('AllowedValue Example', 'http://docs.opengeospatial.org/is/14-065/14-065.html#98'),  # noqa
                          ],
                          data_type='integer',
                          default='1',
@@ -80,7 +83,9 @@ class InOut(Process):
             LiteralInput('any_value', 'Any Value',
                          abstract='Enter any value.',
                          metadata=[
-                            Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AnyValue'),  # noqa
+                             MetadataUrl('PyWPS Docs',
+                                         'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AnyValue',  # noqa
+                                         anonymous=True),
                          ],
                          allowed_values=AnyValue(),
                          default='any value',
@@ -88,7 +93,9 @@ class InOut(Process):
             LiteralInput('ref_value', 'Referenced Value',
                          abstract='Choose a referenced value',
                          metadata=[
-                            Metadata('PyWPS Docs', 'https://pywps.readthedocs.io/en/master/_modules/pywps/inout/literaltypes.html'),  # noqa
+                             MetadataUrl('PyWPS Docs',
+                                         'https://pywps.readthedocs.io/en/master/_modules/pywps/inout/literaltypes.html',  # noqa
+                                         anonymous=True),
                          ],
                          data_type='string',
                          allowed_values=ValuesReference(
@@ -155,8 +162,10 @@ class InOut(Process):
             # profile=['birdhouse'],
             metadata=[
                 Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/',
-                         role='http://www.opengis.net/spec/wps/2.0/def/process/description/documentation')],
+                MetadataUrl('User Guide', 'http://emu.readthedocs.io/en/latest/',
+                            role='http://www.opengis.net/spec/wps/2.0/def/process/description/documentation',
+                            anonymous=True),
+            ],
             inputs=inputs,
             outputs=outputs,
             status_supported=True,
