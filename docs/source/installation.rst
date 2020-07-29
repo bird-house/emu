@@ -14,10 +14,6 @@ Install from Conda
    :target: http://anaconda.org/birdhouse/emu
    :alt: Ananconda Install
 
-.. image:: http://anaconda.org/birdhouse/emu/badges/build.svg
-   :target: http://anaconda.org/birdhouse/emu
-   :alt: Anaconda Build
-
 .. image:: http://anaconda.org/birdhouse/emu/badges/version.svg
    :target: http://anaconda.org/birdhouse/emu
    :alt: Anaconda Version
