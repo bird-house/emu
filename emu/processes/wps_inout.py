@@ -68,9 +68,8 @@ class InOut(Process):
             LiteralInput('int_range', 'Integer Range',
                          abstract='Choose number from range: 1-10 (step 1), 100-200 (step 10)',
                          metadata=[
-                             MetadataUrl('PyWPS Docs',
-                                         'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AllowedValue',  # noqa
-                                         anonymous=True),
+                             Metadata('AllowedValue PyWPS Docs',
+                                      'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AllowedValue'),  # noqa
                              Metadata('AllowedValue Example', 'http://docs.opengeospatial.org/is/14-065/14-065.html#98'),  # noqa
                          ],
                          data_type='integer',
@@ -83,9 +82,8 @@ class InOut(Process):
             LiteralInput('any_value', 'Any Value',
                          abstract='Enter any value.',
                          metadata=[
-                             MetadataUrl('PyWPS Docs',
-                                         'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AnyValue',  # noqa
-                                         anonymous=True),
+                             Metadata('AnyValue PyWPS Docs',
+                                      'https://pywps.readthedocs.io/en/master/api.html#pywps.inout.literaltypes.AnyValue'),  # noqa
                          ],
                          allowed_values=AnyValue(),
                          default='any value',
@@ -93,9 +91,8 @@ class InOut(Process):
             LiteralInput('ref_value', 'Referenced Value',
                          abstract='Choose a referenced value',
                          metadata=[
-                             MetadataUrl('PyWPS Docs',
-                                         'https://pywps.readthedocs.io/en/master/_modules/pywps/inout/literaltypes.html',  # noqa
-                                         anonymous=True),
+                             Metadata('PyWPS Docs',
+                                      'https://pywps.readthedocs.io/en/master/_modules/pywps/inout/literaltypes.html'),  # noqa
                          ],
                          data_type='string',
                          allowed_values=ValuesReference(
