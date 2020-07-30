@@ -2,7 +2,7 @@ import os
 from pywps import Process, LiteralInput, ComplexOutput
 from pywps import FORMATS
 from pywps.inout.literaltypes import AllowedValue
-from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 from pywps.inout.outputs import MetaLink, MetaLink4, MetaFile
 import json
 
@@ -36,7 +36,9 @@ class MultipleOutputs(Process):
             abstract='Produces multiple files and returns a document'
                      ' with references to these files.',
             metadata=[
-                Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
+                MetadataUrl('User Guide',
+                            'https://emu.readthedocs.io/en/latest/processes.html',
+                            anonymous=True),
             ],
             version='1.1',
             inputs=inputs,

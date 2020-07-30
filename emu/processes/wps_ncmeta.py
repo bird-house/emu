@@ -4,7 +4,7 @@ from pywps import Process
 from pywps import ComplexInput, ComplexOutput, FORMATS, Format
 from pywps.inout.basic import SOURCE_TYPE
 from pywps.validator.mode import MODE
-from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 from netCDF4 import Dataset
 
@@ -17,8 +17,7 @@ TEST_URL = 'http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm
 
 class NCMeta(Process):
     """
-    Notes
-    -----
+    Notes:
 
     Returns metadata of a NetCDF file or OpenDAP resource.
     """
@@ -52,7 +51,9 @@ class NCMeta(Process):
             abstract="Return metadata from a netCDF dataset, either on file or an OpenDAP service.",
             version='4',
             metadata=[
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
+                MetadataUrl('User Guide',
+                            'http://emu.readthedocs.io/en/latest/',
+                            anonymous=True),
             ],
             inputs=inputs,
             outputs=outputs,

@@ -1,5 +1,6 @@
 from pywps import Process, LiteralInput, LiteralOutput
 from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 
 class Sleep(Process):
@@ -22,7 +23,9 @@ class Sleep(Process):
                      'This process will sleep for a given delay or 10 seconds if not a valid value.',
             profile='',
             metadata=[
-                Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
+                MetadataUrl('User Guide',
+                            'https://emu.readthedocs.io/en/latest/processes.html',
+                            anonymous=True),  # noqa
                 Metadata('PyWPS Demo', 'https://pywps-demo.readthedocs.io/en/latest/'),
             ],
             inputs=inputs,

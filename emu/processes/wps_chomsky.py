@@ -102,8 +102,7 @@ the strong generative capacity of the theory."""
 
 class Chomsky(Process):
     """
-    Notes
-    -----
+    Notes:
 
     Generates a random chomsky text:
     http://code.activestate.com/recipes/440546-chomsky-random-text-generator/

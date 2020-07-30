@@ -72,6 +72,7 @@ install:
 develop:
 	@echo "Installing development requirements for tests and docs ..."
 	@-bash -c 'pip install -e ".[dev]"'
+	@-bash -c 'pip install git+https://github.com/Ouranosinc/pywps@2a55b6e95f51c648dc94bf3c89db7370b56c1c9c#egg=pywps --upgrade'
 
 .PHONY: start
 start:
@@ -163,7 +164,7 @@ refresh-notebooks:
 .PHONY: docs
 docs:
 	@echo "Generating docs with Sphinx ..."
-	@-bash -c '$(MAKE) -C $@ clean html'
+	@bash -c '$(MAKE) -C $@ clean html'
 	@echo "Open your browser to: file:/$(APP_ROOT)/docs/build/html/index.html"
 	## do not execute xdg-open automatically since it hangs travis and job does not complete
 	@echo "xdg-open $(APP_ROOT)/docs/build/html/index.html"

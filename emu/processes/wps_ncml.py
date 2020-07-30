@@ -2,7 +2,7 @@ import os
 import xarray.tests.test_dataset as td
 from pywps import Process
 from pywps import ComplexOutput, FORMATS
-from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 import logging
 
 
@@ -31,7 +31,9 @@ class NcMLAgg(Process):
             abstract="Return links to an NcML file aggregating netCDF files with moving time units.",
             version="1",
             metadata=[
-                Metadata('User Guide', 'http://emu.readthedocs.io/en/latest/'),
+                MetadataUrl('User Guide',
+                            'http://emu.readthedocs.io/en/latest/',
+                            anonymous=True),
             ],
             inputs=inputs,
             outputs=outputs,

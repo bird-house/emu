@@ -3,6 +3,7 @@ from pywps import LiteralInput, LiteralOutput
 from pywps import ComplexInput
 from pywps import Format
 from pywps.app.Common import Metadata
+from pywps.ext_autodoc import MetadataUrl
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
@@ -38,7 +39,9 @@ class ESGFDemo(Process):
             title='ESGF Demo',
             abstract='Shows how to use WPS metadata for processes using ESGF data.',
             metadata=[
-                Metadata('User Guide', 'https://emu.readthedocs.io/en/latest/processes.html'),  # noqa
+                MetadataUrl('User Guide',
+                            'https://emu.readthedocs.io/en/latest/processes.html',
+                            anonymous=True),
                 Metadata('ESGF Constraints',
                          role='https://www.earthsystemcog.org/spec/esgf_search/4.12.0/def/constraints',  # noqa
                          href='http://esgf-data.dkrz.de/esg-search/search?project=CMIP5&time_frequency=mon&variable=tas,tasmax,tasmin&experiment=historical'),  # noqa
