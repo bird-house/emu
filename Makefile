@@ -72,7 +72,6 @@ install:
 develop:
 	@echo "Installing development requirements for tests and docs ..."
 	@-bash -c 'pip install -e ".[dev]"'
-	@-bash -c 'pip install git+https://github.com/Ouranosinc/pywps@2a55b6e95f51c648dc94bf3c89db7370b56c1c9c#egg=pywps --upgrade'
 
 .PHONY: start
 start:
