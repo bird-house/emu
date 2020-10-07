@@ -1,6 +1,16 @@
 Changes
 *******
 
+0.12.0 (2020-10-07)
+===================
+
+Changes:
+
+* Updated from cookiecutter template (#103, #105, #106).
+* Added Translation process (#102).
+* Added thredds to docker-compose as DAP server (#99).
+* Added process creating NcML file aggregating netCDF files (#97).
+
 0.11.1 (2020-01-03)
 ===================
 
