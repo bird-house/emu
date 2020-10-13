@@ -32,7 +32,8 @@ class OutputFormats(Process):
             self._handler,
             identifier='output_formats',
             title="Return different output formats.",
-            abstract="Dummy process returning various output file formats. Output format can be specified between supported formats",
+            abstract="Dummy process returning various output file formats. Output format "
+                     "can be specified between supported formats",
             version="2.0",
             inputs=inputs,
             outputs=outputs,
