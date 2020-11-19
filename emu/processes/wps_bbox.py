@@ -14,8 +14,9 @@ class Box(Process):
         inputs = [
             BoundingBoxInput('bbox', 'Bounding Box',
                              abstract='Bounding Box Input.',
-                             crss=['epsg:4326', 'epsg:3035'],
-                             min_occurs=0)
+                             crss=['-12.0, 49.0, 3.0, 61.0,epsg:4326x', 'epsg:4326', 'epsg:3035'],
+                             min_occurs=0,
+                             max_occurs=1)
         ]
         outputs = [
             BoundingBoxOutput('bbox', 'Bounding Box',
@@ -26,7 +27,7 @@ class Box(Process):
         super(Box, self).__init__(
             self._handler,
             identifier='bbox',
-            version='0.2',
+            version='0.3',
             title="Bounding box in- and out",
             abstract='Give bounding box, return the same',
             metadata=[
