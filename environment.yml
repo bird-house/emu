@@ -4,7 +4,7 @@ channels:
 - defaults
 dependencies:
 - pip
-- python=3.6
+- python>=3.6
 - pywps>=4.2.6,<4.3
 - jinja2
 - click
@@ -13,6 +13,9 @@ dependencies:
 # opendap support
 - netcdf4
 - xarray
+# geospatial support
+- rasterio
+- fiona
 # tests
 - pytest
 - pip:
