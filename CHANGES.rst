@@ -1,6 +1,16 @@
 Changes
 *******
 
+0.13.0 (unreleased)
+===================
+
+Changes:
+
+* Added Geospatial process.
+* Added a new recipe for installing Emu with GIS libraries (`pip install eum[gis]`).
+* Added example geospatial data (raster image courtesy of USGS: `Mars MGS MOLA DEM 463m v2`).
+* Refined Ultimate Question process to be truer to the source literature.
+
 0.12.0 (2020-10-07)
 ===================
 
