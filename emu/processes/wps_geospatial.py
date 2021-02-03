@@ -69,76 +69,85 @@ class GeoData(Process):
             status_supported=True,
         )
 
-    @staticmethod
     def _handler(self, request, response):
+        from collections import namedtuple
         import tempfile
 
-        from shapely.geometry import box, MultiPolygon
+        from shapely.geometry import box, Polygon
         import fiona
         import rasterio as rio
         from rasterio.mask import mask
 
         response.update_status("PyWPS Process started.", 0)
 
-        if (
-            request.inputs["vector"][0].file is None
-            and request.inputs["raster"][0].file is None
-        ):
+        try:
+            vec_file = request.inputs["vector"][0].file
+        except KeyError:
+            vec_file = None
+        try:
+            ras_file = request.inputs["raster"][0].file
+        except KeyError:
+            ras_file = None
+
+        if vec_file is None and ras_file is None:
             raise Exception("You need to provide at least one dataset.")
 
         rasters = list()
         for dataset in request.inputs["raster"]:
             rasters.append(dataset.file)
 
-        centroid = 0, 0
-        polygon = ""
-        if request.inputs["vector"][0].file is not None:
-            try:
-                file = request.inputs["vector"][0].file
-                vector = fiona.open(file)
+        Centroid = namedtuple("Centroid", "x y")
+        centroid = Centroid(0, 0)
 
-                polygon = next(iter(vector))["geometry"]
-                p = polygon["coordinates"][0]
-                poly = MultiPolygon(p)
-                centroid = poly.centroid.xy[:]
+        polygon = None
+        bounds = ""
+        if vec_file is not None:
+            response.update_status("Reading Vector file", 10)
+            try:
+                with fiona.open(vec_file) as f:
+                    shape_def = next(iter(f))["geometry"]["coordinates"][0][0]
+                    polygon = Polygon(shape_def)
+                    bounds = [*polygon.bounds]
+                    centroid = polygon.centroid
 
             except Exception as e:
-                msg = "{}: unable to read vector file.".format(e)
+                msg = f"{e}: unable to read vector file."
                 logging.warning(msg=msg)
                 raise
 
-        bounds = None
         subset_gtiff = None
-        if rasters:
-            bounds = list()
-            for file in rasters:
-                data = rio.open(file, mode="r")
-                bounds.append(data.bounds)
-
+        if ras_file:
+            response.update_status("Reading Raster file", 30)
+            with rio.open(ras_file, mode="r") as data:
                 if not polygon:
                     # Clip the raster to a quadrant
                     w, s, e, n = data.bounds
                     x_0, y_0 = (e + w) / 2, (n + s) / 2
                     b = box(w, s, x_0, y_0)
-                    m, _ = mask(dataset=data, shapes=[b], crop=True)
+                    bounds = [*b.bounds]
+                    masked, _ = mask(dataset=data, shapes=[b], crop=True)
                 else:
-                    m, _ = mask(dataset=data, shapes=[polygon], crop=True)
-
+                    # Clip the raster with the found shape
+                    masked, _ = mask(dataset=data, shapes=[polygon], crop=True)
                 output_meta = data.meta.copy()
-                output_meta.update(
-                    dict(driver="GTiff", height=m.shape[1], width=m.shape[2])
-                )
-                subset_gtiff = tempfile.NamedTemporaryFile(
-                    prefix="out_", suffix=".tiff", delete=False, dir=self.workdir
-                ).name
+            output_meta.update(
+                dict(driver="GTiff", height=masked.shape[1], width=masked.shape[2])
+            )
+            subset_gtiff = tempfile.NamedTemporaryFile(
+                prefix="out_", suffix=".tiff", delete=False, dir=self.workdir
+            ).name
 
-                # Write to GeoTIFF
-                with rio.open(subset_gtiff, "w", **output_meta) as f:
-                    f.write(m, 1)
+            # Write to GeoTIFF
+            response.update_status("Writing masked raster file", 70)
+            with rio.open(subset_gtiff, "w", **output_meta) as f:
+                f.write(masked)
 
-        response.outputs["centroid"].data = "{:.5f},{:.5f}".format(*centroid)
+        response.outputs["centroid"].data = "{:.5f},{:.5f}".format(
+            centroid.x, centroid.y
+        )
         response.outputs["bounds"].data = bounds
         response.outputs["raster"].file = subset_gtiff
 
         response.update_status("PyWPS Process completed.", 100)
+
         return response
