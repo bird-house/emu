@@ -53,6 +53,13 @@ class GeoData(Process):
                 as_reference=True,
                 supported_formats=[FORMATS.GEOTIFF],
             ),
+            ComplexOutput(
+                "vector",
+                "Region definition in GeoJSON format",
+                abstract="The original vector but buffered by a distance of 5.",
+                as_reference=True,
+                supported_formats=[FORMATS.GEOJSON]
+            )
         ]
 
         super(GeoData, self).__init__(
@@ -71,9 +78,10 @@ class GeoData(Process):
 
     def _handler(self, request, response):
         from collections import namedtuple
+        import json
         import tempfile
 
-        from shapely.geometry import box, Polygon
+        from shapely.geometry import box, mapping, shape
         import fiona
         import rasterio as rio
         from rasterio.mask import mask
@@ -97,21 +105,32 @@ class GeoData(Process):
 
         polygon = None
         bounds = ""
+        buffered_geojson = None
         if vec_file is not None:
             response.update_status("Reading Vector file", 10)
             try:
-                with fiona.open(vec_file) as f:
-                    shape_def = next(iter(f))["geometry"]["coordinates"][0][0]
-                    polygon = Polygon(shape_def)
+                with fiona.open(vec_file, mode='r') as f:
+                    feature = next(iter(f))
+                    polygon = shape(feature["geometry"])
                     bounds = [*polygon.bounds]
                     centroid = polygon.centroid
+
+                    buffered = polygon.buffer(5)
+                    buffered_geojson = tempfile.NamedTemporaryFile(
+                        prefix="out_", suffix=".geojson", delete=False, dir=self.workdir
+                    ).name
+                    with open(buffered_geojson, "w") as bf:
+                        output = {"type": "FeatureCollection", "features": []}
+                        feature["geometry"] = mapping(buffered)
+                        output["features"].append(feature)
+                        bf.write(f"{json.dumps(output)}")
 
             except Exception as e:
                 msg = f"{e}: unable to read vector file."
                 logging.warning(msg=msg)
                 raise
 
-        subset_gtiff = None
+        subset_geotiff = None
         if ras_file:
             response.update_status("Reading Raster file", 30)
             with rio.open(ras_file, mode="r") as data:
@@ -129,23 +148,30 @@ class GeoData(Process):
             output_meta.update(
                 dict(driver="GTiff", height=masked.shape[1], width=masked.shape[2])
             )
-            subset_gtiff = tempfile.NamedTemporaryFile(
+            subset_geotiff = tempfile.NamedTemporaryFile(
                 prefix="out_", suffix=".tiff", delete=False, dir=self.workdir
             ).name
 
             # Write to GeoTIFF
             response.update_status("Writing masked raster file", 70)
-            with rio.open(subset_gtiff, "w", **output_meta) as f:
+            with rio.open(subset_geotiff, "w", **output_meta) as f:
                 f.write(masked)
 
         response.outputs["centroid"].data = "{:.5f},{:.5f}".format(
             centroid.x, centroid.y
         )
         response.outputs["bounds"].data = bounds
-        if subset_gtiff is not None:
-            response.outputs["raster"].file = subset_gtiff
+
+        if subset_geotiff is not None:
+            response.outputs["raster"].file = subset_geotiff
         else:
             response.outputs["raster"].data = ""
+
+        if buffered_geojson is not None:
+            response.outputs["vector"].file = buffered_geojson
+        else:
+            response.outputs["vector"].data = ""
+
         response.update_status("PyWPS Process completed.", 100)
 
         return response
