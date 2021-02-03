@@ -10,7 +10,7 @@ cfgfiles = os.path.join(TESTS_HOME, 'test.cfg')
 
 def test_wps_xml_centroid_get():
     client = client_for(Service(processes=[PolyCentroid(), ], cfgfiles=cfgfiles))
-    datainputs = "xml=@xlink:href=file://{0}".format(resource_file('poly.xml'),)
+    datainputs = f"xml=@xlink:href=file://{resource_file('poly.xml')}"
     resp = client.get(
         service='WPS', request='Execute', version='1.0.0',
         identifier='poly_centroid',
@@ -39,7 +39,7 @@ def test_wps_xml_centroid_post():
 def test_wps_wkt_centroid_get():
     wkt = "POLYGON((30 10, 40 40, 20 40, 10 20, 30 10))"
     client = client_for(Service(processes=[PolyCentroid(), ], cfgfiles=cfgfiles))
-    datainputs = "wkt={}".format(wkt)
+    datainputs = f"wkt={wkt}"
     resp = client.get(
         service='WPS', request='Execute', version='1.0.0',
         identifier='poly_centroid',

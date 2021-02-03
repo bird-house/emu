@@ -3,7 +3,7 @@ import json
 from pywps import Service
 from pywps.tests import assert_response_success
 
-from .common import client_for, resource_file, get_output
+from .common import client_for, resource_file
 from emu.processes.wps_wordcounter import WordCounter
 
 

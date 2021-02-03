@@ -1,5 +1,4 @@
 import pytest
-from lxml import etree
 from pywps import Service
 from pywps.tests import assert_response_success
 
@@ -10,7 +9,7 @@ from emu.processes.wps_multiple_outputs import MultipleOutputs
 @pytest.fixture
 def resp():
     client = client_for(Service(processes=[MultipleOutputs()], cfgfiles=CFG_FILE))
-    datainputs = 'count={}'.format(5)
+    datainputs = f'count={5}'
     response = client.get(
         service="WPS", request="Execute", version="1.0.0", identifier="multiple_outputs",
         datainputs=datainputs)

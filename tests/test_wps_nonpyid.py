@@ -10,7 +10,7 @@ import json
 def test_wps_nonpyid():
     d = {'a': 1}
     client = client_for(Service(processes=[NonPyID()]))
-    datainputs = "input 1=10;input-2={}".format(json.dumps(d))
+    datainputs = f"input 1=10;input-2={json.dumps(d)}"
     resp = client.get(
         service='WPS', request='Execute', version='1.0.0',
         identifier='non.py-id',
