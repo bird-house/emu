@@ -58,8 +58,8 @@ class GeoData(Process):
                 "Region definition in GeoJSON format",
                 abstract="The original vector but buffered by a distance of 5.",
                 as_reference=True,
-                supported_formats=[FORMATS.GEOJSON]
-            )
+                supported_formats=[FORMATS.GEOJSON],
+            ),
         ]
 
         super(GeoData, self).__init__(
@@ -91,28 +91,22 @@ class GeoData(Process):
         ras_file = request.inputs["raster"][0].file
 
         response.update_status("Reading Vector file", 10)
-        try:
-            with fiona.open(vec_file, mode='r') as f:
-                feature = next(iter(f))
-                polygon = shape(feature["geometry"])
-                bounds = [*polygon.bounds]
-                centroid = polygon.centroid
+        with fiona.open(vec_file, mode="r") as f:
+            feature = next(iter(f))
+            polygon = shape(feature["geometry"])
+            bounds = [*polygon.bounds]
+            centroid = polygon.centroid
 
-                buffered = polygon.buffer(5)
-                buffered_geojson = tempfile.NamedTemporaryFile(
-                    prefix="out_", suffix=".geojson", delete=False, dir=self.workdir
-                ).name
-                response.update_status("Writing Vector file", 10)
-                with open(buffered_geojson, "w") as bf:
-                    output = {"type": "FeatureCollection", "features": []}
-                    feature["geometry"] = mapping(buffered)
-                    output["features"].append(feature)
-                    bf.write(f"{json.dumps(output)}")
-
-        except Exception as e:
-            msg = f"{e}: unable to read vector file."
-            logging.warning(msg=msg)
-            raise
+            buffered = polygon.buffer(5)
+            buffered_geojson = tempfile.NamedTemporaryFile(
+                prefix="out_", suffix=".geojson", delete=False, dir=self.workdir
+            ).name
+            response.update_status("Writing Vector file", 10)
+            with open(buffered_geojson, "w") as bf:
+                output = {"type": "FeatureCollection", "features": []}
+                feature["geometry"] = mapping(buffered)
+                output["features"].append(feature)
+                bf.write(f"{json.dumps(output)}")
 
         response.update_status("Reading Raster file", 30)
         with rio.open(ras_file, mode="r") as data:
