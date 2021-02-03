@@ -92,10 +92,6 @@ class GeoData(Process):
         if vec_file is None and ras_file is None:
             raise Exception("You need to provide at least one dataset.")
 
-        rasters = list()
-        for dataset in request.inputs["raster"]:
-            rasters.append(dataset.file)
-
         Centroid = namedtuple("Centroid", "x y")
         centroid = Centroid(0, 0)
 
@@ -146,8 +142,10 @@ class GeoData(Process):
             centroid.x, centroid.y
         )
         response.outputs["bounds"].data = bounds
-        response.outputs["raster"].file = subset_gtiff
-
+        if subset_gtiff is not None:
+            response.outputs["raster"].file = subset_gtiff
+        else:
+            response.outputs["raster"].data = ""
         response.update_status("PyWPS Process completed.", 100)
 
         return response
