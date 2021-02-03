@@ -18,6 +18,7 @@ def test_wps_caps():
         'chomsky',
         'dummyprocess',
         'esgf_demo',
+        'geodata',
         'hello',
         'inout',
         'multiple_outputs',

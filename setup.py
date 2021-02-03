@@ -18,7 +18,7 @@ with open(os.path.join(here, 'emu', '__version__.py'), 'r') as f:
 
 reqs = [line.strip() for line in open('requirements.txt')]
 dev_reqs = [line.strip() for line in open('requirements_dev.txt')]
-gis_reqs = [line.strip() for line in open("requirements_gis.txt")]
+extra_reqs = [line.strip() for line in open("requirements_extra.txt")]
 
 classifiers = [
     'Development Status :: 3 - Alpha',
@@ -53,7 +53,7 @@ setup(name='emu',
       include_package_data=True,
       install_requires=reqs,
       extras_require={
-          "gis:": gis_reqs,
+          "extra:": extra_reqs,
           "dev": dev_reqs,              # pip install ".[dev]"
       },
       entry_points={
