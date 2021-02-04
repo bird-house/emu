@@ -13,9 +13,6 @@ dependencies:
 # opendap support
 - netcdf4
 - xarray
-# geospatial support
-- rasterio
-- fiona
 # tests
 - pytest
 - pip:

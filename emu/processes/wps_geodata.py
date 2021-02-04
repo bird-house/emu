@@ -22,15 +22,15 @@ class GeoData(Process):
         outputs = [
             ComplexOutput(
                 "raster",
-                "DEM subset of `shape` region in GeoTIFF format.",
-                abstract="Elevation statistics: min, max, mean, median, sum, nodata",
+                "DEM of region in GeoTIFF format.",
+                abstract="Elevation data for Olympus Martian region in byte range.",
                 as_reference=True,
                 supported_formats=[FORMATS.GEOTIFF],
             ),
             ComplexOutput(
                 "vector",
                 "Region definition in GeoJSON format",
-                abstract="The original vector but buffered by a distance of 5.",
+                abstract="Rough vector polygon of the Olympus Mons plateau.",
                 as_reference=True,
                 supported_formats=[FORMATS.GEOJSON, FORMATS.JSON],
             ),
