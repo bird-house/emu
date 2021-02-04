@@ -19,6 +19,7 @@ def test_wps_caps():
         'dummyprocess',
         'esgf_demo',
         'geodata',
+        'geospatial',
         'hello',
         'inout',
         'multiple_outputs',

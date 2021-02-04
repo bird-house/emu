@@ -1,11 +1,9 @@
-from pywps import Process
-from pywps import LiteralInput, LiteralOutput
-from pywps import ComplexInput
-from pywps import Format
+import logging
+
+from pywps import ComplexInput, Format, LiteralInput, LiteralOutput, Process
 from pywps.app.Common import Metadata
 from pywps.ext_autodoc import MetadataUrl
 
-import logging
 LOGGER = logging.getLogger("PYWPS")
 
 
@@ -69,7 +67,7 @@ class ESGFDemo(Process):
                 datasets.append(dataset.data)
         if not datasets:
             raise Exception("You need to provide at least one dataset.")
-        response.outputs['output'].data = 'Number of datasets = {}'.format(len(datasets))
+        response.outputs['output'].data = f'Number of datasets = {len(datasets)}'
 
         response.update_status('PyWPS Process completed.', 100)
         return response

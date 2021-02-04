@@ -3,20 +3,20 @@ Process returning a variety of output file formats to help test clients.
 
 Author: David Huard
 """
-import os
-from pywps import Process, ComplexOutput
-from pywps import FORMATS
-
 import logging
+from pathlib import Path
+
+from pywps import FORMATS, ComplexOutput, Process
+
 LOGGER = logging.getLogger("PYWPS")
 
 # TODO: can be replaced by eggshell function.
-DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+DATA_DIR = Path(__file__).parent.parent.joinpath('data')
 
 
 class OutputFormats(Process):
     def __init__(self):
-        inputs = []
+        inputs = list()
         outputs = [
             ComplexOutput('netcdf', 'netCDF dummy output file.',
                           abstract="A very small test netCDF file. ",
@@ -47,15 +47,15 @@ class OutputFormats(Process):
 
         netcdf_out = response.outputs['netcdf']
         if netcdf_out.data_format.mime_type == FORMATS.ZIP.mime_type:
-            netcdf_out.file = os.path.join(DATA_DIR, 'dummy_nc.zip')
+            netcdf_out.file = DATA_DIR.joinpath('dummy_nc.zip')
         else:
-            netcdf_out.file = os.path.join(DATA_DIR, 'dummy.nc')
+            netcdf_out.file = DATA_DIR.joinpath('dummy.nc')
 
         json_out = response.outputs['json']
         if json_out.data_format.mime_type == FORMATS.ZIP.mime_type:
-            json_out.file = os.path.join(DATA_DIR, 'dummy_json.zip')
+            json_out.file = DATA_DIR.joinpath('dummy_json.zip')
         else:
-            json_out.file = os.path.join(DATA_DIR, 'dummy.json')
+            json_out.file = DATA_DIR.joinpath('dummy.json')
 
         response.update_status('PyWPS Process completed.', 100)
         return response

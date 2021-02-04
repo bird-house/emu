@@ -9,10 +9,10 @@ import logging
 
 LOGGER = logging.getLogger("PYWPS")
 
-__all__ = ["GeoData"]
+__all__ = ["GeoSpatial"]
 
 
-class GeoData(Process):
+class GeoSpatial(Process):
     def __init__(self):
         inputs = [
             ComplexInput(
@@ -62,9 +62,9 @@ class GeoData(Process):
             ),
         ]
 
-        super(GeoData, self).__init__(
+        super(GeoSpatial, self).__init__(
             self._handler,
-            identifier="geodata",
+            identifier="geospatial",
             title="Centroid and bounding box for vector and raster data",
             abstract="Return the polygon's centroid coordinates. If the geometry contains multiple polygons, "
             "only the centroid of the first one will be computed. Do not use for serious computations"
