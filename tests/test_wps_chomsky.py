@@ -7,7 +7,7 @@ from emu.processes.wps_chomsky import Chomsky
 
 def test_wps_chomsky():
     client = client_for(Service(processes=[Chomsky()]))
-    datainputs = f"times={10}"
+    datainputs = "times=10"
     resp = client.get(
         service='WPS', request='Execute', version='1.0.0',
         identifier='chomsky',
