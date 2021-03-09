@@ -32,7 +32,7 @@ class GeoData(Process):
                 "Region definition in GeoJSON format",
                 abstract="Rough vector polygon of the Olympus Mons plateau.",
                 as_reference=True,
-                supported_formats=[FORMATS.GEOJSON, FORMATS.JSON],
+                supported_formats=[FORMATS.GEOJSON],
             ),
         ]
 
@@ -52,13 +52,9 @@ class GeoData(Process):
     def _handler(request, response):
         response.update_status("PyWPS Process started.", 0)
 
-        geojson_out = response.outputs['vector']
-        if geojson_out.data_format.mime_type == FORMATS.GEOJSON.mime_type:
-            geojson_out.file = DATA_DIR.joinpath('Olympus_Mons.geojson')
+        response.outputs['vector'].file = DATA_DIR / "Olympus_Mons.geojson"
 
-        geotiff_out = response.outputs['raster']
-        if geotiff_out.data_format.mime_type == FORMATS.GEOTIFF.mime_type:
-            geotiff_out.file = DATA_DIR.joinpath('Olympus.tif')
+        response.outputs['raster'].file = DATA_DIR / "Olympus.tif"
 
         response.update_status("PyWPS Process completed.", 100)
 
