@@ -1,13 +1,11 @@
 import json
+import logging
 import re
-
 from collections import Counter
 
-from pywps import Process
-from pywps import ComplexInput, ComplexOutput, FORMATS
+from pywps import FORMATS, ComplexInput, ComplexOutput, Process
 from pywps.ext_autodoc import MetadataUrl
 
-import logging
 LOGGER = logging.getLogger("PYWPS")
 
 

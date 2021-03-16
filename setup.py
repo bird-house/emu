@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
-REQUIRES_PYTHON = ">=2.7.0"
+REQUIRES_PYTHON = ">=3.6.0"
 
 about = {}
 with open(os.path.join(here, 'emu', '__version__.py'), 'r') as f:
@@ -18,6 +18,7 @@ with open(os.path.join(here, 'emu', '__version__.py'), 'r') as f:
 
 reqs = [line.strip() for line in open('requirements.txt')]
 dev_reqs = [line.strip() for line in open('requirements_dev.txt')]
+extra_reqs = [line.strip() for line in open("requirements_extra.txt")]
 
 classifiers = [
     'Development Status :: 3 - Alpha',
@@ -27,10 +28,11 @@ classifiers = [
     'Operating System :: POSIX',
     'Programming Language :: Python',
     'Natural Language :: English',
-    "Programming Language :: Python :: 2",
-    'Programming Language :: Python :: 2.7',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
     'Topic :: Scientific/Engineering :: Atmospheric Science',
     'License :: OSI Approved :: Apache Software License',
 ]
@@ -51,6 +53,7 @@ setup(name='emu',
       include_package_data=True,
       install_requires=reqs,
       extras_require={
+          "extra:": extra_reqs,
           "dev": dev_reqs,              # pip install ".[dev]"
       },
       entry_points={

@@ -18,6 +18,7 @@ from .wps_nonpyid import NonPyID
 from .wps_dry_run import SimpleDryRun
 from .wps_ncml import NcMLAgg
 from .wps_translation import Translation
+from .wps_geodata import GeoData
 
 
 processes = [
@@ -41,4 +42,5 @@ processes = [
     SimpleDryRun(),
     NcMLAgg(),
     Translation(),
+    GeoData(),
 ]

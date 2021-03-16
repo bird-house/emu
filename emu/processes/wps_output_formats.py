@@ -3,11 +3,11 @@ Process returning a variety of output file formats to help test clients.
 
 Author: David Huard
 """
-import os
-from pywps import Process, ComplexOutput
-from pywps import FORMATS
-
 import logging
+import os
+
+from pywps import FORMATS, ComplexOutput, Process
+
 LOGGER = logging.getLogger("PYWPS")
 
 # TODO: can be replaced by eggshell function.
@@ -16,7 +16,7 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 
 class OutputFormats(Process):
     def __init__(self):
-        inputs = []
+        inputs = list()
         outputs = [
             ComplexOutput('netcdf', 'netCDF dummy output file.',
                           abstract="A very small test netCDF file. ",
