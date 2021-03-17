@@ -5,9 +5,9 @@ Emu
    :target: http://emu.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
-.. image:: https://travis-ci.org/bird-house/emu.svg?branch=master
-   :target: https://travis-ci.org/bird-house/emu
-   :alt: Travis Build
+.. image:: https://github.com/bird-house/emu/actions/workflows/main.yml/badge.svg
+   :target: https://github.com/bird-house/emu/actions
+   :alt: Build Status
 
 .. image:: https://api.codacy.com/project/badge/Grade/a5a5cf4ded364e14a0b1ea1d67a098ff
    :target: https://www.codacy.com/app/cehbrecht/emu?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bird-house/emu&amp;utm_campaign=Badge_Grade
