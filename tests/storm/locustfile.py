@@ -4,7 +4,7 @@ from locust import HttpUser, between, task
 from tests.storm.common import execute_async
 
 
-class RookUser(HttpUser):
+class EmuUser(HttpUser):
     host = "http://localhost:5000"
     wait_time = between(1, 10)
 
