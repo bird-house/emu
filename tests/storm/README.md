@@ -1,4 +1,12 @@
-# Run locaust tests
+# locust tests
+
+Docs:
+* home: https://locust.io/
+* quickstart: https://docs.locust.io/en/stable/quickstart.html
+* async requests with locust: https://github.com/pglass/how-do-i-locust
+
+
+## Run locust
 
 Run:
 ```
