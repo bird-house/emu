@@ -13,7 +13,9 @@ template_env = Environment(loader=FileSystemLoader(templates_path), autoescape=T
 
 def execute_async(client, name, identifier, inputs=None, complex_inputs=None):
     """
-    The async request is taken from:
+    Spawn an async wps execute job.
+
+    The async request implementation is taken from:
     https://github.com/pglass/how-do-i-locust
     """
     inputs = inputs or []
@@ -23,6 +25,7 @@ def execute_async(client, name, identifier, inputs=None, complex_inputs=None):
 
 
 def build_execute_request(identifier, inputs, complex_inputs):
+    """Build the XML document from a template for a POST execute request."""
     execute_template = template_env.get_template("execute.xml")
     return execute_template.render(
         identifier=identifier, inputs=inputs, complex_inputs=complex_inputs
@@ -30,6 +33,7 @@ def build_execute_request(identifier, inputs, complex_inputs):
 
 
 def async_success(name, start_time, resp):
+    """Fire locust event when WPS execute job was successful."""
     locust.events.request_success.fire(
         request_type=resp.request.method,
         name=name,
@@ -39,6 +43,7 @@ def async_success(name, start_time, resp):
 
 
 def async_failure(name, start_time, resp, message):
+    """Fire locust event when WPS execute job has failed."""
     locust.events.request_failure.fire(
         request_type=resp.request.method,
         name=name,
@@ -49,17 +54,27 @@ def async_failure(name, start_time, resp, message):
 
 
 def get_status_location(xml):
+    """Helper method to retrieve the WPS job status document."""
     pq = PyQuery(xml)
     status_location = pq.attr("statusLocation")
     return urlparse(status_location).path
 
 
 def parse_exception(xml):
+    """Helper method to parse the exception test."""
     pq = PyQuery(xml)
+    # TODO: a bit short ... could do more ...
     return pq.text()
 
 
 def do_execute_async(client, name, data, timeout=600):
+    """Run execute request (async, post) with locust.
+
+    Parameters
+    ----------
+    timeout : int
+        Fail job after `timeout` seconds.
+    """
     start_time = time.monotonic()
     # name = "execute_async_subset"
     resp = client.post("/wps", data=data, name=name)
