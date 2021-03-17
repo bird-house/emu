@@ -31,7 +31,7 @@ class RookUser(HttpUser):
                     "Process description for *hello* does not match expected XML"
                 )
 
-    @task(1)
+    @task
     def execute_async_hello(self):
         # short running async, post
         execute_async(
@@ -43,7 +43,7 @@ class RookUser(HttpUser):
             ],
         )
 
-    @task(1)
+    @task
     def execute_async_sleep(self):
         # long running async, post
         execute_async(
@@ -55,7 +55,7 @@ class RookUser(HttpUser):
             ],
         )
 
-    @task(1)
+    @task
     def execute_sync_nap(self):
         # short running sync, get
         query = "/wps?service=WPS&version=1.0.0&request=Execute&identifier=nap&DataInputs=delay=1"
