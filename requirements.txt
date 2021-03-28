@@ -6,3 +6,4 @@ defusedxml
 geomet
 xarray
 netCDF4
+pandas
