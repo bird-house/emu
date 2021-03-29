@@ -1,7 +1,5 @@
-import pytest
 import json
 from pywps import Service
-from pywps.tests import assert_response_success
 from pywps import get_ElementMakerForVersion
 
 from .common import client_for, resource_file, get_output
@@ -31,7 +29,6 @@ def test_wps_pandas_embedded():
         version='1.0.0'
     )
     resp = client.post_xml(doc=request_doc)
-    print(resp.data)
     assert resp.status_code == 200
     penguins = json.loads(resp.data)
     assert penguins[0]['species'] == "Adelie"
@@ -47,7 +44,6 @@ def test_wps_pandas_as_ref():
         datainputs=datainputs,
         rawdataoutput='output=@mimetype=application/json'
     )
-    print(resp.data)
     assert resp.status_code == 200
     penguins = json.loads(resp.data)
     assert penguins[0]['species'] == "Adelie"
