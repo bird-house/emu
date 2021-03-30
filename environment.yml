@@ -5,15 +5,17 @@ channels:
 dependencies:
 - pip
 - python>=3.6
-- pywps>=4.4
+- pywps>=4.4.0
 - jinja2
 - click
 - psutil
 - defusedxml
+# GeoJSON
+- geomet
+# pandas
+- pandas
 # opendap support
 - netcdf4
 - xarray
 # tests
 - pytest
-- pip:
-  - geomet

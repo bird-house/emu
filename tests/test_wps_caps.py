@@ -27,6 +27,7 @@ def test_wps_caps():
         'ncml',
         'non.py-id',
         'output_formats',
+        'pandas',
         'poly_centroid',
         'show_error',
         'simple_dry_run',
