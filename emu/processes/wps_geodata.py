@@ -23,7 +23,7 @@ class GeoData(Process):
                                "Geometry",
                                supported_formats=[FORMATS.GEOJSON],
                                mode=MODE.NONE,  # Can be upgraded to STRICT once pywps releases 4.4.3 or 4.5.
-                               min_occurs=1,
+                               min_occurs=0,
                                max_occurs=1)
                   ]
         outputs = [
@@ -60,7 +60,9 @@ class GeoData(Process):
         import json
         response.update_status("PyWPS Process started.", 0)
 
-        json.loads(request.inputs["shape"][0].data)
+        if "shape" in request.inputs:
+            LOGGER.info("Loading `shape`")
+            json.loads(request.inputs["shape"][0].data)
 
         response.outputs['vector'].file = DATA_DIR / "Olympus_Mons.geojson"
 
