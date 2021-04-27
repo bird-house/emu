@@ -4,8 +4,9 @@ Process using an application/geo+json and 'image/tiff; application=geotiff' outp
 Author: Trevor James Smith
 """
 from pathlib import Path
-from pywps import Process, ComplexOutput
+from pywps import Process, ComplexOutput, ComplexInput
 from pywps import FORMATS
+from pywps.validator.mode import MODE
 import logging
 
 
@@ -18,7 +19,13 @@ DATA_DIR = Path(__file__).parent.parent.joinpath('data')
 
 class GeoData(Process):
     def __init__(self):
-        inputs = list()
+        inputs = [ComplexInput("shape",
+                               "Geometry",
+                               supported_formats=[FORMATS.GEOJSON],
+                               mode=MODE.NONE,  # Can be upgraded to STRICT once pywps releases 4.4.3 or 4.5.
+                               min_occurs=0,
+                               max_occurs=1)
+                  ]
         outputs = [
             ComplexOutput(
                 "raster",
@@ -50,7 +57,12 @@ class GeoData(Process):
 
     @staticmethod
     def _handler(request, response):
+        import json
         response.update_status("PyWPS Process started.", 0)
+
+        if "shape" in request.inputs:
+            LOGGER.info("Loading `shape`")
+            json.loads(request.inputs["shape"][0].data)
 
         response.outputs['vector'].file = DATA_DIR / "Olympus_Mons.geojson"
 
