@@ -20,6 +20,7 @@ from .wps_ncml import NcMLAgg
 from .wps_translation import Translation
 from .wps_geodata import GeoData
 from .wps_pandas import Pandas
+from .wps_show_defaults import ShowDefaults
 
 
 processes = [
@@ -45,4 +46,5 @@ processes = [
     Translation(),
     GeoData(),
     Pandas(),
+    ShowDefaults(),
 ]
