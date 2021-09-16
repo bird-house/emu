@@ -1,4 +1,7 @@
-from pywps import Process, LiteralInput, LiteralOutput
+import json
+
+from pywps import Process, LiteralInput, ComplexOutput
+from pywps import FORMATS
 
 import logging
 LOGGER = logging.getLogger("PYWPS")
@@ -34,15 +37,16 @@ class ShowDefaults(Process):
                 'string_3',
                 'String 3: required no default',
                 data_type='string',
+                default='three',
                 min_occurs=1
             ),
         ]
         outputs = [
-            LiteralOutput(
+            ComplexOutput(
                 'output',
                 'Output',
-                data_type='string',
-            ),
+                as_reference=True,
+                supported_formats=[FORMATS.JSON]),
         ]
 
         super(ShowDefaults, self).__init__(
@@ -66,13 +70,11 @@ class ShowDefaults(Process):
         else:
             string0 = "no value"
 
-        response.outputs['output'].data = f"""
-        Outputs:
-        string0={string0},
-        string1={request.inputs['string_1'][0].data},
-        string2={request.inputs['string_2'][0].data},
-        string3={request.inputs['string_3'][0].data}
-        """
-
+        response.outputs['output'].data = json.dumps({
+            'string0': string0,
+            'string1': request.inputs['string_1'][0].data,
+            'string2': request.inputs['string_2'][0].data,
+            'string3': request.inputs['string_3'][0].data,
+        })
         response.update_status('PyWPS Process completed.', 100)
         return response
