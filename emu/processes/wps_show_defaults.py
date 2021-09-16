@@ -28,8 +28,8 @@ class ShowDefaults(Process):
                 'string_3',
                 'String 3',
                 data_type='string',
-                default='three',
-                min_occurs=2
+                # default='three',
+                min_occurs=1
             ),
         ]
         outputs = [
@@ -56,11 +56,11 @@ class ShowDefaults(Process):
     def _handler(request, response):
         response.update_status('PyWPS Process started.', 0)
 
-        response.outputs['output'].data = f"""\n
-        Outputs:\n
-        string1: {request.inputs['string_1'][0].data}\n
-        string2: {request.inputs['string_2'][0].data}\n
-        string3: {request.inputs['string_3'][0].data}\n
+        response.outputs['output'].data = f"""
+        Outputs:
+        string1={request.inputs['string_1'][0].data},
+        string2={request.inputs['string_2'][0].data},
+        string3={request.inputs['string_3'][0].data}
         """
 
         response.update_status('PyWPS Process completed.', 100)
