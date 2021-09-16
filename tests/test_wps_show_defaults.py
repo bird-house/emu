@@ -18,19 +18,19 @@ def test_wps_show_defaults_post():
         WPS.DataInputs(
             WPS.Input(
                 OWS.Identifier('string_0'),
-                WPS.Data(WPS.LiteralInput("ZERO"))
+                WPS.Data(WPS.LiteralData("ZERO"))
             ),
-            WPS.Input(
-                OWS.Identifier('string_1'),
-                WPS.Data(WPS.LiteralInput("ONE"))
-            ),
-            WPS.Input(
-                OWS.Identifier('string_2'),
-                WPS.Data(WPS.LiteralInput("TWO"))
-            ),
+            # WPS.Input(
+            #     OWS.Identifier('string_1'),
+            #     WPS.Data(WPS.LiteralData("ONE"))
+            # ),
+            # WPS.Input(
+            #     OWS.Identifier('string_2'),
+            #     WPS.Data(WPS.LiteralData("TWO"))
+            # ),
             WPS.Input(
                 OWS.Identifier('string_3'),
-                WPS.Data(WPS.LiteralInput("THREE"))
+                WPS.Data(WPS.LiteralData("THREE"))
             )
         ),
         WPS.ResponseForm(
@@ -44,4 +44,7 @@ def test_wps_show_defaults_post():
     print(resp.data)
     assert resp.status_code == 200
     result = json.loads(resp.data)
-    assert result['string0'] == 'no value'
+    assert result['string0'] == 'ZERO'
+    assert result['string1'] == 'one'
+    assert result['string2'] == 'two'
+    assert result['string3'] == 'THREE'
