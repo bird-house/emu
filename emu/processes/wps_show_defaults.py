@@ -11,24 +11,29 @@ class ShowDefaults(Process):
     def __init__(self):
         inputs = [
             LiteralInput(
+                'string_0',
+                'String 0: optional, no default',
+                data_type='string',
+                min_occurs=0
+            ),
+            LiteralInput(
                 'string_1',
-                'String 1',
+                'String 1: optional with default',
                 data_type='string',
                 default='one',
                 min_occurs=0
             ),
             LiteralInput(
                 'string_2',
-                'String 2',
+                'String 2: required with default',
                 data_type='string',
                 default='two',
                 min_occurs=1
             ),
             LiteralInput(
                 'string_3',
-                'String 3',
+                'String 3: required no default',
                 data_type='string',
-                # default='three',
                 min_occurs=1
             ),
         ]
@@ -56,8 +61,14 @@ class ShowDefaults(Process):
     def _handler(request, response):
         response.update_status('PyWPS Process started.', 0)
 
+        if 'string_0' in request.inputs:
+            string0 = request.inputs['string_0'][0].data
+        else:
+            string0 = "no value"
+
         response.outputs['output'].data = f"""
         Outputs:
+        string0={string0},
         string1={request.inputs['string_1'][0].data},
         string2={request.inputs['string_2'][0].data},
         string3={request.inputs['string_3'][0].data}
