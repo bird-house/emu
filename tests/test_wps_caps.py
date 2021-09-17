@@ -29,6 +29,7 @@ def test_wps_caps():
         'output_formats',
         'pandas',
         'poly_centroid',
+        'show_defaults',
         'show_error',
         'simple_dry_run',
         'sleep',

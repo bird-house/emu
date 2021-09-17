@@ -1,8 +1,7 @@
-pywps>=4.4.0
+pywps>=4.4.5
 jinja2
 click
 psutil
-defusedxml
 geomet
 xarray
 netCDF4
