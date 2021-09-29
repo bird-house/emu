@@ -33,6 +33,7 @@ def test_wps_caps():
         'show_error',
         'simple_dry_run',
         'sleep',
+        'special_chars',
         'translation',
         'ultimate_question',
         'wordcounter',
