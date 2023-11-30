@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # emu documentation build configuration file, created by
 # sphinx-quickstart on Fri Jun  9 13:47:02 2017.
@@ -51,22 +50,52 @@ extensions = [
 # To avoid having to install these and burst memory limit on ReadTheDocs.
 # List of all tested working mock imports from all birds so new birds can
 # inherit without having to test which work which do not.
-autodoc_mock_imports = ["numpy", "xarray", "fiona", "rasterio", "shapely",
-                        "osgeo", "geopandas", "pandas", "statsmodels",
-                        "affine", "rasterstats", "spotpy", "matplotlib",
-                        "scipy", "unidecode", "gdal", "sentry_sdk", "dask",
-                        "numba", "parse", "siphon", "sklearn", "cftime",
-                        "netCDF4", "bottleneck", "ocgis", "geotiff", "geos",
-                        "hdf4", "hdf5", "zlib", "pyproj", "proj", "cartopy",
-                        "scikit-learn", "cairo"]
+autodoc_mock_imports = [
+    "numpy",
+    "xarray",
+    "fiona",
+    "rasterio",
+    "shapely",
+    "osgeo",
+    "geopandas",
+    "pandas",
+    "statsmodels",
+    "affine",
+    "rasterstats",
+    "spotpy",
+    "matplotlib",
+    "scipy",
+    "unidecode",
+    "gdal",
+    "sentry_sdk",
+    "dask",
+    "numba",
+    "parse",
+    "siphon",
+    "sklearn",
+    "cftime",
+    "netCDF4",
+    "bottleneck",
+    "ocgis",
+    "geotiff",
+    "geos",
+    "hdf4",
+    "hdf5",
+    "zlib",
+    "pyproj",
+    "proj",
+    "cartopy",
+    "scikit-learn",
+    "cairo",
+]
 
 # Monkeypatch constant because the following are mock imports.
 # Only works if numpy is actually installed and at the same time being mocked.
-#import numpy
-#numpy.pi = 3.1416
+# import numpy
+# numpy.pi = 3.1416
 
 # We are using mock imports in readthedocs, so probably safer to not run the notebooks
-nbsphinx_execute = 'never'
+nbsphinx_execute = "never"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -82,7 +111,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Emu"
-copyright = "2018-2020, Carsten Ehbrecht"
+copyright = "2018-2023, Carsten Ehbrecht"
 author = "Carsten Ehbrecht"
 
 # The version info for the project you're documenting, acts as replacement
@@ -99,7 +128,7 @@ release = "0.12.0"
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -113,7 +142,7 @@ pygments_style = "sphinx"
 todo_include_todos = False
 
 # Suppress "WARNING: unknown mimetype for ..." when building EPUB.
-suppress_warnings = ['epub.unknown_project_files']
+suppress_warnings = ["epub.unknown_project_files"]
 
 # Avoid "configuration.rst:4:duplicate label configuration, other instance in configuration.rst"
 autosectionlabel_prefix_document = True

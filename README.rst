@@ -45,10 +45,13 @@ You can find information about contributing in our `Developer Guide`_.
 
 Please use bumpversion_ to release a new version.
 
+
 License
 -------
 
-Free software: Apache Software License 2.0
+* Free software: Apache Software License 2.0
+* Documentation: https://emu.readthedocs.io.
+
 
 Credits
 -------
