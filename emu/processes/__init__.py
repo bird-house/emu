@@ -21,6 +21,7 @@ from .wps_translation import Translation
 from .wps_geodata import GeoData
 from .wps_pandas import Pandas
 from .wps_show_defaults import ShowDefaults
+from .wps_special_chars import SpecialChars
 
 
 processes = [
@@ -47,4 +48,5 @@ processes = [
     GeoData(),
     Pandas(),
     ShowDefaults(),
+    SpecialChars(),
 ]
