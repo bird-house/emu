@@ -3,6 +3,7 @@ name: emu-docs
 channels:
 - conda-forge
 dependencies:
+- python >=3.8,<3.11
 - pywps >=4.5.2
 - sphinx
 - nbsphinx
