@@ -131,9 +131,11 @@ def stop():
 @click.option('--log-level', metavar='LEVEL', default='INFO', help='log level in PyWPS configuration.')
 @click.option('--log-file', metavar='PATH', default='pywps.log', help='log file in PyWPS configuration.')
 @click.option('--database', default='sqlite:///pywps-logs.sqlite', help='database in PyWPS configuration')
+@click.option('--outputurl', default='', help='base URL for file downloads')
+@click.option('--outputpath', default='', help='base directory where outputs are written')
 def start(config, bind_host, daemon, hostname, port,
           maxsingleinputsize, maxprocesses, parallelprocesses,
-          log_level, log_file, database):
+          log_level, log_file, database, outputurl, outputpath):
     """Start PyWPS service.
     This service is by default available at http://localhost:5000/wps
     """
@@ -150,6 +152,8 @@ def start(config, bind_host, daemon, hostname, port,
         wps_log_level=log_level,
         wps_log_file=log_file,
         wps_database=database,
+        wps_outputurl=outputurl,
+        wps_outputpath=outputpath
     ))
     if config:
         cfgfiles.append(config)

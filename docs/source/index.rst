@@ -9,6 +9,7 @@
    dev_guide
    tutorial
    processes
+   authors
    changes
 
 Indices and tables
