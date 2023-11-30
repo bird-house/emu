@@ -1,11 +1,15 @@
 Changes
 *******
 
-0.13.0 (unreleased)
+0.13.0 (2023-11-30)
 ===================
 
 Changes:
 
+* Fixed RTD docs build.
+* Updated via cruft from cookiecutter.
+* Updated PyWPS >=4.5.2,<4.7
+* Added GitHub CI (#110).
 * Added Geospatial process.
 * Added a new recipe for installing Emu with GIS libraries (`pip install eum[gis]`).
 * Added example geospatial data (raster image courtesy of USGS: `Mars MGS MOLA DEM 463m v2`).
