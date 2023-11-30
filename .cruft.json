@@ -24,7 +24,7 @@
       "project_repo_name": "emu",
       "project_readthedocs_name": "emu",
       "project_short_description": "WPS processes for testing and demos.",
-      "version": "0.12.0",
+      "version": "0.13.0",
       "open_source_license": "Apache Software License 2.0",
       "http_port": "5000",
       "use_pytest": "y",
