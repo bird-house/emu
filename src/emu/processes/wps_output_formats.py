@@ -7,11 +7,12 @@ import logging
 import os
 
 from pywps import FORMATS, ComplexOutput, Process
+import pathlib
 
 LOGGER = logging.getLogger("PYWPS")
 
 # TODO: can be replaced by eggshell function.
-DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+DATA_DIR = os.path.join(pathlib.Path(__file__).parent, '..', 'data')
 
 
 class OutputFormats(Process):

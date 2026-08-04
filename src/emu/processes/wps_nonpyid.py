@@ -1,7 +1,4 @@
-"""
-Dummy process with non-pythonic identifiers.
-
-"""
+"""Dummy process with non-pythonic identifiers."""
 from pywps import Process, LiteralInput, LiteralOutput, ComplexInput, ComplexOutput, FORMATS
 
 import logging

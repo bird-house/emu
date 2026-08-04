@@ -8,9 +8,7 @@ LOGGER = logging.getLogger("PYWPS")
 
 
 class ShowDefaults(Process):
-    """
-    Process with examples of default value usage in WPS.
-    """
+    """Process with examples of default value usage in WPS."""
 
     def __init__(self):
         inputs = [

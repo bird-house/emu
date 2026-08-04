@@ -59,12 +59,10 @@ class ESGFDemo(Process):
         datasets = []
         # append file urls
         if 'dataset' in request.inputs:
-            for dataset in request.inputs['dataset']:
-                datasets.append(dataset.file)
+            datasets.extend(dataset.file for dataset in request.inputs['dataset'])
         # append opendap urls
         if 'dataset_opendap' in request.inputs:
-            for dataset in request.inputs['dataset_opendap']:
-                datasets.append(dataset.data)
+            datasets.extend(dataset.data for dataset in request.inputs['dataset_opendap'])
         if not datasets:
             raise Exception("You need to provide at least one dataset.")
         response.outputs['output'].data = f'Number of datasets = {len(datasets)}'
