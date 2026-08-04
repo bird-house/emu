@@ -5,54 +5,47 @@ from pywps.ext_autodoc import MetadataUrl
 
 class Nap(Process):
     def __init__(self):
-        inputs = [
-            LiteralInput('delay', 'Delay between every update',
-                         default='1', data_type='float')
-        ]
-        outputs = [
-            LiteralOutput('output', 'Nap Output', data_type='string')
-        ]
+        inputs = [LiteralInput("delay", "Delay between every update", default="1", data_type="float")]
+        outputs = [LiteralOutput("output", "Nap Output", data_type="string")]
 
         super().__init__(
             self._handler,
-            identifier='nap',
-            version='1.0',
-            title='Afternoon Nap (supports sync calls only)',
-            abstract='This process will have a short nap for a given delay or 1 second if not a valid value. '
-                     'This process only supports synchronous WPS requests... '
-                     'so, make sure the nap does not take to long.',
-            profile='',
+            identifier="nap",
+            version="1.0",
+            title="Afternoon Nap (supports sync calls only)",
+            abstract="This process will have a short nap for a given delay or 1 second if not a valid value. "
+            "This process only supports synchronous WPS requests... "
+            "so, make sure the nap does not take to long.",
+            profile="",
             metadata=[
-                Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                MetadataUrl('User Guide',
-                            'http://emu.readthedocs.io/en/latest/',
-                            anonymous=True),
+                Metadata("Birdhouse", "http://bird-house.github.io/"),
+                MetadataUrl("User Guide", "http://emu.readthedocs.io/en/latest/", anonymous=True),
             ],
             inputs=inputs,
             outputs=outputs,
             store_supported=False,
-            status_supported=False
+            status_supported=False,
         )
 
     @staticmethod
     def _handler(request, response):
         import time
 
-        nap_delay = request.inputs['delay'][0].data
+        nap_delay = request.inputs["delay"][0].data
         if nap_delay:
             nap_delay = float(nap_delay)
         else:
             nap_delay = 1
 
-        response.update_status('PyWPS Process started.', 0)
+        response.update_status("PyWPS Process started.", 0)
         time.sleep(nap_delay)
-        response.update_status('PyWPS Process started. Waiting...', 25)
+        response.update_status("PyWPS Process started. Waiting...", 25)
         time.sleep(nap_delay)
-        response.update_status('PyWPS Process started. Waiting...', 50)
+        response.update_status("PyWPS Process started. Waiting...", 50)
         time.sleep(nap_delay)
-        response.update_status('PyWPS Process started. Waiting...', 75)
+        response.update_status("PyWPS Process started. Waiting...", 75)
         time.sleep(nap_delay)
-        response.outputs['output'].data = 'done sleeping'
+        response.outputs["output"].data = "done sleeping"
 
-        response.update_status('PyWPS Process completed.', 100)
+        response.update_status("PyWPS Process completed.", 100)
         return response

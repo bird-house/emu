@@ -38,7 +38,7 @@ jobs:
         with:
           context: .
           file: "Dockerfile"
-          tags: local$emu:latest
+          tags: birdhouse/emu:test
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -46,7 +46,7 @@ jobs:
 
       - name: Run Docker image
         run: |
-          docker run --rm -p 9099:9099 local$emu:latest sh -c '
+          docker run --rm -p 9099:9099 birdhouse/emu:test sh -c '
             $emu start -d
             sleep 2s
             $emu status

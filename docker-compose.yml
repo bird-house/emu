@@ -20,7 +20,7 @@ services:
       - outputpath:/wps_outputs:ro
 
 volumes:
-    outputpath: {}
+  outputpath: {}
 
 # docker-compose build
 # docker-compose up

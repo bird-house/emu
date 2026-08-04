@@ -19,7 +19,7 @@ def test_wps_nc_to_dap():
 
     # Convert to DAP link
     client = client_for(Service(processes=[NcToDap()]))
-    datainputs = "resource=@xlink:href={0}".format(nc_url)
+    datainputs = f"resource=@xlink:href={nc_url}"
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
         identifier='nc_to_dap',

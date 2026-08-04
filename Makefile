@@ -52,7 +52,7 @@ help: ## print this help message. (Default)
 start: ## start emu service as daemon (background process)
 	@echo "Starting application ..."
 	@-bash -c "$(APP_NAME) start -d"
-	
+
 stop: ## stop emu service
 	@echo "Stopping application ..."
 	@-bash -c "$(APP_NAME) stop"
@@ -156,7 +156,7 @@ test-notebooks: notebook-sanitizer
 test-notebooks-lax: notebook-sanitizer ## run tests on notebooks but don't be so strict about outputs
 	@echo "Running notebook-based tests"
 	@bash -c "env WPS_URL=$(WPS_URL) pytest --nbval-lax --rootdir tests/ --verbose $(CURDIR)/docs/source/notebooks/ --ignore $(CURDIR)/docs/source/notebooks/.ipynb_checkpoints"
- 
+
 coverage: ## check code coverage quickly with the default Python
 	@bash -c 'coverage run --source emu -m pytest'
 	@bash -c 'coverage report -m'
@@ -167,7 +167,7 @@ coverage: ## check code coverage quickly with the default Python
 
 autodoc: install-docs clean-docs ## create sphinx-apidoc files:
 	@bash -c 'sphinx-apidoc -o docs/source/apidoc --private --module-first src/emu'
- 
+
 build-docs: autodoc ## generate Sphinx HTML documentation, including API docs
 	@echo "Generating docs with Sphinx ..."
 	$(MAKE) -C docs html

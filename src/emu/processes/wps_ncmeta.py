@@ -2,7 +2,6 @@ import os
 
 from pywps import Process
 from pywps import ComplexInput, ComplexOutput, FORMATS, Format
-from pywps.inout.basic import SOURCE_TYPE
 from pywps.validator.mode import MODE
 from pywps.ext_autodoc import MetadataUrl
 
@@ -10,10 +9,11 @@ from netCDF4 import Dataset
 
 import logging
 import pathlib
+
 LOGGER = logging.getLogger("PYWPS")
 
 
-TEST_URL = 'http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm3_0_run1_200001.nc'
+TEST_URL = "http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm3_0_run1_200001.nc"
 
 
 class NCMeta(Process):
@@ -25,61 +25,66 @@ class NCMeta(Process):
 
     def __init__(self):
         inputs = [
-            ComplexInput('dataset', 'NetCDF Dataset',
-                         abstract=f"{TEST_URL}.nc4",
-                         # default="{}.nc4".format(TEST_URL),
-                         supported_formats=[FORMATS.NETCDF],
-                         min_occurs=0, max_occurs=1,
-                         # default_type=SOURCE_TYPE.URL,
-                         mode=MODE.STRICT),
-
-            ComplexInput('dataset_opendap', 'OpenDAP Dataset',
-                         abstract=TEST_URL,
-                         # default=TEST_URL,
-                         supported_formats=[FORMATS.DODS],
-                         min_occurs=0, max_occurs=1,
-                         # default_type=SOURCE_TYPE.URL,
-                         mode=MODE.NONE),
+            ComplexInput(
+                "dataset",
+                "NetCDF Dataset",
+                abstract=f"{TEST_URL}.nc4",
+                # default="{}.nc4".format(TEST_URL),
+                supported_formats=[FORMATS.NETCDF],
+                min_occurs=0,
+                max_occurs=1,
+                # default_type=SOURCE_TYPE.URL,
+                mode=MODE.STRICT,
+            ),
+            ComplexInput(
+                "dataset_opendap",
+                "OpenDAP Dataset",
+                abstract=TEST_URL,
+                # default=TEST_URL,
+                supported_formats=[FORMATS.DODS],
+                min_occurs=0,
+                max_occurs=1,
+                # default_type=SOURCE_TYPE.URL,
+                mode=MODE.NONE,
+            ),
         ]
         outputs = [
-            ComplexOutput('output', 'Metadata',
-                          as_reference=True,
-                          supported_formats=[FORMATS.TEXT]), ]
+            ComplexOutput("output", "Metadata", as_reference=True, supported_formats=[FORMATS.TEXT]),
+        ]
 
         super().__init__(
             self._handler,
-            identifier='ncmeta',
-            title='Return NetCDF Metadata',
+            identifier="ncmeta",
+            title="Return NetCDF Metadata",
             abstract="Return metadata from a netCDF dataset, either on file or an OpenDAP service.",
-            version='4',
+            version="4",
             metadata=[
-                MetadataUrl('User Guide',
-                            'http://emu.readthedocs.io/en/latest/',
-                            anonymous=True),
+                MetadataUrl("User Guide", "http://emu.readthedocs.io/en/latest/", anonymous=True),
             ],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
-            status_supported=True)
+            status_supported=True,
+        )
 
     def _handler(self, request, response):
         # TODO: can't set default value for input otherwise I will always get
         # both dataset and dataset_opendap
-        response.update_status('PyWPS Process started.', 0)
+        response.update_status("PyWPS Process started.", 0)
 
-        if 'dataset_opendap' in request.inputs:
-            inpt = request.inputs['dataset_opendap'][0]
+        if "dataset_opendap" in request.inputs:
+            inpt = request.inputs["dataset_opendap"][0]
             resource = inpt.url
         else:
-            inpt = request.inputs['dataset'][0]
+            inpt = request.inputs["dataset"][0]
             resource = inpt.file
         ds = Dataset(resource)
-        with pathlib.Path(os.path.join(self.workdir, 'out.txt')).open("w") as fp:
-            response.outputs['output'].file = fp.name
+        with pathlib.Path(os.path.join(self.workdir, "out.txt")).open("w") as fp:
+            response.outputs["output"].file = fp.name
             fp.write(f"URL: {inpt.url}\n\n")
             fp.write(f"MIME Type: {inpt.data_format.mime_type}\n\n")
             for attr in ds.ncattrs():
                 fp.write(f"{attr}: {ds.getncattr(attr)}\n\n")
 
-        response.update_status('PyWPS Process completed.', 100)
+        response.update_status("PyWPS Process completed.", 100)
         return response

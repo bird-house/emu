@@ -14,7 +14,7 @@ NC_FILE_URL = "file://{}".format(resource_file('test.nc'))
 @pytest.mark.online
 def test_wps_ncmeta_opendap():
     client = client_for(Service(processes=[NCMeta()]))
-    datainputs = "dataset_opendap=@xlink:href={0}".format(OPENDAP_URL)
+    datainputs = f"dataset_opendap=@xlink:href={OPENDAP_URL}"
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
         identifier='ncmeta',
@@ -25,7 +25,7 @@ def test_wps_ncmeta_opendap():
 @pytest.mark.online
 def test_wps_ncmeta_netcdf():
     client = client_for(Service(processes=[NCMeta()]))
-    datainputs = "dataset=@xlink:href={0}".format(NC_URL)
+    datainputs = f"dataset=@xlink:href={NC_URL}"
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
         identifier='ncmeta',
@@ -35,7 +35,7 @@ def test_wps_ncmeta_netcdf():
 
 def test_wps_ncmeta_file():
     client = client_for(Service(processes=[NCMeta()]))
-    datainputs = "dataset=@xlink:href={0}".format(NC_FILE_URL)
+    datainputs = f"dataset=@xlink:href={NC_FILE_URL}"
     resp = client.get(
         service='wps', request='execute', version='1.0.0',
         identifier='ncmeta',

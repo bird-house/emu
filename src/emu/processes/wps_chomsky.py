@@ -3,6 +3,7 @@ from pywps import Process, LiteralInput, ComplexOutput, Format
 
 import logging
 import pathlib
+
 LOGGER = logging.getLogger("PYWPS")
 
 leadins = """To characterize a linguistic level L,
@@ -120,15 +121,8 @@ class Chomsky(Process):
     """
 
     def __init__(self):
-        inputs = [
-            LiteralInput('times', 'Times',
-                         abstract='Generates a random chomsky text.',
-                         default='5',
-                         data_type='integer')]
-        outputs = [
-            ComplexOutput('output', 'Chomsky text',
-                          as_reference=True,
-                          supported_formats=[Format('text/plain')])]
+        inputs = [LiteralInput("times", "Times", abstract="Generates a random chomsky text.", default="5", data_type="integer")]
+        outputs = [ComplexOutput("output", "Chomsky text", as_reference=True, supported_formats=[Format("text/plain")])]
 
         super().__init__(
             self._handler,
@@ -139,14 +133,15 @@ class Chomsky(Process):
             inputs=inputs,
             outputs=outputs,
             status_supported=True,
-            store_supported=True)
+            store_supported=True,
+        )
 
     def _handler(self, request, response):
         import textwrap
         import random
         from itertools import chain, islice
 
-        response.update_status('PyWPS Process started.', 0)
+        response.update_status("PyWPS Process started.", 0)
 
         def chomsky(times=5, line_length=72):
             parts = []
@@ -155,11 +150,11 @@ class Chomsky(Process):
                 random.shuffle(phraselist)
                 parts.append(phraselist)
             output = chain(*islice(zip(*parts), 0, times))
-            return textwrap.fill(' '.join(output), line_length)
+            return textwrap.fill(" ".join(output), line_length)
 
-        with pathlib.Path(os.path.join(self.workdir, 'out.txt')).open('w') as fout:
-            fout.write(chomsky(request.inputs['times'][0].data))
-            response.outputs['output'].file = fout.name
+        with pathlib.Path(os.path.join(self.workdir, "out.txt")).open("w") as fout:
+            fout.write(chomsky(request.inputs["times"][0].data))
+            response.outputs["output"].file = fout.name
 
-        response.update_status('PyWPS Process completed.', 100)
+        response.update_status("PyWPS Process completed.", 100)
         return response

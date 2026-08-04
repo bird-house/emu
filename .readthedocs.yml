@@ -17,7 +17,7 @@ sphinx:
 #  configuration: mkdocs.yml
 
 # Optionally build your docs in additional formats such as PDF and ePub
-formats: []
+formats: [ ]
 
 build:
   os: "ubuntu-26.04"

@@ -1,52 +1,43 @@
 from pywps.app.Common import Metadata
 from pywps.ext_autodoc import MetadataUrl
 
-__author__ = 'Jachym'
+__author__ = "Jachym"
 
 from pywps import Process, BoundingBoxInput, BoundingBoxOutput
 
 import logging
-LOGGER = logging.getLogger('PYWPS')
+
+LOGGER = logging.getLogger("PYWPS")
 
 
 class Box(Process):
     def __init__(self):
-        inputs = [
-            BoundingBoxInput('bbox', 'Bounding Box',
-                             abstract='Bounding Box Input.',
-                             crss=['epsg:4326', 'epsg:3035'],
-                             min_occurs=0)
-        ]
-        outputs = [
-            BoundingBoxOutput('bbox', 'Bounding Box',
-                              abstract='Bounding Box Output.',
-                              crss=['epsg:4326'])
-        ]
+        inputs = [BoundingBoxInput("bbox", "Bounding Box", abstract="Bounding Box Input.", crss=["epsg:4326", "epsg:3035"], min_occurs=0)]
+        outputs = [BoundingBoxOutput("bbox", "Bounding Box", abstract="Bounding Box Output.", crss=["epsg:4326"])]
 
         super().__init__(
             self._handler,
-            identifier='bbox',
-            version='0.2',
+            identifier="bbox",
+            version="0.2",
             title="Bounding box in- and out",
-            abstract='Give bounding box, return the same',
+            abstract="Give bounding box, return the same",
             metadata=[
-                Metadata('Birdhouse', 'http://bird-house.github.io/'),
-                MetadataUrl('User Guide',
-                            'http://emu.readthedocs.io/en/latest/',
-                            anonymous=True)],
+                Metadata("Birdhouse", "http://bird-house.github.io/"),
+                MetadataUrl("User Guide", "http://emu.readthedocs.io/en/latest/", anonymous=True),
+            ],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
-            status_supported=True
+            status_supported=True,
         )
 
     @staticmethod
     def _handler(request, response):
-        response.update_status('PyWPS Process started.', 0)
+        response.update_status("PyWPS Process started.", 0)
 
-        LOGGER.debug('bbox: coords=%s, crs=%s', request.inputs['bbox'][0].data, request.inputs['bbox'][0].crs)
-        response.outputs['bbox'].data = request.inputs['bbox'][0].data
-        response.outputs['bbox'].crs = request.inputs['bbox'][0].crs
+        LOGGER.debug("bbox: coords=%s, crs=%s", request.inputs["bbox"][0].data, request.inputs["bbox"][0].crs)
+        response.outputs["bbox"].data = request.inputs["bbox"][0].data
+        response.outputs["bbox"].crs = request.inputs["bbox"][0].crs
 
-        response.update_status('PyWPS Process completed.', 100)
+        response.update_status("PyWPS Process completed.", 100)
         return response

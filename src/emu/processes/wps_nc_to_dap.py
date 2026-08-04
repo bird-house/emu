@@ -14,37 +14,39 @@ LOGGER = logging.getLogger("PYWPS")
 class NcToDap(Process):
     def __init__(self):
         inputs = [
-            ComplexInput('resource', "NetCDF file",
-                         abstract="Link to NetCDF or NcML file on this server",
-                         supported_formats=[FORMATS.NETCDF, ],  # FORMATS.NCML], to become available in PyWPS 4.2.5
-                         min_occurs=1,
-                         max_occurs=1)
+            ComplexInput(
+                "resource",
+                "NetCDF file",
+                abstract="Link to NetCDF or NcML file on this server",
+                supported_formats=[
+                    FORMATS.NETCDF,
+                ],  # FORMATS.NCML], to become available in PyWPS 4.2.5
+                min_occurs=1,
+                max_occurs=1,
+            )
         ]
         outputs = [
-            ComplexOutput('dap', 'DAP url',
-                          as_reference=True,
-                          supported_formats=[FORMATS.DODS]),
+            ComplexOutput("dap", "DAP url", as_reference=True, supported_formats=[FORMATS.DODS]),
         ]
 
         super().__init__(
             self._handler,
-            identifier='nc_to_dap',
+            identifier="nc_to_dap",
             title="Convert file URL to DAP URL",
             abstract="Return Data Access Protocol link to a netCDF or NcML file.",
             version="1",
             metadata=[
-                MetadataUrl('User Guide',
-                            'http://emu.readthedocs.io/en/latest/',
-                            anonymous=True),
+                MetadataUrl("User Guide", "http://emu.readthedocs.io/en/latest/", anonymous=True),
             ],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
-            status_supported=True)
+            status_supported=True,
+        )
 
     @staticmethod
     def _handler(self, request, response):
-        url = request.inputs['resource'][0].url
+        url = request.inputs["resource"][0].url
 
         # Write response
         file_server = configuration.CONFIG.get("server", "outputurl")

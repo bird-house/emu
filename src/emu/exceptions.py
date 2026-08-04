@@ -2,7 +2,7 @@ from pywps.app.exceptions import ProcessError
 
 
 class StorageLimitExceeded(ProcessError):
-    default_msg = 'You have exceeded the storage limit'
+    default_msg = "You have exceeded the storage limit"
 
     def __init__(self, msg=None, used=None, available=None):
         if used and available:
@@ -13,11 +13,11 @@ class StorageLimitExceeded(ProcessError):
 
 
 class TimeLimitExceeded(StorageLimitExceeded):
-    default_msg = 'You have exceeded the time limit'
+    default_msg = "You have exceeded the time limit"
 
 
 class DryRunWarning(ProcessError):
-    default_msg = 'You have submitted a job in dry-run mode'
+    default_msg = "You have submitted a job in dry-run mode"
 
     def __init__(self, msg=None, storage_used=None, time_used=None):
         if storage_used and time_used:

@@ -13,32 +13,27 @@ class NcMLAgg(Process):
     def __init__(self):
         inputs = []
         outputs = [
-            ComplexOutput('d1', 'NetCDF file 1',
-                          as_reference=True,
-                          supported_formats=[FORMATS.NETCDF]),
-            ComplexOutput('d2', 'NetCDF file 2',
-                          as_reference=True,
-                          supported_formats=[FORMATS.NETCDF]),
-            ComplexOutput('ncml', 'NcML aggregation',
-                          as_reference=True,
-                          supported_formats=[FORMATS.DODS]),  # FORMATS.NCML To become available in PyWPS 4.2.5
+            ComplexOutput("d1", "NetCDF file 1", as_reference=True, supported_formats=[FORMATS.NETCDF]),
+            ComplexOutput("d2", "NetCDF file 2", as_reference=True, supported_formats=[FORMATS.NETCDF]),
+            ComplexOutput(
+                "ncml", "NcML aggregation", as_reference=True, supported_formats=[FORMATS.DODS]
+            ),  # FORMATS.NCML To become available in PyWPS 4.2.5
         ]
 
         super().__init__(
             self._handler,
-            identifier='ncml',
+            identifier="ncml",
             title="Test NcML THREDDS capability",
             abstract="Return links to an NcML file aggregating netCDF files with moving time units.",
             version="1",
             metadata=[
-                MetadataUrl('User Guide',
-                            'http://emu.readthedocs.io/en/latest/',
-                            anonymous=True),
+                MetadataUrl("User Guide", "http://emu.readthedocs.io/en/latest/", anonymous=True),
             ],
             inputs=inputs,
             outputs=outputs,
             store_supported=True,
-            status_supported=True)
+            status_supported=True,
+        )
 
     def _handler(self, request, response):
 
@@ -65,6 +60,6 @@ class NcMLAgg(Process):
         response.outputs["d1"].file = d1fn
         response.outputs["d2"].file = d2fn
 
-        response.outputs['ncml'].data = ncml
+        response.outputs["ncml"].data = ncml
 
         return response

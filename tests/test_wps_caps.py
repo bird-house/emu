@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 from pywps import Service
 
 from .common import client_for
