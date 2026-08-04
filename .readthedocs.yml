@@ -20,9 +20,12 @@ sphinx:
 formats: []
 
 build:
-  os: ubuntu-22.04
+  os: "ubuntu-26.04"
   tools:
-    python: "mambaforge-22.9"
+    python: "miniforge3-25.11"
+  jobs:
+    install:
+      - pip install --groups docs
 
 conda:
   environment: environment-docs.yml
@@ -30,4 +33,5 @@ conda:
 # Optionally set the version of Python and requirements required to build your docs
 python:
   install:
-    - requirements: requirements_dev.txt
+    - method: pip
+      path: .

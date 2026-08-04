@@ -1,0 +1,357 @@
+[build-system]
+requires = ["flit_core >=3.11.0,<4"]
+build-backend = "flit_core.buildapi"
+
+[dependency-groups]
+lint = [
+  # Linting tools
+  "codespell >=2.4.2",
+  "deptry >=0.25.1",
+  "flake8 >=7.3.0",
+  "flake8-rst-docstrings >=0.4.0",
+  "mypy >=1.20.0",
+  "numpydoc >=1.10.0",
+  "ruff >=0.15.0",
+  "vulture >=2.14",
+  "yamllint >=1.38.0"
+]
+docs = [
+  # Documentation and example support
+  "alabaster >=1.0.0",
+  "ipykernel",
+  "ipython >=8.10.0",
+  "jupyter_client",
+  "nbsphinx >=0.9.8",
+  "sphinx >=9.0.2",
+  "sphinx-autobuild >=2024.4.16",
+  "sphinx-click",
+  "sphinx-codeautolink >=0.16.2",
+  "sphinx-copybutton >=0.5.2"
+]
+test = [
+  "coverage >=7.5.0",
+  "locust",
+  "nbval >=0.11.0",
+  "pyquery",
+  "pytest >=9.0.0",
+  "pytest-cov >=7.1.0"
+]
+tox = [
+  "tox >=4.52.0",
+  "tox-gh >=1.7.1"
+]
+dev = [
+  # Development and testing tools
+  "bump-my-version >=1.3.0",
+  "cruft >=2.16.0",
+  "flit >=3.11.0,<4.0",
+  "pip >=26.1",
+  "prek >=0.4.0",
+  "watchdog >=6.0.0",
+  {include-group = "docs"},
+  {include-group = "lint"},
+  {include-group = "test"},
+  {include-group = "tox"}
+]
+
+[project]
+name = "emu"
+authors = [
+  {name = "Carsten Ehbrecht", email = "ehbrecht@dkrz.de"}
+]
+maintainers = [
+  {name = "Carsten Ehbrecht", email = "ehbrecht@dkrz.de"}
+]
+readme = {file = "README.rst", content-type = "text/x-rst"}
+requires-python = ">=3.11.0"
+keywords = ["wps", "pywps", "birdhouse", "emu"]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Atmospheric Science"
+]
+dynamic = ["description", "version"]
+dependencies = [
+  "click >=8.3.0",
+  "defusedxml",
+  "geomet",
+  "jinja2 >=3.1.6",
+  "netcdf4",
+  "pandas",
+  "psutil >=7.2.0",
+  "pywps >=4.5.2,<4.7.0",
+  "sphinx >=9.0.2",
+  "xarray <2026.04.0",
+  "zarr <3.0"
+]
+
+[project.optional-dependencies]
+extras = []
+
+[project.scripts]
+emu = "emu.cli:cli"
+
+[project.urls]
+"Issue tracker" = "https://github.com/bird-house/emu/issues"
+"Changelog" = "https://github.com/bird-house/emu/blob/master/changelog.rst"
+"Homepage" = "https://github.com/bird-house/emu"
+
+[tool]
+
+[tool.bumpversion]
+current_version = "0.13.0"
+commit = true
+commit_args = "--no-verify"
+tag = false
+tag_name = "v{new_version}"
+allow_dirty = true
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(\\-(?P<release>[a-z]+)(\\.(?P<build>\\d+)))?"
+serialize = [
+  "{major}.{minor}.{patch}-{release}.{build}",
+  "{major}.{minor}.{patch}"
+]
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.rst"
+include_bumps = ["release"]
+search = """\
+`Unreleased <https://github.com/bird-house/emu>`_ (latest)
+----------------------------------------------------------
+"""
+replace = """\
+..
+    `Unreleased <https://github.com/bird-house/emu>`_ (latest)
+    ----------------------------------------------------------
+
+    Contributors:
+
+    Changes
+    ^^^^^^^
+    * No change.
+
+    Fixes
+    ^^^^^
+    * No change.
+
+.. _changes_{new_version}:
+
+`v{new_version} <https://github.com/bird-house/emu/tree/{new_version}>`_ ({now:%Y-%m-%d})
+---------------------------------------------------------------------------
+"""
+
+[[tool.bumpversion.files]]
+filename = "src/emu/__version__.py"
+search = "__version__ = \"{current_version}\""
+replace = "__version__ = \"{new_version}\""
+
+[[tool.bumpversion.files]]
+filename = "Dockerfile"
+search = "Version=\"{current_version}\""
+replace = "Version=\"{new_version}\""
+
+[[tool.bumpversion.files]]
+filename = ".cruft.json"
+search = "\"version\": \"{current_version}\""
+replace = "\"version\": \"{new_version}\""
+
+[tool.bumpversion.parts.build]
+independent = false
+
+[tool.bumpversion.parts.release]
+optional_value = "release"
+values = [
+  "dev",
+  "release"
+]
+
+[tool.codespell]
+ignore-words-list = "astroid,thirdparty"
+
+[tool.coverage.paths]
+source = ["src/emu/", "*/site-packages/emu/"]
+
+[tool.coverage.run]
+omit = ["tests/*.py"]
+relative_files = true
+source = ["emu"]
+
+[tool.flit.sdist]
+include = [
+  ".zenodo.json",
+  "AUTHORS.rst",
+  "CHANGELOG.rst",
+  "CONTRIBUTING.rst",
+  "LICENSE",
+  "Makefile",
+  "README.rst",
+  "environment.yml",
+  "environment-dev.yml",
+  "environment-docs.yml",
+  "docs/source/_static/*.ico",
+  "docs/source/_static/*.rst",
+  "docs/source/_static/*.svg",
+  "docs/Makefile",
+  "docs/source/*.rst",
+  "docs/source/conf.py",
+  "docs/source/notebooks/*.ipynb",
+  "docs/source/notebooks/*.rst",
+  "pyproject.toml",
+  "src/emu",
+  "tests/*.py",
+  "tox.toml"
+]
+exclude = [
+  "*.py[co]",
+  "__pycache__",
+  ".dockerignore",
+  ".editorconfig",
+  ".github",
+  ".gitignore",
+  ".pre-commit-config.yaml",
+  ".readthedocs.yml",
+  ".yamllint.yaml",
+  ".zizmor.yml",
+  "CI/*.in",
+  "CI/*.txt",
+  "Dockerfile",
+  "docker-compose.yml",
+  "docs/_*",
+  "docs/apidoc/modules.rst",
+  "docs/apidoc/emu*.rst"
+]
+
+[tool.mypy]
+files = "."
+# Use strict defaults
+strict = true
+warn_unreachable = true
+warn_no_return = true
+
+[[tool.mypy.overrides]]
+# Don't require test functions to include types
+module = "tests.*"
+allow_untyped_defs = true
+disable_error_code = "attr-defined"
+
+[tool.numpydoc_validation]
+checks = [
+  "all", # report on all checks, except the below
+  "ES01", # "No extended summary found"
+  "EX01", # "No examples section found"
+  "GL06", # "Found unknown section \"{section}\""
+  "SA01", # "See Also section not found",
+  "SS01" # "No summary found"
+]
+# remember to use single quotes for regex in TOML
+exclude = [
+  # don't report on objects that match any of these regex
+  '\.undocumented_method$',
+  '\.__repr__$',
+  # any object starting with an underscore is a private object
+  '\._\w+'
+]
+override_SS05 = [
+  # override SS05 to allow docstrings starting with these words
+  '^Access ',
+  '^Assess ',
+  '^Process '
+]
+
+[tool.pytest]
+addopts = [
+  "--color=yes",
+  "--tb=native"
+]
+python_files = ["test_*.py"]
+markers = [
+  "online: mark test to need internet connection",
+  "slow: mark test to be slow"
+]
+
+[tool.ruff]
+src = ["emu"]
+line-length = 150
+exclude = [
+  ".eggs",
+  ".git",
+  "build",
+  "docs"
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint]
+extend-select = [
+  "RUF022" # unsorted-dunder-all
+]
+ignore = [
+  "COM", # commas
+  "D205", # blank-line-after-summary
+  "D400", # ends-in-period
+  "D401" # non-imperative-mood
+]
+preview = true
+select = [
+  "BLE", # blind-except
+  "C90", # mccabe-complexity
+  "D", # docstrings
+  "E", # pycodestyle errors
+  "FLY002", # static-join-to-fstring
+  "G", # logging-format
+  "N", # naming conventions
+  "PERF", # iterator performance
+  "PTH", # pathlib
+  "RUF010", # explicit-f-string-type-conversion
+  "RUF013", # implicit-optional
+  "S", # bandit
+  "UP", # python version conventions
+  "W" # pycodestyle warnings
+]
+
+[tool.ruff.lint.flake8-bandit]
+check-typed-exception = true
+
+[tool.ruff.lint.isort]
+known-first-party = ["emu"]
+case-sensitive = true
+detect-same-package = false
+lines-after-imports = 2
+no-lines-before = ["future", "standard-library"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.ruff.lint.per-file-ignores]
+"docs/**" = ["E402"]
+"src/emu/**/__init__.py" = ["F401", "F403"]
+"tests/**" = ["D100", "D101", "D102", "D103", "S101"]
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 180
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.vulture]
+exclude = []
+ignore_decorators = ["@pytest.fixture"]
+ignore_names = []
+min_confidence = 90
+paths = ["src/emu", "tests"]
+sort_by_size = true

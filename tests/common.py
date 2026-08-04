@@ -17,11 +17,11 @@ def resource_file(filepath):
 
 class WpsTestClient(WpsClient):
 
-    def get(self, *args, **kwargs):
+    def get(self, *args, **kwargs):  # noqa: F841
         query = "?"
         for key, value in kwargs.items():
-            query += u"{0}={1}&".format(key, value)
-        return super(WpsTestClient, self).get(query)
+            query += f"{key}={value}&"
+        return super().get(query)
 
 
 def client_for(service):
@@ -29,12 +29,11 @@ def client_for(service):
 
 
 def get_output(doc):
-    """Copied from pywps/tests/test_execute.py.
-    TODO: make this helper method public in pywps."""
+    """Copied from pywps/tests/test_execute.py."""
+    # TODO: make this helper method public in pywps
     output = {}
-    for output_el in xpath_ns(doc, '/wps:ExecuteResponse'
-                                   '/wps:ProcessOutputs/wps:Output'):
-        [identifier_el] = xpath_ns(output_el, './ows:Identifier')
+    for output_el in xpath_ns(doc, "/wps:ExecuteResponse" "/wps:ProcessOutputs/wps:Output"):
+        [identifier_el] = xpath_ns(output_el, "./ows:Identifier")
 
         lit_el = xpath_ns(output_el, './wps:Data/wps:LiteralData')
         if lit_el:
