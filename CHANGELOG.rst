@@ -2,19 +2,24 @@
 Changelog
 =========
 
-..
-    `Unreleased <https://github.com/bird-house/emu>`_ (latest)
-    ----------------------------------------------------------
+`Unreleased <https://github.com/bird-house/emu>`_ (latest)
+----------------------------------------------------------
 
-    Contributors:
+Contributors: Trevor James Smith
 
-    Changes
-    ^^^^^^^
-    * No change.
-
-    Fixes
-    ^^^^^
-    * No change.
+Changes
+^^^^^^^
+* `emu` now supports Python versions from 3.11 to 3.14. Older Python support has been dropped.
+* For indexing reasons, the project has been named `birdhouse-emu`.
+* Updated cookiecutter template version:
+    * Dockerfile has been updated to use new base (`condaforge/miniforge3`) and `gunicorn` as well as use modern metadata conventions.
+    * Project now uses `src` layout with `pyproject.toml` and `flit_core` as backend.
+    * `emu` development and docs dependencies are now managed via `dependency-groups`.
+    * `bump-my-version` is now configured to run build bumps on changes to `master`.
+    * Linting now uses `ruff`, `codespell`, `vulture`, `zizmor` and other tools via `pre-commit`-compatible `prek`.
+    * `CODE_OF_CONDUCT.md` is now present in project.
+    * GitHub Workflows for automated deployment to PyPI deployment, docker testing, and labelling have been added.
+    * `tox.toml` is now available for local testing purposes.
 
 .. _changes_0.13.0:
 
