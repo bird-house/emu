@@ -1,32 +1,36 @@
 # vim:set ft=dockerfile:
-FROM continuumio/miniconda3
-MAINTAINER https://github.com/bird-house/emu
-LABEL Description="Emu: Demo PyWPS" Vendor="Birdhouse" Version="0.13.0"
+FROM condaforge/miniforge3
+ARG DEBIAN_FRONTEND=noninteractive
+ENV PIP_ROOT_USER_ACTION=ignore
+LABEL org.opencontainers.image.authors="Birdhouse"
+LABEL org.opencontainers.image.created="2026-07-30T20:37:38Z"
+LABEL org.opencontainers.image.source="https://github.com/bird-house/emu"
+LABEL org.opencontainers.image.title="EmuWPS"
+LABEL org.opencontainers.image.vendor="Birdhouse"
+LABEL org.opencontainers.image.version="0.13.0"
+LABEL Description="Emu WPS"
 
-# Update Debian system
-RUN apt-get update && apt-get install -y \
- build-essential \
-&& rm -rf /var/lib/apt/lists/*
+# Set the working directory to /code
+WORKDIR /code
 
-# Update conda
-RUN conda update -n base conda
+# Create conda environment
+COPY environment-docker.yml .
+RUN conda env create -n emu -f environment-docker.yml && \
+    conda install -n emu gunicorn && \
+    conda clean --all --yes
+
+# Add the project conda environment to the path
+ENV PATH="/opt/conda/envs/emu/bin:$PATH"
 
 # Copy WPS project
-COPY . /opt/wps
+COPY . /code
 
-WORKDIR /opt/wps
-
-# Create conda environment with PyWPS
-RUN ["conda", "env", "create", "-n", "wps", "-f", "environment.yml"]
-
-# Install WPS
-RUN ["/bin/bash", "-c", "source activate wps && pip install -e ."]
+# Install WPS project
+RUN conda run -n emu pip install . --no-deps
 
 # Start WPS service on port 5000 on 0.0.0.0
-EXPOSE 5000
-ENTRYPOINT ["/bin/bash", "-c"]
-CMD ["source activate wps && exec emu start -b 0.0.0.0 -c /opt/wps/etc/demo.cfg"]
-
+EXPOSE 5001
+CMD ["gunicorn", "--bind=0.0.0.0:5000", "emu.wsgi:application"]
 # docker build -t birdhouse/emu .
 # docker run -p 5000:5000 birdhouse/emu
 # http://localhost:5000/wps?request=GetCapabilities&service=WPS
