@@ -8,7 +8,7 @@ Emu
 +----------------------------+-----------------------------------------------------+
 | Open Source                | |license|                                           |
 +----------------------------+-----------------------------------------------------+
-| Coding Standards           | |ruff| |prek| |pre-commit-ci|                       |
+| Coding Standards           | |ruff| |prek|                                       |
 +----------------------------+-----------------------------------------------------+
 | Development Status         | |status| |build|                                    |
 +----------------------------+-----------------------------------------------------+
@@ -66,13 +66,9 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
         :target: https://github.com/bird-house/emu/blob/main/LICENSE.txt
         :alt: License
 
-.. |pypi| image:: https://img.shields.io/pypi/v/emu.svg
-        :target: https://pypi.python.org/pypi/emu
+.. |pypi| image:: https://img.shields.io/pypi/v/birdhouse-emu.svg
+        :target: https://pypi.python.org/pypi/birdhouse-emu
         :alt: Python Package Index Build
-
-.. |pre-commit-ci| image:: https://results.pre-commit.ci/badge/github/bird-house/emu/main.svg
-        :target: https://results.pre-commit.ci/latest/github/bird-house/emu/main
-        :alt: pre-commit.ci status
 
 .. |prek| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json
         :target: https://github.com/j178/prek
@@ -82,10 +78,10 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
         :target: https://github.com/astral-sh/ruff
         :alt: Ruff
 
-.. |status| image:: https://www.repostatus.org/badges/latest/wip.svg
-        :alt: Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.
-        :target: https://www.repostatus.org/#wip
+.. |status| image:: https://www.repostatus.org/badges/latest/inactive.svg
+        :alt: Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.
+        :target: https://www.repostatus.org/#inactive
 
-.. |versions| image:: https://img.shields.io/pypi/pyversions/emu.svg
-        :target: https://pypi.python.org/pypi/emu
+.. |versions| image:: https://img.shields.io/pypi/pyversions/birdhouse-emu.svg
+        :target: https://pypi.python.org/pypi/birdhouse-emu
         :alt: Supported Python Versions

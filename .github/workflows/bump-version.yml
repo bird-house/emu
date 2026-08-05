@@ -29,7 +29,7 @@ on:
       - pyproject.toml
       - test/**.py
       - tox.toml
-      - src/$emu/__version__.py
+      - src/emu/__version__.py
 
 permissions:
   contents: read

@@ -3,7 +3,7 @@ name: Docker-based Testing Suite
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
 
 concurrency:
