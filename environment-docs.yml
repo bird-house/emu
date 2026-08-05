@@ -14,3 +14,5 @@ dependencies:
   - sphinx-click
   - sphinx-codeautolink >=0.16.2
   - sphinx-copybutton >=0.5.2
+  # Needed for some reason
+  - pytest >=9.0.2

@@ -26,7 +26,6 @@ build:
   jobs:
     post_install:
       - pip install --group docs
-      - pip install pytest>9.0.2 # Needed for some reason for xarray
 
 conda:
   environment: environment-docs.yml
