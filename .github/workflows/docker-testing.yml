@@ -47,8 +47,8 @@ jobs:
       - name: Run Docker image
         run: |
           docker run --rm -p 9099:9099 birdhouse/emu:test sh -c '
-            $emu start -d
+            emu start -d
             sleep 2s
-            $emu status
-            $emu stop
+            emu status
+            emu stop
           '
