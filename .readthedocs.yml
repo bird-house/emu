@@ -25,7 +25,7 @@ build:
     python: "miniforge3-25.11"
   jobs:
     install:
-      - pip install --groups docs
+      - pip install --group docs
 
 conda:
   environment: environment-docs.yml

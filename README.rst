@@ -2,7 +2,7 @@ Emu
 ===
 
 +----------------------------+-----------------------------------------------------+
-| Versions                   | |pypi| |conda| |versions|                           |
+| Versions                   | |pypi| |versions|                                   |
 +----------------------------+-----------------------------------------------------+
 | Documentation and Support  | |docs| |gitter|                                     |
 +----------------------------+-----------------------------------------------------+
@@ -53,10 +53,6 @@ This package was created with Cookiecutter_ and the `bird-house/cookiecutter-bir
 .. |build| image:: https://github.com/bird-house/emu/actions/workflows/main.yml/badge.svg
         :target: https://github.com/bird-house/emu/actions/workflows/main.yml
         :alt: Build Status
-
-.. |conda| image:: https://img.shields.io/conda/vn/conda-forge/emu.svg
-        :target: https://anaconda.org/conda-forge/emu
-        :alt: Conda-forge Build Version
 
 .. |docs| image:: https://readthedocs.org/projects/emu/badge/?version=latest
         :target: https://emu.readthedocs.io/en/latest/?version=latest
