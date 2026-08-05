@@ -42,7 +42,7 @@ jobs:
         shell: bash -l {0}
     strategy:
       matrix:
-        python-version: [ "3.14" ]
+        python-version: [ "3.11", "3.14" ]
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
@@ -60,7 +60,7 @@ jobs:
         with:
           cache-downloads: true
           cache-environment: true
-          environment-file: environment.yml
+          environment-file: environment-dev.yml
           create-args: >-
             python=${{ matrix.python-version }}
 
