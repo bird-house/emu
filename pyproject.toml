@@ -55,7 +55,7 @@ dev = [
 ]
 
 [project]
-name = "emu"
+name = "birdhouse-emu"
 authors = [
   {name = "Carsten Ehbrecht", email = "ehbrecht@dkrz.de"}
 ]
@@ -147,19 +147,25 @@ replace = """\
 
 .. _changes_{new_version}:
 
-`v{new_version} <https://github.com/bird-house/emu/tree/{new_version}>`_ ({now:%Y-%m-%d})
----------------------------------------------------------------------------
+`v{new_version} <https://github.com/bird-house/emu/tree/v{new_version}>`_ ({now:%Y-%m-%d})
+----------------------------------------------------------------------------
 """
+
+[[tool.bumpversion.files]]
+filename = "Dockerfile"
+parse = "LABEL org.opencontainers.image.version=\"{current_version}\""
+replace = "{new_version}"
+
+[[tool.bumpversion.files]]
+filename = 'Dockerfile'
+search = "LABEL org.opencontainers.image.created=\"\\d{{4}}-\\d{{2}}-\\d{{2}}T\\d{{2}}:\\d{{2}}:\\d{{2}}Z\""
+replace = "LABEL org.opencontainers.image.created=\"{utcnow:%Y-%m-%dT%H:%M:%SZ}\""
+regex = true
 
 [[tool.bumpversion.files]]
 filename = "src/emu/__version__.py"
 search = "__version__ = \"{current_version}\""
-replace = "__version__ = \"{new_version}\""
-
-[[tool.bumpversion.files]]
-filename = "Dockerfile"
-search = "Version=\"{current_version}\""
-replace = "Version=\"{new_version}\""
+parse = "{new_version}"
 
 [[tool.bumpversion.files]]
 filename = ".cruft.json"
@@ -187,6 +193,9 @@ source = ["src/emu/", "*/site-packages/emu/"]
 omit = ["tests/*.py"]
 relative_files = true
 source = ["emu"]
+
+[tool.flit.module]
+name = "emu"
 
 [tool.flit.sdist]
 include = [
