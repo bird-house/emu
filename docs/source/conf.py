@@ -123,7 +123,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Emu"
-copyright = "2018-2023, Carsten Ehbrecht"
+copyright = "2014-2026, Carsten Ehbrecht"
 author = "Carsten Ehbrecht"
 
 # The version info for the project you're documenting, acts as replacement
