@@ -1,4 +1,5 @@
 import os
+import pathlib
 import xarray.tests.test_dataset as td
 from pywps import Process
 from pywps import ComplexOutput, FORMATS
@@ -41,8 +42,8 @@ class NcMLAgg(Process):
         d1, d2, _ = td.create_append_test_data()
 
         # Save datasets to disk
-        d1fn = os.path.join(self.workdir, "d1.nc")
-        d2fn = os.path.join(self.workdir, "d2.nc")
+        d1fn = str(pathlib.Path(self.workdir).joinpath("d1.nc"))
+        d2fn = str(pathlib.Path(self.workdir).joinpath("d2.nc"))
 
         d1.to_netcdf(d1fn)
         d2.to_netcdf(d2fn)

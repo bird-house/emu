@@ -9,7 +9,8 @@ LOGGER = logging.getLogger("PYWPS")
 
 
 class ShowError(Process):
-    """Show a user friendly error message using :class:`ProcessError`.
+    """
+    Show a user friendly error message using :class:`ProcessError`.
 
     An example request::
 

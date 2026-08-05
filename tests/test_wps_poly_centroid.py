@@ -6,7 +6,7 @@ from .common import client_for, resource_file, TESTS_HOME, WPS, OWS, get_output
 from emu.processes.wps_poly_centroid import PolyCentroid
 import pathlib
 
-cfgfiles = os.path.join(TESTS_HOME, 'test.cfg')
+cfgfiles = str(pathlib.Path(TESTS_HOME).joinpath('test.cfg'))
 
 
 def test_wps_xml_centroid_get():

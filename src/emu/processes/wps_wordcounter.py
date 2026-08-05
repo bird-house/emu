@@ -11,6 +11,8 @@ LOGGER = logging.getLogger("PYWPS")
 
 class WordCounter(Process):
     """
+    WordCounter Class.
+
     Notes
     -----
     Counts occurrences of all words in a document.

@@ -1,4 +1,4 @@
-"""Translation process to check WPS translations"""
+"""Translation process to check WPS translations."""
 
 from pywps import Process, LiteralInput, LiteralOutput
 

@@ -1,5 +1,5 @@
 """
-DummyProcess to check the WPS structure
+DummyProcess to check the WPS structure.
 
 Author: Jorge de Jesus (jorge.jesus@gmail.com) as suggested by Kor de Jong
 """

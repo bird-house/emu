@@ -1,3 +1,5 @@
+import pathlib
+
 import pytest
 from pywps import Service
 from pywps.tests import assert_response_success
@@ -22,8 +24,9 @@ def test_wps_multiple_output(resp):
     assert 'output' in out
 
 
-def test_metalink_download(resp):
+def test_metalink_download(resp, tmp_path):
+    tmpfolder = pathlib.Path(tmp_path).joinpath("test").mkdir()
     md = pytest.importorskip('metalink.download')
     out = get_output(resp.xml)
-    d = md.get(out['output'], path='/tmp')
+    d = md.get(out['output'], path=tmpfolder)
     assert len(d) == 5

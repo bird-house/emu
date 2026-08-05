@@ -19,12 +19,9 @@ LOGGER = logging.getLogger("PYWPS")
 
 
 class InOut(Process):
-    """
-    This process defines several types of literal type of in- and outputs.
+    """Define several types of literal type of in- and outputs."""
 
-    TODO: add literal input with value range[(0,100)] ... see pywps doc
-    """
-
+    # TODO: Add literal input with value range[(0,100)] ... see pywps doc
     def __init__(self):
         inputs = [
             LiteralInput(

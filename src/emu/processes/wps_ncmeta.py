@@ -18,6 +18,8 @@ TEST_URL = "http://test.opendap.org:80/opendap/netcdf/examples/sresa1b_ncar_ccsm
 
 class NCMeta(Process):
     """
+    NetCDF Metaclass.
+
     Notes
     -----
     Returns metadata of a NetCDF file or OpenDAP resource.
@@ -79,7 +81,7 @@ class NCMeta(Process):
             inpt = request.inputs["dataset"][0]
             resource = inpt.file
         ds = Dataset(resource)
-        with pathlib.Path(os.path.join(self.workdir, "out.txt")).open("w") as fp:
+        with pathlib.Path(self.workdir).joinpath("out.txt").open("w") as fp:
             response.outputs["output"].file = fp.name
             fp.write(f"URL: {inpt.url}\n\n")
             fp.write(f"MIME Type: {inpt.data_format.mime_type}\n\n")

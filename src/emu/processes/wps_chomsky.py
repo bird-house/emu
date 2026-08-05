@@ -104,6 +104,8 @@ the strong generative capacity of the theory."""
 
 class Chomsky(Process):
     """
+    Chomsky Process.
+
     Notes
     -----
     Generates a random chomsky text:
@@ -152,7 +154,7 @@ class Chomsky(Process):
             output = chain(*islice(zip(*parts), 0, times))
             return textwrap.fill(" ".join(output), line_length)
 
-        with pathlib.Path(os.path.join(self.workdir, "out.txt")).open("w") as fout:
+        with pathlib.Path(self.workdir).joinpath("out.txt").open("w") as fout:
             fout.write(chomsky(request.inputs["times"][0].data))
             response.outputs["output"].file = fout.name
 

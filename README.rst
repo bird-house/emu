@@ -7,6 +7,7 @@ Emu
 | Documentation and Support  | |docs| |gitter|                                     |
 +----------------------------+-----------------------------------------------------+
 | Open Source                | |license|                                           |
++----------------------------+-----------------------------------------------------+
 | Coding Standards           | |ruff| |prek| |pre-commit-ci|                       |
 +----------------------------+-----------------------------------------------------+
 | Development Status         | |status| |build|                                    |
@@ -17,7 +18,7 @@ Emu (the bird)
 
 WPS processes for testing and demos.
 
-Emu is a Python package with some test proccess for Web Processing Services (WPS). Currently it is using the `PyWPS 4.x <http://pywps.org/>`_ server.
+Emu is a Python package with some test process for Web Processing Services (WPS). Currently it is using the `PyWPS 4.x <http://pywps.org/>`_ server.
 
 Documentation
 -------------

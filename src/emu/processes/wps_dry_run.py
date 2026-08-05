@@ -3,7 +3,7 @@ from pywps.inout.literaltypes import AllowedValue
 from pywps.ext_autodoc import MetadataUrl
 from pywps.validator.mode import MODE
 
-from emu.exceptions import DryRunWarning, StorageLimitExceeded
+from emu.exceptions import DryRunWarningError, StorageLimitExceededError
 
 import logging
 
@@ -57,10 +57,10 @@ class SimpleDryRun(Process):
 
         if num_files > 10:
             msg = "Too many files too download"
-            raise StorageLimitExceeded(msg, used=num_files, available=10)
+            raise StorageLimitExceededError(msg, used=num_files, available=10)
 
         if request.inputs["dry_run"][0].data is True:
-            raise DryRunWarning(storage_used=f"{num_files} files", time_used="unknown")
+            raise DryRunWarningError(storage_used=f"{num_files} files", time_used="unknown")
 
         response.outputs["output"].data = f"File downloads done: {num_files}"
         response.update_status("PyWPS Process completed.", 100)

@@ -177,7 +177,8 @@ values = [
 ]
 
 [tool.codespell]
-ignore-words-list = "astroid,thirdparty"
+ignore-words-list = "astroid,inout,inpt,processus,prozess,thirdparty"
+skip = 'tests/testdata/alice-in-wonderland.txt'
 
 [tool.coverage.paths]
 source = ["src/emu/", "*/site-packages/emu/"]
@@ -251,6 +252,7 @@ checks = [
   "ES01", # "No extended summary found"
   "EX01", # "No examples section found"
   "GL06", # "Found unknown section \"{section}\""
+  "GL08", # "The object does not have a docstring"
   "SA01", # "See Also section not found",
   "SS01" # "No summary found"
 ]
@@ -302,6 +304,9 @@ extend-select = [
 ]
 ignore = [
   "COM", # commas
+  "D100", # undocumented-public-module
+  "D101", # undocumented-public-class
+  "D104", # undocumented-public-package
   "D205", # blank-line-after-summary
   "D400", # ends-in-period
   "D401" # non-imperative-mood

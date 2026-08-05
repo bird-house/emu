@@ -5,7 +5,6 @@ Author: David Huard
 """
 
 import logging
-import os
 
 from pywps import FORMATS, ComplexOutput, Process
 import pathlib
@@ -13,7 +12,7 @@ import pathlib
 LOGGER = logging.getLogger("PYWPS")
 
 # TODO: can be replaced by eggshell function.
-DATA_DIR = os.path.join(pathlib.Path(__file__).parent, "..", "data")
+DATA_DIR = str(pathlib.Path(__file__).parent.parent.joinpath("data"))
 
 
 class OutputFormats(Process):
@@ -54,15 +53,15 @@ class OutputFormats(Process):
 
         netcdf_out = response.outputs["netcdf"]
         if netcdf_out.data_format.mime_type == FORMATS.ZIP.mime_type:
-            netcdf_out.file = os.path.join(DATA_DIR, "dummy_nc.zip")
+            netcdf_out.file = str(pathlib.Path(DATA_DIR).joinpath("dummy_nc.zip"))
         else:
-            netcdf_out.file = os.path.join(DATA_DIR, "dummy.nc")
+            netcdf_out.file = str(pathlib.Path(DATA_DIR).joinpath("dummy.nc"))
 
         json_out = response.outputs["json"]
         if json_out.data_format.mime_type == FORMATS.ZIP.mime_type:
-            json_out.file = os.path.join(DATA_DIR, "dummy_json.zip")
+            json_out.file = str(pathlib.Path(DATA_DIR).joinpath("dummy_json.zip"))
         else:
-            json_out.file = os.path.join(DATA_DIR, "dummy.json")
+            json_out.file = str(pathlib.Path(DATA_DIR).joinpath("dummy.json"))
 
         response.update_status("PyWPS Process completed.", 100)
         return response
