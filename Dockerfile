@@ -3,11 +3,11 @@ FROM condaforge/miniforge3
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PIP_ROOT_USER_ACTION=ignore
 LABEL org.opencontainers.image.authors="Birdhouse"
-LABEL org.opencontainers.image.created="2026-07-30T20:37:38Z"
+LABEL org.opencontainers.image.created="2026-08-06T14:01:23Z"
 LABEL org.opencontainers.image.source="https://github.com/bird-house/emu"
 LABEL org.opencontainers.image.title="EmuWPS"
 LABEL org.opencontainers.image.vendor="Birdhouse"
-LABEL org.opencontainers.image.version="0.13.0"
+LABEL org.opencontainers.image.version="0.13.1-dev.0"
 LABEL Description="Emu WPS"
 
 # Set the working directory to /code
