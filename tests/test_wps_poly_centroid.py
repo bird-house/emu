@@ -4,8 +4,9 @@ from pywps.tests import assert_response_success
 
 from .common import client_for, resource_file, TESTS_HOME, WPS, OWS, get_output
 from emu.processes.wps_poly_centroid import PolyCentroid
+import pathlib
 
-cfgfiles = os.path.join(TESTS_HOME, 'test.cfg')
+cfgfiles = str(pathlib.Path(TESTS_HOME).joinpath('test.cfg'))
 
 
 def test_wps_xml_centroid_get():
@@ -26,7 +27,7 @@ def test_wps_xml_centroid_post():
         WPS.DataInputs(
             WPS.Input(
                 OWS.Identifier('xml'),
-                WPS.Data(WPS.ComplexData(open(resource_file('poly.xml'), 'r').read()))
+                WPS.Data(WPS.ComplexData(pathlib.Path(resource_file('poly.xml')).open().read()))
             )
         ),
         version='1.0.0'

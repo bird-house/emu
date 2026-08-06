@@ -10,4 +10,10 @@ Development Lead
 Contributors
 ------------
 
-None yet. Why not be the first?
+* David Caron
+* David Huard <huard.david@ouranos.ca>
+* Florian Klemme
+* Francis Pelletier
+* Long Vu <vu.long@ouranos.ca>
+* Nils Hempelmann
+* Trevor James Smith <smith.trevorj@ouranos.ca>

@@ -17,12 +17,15 @@ sphinx:
 #  configuration: mkdocs.yml
 
 # Optionally build your docs in additional formats such as PDF and ePub
-formats: []
+formats: [ ]
 
 build:
-  os: ubuntu-22.04
+  os: "ubuntu-26.04"
   tools:
-    python: "mambaforge-22.9"
+    python: "miniforge3-25.11"
+  jobs:
+    post_install:
+      - pip install --group docs
 
 conda:
   environment: environment-docs.yml
@@ -30,4 +33,5 @@ conda:
 # Optionally set the version of Python and requirements required to build your docs
 python:
   install:
-    - requirements: requirements_dev.txt
+    - method: pip
+      path: .

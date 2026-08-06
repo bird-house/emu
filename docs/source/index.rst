@@ -2,7 +2,7 @@
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
+   :caption: Table of Contents
 
    installation
    configuration
@@ -10,7 +10,18 @@
    tutorial
    processes
    authors
-   changes
+   changelog
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Package Structure
+
+   apidoc/modules
+
+.. toctree::
+   :caption: GitHub Repository
+
+   bird-house/emu <https://github.com/bird-house/emu>
 
 Indices and tables
 ==================

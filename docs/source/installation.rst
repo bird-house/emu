@@ -51,17 +51,17 @@ Install `emu` app:
 
 .. code-block:: console
 
-  $ pip install -e .
-  OR
-  make install
+   $ pip install -e .
+   OR
+   $ make install
 
 For development you can use this command:
 
 .. code-block:: console
 
-  $ pip install -e .[dev]
-  OR
-  $ make develop
+   $ pip install -e .[dev]
+   OR
+   $ make develop
 
 Start Emu PyWPS service
 -----------------------
@@ -105,10 +105,10 @@ You can also use the ``Makefile`` to start and stop the service:
 
 .. code-block:: console
 
-  $ make start
-  $ make status
-  $ tail -f pywps.log
-  $ make stop
+   $ make start
+   $ make status
+   $ tail -f pywps.log
+   $ make stop
 
 
 Run Emu as Docker container

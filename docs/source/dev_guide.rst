@@ -16,13 +16,13 @@ First install dependencies for the documentation:
 
 .. code-block:: console
 
-  $ make develop
+    $ make develop
 
 Run the Sphinx docs generator:
 
 .. code-block:: console
 
-  $ make docs
+    $ make docs
 
 .. _testing:
 
@@ -35,10 +35,10 @@ First activate the ``emu`` Conda environment and install ``pytest``.
 
 .. code-block:: console
 
-   $ source activate emu
-   $ pip install -r requirements_dev.txt  # if not already installed
-   OR
-   $ make develop
+    $ source activate emu
+    $ pip install -r requirements_dev.txt  # if not already installed
+    OR
+    $ make develop
 
 Run quick tests (skip slow and online):
 
@@ -78,11 +78,11 @@ Update the Conda specification file to build identical environments_ on a specif
 
 .. code-block:: console
 
-  $ conda env create -f environment.yml
-  $ source activate emu
-  $ make clean
-  $ make install
-  $ conda list -n emu --explicit > spec-file.txt
+    $ conda env create -f environment.yml
+    $ source activate emu
+    $ make clean
+    $ make install
+    $ conda list -n emu --explicit > spec-file.txt
 
 .. _`environments`: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#building-identical-conda-environments
 
@@ -93,7 +93,7 @@ Bump a new version
 Make a new version of Emu in the following steps:
 
 * Make sure everything is commit to GitHub.
-* Update ``CHANGES.rst`` with the next version.
+* Update ``CHANGELOG.rst`` with the next version.
 * Dry Run: ``bumpversion --dry-run --verbose --new-version 0.8.1 patch``
 * Do it: ``bumpversion --new-version 0.8.1 patch``
 * ... or: ``bumpversion --new-version 0.9.0 minor``

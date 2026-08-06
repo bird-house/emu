@@ -1,8 +1,0 @@
-pywps>=4.5.2
-jinja2
-click
-psutil
-geomet
-xarray
-netCDF4
-pandas

@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 from pywps import Service
 from pywps.tests import assert_response_success
 
