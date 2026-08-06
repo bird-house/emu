@@ -165,13 +165,13 @@ regex = true
 
 [[tool.bumpversion.files]]
 filename = "src/emu/__version__.py"
-search = "__version__ = \"{current_version}\""
-parse = "{new_version}"
+parse = "__version__ = \"{current_version}\""
+replace = "{new_version}"
 
 [[tool.bumpversion.files]]
 filename = ".cruft.json"
-search = "\"version\": \"{current_version}\""
-replace = "\"version\": \"{new_version}\""
+parse = "\"version\": \"{current_version}\""
+replace = "{new_version}"
 
 [tool.bumpversion.parts.build]
 independent = false
