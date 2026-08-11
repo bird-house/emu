@@ -14,9 +14,12 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  TEST_TAG: birdhouse/emu:test
+
 jobs:
   build:
-    name: Build and Test Docker image
+    name: Build Docker image
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
@@ -36,17 +39,17 @@ jobs:
       - name: Build Docker image (no push)
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
-          context: .
-          file: "Dockerfile"
-          tags: birdhouse/emu:test
-          load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          context: .
+          file: "Dockerfile"
+          load: true
           push: false
+          tags: ${{ env.TEST_TAG }}
 
       - name: Run Docker image
         run: |
-          docker run --rm -p 9099:9099 birdhouse/emu:test sh -c '
+          docker run --rm ${{ env.TEST_TAG }} sh -c '
             emu start -d
             sleep 2s
             emu status
