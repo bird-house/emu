@@ -22,6 +22,7 @@ Changes
     * `tox.toml` is now available for local testing purposes.
 * Added a workflow for automatically accepting non-breaking changes originating from `Dependabot`.
 * Moved all CI dependencies into `.github` to help de-clutter the top-level.
+* Added a Docker Hub publishing workflow.
 
 .. _changes_0.13.0:
 
