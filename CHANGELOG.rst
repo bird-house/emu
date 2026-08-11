@@ -2,8 +2,24 @@
 Changelog
 =========
 
-`Unreleased <https://github.com/bird-house/emu>`_ (latest)
-----------------------------------------------------------
+..
+    `Unreleased <https://github.com/bird-house/emu>`_ (latest)
+    ----------------------------------------------------------
+
+    Contributors:
+
+    Changes
+    ^^^^^^^
+    * No change.
+
+    Fixes
+    ^^^^^
+    * No change.
+
+.. _changes_1.0.0:
+
+`v1.0.0 <https://github.com/bird-house/emu/tree/v1.0.0>`_ (2026-08-11)
+----------------------------------------------------------------------------
 
 Contributors: Trevor James Smith
 
