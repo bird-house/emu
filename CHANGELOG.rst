@@ -18,7 +18,7 @@ Changelog
 
 .. _changes_1.0.0:
 
-`v1.0.0 <https://github.com/bird-house/emu/tree/v1.0.0>`_ (2026-08-11)
+`v1.0.0 <https://github.com/bird-house/emu/tree/v1.0.0>`_ (2026-08-18)
 ----------------------------------------------------------------------
 
 Contributors: Trevor James Smith
